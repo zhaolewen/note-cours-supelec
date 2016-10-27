@@ -63,11 +63,108 @@ Put_t(T, K)< K-S_t
 
 \section{Th\'eorie de la valorisation dans le cas discr\`et \`a une p\'eriode}
 
+\subsection{Introduction}
+Nous avons vu que les contrats \`a termes peuvent etre valorise par la principe de non arbitrage alors que ce principe ne donne que des bornes sur les prix des options. La valorisation de ces produits assez complexes necessite l'introduction des modeles probabilistes pour decrire les scenarios possibles du march\'e.
 
+Dans ce marche, si on trouve une strategie qui r\'eplique le payoff de l'option, alors la portefeuille construite par cette strategie r\'eplique l'option.
 
+Par l'absence de opportunite d'arbitrage, la valeur de ce portefeuille est la meme que celui de l'option. Cependant, ce prix est d\'ependant du mod\`ele qui doit etre proche de la r\'ealit\'e.
 
+\subsection{Mod\`ele \`a une p\'eriode}
 
+On consir\`ere qu'il uy a $d+1$ actifs financiers et $2$ dates,: $t=0, t=1$. L'al\'ea du mod\`ele est represente par $K$ etats dans $\Omega=\{\omega_1,\dots,\omega_K\}$.
 
+En $t=1$, avec des probabilit\'es $\{p_1,\dots,\p_K\},(p_i>0)$.
+
+Le prix de l'actif $i$ au $t$ est not\'e $S_t^i, 0<=i<=d$. $S^0$ represente l'actif sous risque $(S_0^0=1, S_1^0=e^R\approx 1+R)$
+Une strategie $\theta\in\mathbb{R}^{d+1}$ est le vecteur contenant le nombre d'unit\'e de chaque actif dans ce portefeuille $V$ entre $t=0$ et $t=1$. 
+
+La valeur de $v$ en $t$
+
+\begin{equation}
+V_t=V_t^\theta=\sum_{i=0}^d\theta_i S_t^i
+\end{equation}
+
+* Le gain est defini par 
+
+\begin{equation}
+G=V_1-V_0=\sum_{i=0}^d \theta_i (S_1^i-S_0^i)=\sum_{i=0}^d \theta_i \Delta S^i
+\end{equation}
+
+On note $\~S_t^i=\frac{S_t^i}{S_t^0}$, $\~V_t\frac{V_t}{S_t^0}$ et $\~G_t=\frac{G}{S_t^0}$
+
+alors
+
+\begin{equation}
+\{\~V_t=\theta_0+\sum_{i=0}^{d}\theta_i \~S_t^i
+\end{equation}
+
+\begin{equation}
+\~G=\~V_1-\~V_0=\sum_{i=1}^d \theta_i (\~S_1^i-\~S_0^i)=\sum_{i=1}^d\theta_i\Delta \~S^i
+\end{equation}
+
+\subsection{R\'esultats de non-arbitrage}
+\subsubsection{D\'efinition}
+
+Une opportunite d'arbitrage est une strategie $\theta$ tel que 
+\begin{enumerate}
+	\item  $V_0^\theta =0$
+	\item $P(V_1^\theta >=0) = 1$ et $P(V_1^\theta>0)>0$ 
+\end{enumerate}
+
+ou
+\begin{enumerate}
+	\item $P(G>=0) = 1$
+	\item $P(G>0) > 0$
+\end{enumerate}
+
+Commencer avec une etat avec valeur $0$, et la probabilite de gagner de l'argent est superierue \`a $0$.
+
+\subsubsection{D\'efinition 2}
+
+Une mesure de probabilit\'e $Q$ est dite risque neutre si:
+\begin{emnumerate}
+	\item $Q~P$, c'est a dire, $Q(\omega_i)>0, \forall 1<=i<=K$
+	\item $E^Q[\~S_1^i]=\~S_0^i, \forall i$
+\end{enumerate}
+
+\subsubsection{Th\'eor\`eme}
+Le march\'e n'admet pas d'opportunit\'e d'arbitrage si et seulement s'il existe au moins une mesure de probabilit\'e risque neutre.
+
+Preuve:
+
+(=>) Supposons qu'il existe une mesure de probabilit\'e risque neutre. Supposons qu'il existe une opportunit\'e d'arbitrage, donc 
+
+\begin{equation}
+Q(G^\theta>=0)=1, Q(G_\theta>0)>0
+\end{equation}
+
+\begin{equation}
+E^Q[\tilde{G}^\theta]=0
+\end{equation}
+contradiction.
+
+(<=) Supposons qu'il y a absence d'opportunit\'e d'arbitrage
+\begin{equation}
+\Epsilon=\{(q_1,\ldots,q_K)|\sum_{i=1}^K q_i, q_i>0\}
+\end{equation}
+\begin{equation}
+C=\{E^Q[\Delta\tilde{S}]|Q\in\Epsilon\}, \Delta \tilde{S}=(\Delta \tilde{S}^1,\ldots, \Delta\tilde{S}^d)^T
+\end{equation}
+Il faut demontrer que $0\in C$.
+
+Supposons $0\notin C$, puisque $C$ est convexe, d'apr\`es le theoreme de separation des convexes, alors 
+\begin{equation}
+\exists \alpha \in \mathbb{R}^d, \alpha^t >= 0, \forall x\in C
+\end{equation}
+\begin{equation}
+\exists x_0\in C, \alpha^t x_0 > 0
+\end{equation}
+\begin{equation}
+x_0=E^{Q_0}[\Delta\tilde{S}]
+\end{equation}
+Soit $\alpha_0$ arbitraire, on consid\`ere la strategie $\theta=(\alpha_0, \alpha)$
+On a $\forall \theta\in\Epsilon, Q(\tilde{G}^\theta>=0)=1, Q_0(\tilde{G}^\theta>0)>0$
 
 
 
