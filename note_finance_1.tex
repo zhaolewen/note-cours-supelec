@@ -1,0 +1,77 @@
+\documentclass{article}
+\linespread{1.5}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+
+\title{Mineur Finance 1}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\pagebreak
+
+\begin{document}
+\section{Cadre de valorisation des produite devive}
+\subsection{Introduction}
+\subsection{Hypothese}
+\subsection{Propriete}
+\subsection{Options americaines}
+Option am\'ericaine similaire aux options europeens mais l'exercise du droit pourra se faire \`a toute date $t$ avant maturit\'e $T$.
+
+On note $CallAmeric_t(T, K)$ et $PutAmeric_t(T, K)$ les prix des calls et puts americain au $t$.
+
+On a 
+\begin{equation}
+CallAmer_t(T,K) >= Call_t(T, K)
+\end{equation}
+
+\begin{equation}
+PutAmer_t(T, K) >= Put_t(T, K)
+\end{equation}
+
+Propri\'et\'e:
+En l'absence de divident, on a:
+
+\begin{equation}
+CallAmer_t(T, K) = Call_t(T, K)
+\end{equation}
+
+Preuve:
+
+\begin{equation}
+Call_t(T, K) >= (S_t- K)_+
+\end{equation}
+
+Il n'est pas optimal d'exercer avant la maturit\'e. Donc $CallAmer_t(T, K) = Call_t(T, K)$
+
+Remarque: Pour le Put, la propri\'et\'e n'est pas vraie.
+
+\begin{equation}
+Put_t(T, K) <= KB(t, T)
+\end{equation}
+
+Pour un certain scenario, le prix de put inferieur au prix d'exercise. $Put_t(T, K)<(S_t-K)_+$.
+
+Pour $S_t$ tel que $KB_t(T)< K-S_t <=> S_t < (1-B_t(T))K$
+Donc, on a
+\begin{equation}
+Put_t(T, K)< K-S_t
+\end{equation} 
+
+\section{Th\'eorie de la valorisation dans le cas discr\`et \`a une p\'eriode}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
