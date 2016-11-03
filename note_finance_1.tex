@@ -117,7 +117,7 @@ Commencer avec une \'etat avec valeur $0$, et la probabilite de gagner de l'arge
 
 Une mesure de probabilit\'e $Q$ est dite risque neutre si:
 \begin{enumerate}
-	\item $Q\~P$, c'est a dire, $Q(\omega_i)>0, \forall 1<=i<=K$
+	\item $Q\sim P$, c'est a dire, $Q(\omega_i)>0, \forall 1<=i<=K$
 	\item $E^Q[\tilde{S}_1^i]=\tilde{S}_0^i, \forall i$
 \end{enumerate}
 
@@ -244,9 +244,9 @@ P(H) = E^Q[\tilde{H}]=E^Q[\frac{H}{S_1^\theta}]=E^Q[\frac{H}{1+R}]
 o\`u $Q$ est une mesure de proba risque neutre.
 
 \b{preuve}: 
-\theta est une strategie tel que $V_1^\theta=H$
+$\theta$ est une strat\'egie tel que $V_1^\theta=H$
 \begin{equation}
-E^Q[\tilde{H}]=E^Q[\tilde{V}_1^\theta]=E^Q[\tilde{V}_0^\theta+\sum_{i=1}^d \theta_i \Delta \tilde{S}^i]=V_0^\theta+sum_{i=1}^d \theta_i E^Q[\Delta \tilde{S}^\i]=V_0^\theta=P(H)
+E^Q[\tilde{H}]=E^Q[\tilde{V}_1^\theta]=E^Q[\tilde{V}_0^\theta+\sum_{i=1}^d \theta_i \Delta \tilde{S}^i]=V_0^\theta+sum_{i=1}^d \theta_i E^Q[\Delta \tilde{S}^i]=V_0^\theta=P(H)
 \end{equation}
 
 Def 3:
@@ -255,7 +255,7 @@ Un march\'e est complet si tout actif conditionnel est r\'ealisable.
 
 
 Remarque: 
-$A$: matrice des payoff: $A_{(i,k)}(S_1^i(w_k))$$. Un actif conditionnel est r\'ealisable si $\exists \theta$ tel que $\theta^T A=H$. Et donc le march\'e est complet si $\theta^T A=H$ a une solution pour tout $H\in \mathbb{R}^K$.	
+$A$: matrice des payoff: $A_{(i,k)}(S_1^i(w_k))$. Un actif conditionnel est r\'ealisable si $\exists \theta$ tel que $\theta^T A=H$. Et donc le march\'e est complet si $\theta^T A=H$ a une solution pour tout $H\in \mathbb{R}^K$.	
 
 Donc il faut que $A$ a au moins $K$ lignes lin\'eairement ind\'edendantes.[une condition n\'ecessaire est donc $d+1>=K$]
 
@@ -263,7 +263,7 @@ Th\'eor\`eme: Un march\'e sans arbitrage est complet ssi il existe une seule mes
 
 Preuve: Supposons que le march\'e est complet. Prenons l'actif conditionnel $\mathbb{1}_{\{w_k\}}(1<=k<=K)$. Donc pour toute mesure de proba risque neutre $q$ on a:
 \begin{equation}
-P_k=P(\mathbb{1}_{\{w_k\}})=E^Q[\frac{\mnathbb{1}_{\{w_k\}}}{1+R}]=\frac{1}{1+R}Q(\{w_k\})
+P_k=P(\mathbb{1}_{\{w_k\}})=E^Q[\frac{\mathbb{1}_{\{w_k\}}}{1+R}]=\frac{1}{1+R}Q(\{w_k\})
 \end{equation}
 => Unicit\'e de $Q$.
 
@@ -277,7 +277,7 @@ E^{Q_\epsilon}=frac{\sum_{k+1}^K (Q(w_k)+\epsilon z_k \tilde{S}^i(w_k)}{1+\epsil
 Exercise
 1. $\Omega=\{w_1, w_2\}$, on cherche le modele suivant:
 
-$S_0^0=1 -> 1+\Omega(1=10%)$
+$S_0^0=1 -> 1+\Omega(1=10\%)$
 
 $S_0^10->12, w_1,P_1$
 $-> 11, w_2,P_2$
@@ -285,10 +285,10 @@ $-> 11, w_2,P_2$
 Est-ce que le march\'e est sans abritrage? Si ce n'est pas le cas, mettre au cas une strategie d'arbitrage.
 
 Cherchons les mesures proba risque neutre
-\begin{tabular}{lll}
- & S_0^1 & w_1 & w_2 \\
- i=0 & 1 & 1.1 & 1.1 \\
- i=1 & 10 & 12 & 11 \\
+\begin{tabular}{llll}
+   & $S_0^1$ & $w_1$ & $w_2$ \\
+ $i=0$ & 1 & 1.1 & 1.1 \\
+ $i=1$ & 10 & 12 & 11 \\
 \end{tabular}
 Cherchons $P_1, P_2$ tel que 
 \begin{equation}
@@ -303,7 +303,7 @@ P_1=0, P_2=1
 \end{equation}
  
 $P_1>0$ n'est pas v\'erifi\'e, donc il existe opportunit\'e d'arbitrage.
-On veut 10 de S^0 et on achete 1 de $S^1$,
+On veut 10 de $S^0$ et on ach\`ete 1 de $S^1$,
 $V_0=10S_0^0+S_0^1=0$
 
 Donc 
@@ -317,7 +317,7 @@ V_1-> -10(1+R)+12=1
 
 2. $\Omega=\{w_1, w_2\}$, on cherche le modele suivant:
 
-$S_0^0=1 -> 1+\Omega(1=10%)$
+$S_0^0=1 -> 1+\Omega(1=10\%)$
 
 $S_0^10->12, w_1, P_1$
 $-> 8, w_2, P_2$
@@ -375,8 +375,10 @@ P(H)=E^Q[\frac{H}{1+R}]
 \end{equation} 
 o\`u
 \begin{equation}
-Q(w) = {\frac{1+R-d}{u-d} si w=w_d
-\frac{u-1-R}{u-d} si w_w_u
+Q(w) = \left\{\begin{array}{rcl}
+	\frac{1+R-d}{u-d} & si w=w_d\\
+\frac{u-1-R}{u-d} & si w_u
+\end{array} \right.
 \end{equation}
 En plus, ;a portefeuille de couverture est donn\'ee par $(\theta_0,\theta_1)$ o\`u 
 \begin{equation}
@@ -392,14 +394,14 @@ Preuve
 \begin{enumerate}
 \item Cherchons des mesures de proba risque neutre $Q=\{q_u,q_d\}(q_u=Q(w_u),q_d=Q(w_d))$
 \begin{equation}
-\left\{ \begin{array}
-q_u+q_d=1\\
-\frac{q_uus+q_d ds}{1+R}=s
-\end{array} <=>
-\left\{\begin{array}
-q_d=1-q_u\\
-q_us(u-d)=s(1+R)-ds
-\end{array}
+\left\{ \begin{array}{rcl}
+q_u+q_d&=1\\
+\frac{q_uus+q_d ds}{1+R}&=s
+\end{array}\right. <=>
+\left\{\begin{array}{rcl}
+q_d&=1-q_u\\
+q_us(u-d)&=s(1+R)-ds
+\end{array}\right.
 \end{equation}
 $<=>$
 \begin{equation}
@@ -416,10 +418,10 @@ Donc $\exists !$ mesure de proba risque neutre ssi $d<1+R<u$
 \end{equation}
 Cherchons $(\theta_0,\theta_1)$ tel que $\theta_0S_1^0 + \theta_1S_1^1=H$
 \begin{equation}
-\left\{\begin{array}
-\theta_0(1+R)+\theta_1(us)=H(w_u)\\
-\theta_0(1+R)+\theta_1(ds)=H(w_d)
-\end{array}
+\left\{\begin{array}{rcl}
+\theta_0(1+R)+\theta_1(us)&=H(w_u)\\
+\theta_0(1+R)+\theta_1(ds)&=H(w_d)
+\end{array}\right.
 \end{equation}
 \begin{equation}
 =>\theta_1(us-ds)=H(w_u)-H(w_d)
