@@ -71,25 +71,23 @@ Par l'absence de opportunite d'arbitrage, la valeur de ce portefeuille est la me
 
 \subsection{Mod\`ele \`a une p\'eriode}
 
-On consir\`ere qu'il uy a $d+1$ actifs financiers et $2$ dates,: $t=0, t=1$. L'al\'ea du mod\`ele est represente par $K$ etats dans $\Omega=\{\omega_1,\ldots,\omega_K\}$.
+On consir\`ere qu'il y a $d+1$ actifs financiers et $2$ dates,: $t=0, t=1$. L'al\'ea du mod\`ele est represente par $K$ \'etats dans $\Omega=\{\omega_1,\ldots,\omega_K\}$.
 
 En $t=1$, avec des probabilit\'es $ \{p_1,\ldots,p_K\},(p_i>0) $.
 
 Le prix de l'actif $i$ au $t$ est not\'e $S_t^i, 0<=i<=d$. $S^0$ represente l'actif sous risque $(S_0^0=1, S_1^0=e^R\approx 1+R)$
 Une strategie $\theta\in\mathbb{R}^{d+1}$ est le vecteur contenant le nombre d'unit\'e de chaque actif dans ce portefeuille $V$ entre $t=0$ et $t=1$. 
 
-La valeur de $v$ en $t$
-
+La valeur de $V$ en $t$
 \begin{equation}
 V_t=V_t^\theta=\sum_{i=0}^d\theta_i S_t^i
 \end{equation}
-
-* Le gain est defini par 
+Le gain est defini par 
 \begin{equation}
 G=V_1-V_0=\sum_{i=0}^d \theta_i (S_1^i-S_0^i)=\sum_{i=0}^d \theta_i \Delta S^i
 \end{equation}
 
-On note $\tilde{S}_t^i=\frac{S_t^i}{S_t^0}$, $\tilde{V}_t\frac{V_t}{S_t^0}$ et $\tilde{G}_t=\frac{G}{S_t^0}$,
+On note $\tilde{S}_t^i=\frac{S_t^i}{S_t^0}$, $\tilde{V}_t=\frac{V_t}{S_t^0}$ et $\tilde{G}_t=\frac{G}{S_t^0}$,
 alors
 \begin{equation}
 \{\tilde{V}_t=\theta_0+\sum_{i=0}^{d}\theta_i \tilde{S}_t^i
@@ -113,13 +111,13 @@ o\`u
 	\item $P(G>0) > 0$
 \end{enumerate}
 
-Commencer avec une etat avec valeur $0$, et la probabilite de gagner de l'argent est superierue \`a $0$.
+Commencer avec une \'etat avec valeur $0$, et la probabilite de gagner de l'argent est superierue \`a $0$.
 
 \subsubsection{D\'efinition 2}
 
 Une mesure de probabilit\'e $Q$ est dite risque neutre si:
 \begin{enumerate}
-	\item $Q~P$, c'est a dire, $Q(\omega_i)>0, \forall 1<=i<=K$
+	\item $Q\~P$, c'est a dire, $Q(\omega_i)>0, \forall 1<=i<=K$
 	\item $E^Q[\tilde{S}_1^i]=\tilde{S}_0^i, \forall i$
 \end{enumerate}
 
@@ -128,10 +126,9 @@ Le march\'e n'admet pas d'opportunit\'e d'arbitrage si et seulement s'il existe 
 
 Preuve:
 
-(=>) Supposons qu'il existe une mesure de probabilit\'e risque neutre. Supposons qu'il existe une opportunit\'e d'arbitrage, donc 
-
+($=>$) Supposons qu'il existe une mesure de probabilit\'e risque neutre. Supposons qu'il existe une opportunit\'e d'arbitrage, donc 
 \begin{equation}
-Q(G^\theta>=0)=1, Q(G_\theta>0)>0
+Q(G^\theta>=0)=1, Q(G^\theta>0)>0
 \end{equation}
 
 \begin{equation}
@@ -139,14 +136,14 @@ E^Q[\tilde{G}^\theta]=0
 \end{equation}
 contradiction.
 
-(<=) Supposons qu'il y a absence d'opportunit\'e d'arbitrage
+($<=$) Supposons qu'il y a absence d'opportunit\'e d'arbitrage
 \begin{equation}
 \mathcal{E}=\{(q_1,\ldots,q_K)|\sum_{i=1}^K q_i, q_i>0\}
 \end{equation}
 \begin{equation}
 C=\{E^Q[\Delta\tilde{S}]|Q\in\mathcal{E}\}, \Delta \tilde{S}=(\Delta \tilde{S}^1,\ldots, \Delta\tilde{S}^d)^T
 \end{equation}
-Il faut demontrer que $0\in C$.
+Il faut d\'emontrer que $0\in C$.
 
 Supposons $0\notin C$, puisque $C$ est convexe, d'apr\`es le theoreme de separation des convexes, alors 
 \begin{equation}
@@ -171,7 +168,7 @@ S'il existe $\omega_i$ tel que $G^Q(\omega_i)<0$, on va construire une mesure $Q
 \end{equation}
 on peut choisir $\epsilon$ suffisamment actif tel que $E^{Q_\epsilon}[\tilde{G}^{\theta}]<0$. Donc $\forall i, G^\theta(\omega_i)>=0 => Q^0(G^\theta>=0)=1$ mais puisque $E^{Q_0}[\tilde{G}^\theta]>0$, alors $Q^0(\tilde{G}^theta)>0$
 
-=> Il y a arbitrage. Contradition, donc $0\in C => \exists $ une mesure de proba risque neutre.
+$=>$ Il y a arbitrage. Contradition, donc $0\in C => \exists $ une mesure de proba risque neutre.
 
 Exemple:
 \begin{equation}
@@ -203,7 +200,7 @@ Cherchons $Q=\{q_1,q_2,q_3,q_4\}$ tel que $0<q$ et
 \begin{equation}
 \left\{ \begin{array}{rcl}
 	q_1+q_2+q_3+q_4 &= 1 \\
-	0.5/1.25 q_1+1/1.25 q_2+1/1.25 q_3 + 2/1.25 q_4 &= 1 \\
+	\frac{0.5}{1.25} q_1+\frac{1}{1.25} q_2+\frac{1}{1.25} q_3 + \frac{2}{1.25} q_4 &= 1 \\
 	0.5/1.25 q_3 + 1/1.25 q_4 &=0.3
 \end{array}\right.
 \end{equation}
@@ -282,15 +279,162 @@ Exercise
 
 $S_0^0=1 -> 1+\Omega(1=10%)$
 
-$S_0^10->12, w_1$
-$-> 11, w_2$
+$S_0^10->12, w_1,P_1$
+$-> 11, w_2,P_2$
 
 Est-ce que le march\'e est sans abritrage? Si ce n'est pas le cas, mettre au cas une strategie d'arbitrage.
 
+Cherchons les mesures proba risque neutre
+\begin{tabular}{lll}
+ & S_0^1 & w_1 & w_2 \\
+ i=0 & 1 & 1.1 & 1.1 \\
+ i=1 & 10 & 12 & 11 \\
+\end{tabular}
+Cherchons $P_1, P_2$ tel que 
+\begin{equation}
+P_1>0, P_2>0, E[\tilde{S_1}^0] = \tilde{S}_0^0, E[\tilde{S}_1^1]=\tilde{S}_0^1
+\end{equation}
+\begin{equation}
+P_1*\frac{1.1}{1.1}+P_2\frac{1.1}{1.1}=\frac{1}{1} and P_1\frac{12}{1.1}+P_2\frac{11}{1.1}=\frac{10}{1}
+\end{equation}
+=>
+\begin{equation}
+P_1=0, P_2=1
+\end{equation}
+ 
+$P_1>0$ n'est pas v\'erifi\'e, donc il existe opportunit\'e d'arbitrage.
+On veut 10 de S^0 et on achete 1 de $S^1$,
+$V_0=10S_0^0+S_0^1=0$
+
+Donc 
+\begin{equation}
+V_1-> -10(1+R)+12=1
+\end{equation}
+\begin{equation}
+->-10(1+R)+11=0
+\end{equation}
 
 
+2. $\Omega=\{w_1, w_2\}$, on cherche le modele suivant:
 
+$S_0^0=1 -> 1+\Omega(1=10%)$
 
+$S_0^10->12, w_1, P_1$
+$-> 8, w_2, P_2$
 
+\begin{enumerate}
+\item Est-ce que le marche est sans arbitrage(complet)?
+\item Calculer le prix d'un call de strike 10
+\item Calculer de deux fa\c{c}ons le prix d'un put de strike 10
+\end{enumerate}
+
+Solution:$P_1=\frac{3}{4}, P_2=\frac{1}{4}$, donc il existe unique mesure probabilite risque neutre. Donc le march\'e est sans arbitrage(complet).
+
+2) Puisque le march\'e est complet et sans arbitrage, alors:
+\begin{equation}
+Call_0(1,10) = E^Q[\frac{(S_1^1-10)_+}{1+R}]=\frac{\frac{3}{4}*2+\frac{1}{4}*0}{1.1}=\frac{15}{11}
+\end{equation}
+
+3) 
+\begin{equation}
+c(1,10)-P(1,10)=S_0^1-\frac{K}{1+R}=\frac{10}{11}
+\end{equation}
+\begin{equation}
+=>P(1,10)=\frac{5}{11}
+\end{equation}
+
+\begin{equation}
+P(1,10) = E^Q[\frac{(10-S_1^1)_+}{1+R}]=0\times\frac{3}{4}+\frac{2}{1.1}\times\frac{1}{4}=\frac{5}{11}
+\end{equation}
+
+\section{Le mod\`ele binominale \`a une p\'eriode}
+
+$T=1,\Omega=\{w_u,w_d\},F=P(\Omega)$,$P$ mesure de proba dans $(\Omega,F),(0<P(w_u)<1)$
+
+\begin{equation}
+S_0^0=1->1+R
+\end{equation}
+\begin{equation}
+S_0^1=s->us, w_u,P_1(u>=d)
+\end{equation}
+\begin{equation}
+->ds, w_d, P_2
+\end{equation}
+
+Proposition: 
+\begin{enumerate}
+\end{enumerate}
+Le mod\`ele est viable (sans arbitrage), ssi
+\begin{equation}
+d<1+R<u
+\end{equation}
+(condition de non-arbitrage)
+
+Le prix d'un actif conditionnel $H$ est:
+\begin{equation}
+P(H)=E^Q[\frac{H}{1+R}]
+\end{equation} 
+o\`u
+\begin{equation}
+Q(w) = {\frac{1+R-d}{u-d} si w=w_d
+\frac{u-1-R}{u-d} si w_w_u
+\end{equation}
+En plus, ;a portefeuille de couverture est donn\'ee par $(\theta_0,\theta_1)$ o\`u 
+\begin{equation}
+\theta_1=\frac{H(w_u)-H(w_d)}{us-ds}
+\end{equation}
+et
+\begin{equation}
+\theta_0=P(H)-\theta_1 s
+\end{equation}
+
+Preuve
+\begin{enumerate}
+\item Cherchons des mesures de proba risque neutre $Q=\{q_u,q_d\}(q_u=Q(w_u),q_d=Q(w_d))$
+\begin{equation}
+\left\{ \begin{array}
+q_u+q_d=1\\
+\frac{q_uus+q_d ds}{1+R}=s
+\end{array} <=>
+\left\{\begin{array}
+q_d=1-q_u\\
+q_us(u-d)=s(1+R)-ds
+\end{array}
+\end{equation}
+$<=>$
+\begin{equation}
+q_d=\frac{u-1-R}{u-d}\\
+q_u=\frac{1+R-d}{u-d}
+\end{equation}
+
+Donc $\exists !$ mesure de proba risque neutre ssi $d<1+R<u$
+
+\item Le march\'e est sous arbitrage et complet
+
+\begin{equation}
+=>P(H)=E^Q[\frac{H}{1+R}]
+\end{equation}
+Cherchons $(\theta_0,\theta_1)$ tel que $\theta_0S_1^0 + \theta_1S_1^1=H$
+\begin{equation}
+\left\{\begin{array}
+\theta_0(1+R)+\theta_1(us)=H(w_u)\\
+\theta_0(1+R)+\theta_1(ds)=H(w_d)
+\end{array}
+\end{equation}
+\begin{equation}
+=>\theta_1(us-ds)=H(w_u)-H(w_d)
+\end{equation}
+\begin{equation}
+=>\theta_1=\frac{H(w_u)-H(w_d)}{us-ds}
+\end{equation}
+\begin{equation}
+\theta_0\times 1+\theta_1 s=P(H)
+\end{equation}
+\begin{equation}
+=>\theta_0=P(H)-\theta_1 s
+\end{equation}
+La strategie de couverture est not\'e $(\theta_0,\theta_1)$ ou $(P(H),\theta_1)$
+$=>$ le prix \`a definir pour l'acheter si le vendeur veut eliminer tout risque.
+\end{enumerate}
 
 \end{document}
