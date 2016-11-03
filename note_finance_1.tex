@@ -222,6 +222,75 @@ l'ensemble des mesures risque neutre est :
 \{(\frac{1}{4},\lambda,\frac{3}{4}-2\lambda)|0<\lambda<\frac{3}{8}\}=empty => AOA
 \end{equation}
 
+\section{March\'e complet et valorisation d'actif conditionnel}
+
+On suppose que le march\'e est sans arbitrage.
+
+\begin{enumerate}
+	\item Def 1
+	
+Un actif conditionnel est une variable al\'eatoire $H$ dons $(\Omega, F, P)$.
+	
+	\item Def 2
+	
+	Un actif conditinnel est r\'ealisable s'il existe une strtegie $\theta$ tel que $H=V_1^\theta$
+	
+	\item Remarque
+	
+	Par AOA, on a prix de l'actif conditionnel est $P(H)=V_0^\theta$.
+\end{enumerate}
+
+Proposition: Le juste prix d'un actif conditionnel r\'ealisable $H$ est:
+\begin{equation}
+P(H) = E^Q[\tilde{H}]=E^Q[\frac{H}{S_1^\theta}]=E^Q[\frac{H}{1+R}]
+\end{equation}
+o\`u $Q$ est une mesure de proba risque neutre.
+
+\b{preuve}: 
+\theta est une strategie tel que $V_1^\theta=H$
+\begin{equation}
+E^Q[\tilde{H}]=E^Q[\tilde{V}_1^\theta]=E^Q[\tilde{V}_0^\theta+\sum_{i=1}^d \theta_i \Delta \tilde{S}^i]=V_0^\theta+sum_{i=1}^d \theta_i E^Q[\Delta \tilde{S}^\i]=V_0^\theta=P(H)
+\end{equation}
+
+Def 3:
+
+Un march\'e est complet si tout actif conditionnel est r\'ealisable.
+
+
+Remarque: 
+$A$: matrice des payoff: $A_{(i,k)}(S_1^i(w_k))$$. Un actif conditionnel est r\'ealisable si $\exists \theta$ tel que $\theta^T A=H$. Et donc le march\'e est complet si $\theta^T A=H$ a une solution pour tout $H\in \mathbb{R}^K$.	
+
+Donc il faut que $A$ a au moins $K$ lignes lin\'eairement ind\'edendantes.[une condition n\'ecessaire est donc $d+1>=K$]
+
+Th\'eor\`eme: Un march\'e sans arbitrage est complet ssi il existe une seule mesure de probabilit\'e risque neutre.
+
+Preuve: Supposons que le march\'e est complet. Prenons l'actif conditionnel $\mathbb{1}_{\{w_k\}}(1<=k<=K)$. Donc pour toute mesure de proba risque neutre $q$ on a:
+\begin{equation}
+P_k=P(\mathbb{1}_{\{w_k\}})=E^Q[\frac{\mnathbb{1}_{\{w_k\}}}{1+R}]=\frac{1}{1+R}Q(\{w_k\})
+\end{equation}
+=> Unicit\'e de $Q$.
+
+Supposons que la mesure risque neutre est unique. D\'emontrer que le march\'e est complet.
+
+Si le march\'e n'est pas complet $\exists z\in\mathbb{R}^{d+1}, z\neq 0$ tel que $z^tA0$. Soit $Q_i|Q_2=\frac{Q(w_k)+\epsilon z_k}{1+\epsilon \sum z_k}$. Il suffit de prendre $\epsilon$ suffisamment petit, $0<Q_2(w_k)<1$.
+\begin{equation}
+E^{Q_\epsilon}=frac{\sum_{k+1}^K (Q(w_k)+\epsilon z_k \tilde{S}^i(w_k)}{1+\epsilon \sum z_k}=\sum_{k=1}^K Q(w_k) \tilde{S}_1^i(w_k)*\epsilon \sum_k=1^{K} z_k \tilde{S}_1^i (w_k)=E^Q[\tilde{S}_1^i]=\tilde{S}_0^i
+\end{equation}
+
+Exercise
+1. $\Omega=\{w_1, w_2\}$, on cherche le modele suivant:
+
+$S_0^0=1 -> 1+\Omega(1=10%)$
+
+$S_0^10->12, w_1$
+$-> 11, w_2$
+
+Est-ce que le march\'e est sans abritrage? Si ce n'est pas le cas, mettre au cas une strategie d'arbitrage.
+
+
+
+
+
 
 
 \end{document}
