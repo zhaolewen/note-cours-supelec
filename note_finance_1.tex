@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{mathrsfs}
+\usepackage{dsfont}
 
 \title{Mineur Finance 1}
 
@@ -20,7 +21,7 @@
 \subsection{Options americaines}
 Option am\'ericaine similaire aux options europeens mais l'exercise du droit pourra se faire \`a toute date $t$ avant maturit\'e $T$.
 
-On note $CallAmeric_t(T, K)$ et $PutAmeric_t(T, K)$ les prix des calls et puts americain au $t$.
+On note $CallAmer_t(T, K)$ et $PutAmer_t(T, K)$ les prix des calls et puts am\'ericains au $t$.
 
 On a 
 \begin{equation}
@@ -52,7 +53,7 @@ Remarque: Pour le Put, la propri\'et\'e n'est pas vraie.
 Put_t(T, K) <= KB(t, T)
 \end{equation}
 
-Pour un certain scenario, le prix de put inferieur au prix d'exercise. $Put_t(T, K)<(S_t-K)_+$.
+Pour un certain scenario, le prix de put est inf、‘erieur au prix d'exercise. $Put_t(T, K)<(S_t-K)_+$.
 
 Pour $S_t$ tel que $KB_t(T)< K-S_t <=> S_t < (1-B_t(T))K$
 Donc, on a
@@ -63,19 +64,19 @@ Put_t(T, K)< K-S_t
 \section{Th\'eorie de la valorisation dans le cas discr\`et \`a une p\'eriode}
 
 \subsection{Introduction}
-Nous avons vu que les contrats \`a termes peuvent etre valorise par la principe de non arbitrage alors que ce principe ne donne que des bornes sur les prix des options. La valorisation de ces produits assez complexes necessite l'introduction des modeles probabilistes pour decrire les scenarios possibles du march\'e.
+Nous avons vu que les contrats \`a termes peuvent \^{e}tre valoris\'es par le principe de non arbitrage alors que ce principe ne donne que des bornes sur les prix des options. La valorisation de ces produits assez complexes n\'ecessite l'introduction des modeles probabilistes pour d\'ecrire les scenarios possibles du march\'e.
 
 Dans ce marche, si on trouve une strategie qui r\'eplique le payoff de l'option, alors la portefeuille construite par cette strategie r\'eplique l'option.
 
-Par l'absence de opportunite d'arbitrage, la valeur de ce portefeuille est la meme que celui de l'option. Cependant, ce prix est d\'ependant du mod\`ele qui doit etre proche de la r\'ealit\'e.
+Par l'absence de opportunite d'arbitrage, la valeur de ce portefeuille est la m\^{e}me que celui de l'option. Cependant, ce prix est d\'ependant du mod\`ele qui doit etre proche de la r\'ealit\'e.
 
 \subsection{Mod\`ele \`a une p\'eriode}
 
-On consir\`ere qu'il y a $d+1$ actifs financiers et $2$ dates,: $t=0, t=1$. L'al\'ea du mod\`ele est represente par $K$ \'etats dans $\Omega=\{\omega_1,\ldots,\omega_K\}$.
+On consir\`ere qu'il y a $d+1$ actifs financiers et $2$ dates,: $t=0, t=1$. L'al\'ea du mod\`ele est represent\'e par $K$ \'etats dans $\Omega=\{\omega_1,\ldots,\omega_K\}$.
 
 En $t=1$, avec des probabilit\'es $ \{p_1,\ldots,p_K\},(p_i>0) $.
 
-Le prix de l'actif $i$ au $t$ est not\'e $S_t^i, 0<=i<=d$. $S^0$ represente l'actif sous risque $(S_0^0=1, S_1^0=e^R\approx 1+R)$
+Le prix de l'actif $i$ au $t$ est not\'e $S_t^i, 0\leq i\leq d$. $S^0$ represente l'actif saus risque $(S_0^0=1, S_1^0=e^R\approx 1+R)$
 Une strategie $\theta\in\mathbb{R}^{d+1}$ est le vecteur contenant le nombre d'unit\'e de chaque actif dans ce portefeuille $V$ entre $t=0$ et $t=1$. 
 
 La valeur de $V$ en $t$
@@ -90,11 +91,10 @@ G=V_1-V_0=\sum_{i=0}^d \theta_i (S_1^i-S_0^i)=\sum_{i=0}^d \theta_i \Delta S^i
 On note $\tilde{S}_t^i=\frac{S_t^i}{S_t^0}$, $\tilde{V}_t=\frac{V_t}{S_t^0}$ et $\tilde{G}_t=\frac{G}{S_t^0}$,
 alors
 \begin{equation}
-\{\tilde{V}_t=\theta_0+\sum_{i=0}^{d}\theta_i \tilde{S}_t^i
-\end{equation}
-
-\begin{equation}
-\tilde{G}=\tilde{V}_1-\tilde{V}_0=\sum_{i=1}^d \theta_i (\tilde{S}_1^i-\tilde{S}_0^i)=\sum_{i=1}^d\theta_i\Delta \tilde{S}^i
+\left \{ \begin{array}{rcl}
+&\tilde{V}_t =\theta_0+\sum_{i=0}^{d}\theta_i \tilde{S}_t^i\\
+&\tilde{G} =\tilde{V}_1-\tilde{V}_0=\sum_{i=1}^d \theta_i (\tilde{S}_1^i-\tilde{S}_0^i)=\sum_{i=1}^d\theta_i\Delta \tilde{S}^i
+\end{array}\right.
 \end{equation}
 
 \subsection{R\'esultats de non-arbitrage}
@@ -177,10 +177,16 @@ Exemple:
 $R=0.25$, $S^0$: Actif sans risque vaux $1$ en $t=0$.
 $S^1$: une action qui vaut $1$ en $t=0$.
 $S^2$: un call sur $S^1$ de strike $K=1$ qui vaut $0.3$ en $t=0$.
+\begin{center}
+\begin{tabular}{l||l|l|l|l|l}
+		& $S_0^i$ & $w_1$ & $w_2$ & $w_3$ & $w_4$\\ \hline \hline
+	$i=0$ & 1 & 1.25 & 1.25 & 1.25 & 1.25 \\	 \hline 
+	$i=1$ & 1 & 0.5 & 1 & 1.5 & 2 \\ \hline 
+	$i=2$ & 0.3 & 0 & 0 & 0.5 & 1 \\ 
+\end{tabular}
+\end{center}
 
-(table ici)
-
-Un actif vaut toujours la meme valeur peu importe l'\'etat.
+Un actif vaut toujours la m\^{e}me valeur peu importe l'\'etat.
 
 Exemple:
 \begin{enumerate}
@@ -196,12 +202,12 @@ G^\theta(\omega_i)=V_1(\omega_i)-V_0, V_0=1*0.7-1+0.3=0
 G^\theta(\omega_1)=0.375, G^\theta(\omega_{2,3,4})=-0.125
 \end{equation}
 
-Cherchons $Q=\{q_1,q_2,q_3,q_4\}$ tel que $0<q$ et
+Cherchons $Q=\{q_1,q_2,q_3,q_4\}$ tel que $0<q_i$ et
 \begin{equation}
 \left\{ \begin{array}{rcl}
 	q_1+q_2+q_3+q_4 &= 1 \\
 	\frac{0.5}{1.25} q_1+\frac{1}{1.25} q_2+\frac{1}{1.25} q_3 + \frac{2}{1.25} q_4 &= 1 \\
-	0.5/1.25 q_3 + 1/1.25 q_4 &=0.3
+	\frac{0.5}{1.25} q_3 + \frac{1}{1.25} q_4 &=0.3
 \end{array}\right.
 \end{equation}
 
@@ -226,11 +232,11 @@ On suppose que le march\'e est sans arbitrage.
 \begin{enumerate}
 	\item Def 1
 	
-Un actif conditionnel est une variable al\'eatoire $H$ dons $(\Omega, F, P)$.
+Un actif conditionnel est une variable al\'eatoire $H$ dans $(\Omega, F, P)$.
 	
 	\item Def 2
 	
-	Un actif conditinnel est r\'ealisable s'il existe une strtegie $\theta$ tel que $H=V_1^\theta$
+	Un actif conditionnel est r\'ealisable s'il existe une strat\'egie $\theta$ tel que $H=V_1^\theta$
 	
 	\item Remarque
 	
@@ -243,11 +249,17 @@ P(H) = E^Q[\tilde{H}]=E^Q[\frac{H}{S_1^\theta}]=E^Q[\frac{H}{1+R}]
 \end{equation}
 o\`u $Q$ est une mesure de proba risque neutre.
 
-\b{preuve}: 
+\textbf{preuve}: 
 $\theta$ est une strat\'egie tel que $V_1^\theta=H$
 \begin{equation}
-E^Q[\tilde{H}]=E^Q[\tilde{V}_1^\theta]=E^Q[\tilde{V}_0^\theta+\sum_{i=1}^d \theta_i \Delta \tilde{S}^i]=V_0^\theta+sum_{i=1}^d \theta_i E^Q[\Delta \tilde{S}^i]=V_0^\theta=P(H)
+\begin{split}
+E^Q[\tilde{H}]&=E^Q[\tilde{V}_1^\theta]\\
+&=E^Q[\tilde{V}_0^\theta+\sum_{i=1}^d \theta_i \Delta \tilde{S}^i]\\
+&=V_0^\theta+\sum_{i=1}^d \theta_i E^Q[\Delta \tilde{S}^i]\\
+&=V_0^\theta=P(H)
+\end{split}
 \end{equation}
+
 
 Def 3:
 
@@ -259,7 +271,7 @@ $A$: matrice des payoff: $A_{(i,k)}(S_1^i(w_k))$. Un actif conditionnel est r\'e
 
 Donc il faut que $A$ a au moins $K$ lignes lin\'eairement ind\'edendantes.[une condition n\'ecessaire est donc $d+1>=K$]
 
-Th\'eor\`eme: Un march\'e sans arbitrage est complet ssi il existe une seule mesure de probabilit\'e risque neutre.
+\textbf{Th\'eor\`eme}: Un march\'e sans arbitrage est complet ssi il existe une seule mesure de probabilit\'e risque neutre.
 
 Preuve: Supposons que le march\'e est complet. Prenons l'actif conditionnel $\mathbb{1}_{\{w_k\}}(1<=k<=K)$. Donc pour toute mesure de proba risque neutre $q$ on a:
 \begin{equation}
@@ -269,9 +281,22 @@ P_k=P(\mathbb{1}_{\{w_k\}})=E^Q[\frac{\mathbb{1}_{\{w_k\}}}{1+R}]=\frac{1}{1+R}Q
 
 Supposons que la mesure risque neutre est unique. D\'emontrer que le march\'e est complet.
 
-Si le march\'e n'est pas complet $\exists z\in\mathbb{R}^{d+1}, z\neq 0$ tel que $z^tA0$. Soit $Q_i|Q_2=\frac{Q(w_k)+\epsilon z_k}{1+\epsilon \sum z_k}$. Il suffit de prendre $\epsilon$ suffisamment petit, $0<Q_2(w_k)<1$.
+Si le march\'e n'est pas complet 
 \begin{equation}
-E^{Q_\epsilon}=frac{\sum_{k+1}^K (Q(w_k)+\epsilon z_k \tilde{S}^i(w_k)}{1+\epsilon \sum z_k}=\sum_{k=1}^K Q(w_k) \tilde{S}_1^i(w_k)*\epsilon \sum_k=1^{K} z_k \tilde{S}_1^i (w_k)=E^Q[\tilde{S}_1^i]=\tilde{S}_0^i
+	\exists z\in\mathbb{R}^{d+1}, z\neq 0
+\end{equation}
+tel que $z^tA0$. Soit
+\begin{equation}
+	Q_i|Q_2=\frac{Q(w_k)+\epsilon z_k}{1+\epsilon \sum z_k}
+\end{equation}. 
+Il suffit de prendre $\epsilon$ suffisamment petit, $0<Q_2(w_k)<1$.
+\begin{equation}
+	\begin{split}
+		E^{Q_\epsilon}&=\frac{\sum_{k+1}^K (Q(w_k)+\epsilon z_k \tilde{S}^i(w_k)}{1+\epsilon \sum z_k}\\
+		&=\sum_{k=1}^K Q(w_k) \tilde{S}_1^i(w_k)\times\epsilon \sum_k \mathds{1}^{K} z_k \tilde{S}_1^i (w_k)\\
+		&=E^Q[\tilde{S}_1^i]\\ 
+		&=\tilde{S}_0^i
+	\end{split}
 \end{equation}
 
 Exercise
@@ -285,11 +310,14 @@ $-> 11, w_2,P_2$
 Est-ce que le march\'e est sans abritrage? Si ce n'est pas le cas, mettre au cas une strategie d'arbitrage.
 
 Cherchons les mesures proba risque neutre
-\begin{tabular}{llll}
-   & $S_0^1$ & $w_1$ & $w_2$ \\
+\begin{center}
+\begin{tabular}{l|lll}
+   & $S_0^1$ & $w_1$ & $w_2$ \\ \hline 
  $i=0$ & 1 & 1.1 & 1.1 \\
  $i=1$ & 10 & 12 & 11 \\
-\end{tabular}
+\end{tabular}	
+\end{center}
+
 Cherchons $P_1, P_2$ tel que 
 \begin{equation}
 P_1>0, P_2>0, E[\tilde{S_1}^0] = \tilde{S}_0^0, E[\tilde{S}_1^1]=\tilde{S}_0^1

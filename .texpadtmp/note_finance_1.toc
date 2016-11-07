@@ -9,6 +9,6 @@
 \contentsline {subsection}{\numberline {2.3}R\'esultats de non-arbitrage}{4}
 \contentsline {subsubsection}{\numberline {2.3.1}D\'efinition}{4}
 \contentsline {subsubsection}{\numberline {2.3.2}D\'efinition 2}{4}
-\contentsline {subsubsection}{\numberline {2.3.3}Th\'eor\`eme}{5}
-\contentsline {section}{\numberline {3}March\'e complet et valorisation d'actif conditionnel}{7}
-\contentsline {section}{\numberline {4}Le mod\`ele binominale \`a une p\'eriode}{9}
+\contentsline {subsubsection}{\numberline {2.3.3}Th\'eor\`eme}{4}
+\contentsline {section}{\numberline {3}March\'e complet et valorisation d'actif conditionnel}{6}
+\contentsline {section}{\numberline {4}Le mod\`ele binominale \`a une p\'eriode}{10}
