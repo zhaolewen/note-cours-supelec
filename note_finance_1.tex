@@ -170,7 +170,7 @@ on peut choisir $\epsilon$ suffisamment actif tel que $E^{Q_\epsilon}[\tilde{G}^
 
 $=>$ Il y a arbitrage. Contradition, donc $0\in C => \exists $ une mesure de proba risque neutre.
 
-Exemple:
+\textbf{Exemple}:
 \begin{equation}
 \Omega=\{\omega_1, \omega_2,\omega_3, \omega_4\}, \mathbb{P}=\{0.3, 0.3,0.2,0.2\}
 \end{equation}
@@ -261,7 +261,7 @@ E^Q[\tilde{H}]&=E^Q[\tilde{V}_1^\theta]\\
 \end{equation}
 
 
-Def 3:
+\subsubsection{Def 3}
 
 Un march\'e est complet si tout actif conditionnel est r\'ealisable.
 
@@ -299,7 +299,7 @@ Il suffit de prendre $\epsilon$ suffisamment petit, $0<Q_2(w_k)<1$.
 	\end{split}
 \end{equation}
 
-Exercise
+\textbf{Exercise}
 1. $\Omega=\{w_1, w_2\}$, on cherche le modele suivant:
 
 $S_0^0=1 -> 1+\Omega(1=10\%)$
@@ -389,7 +389,7 @@ S_0^1=s->us, w_u,P_1(u>=d)
 ->ds, w_d, P_2
 \end{equation}
 
-Proposition: 
+\subsubsection{Proposition} 
 \begin{enumerate}
 \item Le mod\`ele est viable (sans arbitrage), ssi
 \begin{equation}
@@ -418,7 +418,7 @@ et
 \end{equation}
 \end{enumerate}
 
-Preuve
+\textbf{Preuve}
 \begin{enumerate}
 \item Cherchons des mesures de proba risque neutre $Q=\{q_u,q_d\}(q_u=Q(w_u),q_d=Q(w_d))$
 \begin{equation}
@@ -466,5 +466,101 @@ Cherchons $(\theta_0,\theta_1)$ tel que $\theta_0S_1^0 + \theta_1S_1^1=H$
 La strategie de couverture est not\'e $(\theta_0,\theta_1)$ ou $(P(H),\theta_1)$
 $=>$ le prix \`a definir pour l'acheter si le vendeur veut eliminer tout risque.
 \end{enumerate}
+
+\section{Th\'eor\`em de Valorisation dans le cas discr\`ete multi-p\'eriode}
+\subsection{Mod\`ele}
+On consid\`ere qu'il y a $n$ p\'eriodes et $n+1$ dates ${t_0=0,t_1,\ldots,t_n=T}$. L'al'ea est repr\'esent\'e par un espace de probabilit\'e $(\Omega,\mathcal{F},P)$. Pour sp\'ecifier l'information disponible en $t$, on introduit la filtration $\mathbb{F}=\{\mathcal{F}_0,\ldots,\mathcal{F}_n\}$. 
+
+On suppose $\mathcal{F}_0=\{\empty,\Omega\},\mathcal{F}_n=\mathcal{F}=P(\Omega)$. LEs actifsrisqu\'e sont mod\'elis\'es par $d$ processus stocastiques $(S^i_j)_{j=0,\ldots,n}^{i=1,\ldots,d}$ comme $\mathbb{F}$-adapt\'e. L'actif sans risque est d\'efini $(S_j^0)_{j=0,\ldots,n}$
+\begin{equation}
+S_0^0=1,S_j^0=(0+R)S_{j-1}^0
+\end{equation} 
+$R_j$ est le taux d'int\'er\^et pour la p\'eriode $[t_{j-1},t^j]$.
+
+\subsubsection{Def 1}
+Une strat\'egie d'investissement admissible est un processus stocastique $(\theta_j^i)_{j=0,\ldots,n}^{i=0,\ldots,d}$ o\`u $\theta_j^i$ est la quantit\'e investie dans l'actif $i$ entre $t_{j-1}$ et $t_j$ qui doit \^etre connu en $t_{j-1}.($\theta$ est pr\'evisible).
+
+\textbf{Remarque}:
+La valeur d'un portefeuille peut varier par deux possibilit\'es
+
+$->$ possibilit\'e 1: variation des prix d'actifs
+$->$ possibilit\'e 2: versement/retrait d'argent
+
+On va introduire la possibilit\'e 2 aux strat\'egies. 
+
+\subsubsection{Def 2}
+Une strat\'egie $\theta$ est dite audofinanc\'ee si 
+\begin{equation}
+\sum_{i=0}^d\theta_j^i S_j^i=\sum_{i=0}^d\theta_{j-1}^i S_j^i, \forall j=1,\ldots,n-1
+\end{equation}
+
+\subsubsection{Def 3}
+Le processus de gain d'une strat\'egie est un processus stocastique qui d\'ecrit le changement de valeur duportefeuille associ\'e suite aux variation des prix d'actif. 
+
+On va le noter $G$
+\begin{equation}
+G_0=0,G_t=\sum_{j=1}^t\sum_{i=0}^d \theta_j^i\Delta S_j^i,\Delta_j^i=S_j^i-S_{j-1}^i
+\end{equation}
+pour une strat\'egie auto-financ\'ee,
+\begin{equation}
+V_t=V_0+G_t
+\end{equation}
+Comme dans le cas d'une p\'eriode, on note:
+\begin{equation}
+\tilde{S}_j^i=\frac{S_t^i}{S_t^0},\tilde{V}_t=\frac{V_t}{S_t^0}=\tilde{V}_0+\tilde{G}_t
+\end{equation}
+\begin{equation}
+\tilde{G}_t=\sum_{j=1}^t\sum_{i=1}^d \theta_j^i \Delta \tilde{S}_j^i
+\end{equation}
+
+\subsection{R\'esultats de march\'e viable et complet}
+
+\subsubsection{Def 1}
+Une opportunit\'e d'arbitrage est une strat\'egie audo-financ\'ee $\theta$ tel que:
+\begin{equation}
+\left\{\begin{array}{rcl}
+V_0^\theta=0 \\
+P(V_n^\theta >= 0)=1 et P(V_n^\theta >0)>0
+\end{array}\right.
+\end{equation}
+ou
+\begin{equation}
+\left\{\begin{array}{rcl}
+P(\tilde{G}_n^\theta>=0)=1\\
+P(\tilde{G}_n^\theta>0)>0
+\end{array}\right.
+\end{equation}
+
+\subsubsection{Th\'eor\`eme}
+Un march\'e financ\'e \`a $n$ p\'eriode est viable ssi il existe une mesure de probabilit\'e risque neutre $Q$. C'est-\`a-dire,
+\begin{equation}
+\left\{\begin{array}{rcl}
+Q(w)>0,\forall w\in\Omega\\
+E^Q[\tilde{S_{t+1}^i}|\mathcal{F}_t]=\tilde{S}_t^i,\forall 0<=i<=d,0<=t<=n-1
+\end{array}\right.
+\end{equation}
+(Les prix actualis\'es sont de $Q$-martingale).
+
+\subsubsection{Proposition}
+Le juste prix d'un actif conditionnel r\'ealisable $H$ \`a la date $t$ est(l'actif verse $H$ en $T$):
+\begin{equation}
+P_t(H)=S_t^0 E^Q[\frac{H}{S^0_t}|\mathcal{F}_t]
+\end{equation}
+($Q$ est la mesure risque neutre)
+
+\textbf{Preuve}:
+Il existe une strat\'egie \theta tel que 
+\begin{equation}
+H=\sum_{i=0}^d \theta_i S_t^i
+\end{equation}
+Donc
+\begin{equation}
+\begin{split}
+S_tE^Q[\frac{H}{S_n^0}|\mathcal{F}_t]&=S_tE^Q[\frac{\sum\theta_i S_n^i}{S_n^0}|\mathcal{F}_t]\\
+&=S_t\sum_{i=0}^d\theta_i E^Q[\tilde{S}_n^i|\mathcal{F}_t]\\
+&=S_t\sum_{i=0}^d\theta_i\tilde{S}_t^i\\
+&=\sum_{i=0}^d\theta_i S_t^i=V_t=P_t(H)
+\end{split}
+\end{equation}
 
 \end{document}
