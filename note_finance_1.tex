@@ -563,4 +563,141 @@ S_tE^Q[\frac{H}{S_n^0}|\mathcal{F}_t]&=S_tE^Q[\frac{\sum\theta_i S_n^i}{S_n^0}|\
 \end{split}
 \end{equation}
 
+\subsection{Th\'eor\`eme}
+Un march\'e viable est complet ssi la moyenne de probabilit\'e risque neutre est unique.
+
+\subsection{Mod\`ele binomiale multi-p\'eriode(Mod\`ele de Lex-Ross-Robinstein)}
+\begin{equation}
+\Omega=\{-1,1\}^n,\mathcal{F}=P(\Omega)
+\end{equation}
+Soit $(z_k)_{k>=0}$ une suite de variable al\'eatoires ind\'ependantes tel que $P(z_k=1)=P(z_k=-1)=\frac{1}{2}$
+\begin{equation}
+\mathcal{F}_0=\{\empty,\Omega\},\mathcal{F}_k=\sigma(z_0,\ldots,z_k),\mathbb{F}=\{\mathcal{F}_0,\ldots,\mathcal{F}_n\}
+\end{equation}
+
+$T>0, t_i=\frac{iT}{n}$: diviser $[0,T]$ en $n$ parties.
+
+On d\'efinit:
+\begin{equation}
+\left\{\begin{array}{rcl}
+b_n=b\frac{T}{n}\\
+\sigma_n=\sigma\frac{T}{n}
+\end{array}\right.
+,b,\sigma>0
+\end{equation}
+
+\begin{equation}
+S_0^0=1, S_j^0=e^{\Omega\frac{T}{n}}S_{j-1}^0,(R=e^{\Omega\frac{T}{n}}-1\tilde \frac{tT}{n})=(1+R)S_{j-1}^0
+\end{equation}
+\begin{equation}
+\begin{split}
+S_0^1=s,S_j^1&=se^{jb_n+\sigma_n\sum{k=1}^j z_k}\\
+&=S_{j-1}^1 e^{b_n+\sigma_n z_j}, j=1,\ldots,n
+\end{split}
+\end{equation}
+
+Ainsi, pour chaque $n>=1$, on a definit un march\'e \`a $n$ p\'eriodes de pas constant $\frac{T}{n}$.
+
+\subsubsection{Proposition}
+Le march\'e est sans arbitrage ssi
+\begin{equation}
+d_n<1+R_n<u_n avec 
+\left\{\begin{array}{rcl}
+u_n=e^{b_n+\sigma_n}\\
+d_n=e^{b_n-\sigma_n}
+\end{array}\right.
+\end{equation}
+
+Dans ce cas, il existe une unique mesure de probabilit\'e risque neutre $Q^n$ d\'efinie par:
+\begin{equation}
+Q^n(z_i=1)=q_n=\frac{1+R_n-d_n}{u_n-d_n}
+\end{equation}
+En plus, le march\'e est complet.
+\subsection{Valorisation dans le mod\`ele de Cor-Ross-Robinstein}
+On consid\`ere un actif conditionnel $H_n=g(S_n^1)$
+\begin{equation}
+P_0(H_n)=S_0^0E^{Q^n}[\frac{H_n}{S_n^0}]
+\end{equation}
+\begin{equation}
+S_0^0=1, S_n^0=(1+R)S_{n-1}^0=\ldots=(1+R)^n=(e^{\Omega\frac{T}{n}})^n=e^{nT}
+\end{equation}
+\begin{equation}
+P_0(H_n)=\frac{1}{(1+R_n)^n}E^{Q_n}[H_n]=e^{-\Omega T}E^{Q_n}[H_n]=e^{-\Omega T}E^{Q_n}[g(S_n^1)]
+\end{equation}
+Sous $Q^n$, $(\frac{z_{j+1}}{2})$ est une suite de V.A. de Bernouille de param\`etre $q_n=\frac{1+R_n-d_n}{u_n-d_N}$
+\begin{equation}
+Q^n(\sum_{i=1}{n}\frac{1+z_i}{2}=j)=C_n^j(q_n)^j(1-q_n)^{n-j},(0<=j<=n)
+\end{equation}
+\begin{equation}
+P_0(H_n)=e^{-RT}\sum_{i=0}^n C_n^i(q_n)^i(1-q_n)^{n-i}g(i(u_n)^i(d_n)^{n-i})
+\end{equation}
+\begin{equation}
+P_k(H_n)=e(-R(1-\frac{k}{n})T)\sum_{i=0}^{n-k}C_n^iq_n^i(1-q_n)^{n-k-i}g(S_k^iu_n^id_n^{n-k-i})
+\end{equation}
+
+\subsubsection{Proposition}
+
+\begin{equation}
+\begin{split}
+P_k(H_n)&=e^{-R\frac{T}{n}}E^{Q_n}[P_{k+1}(H_n)|\mathcal{F}_k],k=0,\ldots,n-1\\
+&=e^{-\frac{RT}{n}}[q_nP_{k+1}(H_n)_{u_n}+(1-q_n)P_{k+1}(H_n)_{d_n}]
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+E^{Q_n}[P_{k+1}(H_n)|\mathcal{F}_k]=E^{Q_n}[S_{k+1}^0E^{Q_n}[\frac{H_n}{S_n^0}|\mathcal{F}_{k+1}]|\mathcal{F}_k]\\
+&=S^0_{k+1}E^{Q_n}[\frac{H_n}{S_n^0}|\mathcal{F}_k]\\
+&=e^{R\frac{T}{n}}P_k[H_n]
+\end{split}
+\end{equation}
+
+\textbf{Remarque}:
+La valorisation et la couverture dans le cas multi-p\'eriode se r\'eduit \`a une s\'equence de valorisation/couverture dans le cas d'une seule p\'eriode.
+
+En effet, $P_k(H_n)$ est le juste prix de l'actif conditionnel $P_{k+1}(H_n)$.
+\begin{center}
+\begin{tablular}
+ $\frac{kT}{n} $ & $\frac{(k+1)T}{n}$\\
+ Actif risqu\'e: $S_k^1$ & $->u_nS_k^1$\\
+ & $->d_nS_k^n$
+\end{tabular}
+\end{center}
+
+Actif conditionnel:
+\begin{center}
+\begin{tabular}
+$\frac{kT}{n}$ & $\frac{(k-1)T}{n}$ \\ 
+$P_k(H_n)$ & $->P_{k+1}(H_n)$\\
+&$->P_{k+1}(H_n)_{d_n}$
+\end{tabular}
+\end{center}
+
+La strat\'egie de couverture s'\'ecrit donc
+\begin{equation}
+\theta_{k+1}^1=\frac{P_{k+1}{(H_n)_{u_n}}-P_{k+1}(H_n)_{d_n}}{u_nS_k^i-d_nS_k^i}
+\end{equation}
+On la tracte $(P_k(H_n),\theta_{k+1}^1)$.
+
+\subsubsection{Exercise}
+On consid\`re le mod\`ele suivant:
+\begin{equation}
+S_0^0=1->S_1^0=1+R->S_2^0=(1+R)^2
+\end{equation}
+\begin{equation}
+S_0^1=2
+\begin{split}
+->4\left\{\begin{array}\{rcl}
+8\\
+2
+\end{array}\right.\\
+->1
+\left\{\begin{array}
+2\\
+\frac{1}{2}
+\end{array}\right.
+\end{split}
+\end{equation}
+1) Est-ce que le march\'e est viable/complet?
+2) Calculer le prix d'un call sur l'actif risqu\'e $S^1$ de maturit\'e $2$ et de strike $1$.
+
 \end{document}
