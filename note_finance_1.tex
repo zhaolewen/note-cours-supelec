@@ -822,4 +822,135 @@ E[R_{t-1}]=E[e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1
 =e^{(b-\frac{1}{2}\sigma^2)\Delta t_i}\times e^{\frac{1}{2}\sigma^2\Delta t_i}-1
 =e^{b\Delta t_i}-1\approx b\Delta t_i+o(\Delta t_i^2)
 \end{equation}
+
+\begin{equation}
+\begin{split}
+Var(R_{t_i})&=E[(R_{t_i}-E[R_{t_i}])^2]\\
+&=E[(e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-e^{b\Delta t_i})^2]\\
+&=e^{2b\Delta t_i}E[(e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1)^2]\\
+&=e^{2b\Delta t_i}(e^{-\sigma^2\Delta t_i}E[e^{2\sigma(W_{t_i}-W_{t_{i-1}})}]-2e^{-\frac{1}{2}\\sigma^2\Delta t_i}E[e^{\sigma(W_{t_i}-W_{t_{i-1}})}]+1)\\
+&=e^{2b\Delta t_i}(e^{-\sigma^2\Delta t_i e^{\frac{1}{2}(2\sigma)^2\Delta t_i}}-1)\\
+&=e^{2b\Delta t_i}(e^{\sigma^2\Delta t_i}-1)
+&\approx\sigma^2\Delta t_i+o(\Delta t_i^2)
+\end{split}
+\end{equation}
+
+$=>$
+\begin{equation}
+\sigma\approx\sqrt{\frac{Var(R_{t_i})}{\Delta t_i}}
+\end{equation}
+$\sigma$ est donc l'\'ecart type normalis\'e du rendement, appll\'ee volatilit\'e.
+$b$ est l'esp\'erance du standatd (normalis\'e) sur une courte p\'eriode $\Delta t_i$.
+
+\begin{equation}
+dS_t=b_tS_tdt+\sigma S_t dW_t => S_t=S_0 e^{(b-\frac{1}{2}\sigma^2 t)+\sigma W_t}
+\end{equation}
+\begin{equation}
+\begin{split}
+ln(S_t)&=ln(S_0)+\int_0^u (\frac{\partial ln}{\partial S}(S_t) dS_t)+\int_0^u \frac{1}{2}(\frac{\partial^2 ln}{\partial S^2}(S_t)d<S>_t)\\
+&=ln(S_0)+\int_0^u\frac{1}{S_t} dS_t -\int_0^u \frac{1}{S_t^2}(\sigma S_t)^2 dt\\
+&=ln(S_0)-\frac{1}{2}\int_0^u\sigma^2 dt + \int_0^u \frac{1}{S_t} (b_t S_t+dt)+\int_0^u \frac{1}{S_t}\sigma S_t dW_t\\
+&=ln(S_0)-\frac{1}{2}\sigma^2 u+b u+\int_0^u\sigma d W_t\\
+&=ln(S_0)+(b-\frac{1}{2}\sigma^2)u+\sigma W_u
+\end{split}
+\end{equation}
+\begin{equation}
+=>S_u=S_0e^{(b-\frac{1}{2}\sigma^2)u+\sigma W__u}
+\end{equation}
+Supposons que le prix d'une option en $t$ est $u(t,S_t)=P_t$
+\begin{equation}
+\begin{split}
+dP_t&=du(t,S_t)\\
+=\frac{\partial u}{\partial t}(t, S_t)dt+\frac{\partial u}{\partial S}(t,S_t)dS_t+\frac{1}{2}\frac{\partial^2 u}{\partial S^2}(t,S_t)d<S>_t\\
+&=(\frac{\partial u}{\partial t}(t,S_t)+\frac{1}{2}\sigma^2S_t^2\frac{\partial^2}{\partial S^2}(t, S_t))dt+\frac{\partial u}{\partial S}(t, S_t)(bS_tdt + \sigma S_tdW_t)\\\
+&=(\frac{\partial u}{\partial t}++\frac{1}{2}\\sigma^2 S_t^2\frac{\partial^2 u}{\partial S^2}+bS_t\frac{\partial u}{\partial S})dt+\sigma S_t\frac{\partial u}{\partial S}dW_t
+\end{split}
+\end{equation}
+Ainsi la volatilit\'e de l'option en $t$ est:
+\begin{equation}
+\frac{\sigma S_t \frac{\partial u}{\partial S}(t, S_t)}{u(t, S_t)}
+\end{equation}
+
+\subsection{Dynamique d'un portefeuille auto-finan\c{c}ant}
+On consid\`ere un portefeuille financier contenant une centaine $S_t$ de l'actif risqu\'e $S$ et le reste dansl'actif sans risque $S^0$.
+On suppose que ce portefeuille est audo-finan\c{c}ant.(Il n'y a pas d'argent ou de retrait d'argent),, Soit $V_t$
+ sa valeur en $t$.
+ 
+Si l'ajustement de fait \`a des dates discr\`ere $t_1,\ldots,t_n$,  alors
+\begin{equation}
+\begin{split}
+V_{t_{i+1}}-V_{t_i}&=\delta_{t_i}(S_{t_i+1}-S_{t_i})+\frac{V_{t_i}-\delta_{t_i}S_{t_i}}{S^2_{t_i}}(S^0_{t_{i+1}}-S^0_{t_{i}})\\
+&=\delta_{t_i}(S_{t_{i+1}}-S_{t_i})+(V_{t_i}-\delta_{t_i}S_{t_i})(e^{R(t_{i+1}-t_i)}-1)
+\end{split}
+\end{equation}
+
+\begin{equation}
+\tilde{V}_{t_{i+1}}-\tilde{V}_{t_i}=\delta_{t_i}(\tilde{S}_{t_{i+1}-\tilde{S}_{t_i}})
+\end{equation}
+En faisant tendre le pas d'ajustement $\Delta t_i=t_{i+1}-t_i$ vers $0$, on obtient
+\begin{equation}
+d\tilde{V}_t=\delta_td\tilde{S}_t
+\end{equation}
+\begin{equation}
+dV_t=\delta_tdS_t+(V_t-\delta_t S_t)Rdt
+\end{equation}
+ce qui est l'\'equation du portefeuille auto-finan\c{c}ant en temps continue. 
+
+\subsection{Construction du portefeuille de replication}
+
+Rapplons que notre objectif est de valoriser ainsi que de couvrir une option de payoff $g(S_T)$ \`a \'ech\'eance $T$.
+Soit $v(t,S):[0,T]\times]0,\infty[ $ une fonction dans $C^{1,2}$.
+Nous cherchons les conditions que doit v\'erifier $v$ pour qu'elle soit le prix de l'option.
+D'abord, nous cherchons un portefeuille auto-finan\c{c}ant $V$ qui r\'eplique $v$, c'est-\`a-dire
+\begin{equation}
+V_t=v(t,S_t)  en tout $t$.
+\end{equation}
+\begin{equation}
+f(t,X_t)=f(0,X_0)+\int_0^tf'(u,X_u)dX_u+\int_0^t f'(u,X_u)dX_u+\int_0^tf''(u,X_u)d<X>_u
+\end{equation}
+Rappel
+\begin{equation}
+dX_t=a_tdt+b_tdW_t
+\end{equation}
+\begin{equation}
+dY_t=c_tdt+d_tdW_t
+\end{equation}
+\begin{equation}
+d<X,Y>_t=(b_td_t)dt
+\end{equation}
+\begin{equation}
+d<X>_t=d<X,X>_t=b_t^2dt
+\end{equation}
+
+\begin{equation}
+v(t, S_t)&=v(0,S_0)+\int_0^t\frac{\partial v}{\partial S}(u,S_u)du+\int_0^t\frac{\partial v}{\partial S}(u, S_u)
+ dS_u + \frac{1}{2}\int_0^t\frac{\partial^2 v}{\partial S^2}(u,S_u)d<S>_u\\
+ &=v(0,S_0)+\int_0^t\frac{\partial v}{\partial u}(u,S_u)du+\frac{1}{2}\int_0^t\sigma^2S_u^2\frac{\partial^2 v}{\partial S}(u,S_u)du+\int_0^t\frac{\partial v}{\partial S}(u, S_u)dS_u\\
+ &=v(0,S_0)+\int (\frac{\partial v}{\partial u}(u,S_u)+\frac{1}{2}\sigma^2S_u^2\frac{\partial^2 v}{\partial S^2}(u,S_u))du+\int \frac{\partial v}{\partial S}(u, S_u)dS_u
+\end{equation}
+\begin{equation}
+dV_t=S_tdS_t+(V_t-\delta_tS_t)r dt
+\end{equation}
+\begin{equation}
+V_t=V_0+\int S_u dS_u+\int (V_u-\delta_uS_u)rdu
+\end{equation}
+
+Prenons $v$ solution de l'EDP,
+\begin{equation}
+\frac{\partial v}{\partial t}(t,S)+\frac{1}{2}\sigma^2S^2\frac{\partial^2 v}{\partial S^2}(t,,S)=(v(t,S_t)-\frac{\partial v}{\partial S}(u,S)S)R
+\end{equation}
+Donc 
+\begin{equation}
+v(t,S_t)=v(0,S_0)+\int\frac{\partial v}{\partial S}(u,S_u) dS_u+\int (v(u,S_u)-S_u\frac{\partial v}{\partial S})Rdt
+\end{equation}
+Si je choisis
+\begin{equation}
+V_0=v(0,S_0), S_t=\frac{\partial v}{\partial S}(t,S_t)
+\end{equation}
+alors
+\begin{equation}
+V_t=v(t,S_t)
+\end{equation}
+en tout $t$ et en particulier $V_T=v(T,S_T)$
+
 \end{document}
