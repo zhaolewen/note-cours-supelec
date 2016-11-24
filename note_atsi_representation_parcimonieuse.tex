@@ -1,0 +1,97 @@
+\documentClass{article}
+\usepackage{amsmath}
+\title{ATSI}
+\maketitle
+
+\begin{document}
+\begin{equation}
+\min_\alpha \frac{1}{2}||y-\phi \alpha||^2+\lambda ||\alpha||
+\end{equation}
+\begin{equation}
+\Phi^H\Phi = \Phi\Phi^H=I
+\end{equation}
+Class de probl\`eme $\min_x f(x)+\phi(x)$, avec 
+-$f$ L-lipschitz differentiable, convexe
+-$\phi$ convexe
+
+Def $f$ est L-Lipschitz differentiable ssi
+\begin{equation}
+\exists L>0 tel que
+\end{equation}
+\begin{equation}
+\forall x,y\in \mathbb{R}^N, ||\Delta f(x)-\Delta f(y)||<=L||x-y||
+\end{equation}
+Lemme Si $f$ est $L$-Lipschitz differentiable, alors
+\begin{equation}
+|f(x)-f(y)-<\Delta f(y),x-y>|<=\frac{L}{2}||x-y||^2
+\end{equation}
+si de plus $f$  est convexe, alors
+\begin{equation}
+0<=f(x)-f(y)-<\Delta f(y),x-y> <= \frac{L}{2}||x-y||^2
+\end{equation}
+\begin{equation}
+f(x)+\phi(x)<=f(y)+<\Delta f(y),x-y>+\frac{L}{2}||x-y||^2+\phi(x)
+\end{equation}
+Soit
+\begin{equation}
+\begin{split}
+x^{(t+1)}&=\argmin_x f(x^{(t)})+<\Delta f(x^{(t)}),x-x^{(t)}>+\frac{L}{2}||x-x^{(t)}||^2+\phi(x)\\
+&\\argmin_x\frac{1}{L}||x-x^{(t)}+\Delta f(x^{(t)})||^2_2+\frac{1}{L}\phi(x)
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+f(x^{(t+1)})+\phi(x^{(x+1)})&<=f(x^{(t)})+<\Delta f(x^{(t)}),x^{(t+1)-x^{(t)}}> +\frac{L}{2}||x^{(t+1)}-x^{(t)}||+\phi(x^{(t+1)})\\
+&<=f(x^{(t)})+\phi(x^{(t)})
+\end{split}
+\end{equation}
+
+Def Soit $\phi: \mathbb{R}^N->\mathbb{R}$ une fonction convexe. On appelle operator de proximit\'e de $\phi$ not\'e $prox_\phi$, al fonction 
+\begin{equation}
+\begin{split}
+\mathbb{R}^N->\mathbb{R}^N\\
+y->prox_\phi(y)=\argmin_x \frac{1}{2} ||y-x||^2_2+\phi(x)
+\end{split}
+\end{equation}
+
+\begin{equation}
+x^{(t+1)}=prox_{\frac{1}{2}\phi}(x^{(t)}-\frac{1}{L}\Delta f(x^{(t)}))
+\end{equation}
+
+\begin{equation}
+\phi(x)=\lambda ||x||_2^2
+\end{equation}
+
+\begin{equation}
+prox_\phi(y)=\argmin_x \frac{1}{L}||y-x||^2+\frac{\lambda}{2}||x||^2
+\end{equation}
+
+\begin{equation}
+\frac{\partial}{\partial x}=0=x-y+\lambda x => x=\frac{1}{1+\lambda}y
+\end{equation}
+
+\begin{equation}
+\phi(x)=\lambda ||x||_1
+\end{equation}
+
+\begin{equation}
+prox_\phi(y) =\argmin_x\frac{1}{2} ||y-x||^2_2 +\lambda ||x||_1 => x=y(1-\frac{\lambda}{|y|})^+
+\end{equation}
+
+\textbf{Def}. Soit $f$ une fonction convexe, le point $s$ est un sous-gradient de $f$ en $x$ ssi 
+\begin{equation}
+\forall y\in \mathbb{E}, f(y) >= f(x)+<s,y-x>
+\end{equation}
+
+\textbf{Def} (sous-differentiel) 
+\begin{equation}
+\partial_f (x) = \{s\}
+\end{equation}
+
+
+
+
+
+
+
+\end{document}

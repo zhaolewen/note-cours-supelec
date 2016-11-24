@@ -700,4 +700,126 @@ S_0^1=2
 1) Est-ce que le march\'e est viable/complet?
 2) Calculer le prix d'un call sur l'actif risqu\'e $S^1$ de maturit\'e $2$ et de strike $1$.
 
+1)
+\begin{equation}
+u_1=u_2=2, d_1=d_2=\frac{1}{2}
+\end{equation}
+\begin{equation}
+d_i=\frac{1}{2<1+R=1.25<<2=u_i
+\end{equation}
+$=>$ le march\'e est viable
+
+2)
+\begin{equation}
+P_k(H_n)=\frac{1}{1+R}[q_kP_{k+1}(H_n)+(1-q_n)P_{k}(H_n)]e^{-R}\approx=frac{1}{1+R}
+\end{equation}
+
+$Q_k=\{q_k,1-q_k\}$ est la mesure de proba risque neutre.
+\begin{equation}
+P_2(H_2)=
+\left\{\begin{array}[rcl]
+7\\
+1\\
+1\\
+0
+\end{array}\right.
+\end{equation}
+\begin{equation}
+H_2=(S_2^1-1)_+
+\end{equation}
+pour $S_1^1=4$:
+\begin{equation}
+q_2=\frac{1.25-0.5}{2-0.5}=\frac{0.75}{1.5}\frac{1}{2}
+\end{equation}
+\begin{equation}
+P_1(H_2)=\frac{1}{1.25}[\frac{1}{2}\times 7+\frac{1}{2}\times 1]=\frac{16}{5}
+\end{equation}
+pour $S_1^1=1$:$q_2=\frac{1}{2}$
+\begin{equation}
+P_1(H_2)=\frac{4}{5}\times[\frac{1}{2}\times 1+\frac{1}{2}\times 0]==\frac{2}{5}
+\end{equation}
+et en $t=0$: $q_1=\frac{1}{2}$
+\begin{equation}
+P_0(H_2)=\frac{4}{5}\times[\frac{1}{2}\times\frac{16}{5}+\frac{1}{2}\times\frac{2}{5}]=\frac{36}{25}
+\end{equation}
+
+\subsubsection{Th\'eor\`em}
+Le juste prix $P_0(H_n)$ $(H_n=(S_n^1-K)_+)$ converge quand $n->\infty$ au prix Black Scholes.
+\begin{equation}
+P_0(S,T,K)=S\mathcal{N}(d_1(S,K,\sigma^2 T))-Ke^{\Omega T}\mathcal{N}(d_2(S,K,\sigma^2 T))
+\end{equation}
+\begin{equation}
+d_1(S,K,v)-\frac{ln(\frac{S}{Ke^{\Omega t}})}{Nv}++\frac{1}{v}Sv
+\end{equation}
+\begin{equation}
+d_2(S,K,v)=d_1-\frac{1}{2}Sv
+\end{equation}
+\begin{equation}
+\mathcal{N}(x)=\int_{-\infty}^x\frac{e^{-\frac{y^2}{2}}}{\sqrt{2\pi}}
+\end{equation}
+est la fonction de r\'epartition de la loi normale standarde.
+
+\section{Valorisation dans un cadre continue: Le mod\`ele de Black-Scholes}
+\subsection{Introduction}
+Notre objectif est de donner dans un mod\`ele probabiliste continue un prix \`a une option et g\'en\'eralement \`a tout contrat de flox terminale en $T$ de la forme$g(S_T)$ avec $S_t$ est un titre n\'egociable.
+
+Nous traitons dans ce chap\^itre un mod\`ele de base en finance, qui est le mod\`ele de Black Scholes.
+
+\subsection{Mod\`ele de Black Scholes}
+L'al\'ea du march\'e financier est mod\'elis\'e via un espace de probabilit\'e filtr\'e $(\Omega,\mathcal{F}_1(\mathcal{F}_t),\mathbb{P}),0<=t<=T$
+
+$\Omega$: L'ensemble des scenarii possibles
+$\mathcal{F}$: est une tribu quir\'epr\'esente l'information globale disponible sur le march\'e.
+
+Les al\'eas sont g\'en\'er\'es par un mouvement brownien standard $(W_t)_{0<=t<=T}$ qui engendre le filtration $\mathbb{F}=(\mathcal{F})_{0<=t<=T}$
+
+$\mathbb{P}$ est la probabilit\'e historique.
+
+Rappel:
+
+Un mouvement brownien etandard est un processus stochastique $(W_t)_{t>0}$
+\begin{equation}
+\left\{\begin{array}[rcl]
+W_0=0 (standard) et W_t est continu\\
+accroissements ind\'ependants:\forall t_1<=\ldots <= t_n, (W_{t_n}-W_{t_{n-1}}),\ldots,(W_{t_2}-W_{t_1}) sont ind\'ependants.\\
+W_t-W_s est de loi \mathcal{N}(0,t-s),\forall t>s\\
+\end{array}\right.
+\end{equation}
+
+\subsubsection{Definition}
+Le mod\`ele de Black & Scholes est d\'efini sous forme de rendement instantan\'e par
+\begin{equation}
+\frac{d S_t}{S_t}=b dt+\sigma d W_t, d S_t=b S_t dt+\sigma S_t d W_t
+\end{equation}
+\begin{equation}
+S_t=S_0+\int_0^t S_u du +\int_0^t \sigma S_u dW_u
+\end{equation}
+
+\begin{equation}
+\int_0^t X_u dW_u=lim_{\Delta t->0}\sum_{i=1}^{n}X_{t_i}(W_{t+1}-W_t)
+\end{equation}
+
+avec $S_0=x$ et $W_t$ est un M>B>S sous $\mathbb{P}$
+Ainsi
+\begin{equation}
+S_t=S_0e^{(b-\frac{1}{2}\sigma^2)t+\sigma W_t}
+\end{equation}
+On suppose que l'on a un actif sans risque $S^0$ sont la valeur $S_t^0=e^{Rt}$
+Remarque:
+D\'efinissons le rendement de l'actif $S$ en $t=1$ et $t_i$
+\begin{equation}
+t_i(\Delta t_i=t_i-t_{i-1})
+\end{equation}
+\begin{equation}
+\begin{split}
+R_{t_i}&=\frac{S_{t_i}-S_{t_{i-1}}}{S_{t_{i-1}}}=\frac{S_{t_{i-1}}e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-S_{t_{i-1}}}{S_{t_{i-1}}}\\
+&=e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1
+\end{split}
+\end{equation}
+\begin{equation}
+E[R_{t-1}]=E[e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1]
+=e^{(b-\frac{1}{2}\sigma^2)\Delta t_i} E[e^{\sigma(W_{t_i}-W_{t_{i-1}})}]-1
+=e^{(b-\frac{1}{2}\sigma^2)\Delta t_i}\times e^{\frac{1}{2}\sigma^2\Delta t_i}-1
+=e^{b\Delta t_i}-1\approx b\Delta t_i+o(\Delta t_i^2)
+\end{equation}
 \end{document}
