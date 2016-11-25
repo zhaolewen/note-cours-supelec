@@ -13,3 +13,5 @@ which(p<0.05)
 
 padj_bonf <- p*ncol(m)
 sum(padj_bonf<0.05)
+
+padj_bonf[padj_bonf>1]=1
