@@ -1,0 +1,128 @@
+\documenttype{article}
+\usepackage{amsfont}
+
+\title{Bio-Statistique}
+\maketitle
+
+\begin{document}
+\section{Methodologie du test statistique}
+
+\begin{equation}
+X_1,\ldots,\X_{n_1} ~\mathcal{N}(\mu_1,\sigma^2)
+\end{equation}
+\begin{equation}
+Y_1,\ldots,Y_{n_2} ~\mathcal{N}(\mu_2,\sigma^2)
+\end{equation}
+
+Test d'hypoth\`ese
+\begin{equation}
+H_0 \{\mu_1=\mu_2\} vs H_1 \{\mu_1\neq\mu_2\}
+\end{equation}
+
+Pour rejeter (ou non) l'hypoth\`ese nulle, on utilise une statistique de test dont on connait la distribution sous $H_0$ (m\^eme asymptotiquement).
+Ici, on utilisera le test de student de statistique associ\'ee
+\begin{equation}
+T=\frac{\bar{X}-\bar{Y}}{s\sqrt{\frac{1}{n_1}-\frac{1}{n_2}}}
+\end{equation}
+avec
+\begin{equation}
+s=\sqrt{\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}}
+\end{equation}
+Parce que la loi de $T$ est connue sous $H_0$, on peut controler l'erreur de 1er esp\`ece et on peut calculer des p-values.
+
+\begin{center}
+\begin{tabular}
+(Realit\'e/D'ecision) & non rejet de $H_0$ & rejet de $H_0$\\
+$H_0$ vraie & OK & erreur de 1er esp\`ece (faux positif)\\
+$H_0$ faux & erreur de 2e esp\`ece (faux n\'egatif) & OK
+\end{tabular}
+\end{center}
+Notons $\alpha=\mathbb{P}(rejet de H_0 | H_0 vraie)$ erreur de 1er esp\`ece.
+
+\textbf{p-value}
+Probabilit\'e sous $H_0$ d'avoir une value de $T$ plus grande que celle observ\'ee.
+
+\begin{equation}
+p=\mathbb{P}_{H_0}(|T|>|t_{obs}|)
+\end{equation}
+
+On comprend donc bien que plus $p$ est petit, plus on aura tendance \`a rejeter l'hypoth\`ese nulle. $=>$ Rejet de $H_0$ si $p<seuil$. La p-value est une normalisation particulier de la statistique de sorte que sous $H_0$, $p~\mathcal{U}[0,1]$
+\begin{center}
+\begin{tabular}
+seuil & $\mathbb{P}_{H_0}(p<seuil)$ \\
+1 & 1\\
+0.5 & 0.5 \\
+$\alpha$ & $\alpha$
+\end{tabular}
+\end{center}
+Si on veut controler l'erreur de premi\`ere esp\`ece au seuil $\alpha$, rejet de $H_0$ si $p<=\alpha$
+
+La probl\`ematique des tests multiples
+Pour un test:
+\begin{center}
+\begin{tabular}
+(R\'ealit\'e/D\'ecision) & $H_0$ non rejet\'ee & $H_0$ rejet\'ee\\
+$H_0$ vraie & TN & FP\\
+$H_0$ faux & FN & TP
+\end{tabular}
+\end{center}
+
+Pour une famille de $m$ tests
+\begin{center}
+\begin{tabular}
+(R\'ealit\'e/D\'ecision) & $H_0$ non rejet\'ee & $H_0$ rejet\'ee & \\
+$H_0$ vraie & $U$ & $V$ & m_0 \\
+$H_0$ fausse & $T$ & $S$ & m_1 \\
+& $W$ & $S$ & $m$
+\end{tabular}
+\end{center}
+$m_0$ nombre de variables (ex. g\`enes) v\'erifiant l'hypoth\'ese nulle.
+$m_1$ nombre de variables v\'erifiant l'alternative.
+$m_0,m_1$ inconnue.
+
+$m$ nombre de g\`ene test\'es.
+$R$ nombre d'hypoth\`ese nulle rejet\'ee.
+
+On suppose que $m_0$ hypoth\`ese $H_0$ vraies.
+On suppose que tous les tests sont men\'es au niveau $\alpha$.
+\begin{equation}
+\left\{\begin{array}[rcl]
+E_1=1 & si p_1<\alpha\\
+E_1=0 & sinon
+\end{array}\right.
+=> E_1 ~ \mathcal{B}(\alpha)
+\end{equation}
+
+\begin{equation}
+\left\{\begin{array}[rcl]
+E_2=1 & si p_2<\alpha\\
+E_2=0 & sinon
+\end{array}\right.
+=> E_2 ~ \mathcal{B}(\alpha)
+\end{equation}
+
+...
+
+\begin{equation}
+\left\{\begin{array}[rcl]
+E_{m_0}=1 & si p_{m_0}<\alpha\\
+E_{m_0}=0 & sinon
+\end{array}\right.
+=> E_{m_0} ~ \mathcal{B}(\alpha)
+\end{equation}
+\begin{equation}
+=>\V=-\sum_{k=1}^{m_0} E_k ~ \mathcal{B}_{in}(m_0,\alpha)
+\end{equation}
+
+On a $\mathbb{E}[V]=m_0\alpha$
+Conclusion: le nombre attendu de faux positifs augmente lin\'eairement avec $m_0$. 
+
+Dans ce contexte, on s'int\'eresse au FWER (Family Wise Error Rate) d\'efini par:
+\begin{equation}
+FWER = \mathbb{P}(V>0)
+\end{equation}
+= Probabilit\'e de rejeter au moins une fois l'hypoth\`ese nulle \`a tort dans la famille des tests r\'ealis\'es.
+
+Procedure de contr\^ole du FWER: Bonferroni.
+
+\end{document}
