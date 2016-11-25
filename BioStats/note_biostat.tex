@@ -125,4 +125,26 @@ FWER = \mathbb{P}(V>0)
 
 Procedure de contr\^ole du FWER: Bonferroni.
 
+La correction de Bonferroni.
+
+Soient une famille de $m$ tests et leur p-value individuelle $p_1,\ldots,p_m$.
+Soit $I_0$ un vecteur de valeur indexant les vraies hypoth\`ese nulles
+\begin{equation}
+card(I_0)=m_0
+\end{equation}
+\begin{equation}
+FWER = \mathbb{P}(V>0)=\mathbb{P}(U_I_0 \{p_i<\alpha\}) <=_{in\'egalit\'e Boole} \sum_{I_0} P(p_i<\alpha)=m_0\alpha
+\end{equation}
+Si on veut garantir un contr\^ole du FWER et ce quelque soit le "motif" d'hypoth\'ese nulles et alternatives, on pose 
+\begin{equation}
+\alpha <- \frac{\alpha}{m}
+\end{equation}
+
+Conclusion
+On rejette $H_{0_\alpha}_{1<=\alpha<=m}$ si $p_\alpha<=\frac{\alpha}{m}$
+$<=>$ On rejette $H_{0_\alpha}$ si 
+\begin{equation}
+p_\alpha^{adj}=mp_alpha<=\alpha
+\end{equation}
+
 \end{document}
