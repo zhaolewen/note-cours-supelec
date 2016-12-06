@@ -27,7 +27,7 @@ On a
 \begin{equation}
 CallAmer_t(T,K) >= Call_t(T, K)
 \end{equation}
-
+ 
 \begin{equation}
 PutAmer_t(T, K) >= Put_t(T, K)
 \end{equation}
@@ -478,7 +478,7 @@ S_0^0=1,S_j^0=(0+R)S_{j-1}^0
 $R_j$ est le taux d'int\'er\^et pour la p\'eriode $[t_{j-1},t^j]$.
 
 \subsubsection{Def 1}
-Une strat\'egie d'investissement admissible est un processus stocastique $(\theta_j^i)_{j=0,\ldots,n}^{i=0,\ldots,d}$ o\`u $\theta_j^i$ est la quantit\'e investie dans l'actif $i$ entre $t_{j-1}$ et $t_j$ qui doit \^etre connu en $t_{j-1}.($\theta$ est pr\'evisible).
+Une strat\'egie d'investissement admissible est un processus stochastique $(\theta_j^i)_{j=0,\ldots,n}^{i=0,\ldots,d}$ o\`u $\theta_j^i$ est la quantit\'e investie dans l'actif $i$ entre $t_{j-1}$ et $t_j$ qui doit \^etre connu en $t_{j-1}$.($\theta$ est pr\'evisible).
 
 \textbf{Remarque}:
 La valeur d'un portefeuille peut varier par deux possibilit\'es
@@ -549,7 +549,7 @@ P_t(H)=S_t^0 E^Q[\frac{H}{S^0_t}|\mathcal{F}_t]
 ($Q$ est la mesure risque neutre)
 
 \textbf{Preuve}:
-Il existe une strat\'egie \theta tel que 
+Il existe une strat\'egie $\theta$ tel que 
 \begin{equation}
 H=\sum_{i=0}^d \theta_i S_t^i
 \end{equation}
@@ -587,7 +587,7 @@ b_n=b\frac{T}{n}\\
 \end{equation}
 
 \begin{equation}
-S_0^0=1, S_j^0=e^{\Omega\frac{T}{n}}S_{j-1}^0,(R=e^{\Omega\frac{T}{n}}-1\tilde \frac{tT}{n})=(1+R)S_{j-1}^0
+S_0^0=1, S_j^0=e^{\Omega\frac{T}{n}}S_{j-1}^0,(R=e^{\Omega\frac{T}{n}}-1 \frac{tT}{n})=(1+R)S_{j-1}^0
 \end{equation}
 \begin{equation}
 \begin{split}
@@ -656,8 +656,8 @@ La valorisation et la couverture dans le cas multi-p\'eriode se r\'eduit \`a une
 
 En effet, $P_k(H_n)$ est le juste prix de l'actif conditionnel $P_{k+1}(H_n)$.
 \begin{center}
-\begin{tablular}
- $\frac{kT}{n} $ & $\frac{(k+1)T}{n}$\\
+\begin{tabular}{ll}
+ $\frac{kT}{n}$ & $\frac{(k+1)T}{n}$\\
  Actif risqu\'e: $S_k^1$ & $->u_nS_k^1$\\
  & $->d_nS_k^n$
 \end{tabular}
@@ -665,7 +665,7 @@ En effet, $P_k(H_n)$ est le juste prix de l'actif conditionnel $P_{k+1}(H_n)$.
 
 Actif conditionnel:
 \begin{center}
-\begin{tabular}
+\begin{tabular}{ll}
 $\frac{kT}{n}$ & $\frac{(k-1)T}{n}$ \\ 
 $P_k(H_n)$ & $->P_{k+1}(H_n)$\\
 &$->P_{k+1}(H_n)_{d_n}$
@@ -686,12 +686,12 @@ S_0^0=1->S_1^0=1+R->S_2^0=(1+R)^2
 \begin{equation}
 S_0^1=2
 \begin{split}
-->4\left\{\begin{array}\{rcl}
+->4\left\{\begin{array}{l}
 8\\
 2
 \end{array}\right.\\
 ->1
-\left\{\begin{array}
+\left\{\begin{array}{l}
 2\\
 \frac{1}{2}
 \end{array}\right.
@@ -705,7 +705,7 @@ S_0^1=2
 u_1=u_2=2, d_1=d_2=\frac{1}{2}
 \end{equation}
 \begin{equation}
-d_i=\frac{1}{2<1+R=1.25<<2=u_i
+d_i=\frac{1}{2}<1+R=1.25<<2=u_i
 \end{equation}
 $=>$ le march\'e est viable
 
@@ -717,7 +717,7 @@ P_k(H_n)=\frac{1}{1+R}[q_kP_{k+1}(H_n)+(1-q_n)P_{k}(H_n)]e^{-R}\approx=frac{1}{1
 $Q_k=\{q_k,1-q_k\}$ est la mesure de proba risque neutre.
 \begin{equation}
 P_2(H_2)=
-\left\{\begin{array}[rcl]
+\left\{\begin{array}{r}
 7\\
 1\\
 1\\
@@ -779,15 +779,15 @@ Rappel:
 
 Un mouvement brownien etandard est un processus stochastique $(W_t)_{t>0}$
 \begin{equation}
-\left\{\begin{array}[rcl]
-W_0=0 (standard) et W_t est continu\\
-accroissements ind\'ependants:\forall t_1<=\ldots <= t_n, (W_{t_n}-W_{t_{n-1}}),\ldots,(W_{t_2}-W_{t_1}) sont ind\'ependants.\\
+\left\{\begin{array}{rcl}
+W_0=0 \text{(standard) et} W_t \text{est continu}\\
+\text{accroissements ind\'ependants}:\forall t_1<=\ldots <= t_n, (W_{t_n}-W_{t_{n-1}}),\ldots,(W_{t_2}-W_{t_1}) \text{sont ind\'ependants.}\\
 W_t-W_s est de loi \mathcal{N}(0,t-s),\forall t>s\\
 \end{array}\right.
 \end{equation}
 
 \subsubsection{Definition}
-Le mod\`ele de Black & Scholes est d\'efini sous forme de rendement instantan\'e par
+Le mod\`ele de Black \& Scholes est d\'efini sous forme de rendement instantan\'e par
 \begin{equation}
 \frac{d S_t}{S_t}=b dt+\sigma d W_t, d S_t=b S_t dt+\sigma S_t d W_t
 \end{equation}
@@ -817,10 +817,12 @@ R_{t_i}&=\frac{S_{t_i}-S_{t_{i-1}}}{S_{t_{i-1}}}=\frac{S_{t_{i-1}}e^{(b-\frac{1}
 \end{split}
 \end{equation}
 \begin{equation}
-E[R_{t-1}]=E[e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1]
-=e^{(b-\frac{1}{2}\sigma^2)\Delta t_i} E[e^{\sigma(W_{t_i}-W_{t_{i-1}})}]-1
-=e^{(b-\frac{1}{2}\sigma^2)\Delta t_i}\times e^{\frac{1}{2}\sigma^2\Delta t_i}-1
-=e^{b\Delta t_i}-1\approx b\Delta t_i+o(\Delta t_i^2)
+\begin{split}
+E[R_{t-1}]&=E[e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1]\\
+&=e^{(b-\frac{1}{2}\sigma^2)\Delta t_i} E[e^{\sigma(W_{t_i}-W_{t_{i-1}})}]-1\\
+&=e^{(b-\frac{1}{2}\sigma^2)\Delta t_i}\times e^{\frac{1}{2}\sigma^2\Delta t_i}-1\\
+&=e^{b\Delta t_i}-1\approx b\Delta t_i+o(\Delta t_i^2)
+\end{split}
 \end{equation}
 
 \begin{equation}
@@ -828,9 +830,9 @@ E[R_{t-1}]=E[e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1
 Var(R_{t_i})&=E[(R_{t_i}-E[R_{t_i}])^2]\\
 &=E[(e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-e^{b\Delta t_i})^2]\\
 &=e^{2b\Delta t_i}E[(e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1)^2]\\
-&=e^{2b\Delta t_i}(e^{-\sigma^2\Delta t_i}E[e^{2\sigma(W_{t_i}-W_{t_{i-1}})}]-2e^{-\frac{1}{2}\\sigma^2\Delta t_i}E[e^{\sigma(W_{t_i}-W_{t_{i-1}})}]+1)\\
+&=e^{2b\Delta t_i}(e^{-\sigma^2\Delta t_i}E[e^{2\sigma (W_{t_i}-W_{t_{i-1}})}]-2e^{-\frac{1}{2}sigma^2\Delta t_i}E[e^{\sigma (W_{t_i}-W_{t_{i-1}})}]+1)\\
 &=e^{2b\Delta t_i}(e^{-\sigma^2\Delta t_i e^{\frac{1}{2}(2\sigma)^2\Delta t_i}}-1)\\
-&=e^{2b\Delta t_i}(e^{\sigma^2\Delta t_i}-1)
+&=e^{2b\Delta t_i}(e^{\sigma^2\Delta t_i}-1)\\
 &\approx\sigma^2\Delta t_i+o(\Delta t_i^2)
 \end{split}
 \end{equation}
@@ -855,7 +857,7 @@ ln(S_t)&=ln(S_0)+\int_0^u (\frac{\partial ln}{\partial S}(S_t) dS_t)+\int_0^u \f
 \end{split}
 \end{equation}
 \begin{equation}
-=>S_u=S_0e^{(b-\frac{1}{2}\sigma^2)u+\sigma W__u}
+=>S_u=S_0e^{(b-\frac{1}{2}\sigma^2)u+\sigma W_u}
 \end{equation}
 Supposons que le prix d'une option en $t$ est $u(t,S_t)=P_t$
 \begin{equation}
@@ -903,7 +905,7 @@ Soit $v(t,S):[0,T]\times]0,\infty[ $ une fonction dans $C^{1,2}$.
 Nous cherchons les conditions que doit v\'erifier $v$ pour qu'elle soit le prix de l'option.
 D'abord, nous cherchons un portefeuille auto-finan\c{c}ant $V$ qui r\'eplique $v$, c'est-\`a-dire
 \begin{equation}
-V_t=v(t,S_t)  en tout $t$.
+V_t=v(t,S_t)  en tout t
 \end{equation}
 \begin{equation}
 f(t,X_t)=f(0,X_0)+\int_0^tf'(u,X_u)dX_u+\int_0^t f'(u,X_u)dX_u+\int_0^tf''(u,X_u)d<X>_u
@@ -923,10 +925,12 @@ d<X>_t=d<X,X>_t=b_t^2dt
 \end{equation}
 
 \begin{equation}
+\begin{split}
 v(t, S_t)&=v(0,S_0)+\int_0^t\frac{\partial v}{\partial S}(u,S_u)du+\int_0^t\frac{\partial v}{\partial S}(u, S_u)
  dS_u + \frac{1}{2}\int_0^t\frac{\partial^2 v}{\partial S^2}(u,S_u)d<S>_u\\
  &=v(0,S_0)+\int_0^t\frac{\partial v}{\partial u}(u,S_u)du+\frac{1}{2}\int_0^t\sigma^2S_u^2\frac{\partial^2 v}{\partial S}(u,S_u)du+\int_0^t\frac{\partial v}{\partial S}(u, S_u)dS_u\\
  &=v(0,S_0)+\int (\frac{\partial v}{\partial u}(u,S_u)+\frac{1}{2}\sigma^2S_u^2\frac{\partial^2 v}{\partial S^2}(u,S_u))du+\int \frac{\partial v}{\partial S}(u, S_u)dS_u
+\end{split}
 \end{equation}
 \begin{equation}
 dV_t=S_tdS_t+(V_t-\delta_tS_t)r dt
