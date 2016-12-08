@@ -147,4 +147,113 @@ $<=>$ On rejette $H_{0_\alpha}$ si
 p_\alpha^{adj}=mp_alpha<=\alpha
 \end{equation}
 
+Proc\'edure de contr\^ole de FWER: Correction de Sidak
+\begin{equation}
+\begin{split}
+FWER&=\mathcal{P}(V>0)=\mathcal{P}(\{p_1<\alpha\}U\ldots\{p_m<\alpha\})\\
+&=1-\mathbb{P}(\{p_1>\alpha\} n\ldots n \{p_m>\alpha\})\\
+&=_{independance des tests r\'ealis\'es} 1-\Pi_{i=1}^{m}\mathbb{P}(p_i>\alpha)\\
+&=1-(1-\alpha)^m<\alpha^*=0.05
+\end{split}
+\end{equation}
+
+On a donc 
+\begin{equation}
+\alpha=1-(1-\alpha^*)^{\frac{1}{m}}
+\end{equation}
+
+Conclusion
+
+On rejette $H_0$ si $p_\alpha <= 1-(1-\alpha^*)^{\frac{1}{m}}$
+$<=>$ on rejette $H_{0_\alpha}$ si $p_\alpha^{adj}=1-(1-p_\alpha)^m<\alpha$
+
+Exercise
+Mener une connection Sidak sur les donn\'ees simul\'ees de la s\'eance pr\'ec\'edente
+
+* Comparer les $p_{adj}^{Bonf}/$ et $p_{adj}^{Sidak}$
+
+\subsection{Le False Discovery Rate (FDR)}
+
+Une approche qui a radicalement r\'evolutionn\'e la probl\`ematique des tests multiples est le FDR(Benjamini & Hachberg 1993). Plut\^ot que de contr\^oler le FWER, le FDR cherche \`a contr\^oler la proportion d'erreurs. (approach beaucoup moins conservative):
+\begin{equation}
+FDR=\mathbb{E}[\frac{V}{R}]
+\end{equation}
+
+L'objectif est bien \'evidemment de contr\^oler la valeur du FDR \`a une valeur pr\'efix\'ee $\alpha(=0.05)$
+
+Au niveau $\alpha$, le nombre d'hypoth\'esenulle rejet\'ees est not\'e $m(\alpha)$
+Le nombre de faux positifs attendus $\mathbb{E}[V]=m_0\alpha$. Une estimation du FDR est donn\'ee par
+\begin{equation}
+\hat{FDR}(\alpha)=\frac{m_0\alpha}{m(\alpha)}
+\end{equation}
+
+De cette estimation du FDR, BH propose la proc\'edure s\'equentielle suivante:
+
+\textbf{Etape 1}: Soient $p_1,\ldots,p_m$ les p-values individuelles et $p_{1}<=p_{2}<=\ldots<=p_{m}$ avec $p_{(k)}$ la $k$\`eme plus petite p-value. 
+
+Au seuil $\alpha=p_{(k)}$, le ombre d'hypoth\`ese nulle rejet\'es est egal \`a $k$.
+
+* Nombre de fausse positives attendues
+\begin{equation}
+\mathbb{E}[V]=m_0p_{(k)}<=mp_{(k)}
+\end{equation} 
+Donc 
+\begin{equation}
+\hat{FDR}(p_{(k)})=\frac{mp_{(k)}}{k}
+\end{equation}
+On cherche alors la valeur maximale de $k$ telle que $p_{(k)}$ v\'erifie
+\begin{equation}
+\frac{mp_{(k)}}{k}<=\alpha^*
+\end{equation}
+En d'autres termes
+\begin{equation}
+k=argmax_i (p_{(i)}<=\frac{i}{m}\alpha^*)
+\end{equation}
+on rejette alors les $k$ premi\`eres hypoth\`eses.
+
+En terme de p-value ajust\'ees
+\begin{equation}
+p_{adj}^{BH}=p_{m}
+\end{equation}
+\begin{equation}
+p_{adj}^{BH}(\alpha)=min(p_{\alpha+1}^{adj},\frac{mp(\alpha)}{\alpha})
+\end{equation}
+
+Petit exemple illustratif:
+
+\begin{equation}
+p_1=0.06,p_2=0.02,p_3=0.03
+\end{equation}
+
+Par Bonferioni,
+\begin{equation}
+p_1^{Bonf}=0.18,p_2^{Bonf}=0.06, p_3^{Bonf}=0.09
+\end{equation}
+On compare ces p-values ajust\'ees \`a $\alpha=0.05$
+$=>$ Aucune hypoth\`ese rejet\'ees !!!
+
+Par Benjamini & Hachberg
+\begin{equation}
+p_{(1)}=p_2=0.02, p_{(2)}=p_3=0.03,p_{(3)}=p_1=0.06
+\end{equation}
+
+\begin{equation}
+p_{(3)}<=0.05 => Non
+\end{equation}
+\begin{equation}
+p_{(2)}<=\frac{(m-1)\times 0.05}{m}=0.033333 => Oui 
+\end{equation}
+$H_{(3)}$ non rejet\'ee, $H_{(1)}$ et $H_{(2)}$ rejet\'ee
+
+En terme de p-value ajust\'ee
+\begin{equation}
+p_{(3)}^{BH}=p_{(3)}=0.06
+\end{equation}
+\begin{equation}
+p_{(2)}^{BH}=min(p_{(3)}^{BH},\frac{3}{2}p_{(2)})=0.045
+\end{equation}
+\begin{equation}
+p_{(1)}^{BH}
+\end{equation}
+
 \end{document}
