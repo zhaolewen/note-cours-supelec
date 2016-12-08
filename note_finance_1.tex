@@ -1073,4 +1073,105 @@ y&=-\sigma\sqrt{T-t}\\\
 &=\mathcal{N}(d_1)
 \end{equation}
 
+\subsubsection{Corrollaire}
+Le prix d'un put europ\'een de payoff $g(S)=(K-S)_+$ dans le mod\`ele de B\&S est donn\'e par:
+\begin{equation}
+P_{BS}(t,S)=Ke^{-r(T-t)}\mathcal{N}(-d_2)-S\mathcal{N}(-d_1)
+\end{equation}
+Le ratio de couverture (delta du put) est donn\'e par:
+\begin{equation}
+\frac{\partial P_{BS}}{\partial S}(t,S)=\mathcal{N}(d_1)-1 
+\end{equation}
+
+Relation Call-Put:
+\begin{equation}
+\begin{split}
+&Call(t,S,K,T)-Put(t,S,K,T)\\
+=& S-Ke^{-r(T-t)}\\
+=&S-KB(t,T)
+\end{split}
+\end{equation}
+
+\begin{equation}
+\\frac{\partial C_{BS}}{\partial S}(r,S)-\frac{\partial P_{BS}}{\partial S}(r,S) = 1-0=1
+\end{equation}
+\begin{equation}
+\frac{\partial P_{BS}}{\partial S} = \frac{\partial C_{BS}}{\partial S}-1=\mathcal{N}(d_1)-1
+\end{equation}
+
+\begin{equation}
+P_{BS}(t,S)=-S+Ke^{-r(T-t)}+S\mathcal{N}(d_1)-Ke^{-r(T-t)}\mathcal{N}(d_2)
+\end{equation}
+\begin{equation}
+1-\mathcal{N}(x)=\mathcal{N}(-x)
+\end{equation}
+Donc 
+\begin{equation}
+P_{BS}(t,S)=Ke^{-r(T-t)}\mathcal{N}(-d_2)-S\mathcal{N}(-d_1)
+\end{equation}
+\textbf{Remarque}:
+\begin{equation}
+\frac{\partial C_{BS}}{\partial S}=\mathcal{N}(d_1)
+\end{equation}
+et
+\begin{equation}
+\frac{\partial P_{BS}}{\partial S}=\mathcal{N}(d_1)-1
+\end{equation}
+$=>$ $C_{BS}$ est croissant et $P_{BS}$ est d\'ecroissant par rapport \`a $S$.
+
+\subsection{Les grecques}
+
+Pour comprendre le comportement des options en fonction des diff\'erents propri\'et\'es du mod\`ele, on calcule les subtilit\'es du prix Black Scholes  par rapport \`a ces propri\'et\'es:
+\begin{enumerate}
+\item Delta
+
+Le delta est la sensibilit\'e du prix par rapport \`a la valeur actuelle de l'actif sous-jacent.
+\begin{equation}
+\Delta^c = \frac{\partial C_{BS}}{\partial S}=\mathcal{N}(d_1)
+,\end{equation}
+\begin{equation}
+\Delta^p=\frac{\partial P_{BS}}{\partial S}=\mathcal{N}(d_1)-1
+\end{equation}
+
+\item Gamma
+Le gamma est d\'efini comme la d\'eriv\'ee du prix au b, en la d\'eriv\'ee du delta.
+\begin{equation}
+\Gamma^c=\Gamma_p=\frac{\partial^2 C_{B,S}}{\partial S^2}=\frac{\partial^2 P_{BS}}{\partial S^2}=\frac{n(d_1)}{S\sigma\sqrt{T-t}}
+\end{equation}
+\begin{equation}
+n(x)=\frac{e^{-\frac{x^2}{2}}}{\sqrt{2\pi}}
+\end{equation}
+
+Puisque $\Gamma$ est positif, le prix du call et du put est convexe en $S$.. Le Gamma est grand quand l'option est \`a la monnaie au proche de l'\'ech\'eance
+
+\item le Vega
+
+Le vega est la sensibilit\'e du  prix par rapport \`a la volatilit\'e:
+\begin{equation}
+\Vega=\frac{\partial C_{BS}}{\partial \sigma} = \frac{\partial P_{BS}}{\partial\sigma}=Sn(d_1)\sqr{T-t}
+\end{equation}
+Le prix du put et du call est croissant par rapport \`a la volatilit\'e. Le Vega est plus grande \`a la monnaie mais d\'ecroit pour les options proches de la maturit\'e.
+
+\item Th\'eta
+
+Le th\'eta est la sensibilit\'e par rapport au temps.
+\begin{equation}
+\Theta^c=\frac{\partial C_{BS}}{\partial t}=-\frac{Sn(d_1)\sigma}{2\sqrt{T-t}}-rKe^{-r(T-t)}N(d_2)<0
+\end{equation}
+\begin{equation}
+\Theta^p=\frac{\partial P_{BS}}{\partial t}=-\frac{Sn(d_1)\sigma}{2\sqrt{T-t}}+rKe^{-r(T-t)}\mathcal{N}(-d_2)
+\end{equation}
+$=>$Le prix du call est d\'ecroissant par rapport au temps
+
+\item Rho
+
+Le Rho est la sensibilit\'e par rapport au taux d'int\'er\^et $r$
+\begin{equation}
+\rho_{BS}^c=\frac{\partial C_{BS}}{\partial r}=K(T-t)e^{-r(T-t)}\mathcal{N}(d_2)>0
+\end{equation}
+\begin{equation}
+\rho_{BS}^p=\frac{\partial P_{BS}}{\partial r}=-K(T-t)e^{-r(T-t)}\mathcal{N}(-d_2)<0
+\end{equation}
+$=>$ call est croissant et le put est d\'ecroissant par rapport au taux d'int\'er\^et
+\end{enumerate}
 \end{document}
