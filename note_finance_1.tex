@@ -901,7 +901,8 @@ ce qui est l'\'equation du portefeuille auto-finan\c{c}ant en temps continue.
 \subsection{Construction du portefeuille de replication}
 
 Rapplons que notre objectif est de valoriser ainsi que de couvrir une option de payoff $g(S_T)$ \`a \'ech\'eance $T$.
-Soit $v(t,S):[0,T]\times]0,\infty[ $ une fonction dans $C^{1,2}$.
+Soit $v(t,S):[0,T]\times]0,\infty[ $ une fonction dans $C^{1,2}$ 
+ 
 Nous cherchons les conditions que doit v\'erifier $v$ pour qu'elle soit le prix de l'option.
 D'abord, nous cherchons un portefeuille auto-finan\c{c}ant $V$ qui r\'eplique $v$, c'est-\`a-dire
 \begin{equation}
@@ -956,5 +957,120 @@ alors
 V_t=v(t,S_t)
 \end{equation}
 en tout $t$ et en particulier $V_T=v(T,S_T)$
+
+Pour A.O.A. On a
+
+valeur de l'option = valeur du portefeuille de couverture
+
+\subsubsection{Theor\`eme}
+Dans le mod\`ele de Black Scholes, le prix en $t$ d'une option europ\'eenne de payoff $g(S_T)$ en $T$ est $v(t,S_t)$ o\`u la fonction $v$ est la solution de l'EDP
+
+\begin{equation}
+\frac{\partial v}{\partial t}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 v}{\partial S^2}=r(v-S\frac{\partial v}{\partial S})
+\end{equation}
+\begin{equation}
+v(T,S) = g(S)
+\end{equation}
+Cette option peut-\^etrte couverte par un portefeuille auto-finan\c{c}ant de valeur initiale $v(0,S_0)=V_0$ et qui contient \`a tout $t$ $\frac{\partial v}{\\partial S}(t,S_t)$ d'unit\'e d'actif risqu\'e.
+
+\textbf{Remarque}: Pour r\'eplique une option europ\'eenne dans le mod\'ele B\&S, on peut utiliser la proc\'edure suivante:
+\begin{enumerate}
+\item Calculer la fonction $v(t,S)$ r\'esolvant l'EDP
+
+\item Calculer la d\'eriv\'ee $\frac{\partial v}{\partial S}$ pour obtenir le ratio de couverture.
+\end{enumerate}
+
+Pour que cette d\'emarche fonctionne, il faut que l'EDP admet une unique solution. D'o\'u le th\'eor\'eme suivant :
+
+\subsubsection{Theor\`eme 2}
+Soit $g$ une fonction \`a croissance polynomiale.
+\begin{equation}
+\exists p, \forall x, |g(x)|<=c(1+|x|^p)
+\end{equation}
+Alors l'EDP de B\&S admet une solution dans la classe des fonctions de croissance polynomiale, appartenant \`a $C^0([0,T]\times ]0,\infty[) and C^{1,2}([0,T)\times]0,\infty[)$ donn\'ee par:
+\begin{equation}
+v(t,S)=E[e^{-r(T-t)}g(S e^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma (W_T -W_t)})]
+\end{equation}
+
+\subsection{Formule de Black-Scholes}
+\subsubsection{Theor\`eme 3}
+Le prix d'une option europeende payoff
+\begin{equation}
+g(S)=(S-K)_+
+\end{equation}
+dans le mod\`ele de B\&S est donn\'ee par
+\begin{equation}
+\begin{split}
+v(t,S)&=C_{BS}(t,S)\\
+&=S\mathcal{N}(d_1)-K e^{-r(T-t)}\mathcal{N}(d_2)
+\end{split}
+\end{equation}
+\begin{equation}
+\mathcal{N}(x)=\int_{-\infty}^x \frac{e^{-\frac{y^2}{2}}}{V\bar{epsilon}\\pi}dy
+\end{equation}
+\begin{equation}
+d_1=\frac{ln(\frac{S}{Ke^{-r(T-t)}})+\frac{1}{2}\sigma^2(T-t)}{\sigma \sqrt{T-t}}
+\end{equation}
+\begin{equation}
+d_2=\frac{ln(\frac{S}{Ke^{-r(T-t)}})-\frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}}=d_1-\sigma\sqrt{T-t}
+\end{equation}
+
+Le ratio de couverture (delta) est donn\'ee par
+\begin{equation}
+\Delta_{BS}(t,S)=\mathcal{N}(d_1)
+\end{equation}
+\textbf{preuve}:
+\begin{equation}
+\begin{split}
+C_{BS}(t,S)&=E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K)_+]\\
+&=E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K) \bbm{1}_{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K}]\\
+&=P_1-P_2
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+P_2&=Ke^{-r(T-t)}E[\bbm_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]\\
+&=Ke^{-r(T-t)P((r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)>ln(\frac{K}{S}))\\
+&=Ke^{-r(T-t)}P(\frac{W_T-W_t}{\sqrt{T-t}})>\frac{ln(\frac{K}{S})-(r-\frac{1}{2}\sigma^2)(T-t)}{\sigma\sqrt{T-t}}\\
+&=Ke^{-r(T-t)}P(\frac{W_T-W_t}{\sqrt{T-t}})>\frac{ln(\frac{Ke^{-r(T-t)}}{S})+\frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}}\\
+&=Ke^{-r(T-t)}P(\frac{W_T-W_t}{\sqrt{T-t}}<d_2)\\
+&=Ke^{-r(T-t)}\mathcal{N}(d_2)
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+P_1&=E[e^{-r(T-t)}Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}\bbm_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]\\
+&=E[Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\bbm_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]
+\end{split}
+\end{equation}
+\begin{equation}
+W_T-W_t\~\mathcal{N}(0,T-t)
+\end{equation}
+\begin{equation}
+W_T-W_t=\sqrt{T-t}Z
+\end{equation}
+avec &Z\~\mathcal{N}(0,1)&
+\begin{equation}
+\begin{split}
+P_1&=\int_{\mathbb{R}}Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\bbm_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}\times \frac{e^{\frac{-\z^2}{2}}}{\sqrt{2\pi}}dz\\
+&=\int_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}} Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\frac{e^{\frac{-\z^2}{2}}}{\sqrt{2\pi}}dz\\
+&=\int_{\{\frac{1}{2}\sigma^2(T-t)+\sigma\sqrt{T-t}>ln{\frac{K}{S}}\}} S\frac{e^{-\frac{(z-\sigma\sqrt{T-t})^2}{2}}}{\sqrt{2\pi}}dz
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+y&=-\sigma\sqrt{T-t}\\\
+&=S\int_{\{\sigma\sqrt{T-t}(y+\sigma\sqrt{T-t})+(r-\frac{1}{2}\sigma^2)(T-t)>ln(\frac{K}{S})\}}\frac{e^{-y^2}}{\sqrt{2\pi}}dy\\
+&=S\int_{\{y>\frac{ln(\frac{Ke^{-r(T-t)}}{S})-frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}}\}}\\
+&=S\mathcal{N}(d_1)
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\frac{\partial C_{BS}}{\partial S}(t,S)&=\frac{\partial}{\partial S}E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K)+]\\
+&=E[e^{-r(T-t)}\bbm_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}]\\
+&=\mathcal{N}(d_1)
+\end{equation}
 
 \end{document}
