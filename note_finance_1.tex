@@ -5,6 +5,17 @@
 \usepackage{amsfonts}
 \usepackage{mathrsfs}
 \usepackage{dsfont}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Th\'eor\`eme}[section]
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{D\'efinition}
+\newtheorem{propos}[thm]{Proposition}
+\newtheorem{remq}[thm]{Remarque}
 
 \title{Mineur Finance 1}
 
@@ -16,20 +27,20 @@
 
 \section{Cadre de valorisation des produite devive}
 \subsection{Introduction}
-\subsection{Hypothese}
-\subsection{Propriete}
-\subsection{Options americaines}
+\subsection{Hypoth\`ese}
+\subsection{Propri\'et\'e}
+\subsection{Options am\'ericaines}
 Option am\'ericaine similaire aux options europeens mais l'exercise du droit pourra se faire \`a toute date $t$ avant maturit\'e $T$.
 
 On note $CallAmer_t(T, K)$ et $PutAmer_t(T, K)$ les prix des calls et puts am\'ericains au $t$.
 
 On a 
 \begin{equation}
-CallAmer_t(T,K) >= Call_t(T, K)
+CallAmer_t(T,K) \geq Call_t(T, K)
 \end{equation}
  
 \begin{equation}
-PutAmer_t(T, K) >= Put_t(T, K)
+PutAmer_t(T, K) \geq Put_t(T, K)
 \end{equation}
 
 Propri\'et\'e:
@@ -39,10 +50,14 @@ En l'absence de divident, on a:
 CallAmer_t(T, K) = Call_t(T, K)
 \end{equation}
 
-Preuve:
+\textbf{Meilleure explication sur Stackoverflow}
+
+{\color{blue}\href{http://money.stackexchange.com/questions/5161/why-are-american-style-options-worth-more-than-european-style-options}{Stackoverflow question link}}
+
+\textbf{Preuve}:
 
 \begin{equation}
-Call_t(T, K) >= (S_t- K)_+
+Call_t(T, K) \geq (S_t- K)_+
 \end{equation}
 
 Il n'est pas optimal d'exercer avant la maturit\'e. Donc $CallAmer_t(T, K) = Call_t(T, K)$
@@ -50,12 +65,12 @@ Il n'est pas optimal d'exercer avant la maturit\'e. Donc $CallAmer_t(T, K) = Cal
 Remarque: Pour le Put, la propri\'et\'e n'est pas vraie.
 
 \begin{equation}
-Put_t(T, K) <= KB(t, T)
+Put_t(T, K) \leq KB(t, T)
 \end{equation}
 
 Pour un certain scenario, le prix de put est inf、‘erieur au prix d'exercise. $Put_t(T, K)<(S_t-K)_+$.
 
-Pour $S_t$ tel que $KB_t(T)< K-S_t <=> S_t < (1-B_t(T))K$
+Pour $S_t$ tel que $KB_t(T)< K-S_t \Leftrightarrow S_t < (1-B_t(T))K$
 Donc, on a
 \begin{equation}
 Put_t(T, K)< K-S_t
@@ -64,11 +79,11 @@ Put_t(T, K)< K-S_t
 \section{Th\'eorie de la valorisation dans le cas discr\`et \`a une p\'eriode}
 
 \subsection{Introduction}
-Nous avons vu que les contrats \`a termes peuvent \^{e}tre valoris\'es par le principe de non arbitrage alors que ce principe ne donne que des bornes sur les prix des options. La valorisation de ces produits assez complexes n\'ecessite l'introduction des modeles probabilistes pour d\'ecrire les scenarios possibles du march\'e.
+Nous avons vu que les contrats \`a termes peuvent \^{e}tre valoris\'es par le principe de non arbitrage alors que ce principe ne donne que des bornes sur le prix des options. La valorisation de ces produits assez complexes n\'ecessite l'introduction des mod\`eles probabilistes pour d\'ecrire les sc\'enarios possibles du march\'e.
 
-Dans ce marche, si on trouve une strategie qui r\'eplique le payoff de l'option, alors la portefeuille construite par cette strategie r\'eplique l'option.
+Dans ce march\'e, si l'on trouve une strat\'egie qui r\'eplique le payoff de l'option, alors la portefeuille construite par cette strat\'egie r\'eplique l'option.
 
-Par l'absence de opportunite d'arbitrage, la valeur de ce portefeuille est la m\^{e}me que celui de l'option. Cependant, ce prix est d\'ependant du mod\`ele qui doit etre proche de la r\'ealit\'e.
+Par l'absence d'opportunite d'arbitrage, la valeur de ce portefeuille est la m\^{e}me que celle de l'option. Cependant, ce prix est d\'ependant du mod\`ele qui doit \^etre proche de la r\'ealit\'e.
 
 \subsection{Mod\`ele \`a une p\'eriode}
 
@@ -76,8 +91,8 @@ On consir\`ere qu'il y a $d+1$ actifs financiers et $2$ dates,: $t=0, t=1$. L'al
 
 En $t=1$, avec des probabilit\'es $ \{p_1,\ldots,p_K\},(p_i>0) $.
 
-Le prix de l'actif $i$ au $t$ est not\'e $S_t^i, 0\leq i\leq d$. $S^0$ represente l'actif saus risque $(S_0^0=1, S_1^0=e^R\approx 1+R)$
-Une strategie $\theta\in\mathbb{R}^{d+1}$ est le vecteur contenant le nombre d'unit\'e de chaque actif dans ce portefeuille $V$ entre $t=0$ et $t=1$. 
+Le prix de l'actif $i$ au $t$ est not\'e $S_t^i, 0\leq i\leq d$. $S^0$ represente l'actif sans risque $(S_0^0=1, S_1^0=e^R\approx 1+R)$
+Une strategie $\theta\in\mathbb{R}^{d+1}$ est un vecteur contenant le nombre d'unit\'e de chaque actif dans ce portefeuille $V$ entre $t=0$ et $t=1$. 
 
 La valeur de $V$ en $t$
 \begin{equation}
@@ -88,11 +103,14 @@ Le gain est defini par
 G=V_1-V_0=\sum_{i=0}^d \theta_i (S_1^i-S_0^i)=\sum_{i=0}^d \theta_i \Delta S^i
 \end{equation}
 
-On note $\tilde{S}_t^i=\frac{S_t^i}{S_t^0}$, $\tilde{V}_t=\frac{V_t}{S_t^0}$ et $\tilde{G}_t=\frac{G}{S_t^0}$,
+On note
+\begin{equation}
+	\tilde{S}_t^i=\frac{S_t^i}{S_t^0},\tilde{V}_t=\frac{V_t}{S_t^0},\tilde{G}_t=\frac{G}{S_t^0}
+\end{equation}
 alors
 \begin{equation}
-\left \{ \begin{array}{rcl}
-&\tilde{V}_t =\theta_0+\sum_{i=0}^{d}\theta_i \tilde{S}_t^i\\
+\left \{ \begin{array}{ll}
+&\tilde{V}_t =\theta_0+\sum_{i=1}^{d}\theta_i \tilde{S}_t^i\\
 &\tilde{G} =\tilde{V}_1-\tilde{V}_0=\sum_{i=1}^d \theta_i (\tilde{S}_1^i-\tilde{S}_0^i)=\sum_{i=1}^d\theta_i\Delta \tilde{S}^i
 \end{array}\right.
 \end{equation}
@@ -107,18 +125,23 @@ Une opportunite d'arbitrage est une strategie $\theta$ tel que
 \end{enumerate}
 o\`u
 \begin{enumerate}
-	\item $P(G>=0) = 1$
+	\item $P(G\geq 0) = 1$
 	\item $P(G>0) > 0$
 \end{enumerate}
 
-Commencer avec une \'etat avec valeur $0$, et la probabilite de gagner de l'argent est superierue \`a $0$.
+Commencer avec un \'etat avec valeur $0$, et la probabilite de gagner de l'argent est superierue \`a $0$.
 
 \subsubsection{D\'efinition 2}
 
 Une mesure de probabilit\'e $Q$ est dite risque neutre si:
 \begin{enumerate}
-	\item $Q\sim P$, c'est a dire, $Q(\omega_i)>0, \forall 1<=i<=K$
+	\item $Q\sim P$, c'est a dire, $Q(\omega_i)>0, \forall 1\leq i\leq K$
+	
+	$Q$ r\'eplique $P$
+	
 	\item $E^Q[\tilde{S}_1^i]=\tilde{S}_0^i, \forall i$
+	
+	Valeur relative des actifs ne change pas.
 \end{enumerate}
 
 \subsubsection{Th\'eor\`eme}
@@ -126,38 +149,42 @@ Le march\'e n'admet pas d'opportunit\'e d'arbitrage si et seulement s'il existe 
 
 Preuve:
 
-($=>$) Supposons qu'il existe une mesure de probabilit\'e risque neutre. Supposons qu'il existe une opportunit\'e d'arbitrage, donc 
+($\Rightarrow$) Supposons qu'il existe une mesure de probabilit\'e risque neutre. Supposons qu'il existe une opportunit\'e d'arbitrage, donc 
 \begin{equation}
-Q(G^\theta>=0)=1, Q(G^\theta>0)>0
+\label{eq:gain_risque_neutre}
+Q(G^\theta\geq0)=1, Q(G^\theta>0)>0
 \end{equation}
-
+Mais
 \begin{equation}
-E^Q[\tilde{G}^\theta]=0
+E^Q[\tilde{G}^\theta]=E^Q[\tilde{S}_1^\theta]-\tilde{S}_0^\theta=0
 \end{equation}
-contradiction.
+ce qui est en contradiction avec (\ref{eq:gain_risque_neutre}).
 
-($<=$) Supposons qu'il y a absence d'opportunit\'e d'arbitrage
+($\Leftarrow$) Supposons qu'il y a absence d'opportunit\'e d'arbitrage. Soient
 \begin{equation}
 \mathcal{E}=\{(q_1,\ldots,q_K)|\sum_{i=1}^K q_i, q_i>0\}
 \end{equation}
 \begin{equation}
 C=\{E^Q[\Delta\tilde{S}]|Q\in\mathcal{E}\}, \Delta \tilde{S}=(\Delta \tilde{S}^1,\ldots, \Delta\tilde{S}^d)^T
 \end{equation}
-Il faut d\'emontrer que $0\in C$.
+Il faut d\'emontrer que $0\in C$. Dans ce cas l\`a, il existe une mesure de probabilit\'e de sorte que la valeur esp\'er\'ee est $0$, c'est-\`a-dire, pas d'arbitrage. 
 
-Supposons $0\notin C$, puisque $C$ est convexe, d'apr\`es le theoreme de separation des convexes, alors 
+Supposons $0\notin C$, puisque $C$ est convexe, d'apr\`es le th\'eor\`eme de s\'eparation des convexes, alors 
 \begin{equation}
-\exists \alpha \in \mathbb{R}^d, \alpha^t >= 0, \forall x\in C
-\end{equation}
-\begin{equation}
-\exists x_0\in C, \alpha^t x_0 > 0
+\exists \alpha \in \mathbb{R}^d, \alpha^t \geq 0, \forall x\in C,\exists x_0\in C, \alpha^t x_0 > 0
 \end{equation}
 \begin{equation}
 x_0=E^{Q_0}[\Delta\tilde{S}]
 \end{equation}
-Soit $\alpha_0$ arbitraire, on consid\`ere la strategie $\theta=(\alpha_0, \alpha)$
-On a $\forall \theta\in\mathcal{E}, Q(\tilde{G}^\theta>=0)=1, Q_0(\tilde{G}^\theta>0)>0$
-On a $\forall Q\in\mathcal{E}, E^Q[\tilde{G}^Q]>=0, E^Q[\tilde{G}^Q]>0$
+Soit $\alpha_0$ arbitraire, on consid\`ere la strat\'egie $\theta=(\alpha_0, \alpha)$
+On a
+\begin{equation}
+	\forall \theta\in\mathcal{E}, Q(\tilde{G}^\theta\geq 0)=1, Q_0(\tilde{G}^\theta>0)>0
+\end{equation}
+Et
+\begin{equation}
+	\forall Q\in\mathcal{E}, E^Q[\tilde{G}^Q]\geq 0, E^Q[\tilde{G}^Q]>0
+\end{equation}
 
 S'il existe $\omega_i$ tel que $G^Q(\omega_i)<0$, on va construire une mesure $Q^t$:
 \begin{equation}
@@ -166,9 +193,13 @@ S'il existe $\omega_i$ tel que $G^Q(\omega_i)<0$, on va construire une mesure $Q
 	\frac{\epsilon}{K} & \omega\neq \omega_i
 \end{split}
 \end{equation}
-on peut choisir $\epsilon$ suffisamment actif tel que $E^{Q_\epsilon}[\tilde{G}^{\theta}]<0$. Donc $\forall i, G^\theta(\omega_i)>=0 => Q^0(G^\theta>=0)=1$ mais puisque $E^{Q_0}[\tilde{G}^\theta]>0$, alors $Q^0(\tilde{G}^theta)>0$
+on peut choisir $\epsilon$ suffisamment actif tel que $E^{Q_\epsilon}[\tilde{G}^{\theta}]<0$. Donc
+\begin{equation}
+	\forall i, G^\theta(\omega_i)\geq 0 \geq Q^0(G^\theta\geq 0)=1
+\end{equation}
+mais puisque $E^{Q_0}[\tilde{G}^\theta]>0$, alors $Q^0(\tilde{G}^\theta)>0$
 
-$=>$ Il y a arbitrage. Contradition, donc $0\in C => \exists $ une mesure de proba risque neutre.
+$\Rightarrow$ Il y a arbitrage. Contradition, donc $0\in C \Rightarrow \exists $ une mesure de proba risque neutre.
 
 \textbf{Exemple}:
 \begin{equation}
@@ -214,40 +245,43 @@ Cherchons $Q=\{q_1,q_2,q_3,q_4\}$ tel que $0<q_i$ et
 Et on a
 \begin{equation}
 \left\{ \begin{array}{rcl}
-q_1&=\frac{1}{4} \\
-q_2&=q_4 \\ 
+q_1&=\frac{1}{2}-2q_4 \\
+q_2&=3q_4-\frac{1}{4} \\ 
 q_3&=\frac{3}{4}-2q_4
 \end{array}\right.
 \end{equation}
 
 l'ensemble des mesures risque neutre est :
 \begin{equation}
-\{(\frac{1}{4},\lambda,\frac{3}{4}-2\lambda)|0<\lambda<\frac{3}{8}\}=empty => AOA
+\{(\frac{1}{2}-2\lambda,3\lambda-\frac{1}{4},\frac{3}{4}-2\lambda)|q_i>0,i\in\{1,2,3,4\}\}\neq\emptyset \Rightarrow AOA
 \end{equation}
+
+{\color{red} Is the above correct ?}
 
 \section{March\'e complet et valorisation d'actif conditionnel}
 
 On suppose que le march\'e est sans arbitrage.
 
-\begin{enumerate}
-	\item Def 1
-	
-Un actif conditionnel est une variable al\'eatoire $H$ dans $(\Omega, F, P)$.
-	
-	\item Def 2
-	
-	Un actif conditionnel est r\'ealisable s'il existe une strat\'egie $\theta$ tel que $H=V_1^\theta$
-	
-	\item Remarque
-	
-	Par AOA, on a prix de l'actif conditionnel est $P(H)=V_0^\theta$.
-\end{enumerate}
+\begin{defn}
+	Un actif conditionnel est une variable al\'eatoire $H$ dans $(\Omega, \mathcal{F}, \mathbb{P})$.
+\end{defn}
 
-Proposition: Le juste prix d'un actif conditionnel r\'ealisable $H$ est:
-\begin{equation}
-P(H) = E^Q[\tilde{H}]=E^Q[\frac{H}{S_1^\theta}]=E^Q[\frac{H}{1+R}]
-\end{equation}
-o\`u $Q$ est une mesure de proba risque neutre.
+\begin{defn}
+	Un actif conditionnel est r\'ealisable s'il existe une strat\'egie $\theta$ tel que $H=V_1^\theta$
+\end{defn}
+
+\begin{remq}
+	Par AOA, on a prix de l'actif conditionnel $P(H)=V_0^\theta$.
+\end{remq}
+
+\begin{propos}
+	Le juste prix d'un actif conditionnel r\'ealisable $H$ est:
+	\begin{equation}
+	P(H) = E^Q[\tilde{H}]=E^Q[\frac{H}{S_1^\theta}]=E^Q[\frac{H}{1+R}]
+	\end{equation}
+	o\`u $Q$ est une mesure de probabilit\'e risque neutre.
+\end{propos}
+
 
 \textbf{preuve}: 
 $\theta$ est une strat\'egie tel que $V_1^\theta=H$
@@ -260,32 +294,36 @@ E^Q[\tilde{H}]&=E^Q[\tilde{V}_1^\theta]\\
 \end{split}
 \end{equation}
 
+{\color{red} Pourquoi pas $V_0^\theta$ sur la 3e et 4e ligne?}
 
-\subsubsection{Def 3}
+\begin{defn}
+	Un march\'e est complet si tout actif conditionnel est r\'ealisable.
+\end{defn}
 
-Un march\'e est complet si tout actif conditionnel est r\'ealisable.
+\begin{remq}
+	$A$: matrice des payoff: $A_{(i,k)}(S_1^i(w_k))$. Un actif conditionnel est r\'ealisable si $\exists \theta$ tel que $\theta^T A=H$. Et donc le march\'e est complet si $\theta^T A=H$ a une solution pour tout $H\in \mathbb{R}^K$.	
+\end{remq}
 
 
-Remarque: 
-$A$: matrice des payoff: $A_{(i,k)}(S_1^i(w_k))$. Un actif conditionnel est r\'ealisable si $\exists \theta$ tel que $\theta^T A=H$. Et donc le march\'e est complet si $\theta^T A=H$ a une solution pour tout $H\in \mathbb{R}^K$.	
+Donc il faut que $A$ a au moins $K$ lignes lin\'eairement ind\'edendantes.[une condition n\'ecessaire est donc $d+1\geq K$]
 
-Donc il faut que $A$ a au moins $K$ lignes lin\'eairement ind\'edendantes.[une condition n\'ecessaire est donc $d+1>=K$]
+\begin{thm}
+	Un march\'e sans arbitrage est complet ssi il existe une seule mesure de probabilit\'e risque neutre.
+\end{thm}
 
-\textbf{Th\'eor\`eme}: Un march\'e sans arbitrage est complet ssi il existe une seule mesure de probabilit\'e risque neutre.
-
-Preuve: Supposons que le march\'e est complet. Prenons l'actif conditionnel $\mathbb{1}_{\{w_k\}}(1<=k<=K)$. Donc pour toute mesure de proba risque neutre $q$ on a:
+\textbf{Preuve}: Supposons que le march\'e est complet. Prenons l'actif conditionnel $\mathds{1}_{\{w_k\}}(1\leq k\leq K)$. Donc pour toute mesure de probabilit\'e risque neutre $q$ on a:
 \begin{equation}
-P_k=P(\mathbb{1}_{\{w_k\}})=E^Q[\frac{\mathbb{1}_{\{w_k\}}}{1+R}]=\frac{1}{1+R}Q(\{w_k\})
+P_k=P(\mathds{1}_{\{w_k\}})=E^Q[\frac{\mathds{1}_{\{w_k\}}}{1+R}]=\frac{1}{1+R}Q(\{w_k\})
 \end{equation}
-=> Unicit\'e de $Q$.
+$\Rightarrow$ Unicit\'e de $Q$. {\color{red} Pourquoi?}
 
 Supposons que la mesure risque neutre est unique. D\'emontrer que le march\'e est complet.
 
 Si le march\'e n'est pas complet 
 \begin{equation}
-	\exists z\in\mathbb{R}^{d+1}, z\neq 0
+	\exists z\in\mathbb{R}^{d+1}, z\neq 0, \text{t.q. } z^tA=0
 \end{equation}
-tel que $z^tA0$. Soit
+Soit
 \begin{equation}
 	Q_i|Q_2=\frac{Q(w_k)+\epsilon z_k}{1+\epsilon \sum z_k}
 \end{equation}. 
@@ -301,13 +339,18 @@ Il suffit de prendre $\epsilon$ suffisamment petit, $0<Q_2(w_k)<1$.
 
 \textbf{Exercise}
 1. $\Omega=\{w_1, w_2\}$, on cherche le modele suivant:
+\begin{equation}
+	S_0^0=1 \rightarrow 1+\Omega(=10\%)
+\end{equation}
+\begin{equation}
+	S_0^1\rightarrow\left\{
+	\begin{array}{rc}
+		12, &w_1,P_1\\
+		11, &w_2,P_2
+	\end{array}\right.
+\end{equation}
 
-$S_0^0=1 -> 1+\Omega(1=10\%)$
-
-$S_0^10->12, w_1,P_1$
-$-> 11, w_2,P_2$
-
-Est-ce que le march\'e est sans abritrage? Si ce n'est pas le cas, mettre au cas une strategie d'arbitrage.
+Est-ce que le march\'e est sans abritrage? Si ce n'est pas le cas, mettre au cas une strat\'egie d'arbitrage.
 
 Cherchons les mesures proba risque neutre
 \begin{center}
@@ -645,7 +688,7 @@ P_k(H_n)&=e^{-R\frac{T}{n}}E^{Q_n}[P_{k+1}(H_n)|\mathcal{F}_k],k=0,\ldots,n-1\\
 \end{equation}
 \begin{equation}
 \begin{split}
-E^{Q_n}[P_{k+1}(H_n)|\mathcal{F}_k]=E^{Q_n}[S_{k+1}^0E^{Q_n}[\frac{H_n}{S_n^0}|\mathcal{F}_{k+1}]|\mathcal{F}_k]\\
+E^{Q_n}[P_{k+1}(H_n)|\mathcal{F}_k]&=E^{Q_n}[S_{k+1}^0E^{Q_n}[\frac{H_n}{S_n^0}|\mathcal{F}_{k+1}]|\mathcal{F}_k]\\
 &=S^0_{k+1}E^{Q_n}[\frac{H_n}{S_n^0}|\mathcal{F}_k]\\
 &=e^{R\frac{T}{n}}P_k[H_n]
 \end{split}
@@ -863,9 +906,9 @@ Supposons que le prix d'une option en $t$ est $u(t,S_t)=P_t$
 \begin{equation}
 \begin{split}
 dP_t&=du(t,S_t)\\
-=\frac{\partial u}{\partial t}(t, S_t)dt+\frac{\partial u}{\partial S}(t,S_t)dS_t+\frac{1}{2}\frac{\partial^2 u}{\partial S^2}(t,S_t)d<S>_t\\
-&=(\frac{\partial u}{\partial t}(t,S_t)+\frac{1}{2}\sigma^2S_t^2\frac{\partial^2}{\partial S^2}(t, S_t))dt+\frac{\partial u}{\partial S}(t, S_t)(bS_tdt + \sigma S_tdW_t)\\\
-&=(\frac{\partial u}{\partial t}++\frac{1}{2}\\sigma^2 S_t^2\frac{\partial^2 u}{\partial S^2}+bS_t\frac{\partial u}{\partial S})dt+\sigma S_t\frac{\partial u}{\partial S}dW_t
+&=\frac{\partial u}{\partial t}(t, S_t)dt+\frac{\partial u}{\partial S}(t,S_t)dS_t+\frac{1}{2}\frac{\partial^2 u}{\partial S^2}(t,S_t)d<S>_t\\
+&=(\frac{\partial u}{\partial t}(t,S_t)+\frac{1}{2}\sigma^2S_t^2\frac{\partial^2}{\partial S^2}(t, S_t))dt+\frac{\partial u}{\partial S}(t, S_t)(bS_tdt + \sigma S_tdW_t)\\
+&=(\frac{\partial u}{\partial t}+\frac{1}{2}\sigma^2 S_t^2\frac{\partial^2 u}{\partial S^2}+bS_t\frac{\partial u}{\partial S})dt+\sigma S_t\frac{\partial u}{\partial S}dW_t
 \end{split}
 \end{equation}
 Ainsi la volatilit\'e de l'option en $t$ est:
@@ -989,12 +1032,12 @@ Soit $g$ une fonction \`a croissance polynomiale.
 \end{equation}
 Alors l'EDP de B\&S admet une solution dans la classe des fonctions de croissance polynomiale, appartenant \`a $C^0([0,T]\times ]0,\infty[) and C^{1,2}([0,T)\times]0,\infty[)$ donn\'ee par:
 \begin{equation}
-v(t,S)=E[e^{-r(T-t)}g(S e^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma (W_T -W_t)})]
+v(t,S)=E[e^{-r(T-t)}g(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma (W_T -W_t)})]
 \end{equation}
 
 \subsection{Formule de Black-Scholes}
-\subsubsection{Theor\`eme 3}
-Le prix d'une option europeende payoff
+\subsubsection{Th\'eor\`eme 3}
+Le prix d'une option europeene payoff
 \begin{equation}
 g(S)=(S-K)_+
 \end{equation}
@@ -1006,7 +1049,7 @@ v(t,S)&=C_{BS}(t,S)\\
 \end{split}
 \end{equation}
 \begin{equation}
-\mathcal{N}(x)=\int_{-\infty}^x \frac{e^{-\frac{y^2}{2}}}{V\bar{epsilon}\\pi}dy
+\mathcal{N}(x)=\int_{-\infty}^x \frac{e^{-\frac{y^2}{2}}}{V\bar{\epsilon}\pi}dy
 \end{equation}
 \begin{equation}
 d_1=\frac{ln(\frac{S}{Ke^{-r(T-t)}})+\frac{1}{2}\sigma^2(T-t)}{\sigma \sqrt{T-t}}
@@ -1020,57 +1063,64 @@ Le ratio de couverture (delta) est donn\'ee par
 \Delta_{BS}(t,S)=\mathcal{N}(d_1)
 \end{equation}
 \textbf{preuve}:
+
 \begin{equation}
 \begin{split}
 C_{BS}(t,S)&=E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K)_+]\\
-&=E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K) \bbm{1}_{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K}]\\
+&=E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K) \mathds{1}_{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K}]\\
 &=P_1-P_2
 \end{split}
 \end{equation}
+
 \begin{equation}
 \begin{split}
-P_2&=Ke^{-r(T-t)}E[\bbm_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]\\
-&=Ke^{-r(T-t)P((r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)>ln(\frac{K}{S}))\\
+P_2&=Ke^{-r(T-t)}E[\mathds{1}_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]\\
+&=Ke^{-r(T-t)}P((r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)>ln(\frac{K}{S}))\\
 &=Ke^{-r(T-t)}P(\frac{W_T-W_t}{\sqrt{T-t}})>\frac{ln(\frac{K}{S})-(r-\frac{1}{2}\sigma^2)(T-t)}{\sigma\sqrt{T-t}}\\
 &=Ke^{-r(T-t)}P(\frac{W_T-W_t}{\sqrt{T-t}})>\frac{ln(\frac{Ke^{-r(T-t)}}{S})+\frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}}\\
 &=Ke^{-r(T-t)}P(\frac{W_T-W_t}{\sqrt{T-t}}<d_2)\\
 &=Ke^{-r(T-t)}\mathcal{N}(d_2)
 \end{split}
 \end{equation}
+
 \begin{equation}
 \begin{split}
-P_1&=E[e^{-r(T-t)}Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}\bbm_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]\\
-&=E[Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\bbm_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]
+P_1&=E[e^{-r(T-t)}Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}\mathds{1}_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]\\
+&=E[Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\mathds{1}_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]
 \end{split}
 \end{equation}
+
 \begin{equation}
-W_T-W_t\~\mathcal{N}(0,T-t)
+W_T-W_t\sim\mathcal{N}(0,T-t)
 \end{equation}
+
 \begin{equation}
 W_T-W_t=\sqrt{T-t}Z
 \end{equation}
-avec &Z\~\mathcal{N}(0,1)&
+avec $Z\sim \mathcal{N}(0,1)$
 \begin{equation}
 \begin{split}
-P_1&=\int_{\mathbb{R}}Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\bbm_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}\times \frac{e^{\frac{-\z^2}{2}}}{\sqrt{2\pi}}dz\\
-&=\int_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}} Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\frac{e^{\frac{-\z^2}{2}}}{\sqrt{2\pi}}dz\\
-&=\int_{\{\frac{1}{2}\sigma^2(T-t)+\sigma\sqrt{T-t}>ln{\frac{K}{S}}\}} S\frac{e^{-\frac{(z-\sigma\sqrt{T-t})^2}{2}}}{\sqrt{2\pi}}dz
+P_1&=\int_{\mathbb{R}}Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\mathds{1}_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}\times \frac{e^{\frac{-z^2}{2}}}{\sqrt{2\pi}}dz\\
+&=\int_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}} Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\frac{e^{\frac{-z^2}{2}}}{\sqrt{2\pi}}dz\\
+&=\int_{\{\frac{1}{2}\sigma^2(T-t)+\sigma\sqrt{T-t}>ln(\frac{K}{S})\}} S\frac{e^{-\frac{(z-\sigma\sqrt{T-t})^2}{2}}}{\sqrt{2\pi}}dz
 \end{split}
 \end{equation}
+
 \begin{equation}
 \begin{split}
-y&=-\sigma\sqrt{T-t}\\\
+y&=-\sigma\sqrt{T-t}\\
 &=S\int_{\{\sigma\sqrt{T-t}(y+\sigma\sqrt{T-t})+(r-\frac{1}{2}\sigma^2)(T-t)>ln(\frac{K}{S})\}}\frac{e^{-y^2}}{\sqrt{2\pi}}dy\\
-&=S\int_{\{y>\frac{ln(\frac{Ke^{-r(T-t)}}{S})-frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}}\}}\\
+&=S\int_{\{y>\frac{ln(\frac{Ke^{-r(T-t)}}{S})-\frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}}\}}\\
 &=S\mathcal{N}(d_1)
 \end{split}
 \end{equation}
 
 \begin{equation}
 \begin{split}
-\frac{\partial C_{BS}}{\partial S}(t,S)&=\frac{\partial}{\partial S}E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K)+]\\
-&=E[e^{-r(T-t)}\bbm_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}]\\
+\frac{\partial C_{BS}}{\partial S}(t,S)&=\frac{\partial}{\partial S}E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K)_+]\\
+&=E[e^{-r(T-t)}\mathds{1}_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]\\
 &=\mathcal{N}(d_1)
+\end{split}
 \end{equation}
 
 \subsubsection{Corrollaire}
@@ -1128,7 +1178,7 @@ Pour comprendre le comportement des options en fonction des diff\'erents propri\
 Le delta est la sensibilit\'e du prix par rapport \`a la valeur actuelle de l'actif sous-jacent.
 \begin{equation}
 \Delta^c = \frac{\partial C_{BS}}{\partial S}=\mathcal{N}(d_1)
-,\end{equation}
+\end{equation}
 \begin{equation}
 \Delta^p=\frac{\partial P_{BS}}{\partial S}=\mathcal{N}(d_1)-1
 \end{equation}
@@ -1148,7 +1198,7 @@ Puisque $\Gamma$ est positif, le prix du call et du put est convexe en $S$.. Le 
 
 Le vega est la sensibilit\'e du  prix par rapport \`a la volatilit\'e:
 \begin{equation}
-\Vega=\frac{\partial C_{BS}}{\partial \sigma} = \frac{\partial P_{BS}}{\partial\sigma}=Sn(d_1)\sqr{T-t}
+\nu=\frac{\partial C_{BS}}{\partial \sigma} = \frac{\partial P_{BS}}{\partial\sigma}=Sn(d_1)\sqrt{T-t}
 \end{equation}
 Le prix du put et du call est croissant par rapport \`a la volatilit\'e. Le Vega est plus grande \`a la monnaie mais d\'ecroit pour les options proches de la maturit\'e.
 
@@ -1156,7 +1206,7 @@ Le prix du put et du call est croissant par rapport \`a la volatilit\'e. Le Vega
 
 Le th\'eta est la sensibilit\'e par rapport au temps.
 \begin{equation}
-\Theta^c=\frac{\partial C_{BS}}{\partial t}=-\frac{Sn(d_1)\sigma}{2\sqrt{T-t}}-rKe^{-r(T-t)}N(d_2)<0
+\Theta^c=\frac{\partial C_{BS}}{\partial t}=-\frac{Sn(d_1)\sigma}{2\sqrt{T-t}}-rKe^{-r(T-t)}\mathcal{N}(d_2)<0
 \end{equation}
 \begin{equation}
 \Theta^p=\frac{\partial P_{BS}}{\partial t}=-\frac{Sn(d_1)\sigma}{2\sqrt{T-t}}+rKe^{-r(T-t)}\mathcal{N}(-d_2)
@@ -1173,5 +1223,7 @@ Le Rho est la sensibilit\'e par rapport au taux d'int\'er\^et $r$
 \rho_{BS}^p=\frac{\partial P_{BS}}{\partial r}=-K(T-t)e^{-r(T-t)}\mathcal{N}(-d_2)<0
 \end{equation}
 $=>$ call est croissant et le put est d\'ecroissant par rapport au taux d'int\'er\^et
+
 \end{enumerate}
+
 \end{document}
