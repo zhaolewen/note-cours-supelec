@@ -29,6 +29,21 @@
 \subsection{Introduction}
 \subsection{Hypoth\`ese}
 \subsection{Propri\'et\'e}
+\begin{thm}
+	Parit\'e Call-Put
+	\begin{equation}
+		C(t) - P(t) = S(t)-KB(t,T)
+	\end{equation}
+\end{thm}
+o\`u
+\begin{itemize}
+	\item $C(t)$ prix du call
+	\item $P(t)$ prix du put
+	\item $S(t)$ prix de l'actif
+	\item $K$ prix strike
+	\item $B(t,T)=e^{-r(T-t)}$ valeur of a zero-coupon bond that matures to $1$ at  $T$
+\end{itemize}
+	
 \subsection{Options am\'ericaines}
 Option am\'ericaine similaire aux options europeens mais l'exercise du droit pourra se faire \`a toute date $t$ avant maturit\'e $T$.
 
@@ -343,7 +358,7 @@ Il suffit de prendre $\epsilon$ suffisamment petit, $0<Q_2(w_k)<1$.
 	S_0^0=1 \rightarrow 1+\Omega(=10\%)
 \end{equation}
 \begin{equation}
-	S_0^1\rightarrow\left\{
+	S_0^1=10\rightarrow\left\{
 	\begin{array}{rc}
 		12, &w_1,P_1\\
 		11, &w_2,P_2
@@ -366,32 +381,42 @@ Cherchons $P_1, P_2$ tel que
 P_1>0, P_2>0, E[\tilde{S_1}^0] = \tilde{S}_0^0, E[\tilde{S}_1^1]=\tilde{S}_0^1
 \end{equation}
 \begin{equation}
-P_1*\frac{1.1}{1.1}+P_2\frac{1.1}{1.1}=\frac{1}{1} and P_1\frac{12}{1.1}+P_2\frac{11}{1.1}=\frac{10}{1}
+	P_1\frac{1.1}{1.1}+P_2\frac{1.1}{1.1}=\frac{1}{1} 
 \end{equation}
-=>
+and
+\begin{equation}
+	P_1\frac{12}{1.1}+P_2\frac{11}{1.1}=\frac{10}{1}
+\end{equation}
+Et on a
 \begin{equation}
 P_1=0, P_2=1
 \end{equation}
  
 $P_1>0$ n'est pas v\'erifi\'e, donc il existe opportunit\'e d'arbitrage.
-On veut 10 de $S^0$ et on ach\`ete 1 de $S^1$,
-$V_0=10S_0^0+S_0^1=0$
-
-Donc 
+On veut 10 de $S^0$ et on ach\`ete 1 de $S^1$. Ainsi, la valeur initiale du portefeuille est
 \begin{equation}
-V_1-> -10(1+R)+12=1
+	V_0=-10S_0^0+S_0^1=0
 \end{equation}
+Donc au $t=1$
 \begin{equation}
-->-10(1+R)+11=0
+V_1\rightarrow
+\left\{\begin{array}{rc}
+	-10(1+R)+12=1\\
+	-10(1+R)+11=0
+\end{array}\right.
 \end{equation}
-
 
 2. $\Omega=\{w_1, w_2\}$, on cherche le modele suivant:
-
-$S_0^0=1 -> 1+\Omega(1=10\%)$
-
-$S_0^10->12, w_1, P_1$
-$-> 8, w_2, P_2$
+\begin{equation}
+	S_0^0=1 \rightarrow 1+\Omega(=10\%)
+\end{equation}
+\begin{equation}
+	S_0^1=10\rightarrow
+	\left\{\begin{array}{rc}
+		12, w_1, P_1\\
+		8, w_2, P_2
+	\end{array}\right.
+\end{equation}
 
 \begin{enumerate}
 \item Est-ce que le marche est sans arbitrage(complet)?
@@ -399,19 +424,27 @@ $-> 8, w_2, P_2$
 \item Calculer de deux fa\c{c}ons le prix d'un put de strike 10
 \end{enumerate}
 
-Solution:$P_1=\frac{3}{4}, P_2=\frac{1}{4}$, donc il existe unique mesure probabilite risque neutre. Donc le march\'e est sans arbitrage(complet).
+Solution:
+
+1) $P_1=\frac{3}{4}, P_2=\frac{1}{4}$, donc il existe unique mesure probabilite risque neutre. Donc le march\'e est sans arbitrage(complet).
 
 2) Puisque le march\'e est complet et sans arbitrage, alors:
 \begin{equation}
-Call_0(1,10) = E^Q[\frac{(S_1^1-10)_+}{1+R}]=\frac{\frac{3}{4}*2+\frac{1}{4}*0}{1.1}=\frac{15}{11}
+\begin{split}
+	Call_0(1,10) &= E^Q[\tilde{H}] \\
+	&= E^Q[\frac{V_1^\theta}{1+R}] \\
+	&= E^Q[\frac{(S_1^1-10)_+}{1+R}]\\
+	&=\frac{\frac{3}{4}*2+\frac{1}{4}*0}{1.1}=\frac{15}{11}
+\end{split}
 \end{equation}
 
 3) 
+D'abord, on utilise la parit\'e Call-Put
 \begin{equation}
 c(1,10)-P(1,10)=S_0^1-\frac{K}{1+R}=\frac{10}{11}
 \end{equation}
 \begin{equation}
-=>P(1,10)=\frac{5}{11}
+\Rightarrow P(1,10)=\frac{5}{11}
 \end{equation}
 
 \begin{equation}
@@ -420,129 +453,144 @@ P(1,10) = E^Q[\frac{(10-S_1^1)_+}{1+R}]=0\times\frac{3}{4}+\frac{2}{1.1}\times\f
 
 \section{Le mod\`ele binominale \`a une p\'eriode}
 
-$T=1,\Omega=\{w_u,w_d\},F=P(\Omega)$,$P$ mesure de proba dans $(\Omega,F),(0<P(w_u)<1)$
+$T=1,\Omega=\{w_u,w_d\},F=\mathbb{P}(\Omega)$,$\mathbb{P}$ mesure de probabilit\'e dans $(\Omega,\mathcal{F}),(0<P(w_u)<1)$
 
 \begin{equation}
-S_0^0=1->1+R
+S_0^0=1\rightarrow 1+R
 \end{equation}
 \begin{equation}
-S_0^1=s->us, w_u,P_1(u>=d)
+S_0^1=s\rightarrow
+\left\{\begin{array}{rc}
+	us, &w_u,P_1\\
+	ds, &w_d, P_2
+\end{array}\right.
 \end{equation}
-\begin{equation}
-->ds, w_d, P_2
-\end{equation}
+o\`u $u \geq d$
 
-\subsubsection{Proposition} 
-\begin{enumerate}
-\item Le mod\`ele est viable (sans arbitrage), ssi
-\begin{equation}
-d<1+R<u
-\end{equation}
-(condition de non-arbitrage)
+\begin{propos}
+	Le mod\`ele est viable (sans arbitrage), ssi
+	\begin{equation}
+	d<1+R<u
+	\end{equation}
+	(condition de non-arbitrage)
+\end{propos}
 
-\item Le prix d'un actif conditionnel $H$ est:
-\begin{equation}
+\begin{propos}
+	Le prix d'un actif conditionnel $H$ est:
+	\begin{equation}
 P(H)=E^Q[\frac{H}{1+R}]
 \end{equation} 
 o\`u
 \begin{equation}
 Q(w) = \left\{\begin{array}{rcl}
-	\frac{1+R-d}{u-d} & si w=w_d\\
-\frac{u-1-R}{u-d} & si w_u
+	\frac{1+R-d}{u-d} & ,\text{si} &w=w_d\\
+	\frac{u-1-R}{u-d} & ,\text{si} &w=w_u
 \end{array} \right.
 \end{equation}
-En plus, ;a portefeuille de couverture est donn\'ee par $(\theta_0,\theta_1)$ o\`u 
+En plus, le portefeuille de couverture est donn\'ee par $(\theta_0,\theta_1)$ o\`u 
 \begin{equation}
-\theta_1=\frac{H(w_u)-H(w_d)}{us-ds}
+	\left\{\begin{array}{rc}
+		\theta_0=P(H)-\theta_1 s\\
+		\theta_1=\frac{H(w_u)-H(w_d)}{us-ds}
+	\end{array}\right.
 \end{equation}
-et
-\begin{equation}
-\theta_0=P(H)-\theta_1 s
-\end{equation}
-\end{enumerate}
+\end{propos}
 
 \textbf{Preuve}
 \begin{enumerate}
-\item Cherchons des mesures de proba risque neutre $Q=\{q_u,q_d\}(q_u=Q(w_u),q_d=Q(w_d))$
+\item Cherchons des mesures de probabilit\'e risque neutre telles que
+\begin{equation}
+	Q=\{q_u,q_d\}(q_u=Q(w_u),q_d=Q(w_d))
+\end{equation}
 \begin{equation}
 \left\{ \begin{array}{rcl}
 q_u+q_d&=1\\
 \frac{q_uus+q_d ds}{1+R}&=s
-\end{array}\right. <=>
-\left\{\begin{array}{rcl}
+\end{array}\right. \Leftrightarrow
+\left\{\begin{array}{rc}
 q_d&=1-q_u\\
 q_us(u-d)&=s(1+R)-ds
 \end{array}\right.
 \end{equation}
-$<=>$
-\begin{equation}
-q_d=\frac{u-1-R}{u-d}\\
-q_u=\frac{1+R-d}{u-d}
+Ainsi\begin{equation}
+\left\{\begin{array}{rc}
+	q_u=\frac{u-1-R}{u-d}\\
+	q_d=\frac{1+R-d}{u-d}
+\end{array}\right.
 \end{equation}
 
-Donc $\exists !$ mesure de proba risque neutre ssi $d<1+R<u$
+Donc $\exists !$ mesure de probabilit\'e risque neutre ssi $d<1+R<u$
 
-\item Le march\'e est sous arbitrage et complet
-
+\item Si le march\'e est sans arbitrage et complet
 \begin{equation}
-=>P(H)=E^Q[\frac{H}{1+R}]
+	P(H)=E^Q[\frac{H}{1+R}]
 \end{equation}
 Cherchons $(\theta_0,\theta_1)$ tel que $\theta_0S_1^0 + \theta_1S_1^1=H$
 \begin{equation}
 \left\{\begin{array}{rcl}
-\theta_0(1+R)+\theta_1(us)&=H(w_u)\\
-\theta_0(1+R)+\theta_1(ds)&=H(w_d)
+\theta_0(1+R)+\theta_1 us&=H(w_u)\\
+\theta_0(1+R)+\theta_1 ds&=H(w_d)
 \end{array}\right.
 \end{equation}
+Ainsi
 \begin{equation}
-=>\theta_1(us-ds)=H(w_u)-H(w_d)
+	\theta_1(us-ds)=H(w_u)-H(w_d)
 \end{equation}
 \begin{equation}
-=>\theta_1=\frac{H(w_u)-H(w_d)}{us-ds}
+	\theta_1=\frac{H(w_u)-H(w_d)}{us-ds}
 \end{equation}
+Au temps $t=0$, on a
 \begin{equation}
-\theta_0\times 1+\theta_1 s=P(H)
+	\theta_0\times 1+\theta_1 s=P(H)
 \end{equation}
+Donc,
 \begin{equation}
-=>\theta_0=P(H)-\theta_1 s
+	\theta_0=P(H)-\theta_1 s
 \end{equation}
-La strategie de couverture est not\'e $(\theta_0,\theta_1)$ ou $(P(H),\theta_1)$
-$=>$ le prix \`a definir pour l'acheter si le vendeur veut eliminer tout risque.
+La strat\'egie de couverture est not\'e $(\theta_0,\theta_1)$ ou $(P(H),\theta_1)$
+qui donne le prix \`a definir pour l'acheter si le vendeur veut eliminer tout risque.
 \end{enumerate}
 
 \section{Th\'eor\`em de Valorisation dans le cas discr\`ete multi-p\'eriode}
 \subsection{Mod\`ele}
-On consid\`ere qu'il y a $n$ p\'eriodes et $n+1$ dates ${t_0=0,t_1,\ldots,t_n=T}$. L'al'ea est repr\'esent\'e par un espace de probabilit\'e $(\Omega,\mathcal{F},P)$. Pour sp\'ecifier l'information disponible en $t$, on introduit la filtration $\mathbb{F}=\{\mathcal{F}_0,\ldots,\mathcal{F}_n\}$. 
+On consid\`ere qu'il y a $n$ p\'eriodes et $n+1$ dates ${t_0=0,t_1,\ldots,t_n=T}$. L'al\'ea est repr\'esent\'e par un espace de probabilit\'e $(\Omega,\mathcal{F},P)$. Pour sp\'ecifier l'information disponible en $t$, on introduit la filtration $\mathbb{F}=\{\mathcal{F}_0,\ldots,\mathcal{F}_n\}$. 
 
-On suppose $\mathcal{F}_0=\{\empty,\Omega\},\mathcal{F}_n=\mathcal{F}=P(\Omega)$. LEs actifsrisqu\'e sont mod\'elis\'es par $d$ processus stocastiques $(S^i_j)_{j=0,\ldots,n}^{i=1,\ldots,d}$ comme $\mathbb{F}$-adapt\'e. L'actif sans risque est d\'efini $(S_j^0)_{j=0,\ldots,n}$
+On suppose $\mathcal{F}_0=\{\emptyset,\Omega\},\mathcal{F}_n=\mathcal{F}=P(\Omega)$. Les actifs risqu\'es sont mod\'elis\'es par $d$ processus stocastiques $(S^i_j)_{j=0,\ldots,n}^{i=1,\ldots,d}$ comme $\mathbb{F}$-adapt\'e. L'actif sans risque est d\'efini $(S_j^0)_{j=0,\ldots,n}$
 \begin{equation}
-S_0^0=1,S_j^0=(0+R)S_{j-1}^0
+S_0^0=1,S_j^0=(1+R_j)S_{j-1}^0
 \end{equation} 
 $R_j$ est le taux d'int\'er\^et pour la p\'eriode $[t_{j-1},t^j]$.
 
-\subsubsection{Def 1}
-Une strat\'egie d'investissement admissible est un processus stochastique $(\theta_j^i)_{j=0,\ldots,n}^{i=0,\ldots,d}$ o\`u $\theta_j^i$ est la quantit\'e investie dans l'actif $i$ entre $t_{j-1}$ et $t_j$ qui doit \^etre connu en $t_{j-1}$.($\theta$ est pr\'evisible).
+\begin{defn}
+	Une strat\'egie d'investissement admissible est un processus stochastique $(\theta_j^i)_{j=0,\ldots,n}^{i=0,\ldots,d}$ o\`u $\theta_j^i$ est la quantit\'e investie dans l'actif $i$ entre $t_{j-1}$ et $t_j$ qui doit \^etre connu en $t_{j-1}$.($\theta$ est pr\'evisible).
+\end{defn}
 
-\textbf{Remarque}:
-La valeur d'un portefeuille peut varier par deux possibilit\'es
-
-$->$ possibilit\'e 1: variation des prix d'actifs
-$->$ possibilit\'e 2: versement/retrait d'argent
+\begin{remq}
+	La valeur d'un portefeuille peut varier par deux possibilit\'es
+	\begin{enumerate}
+		\item variation des prix d'actifs
+		\item versement/retrait d'argent
+	\end{enumerate}
+\end{remq}
 
 On va introduire la possibilit\'e 2 aux strat\'egies. 
 
-\subsubsection{Def 2}
-Une strat\'egie $\theta$ est dite audofinanc\'ee si 
+\begin{defn}
+	Une strat\'egie $\theta$ est dite auto-financ\'ee si 
 \begin{equation}
 \sum_{i=0}^d\theta_j^i S_j^i=\sum_{i=0}^d\theta_{j-1}^i S_j^i, \forall j=1,\ldots,n-1
 \end{equation}
+o\`u le changement de la strat\'egie d'investissement ne change pas la valeur totale du portefeuille pour un instant donn\'e.
+\end{defn}
 
-\subsubsection{Def 3}
-Le processus de gain d'une strat\'egie est un processus stocastique qui d\'ecrit le changement de valeur duportefeuille associ\'e suite aux variation des prix d'actif. 
+\begin{defn}
+	Le processus de gain d'une strat\'egie est un processus stocastique qui d\'ecrit le changement de valeur du portefeuille associ\'e suite aux variation des prix d'actif.
+
+\end{defn}
 
 On va le noter $G$
 \begin{equation}
-G_0=0,G_t=\sum_{j=1}^t\sum_{i=0}^d \theta_j^i\Delta S_j^i,\Delta_j^i=S_j^i-S_{j-1}^i
+G_0=0,G_t=\sum_{j=1}^t\sum_{i=0}^d \theta_j^i\Delta S_j^i,\Delta S_j^i=S_j^i-S_{j-1}^i
 \end{equation}
 pour une strat\'egie auto-financ\'ee,
 \begin{equation}
@@ -556,40 +604,47 @@ Comme dans le cas d'une p\'eriode, on note:
 \tilde{G}_t=\sum_{j=1}^t\sum_{i=1}^d \theta_j^i \Delta \tilde{S}_j^i
 \end{equation}
 
-\subsection{R\'esultats de march\'e viable et complet}
+\subsection{R\'esultats du march\'e viable et complet}
 
-\subsubsection{Def 1}
-Une opportunit\'e d'arbitrage est une strat\'egie audo-financ\'ee $\theta$ tel que:
+\begin{defn}
+	Une opportunit\'e d'arbitrage est une strat\'egie auto-financ\'ee $\theta$ tel que:
 \begin{equation}
-\left\{\begin{array}{rcl}
+\left\{\begin{array}{l}
 V_0^\theta=0 \\
-P(V_n^\theta >= 0)=1 et P(V_n^\theta >0)>0
+P(V_n^\theta \geq 0)=1\\ 
+P(V_n^\theta >0)>0
 \end{array}\right.
 \end{equation}
 ou
 \begin{equation}
 \left\{\begin{array}{rcl}
-P(\tilde{G}_n^\theta>=0)=1\\
+P(\tilde{G}_n^\theta \geq 0)=1\\
 P(\tilde{G}_n^\theta>0)>0
 \end{array}\right.
 \end{equation}
+\end{defn}
 
-\subsubsection{Th\'eor\`eme}
-Un march\'e financ\'e \`a $n$ p\'eriode est viable ssi il existe une mesure de probabilit\'e risque neutre $Q$. C'est-\`a-dire,
+\begin{thm}
+	Un march\'e financ\'e \`a $n$ p\'eriode est viable ssi il existe une mesure de probabilit\'e risque neutre $Q$. C'est-\`a-dire,
 \begin{equation}
-\left\{\begin{array}{rcl}
+\left\{\begin{array}{l}
 Q(w)>0,\forall w\in\Omega\\
-E^Q[\tilde{S_{t+1}^i}|\mathcal{F}_t]=\tilde{S}_t^i,\forall 0<=i<=d,0<=t<=n-1
+E^Q[\tilde{S_{t+1}^i}|\mathcal{F}_t]=\tilde{S}_t^i
 \end{array}\right.
+\forall 0 \leq i \leq d,0\leq t\leq n-1
 \end{equation}
 (Les prix actualis\'es sont de $Q$-martingale).
+\end{thm}
 
-\subsubsection{Proposition}
-Le juste prix d'un actif conditionnel r\'ealisable $H$ \`a la date $t$ est(l'actif verse $H$ en $T$):
+{\color{red} C'est quoi martingale?}
+
+\begin{propos}
+	Le juste prix d'un actif conditionnel r\'ealisable $H$ \`a la date $t$ est(l'actif verse $H$ en $T$):
 \begin{equation}
 P_t(H)=S_t^0 E^Q[\frac{H}{S^0_t}|\mathcal{F}_t]
 \end{equation}
 ($Q$ est la mesure risque neutre)
+\end{propos}
 
 \textbf{Preuve}:
 Il existe une strat\'egie $\theta$ tel que 
@@ -606,16 +661,20 @@ S_tE^Q[\frac{H}{S_n^0}|\mathcal{F}_t]&=S_tE^Q[\frac{\sum\theta_i S_n^i}{S_n^0}|\
 \end{split}
 \end{equation}
 
-\subsection{Th\'eor\`eme}
-Un march\'e viable est complet ssi la moyenne de probabilit\'e risque neutre est unique.
+{\color{red} Pourquoi $E^Q$ disparait sur la 3e ligne?}
+
+\begin{thm}
+	Un march\'e viable est complet ssi la moyenne de probabilit\'e risque neutre est unique.
+\end{thm}
+
 
 \subsection{Mod\`ele binomiale multi-p\'eriode(Mod\`ele de Lex-Ross-Robinstein)}
 \begin{equation}
 \Omega=\{-1,1\}^n,\mathcal{F}=P(\Omega)
 \end{equation}
-Soit $(z_k)_{k>=0}$ une suite de variable al\'eatoires ind\'ependantes tel que $P(z_k=1)=P(z_k=-1)=\frac{1}{2}$
+Soit $(z_k)_{k>=0}$ une suite de variable al\'eatoires ind\'ependantes telles que $P(z_k=1)=P(z_k=-1)=\frac{1}{2}$
 \begin{equation}
-\mathcal{F}_0=\{\empty,\Omega\},\mathcal{F}_k=\sigma(z_0,\ldots,z_k),\mathbb{F}=\{\mathcal{F}_0,\ldots,\mathcal{F}_n\}
+\mathcal{F}_0=\{\emptyset,\Omega\},\mathcal{F}_k=\sigma(z_0,\ldots,z_k),\mathbb{F}=\{\mathcal{F}_0,\ldots,\mathcal{F}_n\}
 \end{equation}
 
 $T>0, t_i=\frac{iT}{n}$: diviser $[0,T]$ en $n$ parties.
@@ -632,6 +691,7 @@ b_n=b\frac{T}{n}\\
 \begin{equation}
 S_0^0=1, S_j^0=e^{\Omega\frac{T}{n}}S_{j-1}^0,(R=e^{\Omega\frac{T}{n}}-1 \frac{tT}{n})=(1+R)S_{j-1}^0
 \end{equation}
+{\color{red} Comprends pas...}
 \begin{equation}
 \begin{split}
 S_0^1=s,S_j^1&=se^{jb_n+\sigma_n\sum{k=1}^j z_k}\\
@@ -644,8 +704,11 @@ Ainsi, pour chaque $n>=1$, on a definit un march\'e \`a $n$ p\'eriodes de pas co
 \subsubsection{Proposition}
 Le march\'e est sans arbitrage ssi
 \begin{equation}
-d_n<1+R_n<u_n avec 
-\left\{\begin{array}{rcl}
+d_n<1+R_n<u_n  
+\end{equation}
+avec
+\begin{equation}
+	\left\{\begin{array}{rcl}
 u_n=e^{b_n+\sigma_n}\\
 d_n=e^{b_n-\sigma_n}
 \end{array}\right.
@@ -662,14 +725,25 @@ On consid\`ere un actif conditionnel $H_n=g(S_n^1)$
 P_0(H_n)=S_0^0E^{Q^n}[\frac{H_n}{S_n^0}]
 \end{equation}
 \begin{equation}
-S_0^0=1, S_n^0=(1+R)S_{n-1}^0=\ldots=(1+R)^n=(e^{\Omega\frac{T}{n}})^n=e^{nT}
+\left\{\begin{array}{l}
+	S_0^0=1\\
+	S_n^0=(1+R)S_{n-1}^0=\ldots=(1+R)^n=(e^{R\frac{T}{n}})^n=e^{nT}
+\end{array}\right.
 \end{equation}
 \begin{equation}
-P_0(H_n)=\frac{1}{(1+R_n)^n}E^{Q_n}[H_n]=e^{-\Omega T}E^{Q_n}[H_n]=e^{-\Omega T}E^{Q_n}[g(S_n^1)]
+\begin{split}
+	P_0(H_n)&=\frac{1}{(1+R_n)^n}E^{Q_n}[H_n]\\
+	&=e^{-R T}E^{Q_n}[H_n]\\
+	&=e^{-R T}E^{Q_n}[g(S_n^1)]
+\end{split}
 \end{equation}
+{\color{red} C'est quoi $g()$ ?}
+
 Sous $Q^n$, $(\frac{z_{j+1}}{2})$ est une suite de V.A. de Bernouille de param\`etre $q_n=\frac{1+R_n-d_n}{u_n-d_N}$
+
+Valeur moyenne de Bernouille:
 \begin{equation}
-Q^n(\sum_{i=1}{n}\frac{1+z_i}{2}=j)=C_n^j(q_n)^j(1-q_n)^{n-j},(0<=j<=n)
+Q^n(\sum_{i=1}{n}\frac{1+z_i}{2}=j)=C_n^j(q_n)^j(1-q_n)^{n-j},(0\leq j\leq n)
 \end{equation}
 \begin{equation}
 P_0(H_n)=e^{-RT}\sum_{i=0}^n C_n^i(q_n)^i(1-q_n)^{n-i}g(i(u_n)^i(d_n)^{n-i})
@@ -678,14 +752,14 @@ P_0(H_n)=e^{-RT}\sum_{i=0}^n C_n^i(q_n)^i(1-q_n)^{n-i}g(i(u_n)^i(d_n)^{n-i})
 P_k(H_n)=e(-R(1-\frac{k}{n})T)\sum_{i=0}^{n-k}C_n^iq_n^i(1-q_n)^{n-k-i}g(S_k^iu_n^id_n^{n-k-i})
 \end{equation}
 
-\subsubsection{Proposition}
-
-\begin{equation}
+\begin{propos}
+	\begin{equation}
 \begin{split}
-P_k(H_n)&=e^{-R\frac{T}{n}}E^{Q_n}[P_{k+1}(H_n)|\mathcal{F}_k],k=0,\ldots,n-1\\
+P_k(H_n)&=e^{-R\frac{T}{n}}E^{Q_n}[P_{k+1}(H_n)|\mathcal{F}_k]\\
 &=e^{-\frac{RT}{n}}[q_nP_{k+1}(H_n)_{u_n}+(1-q_n)P_{k+1}(H_n)_{d_n}]
 \end{split}
 \end{equation}
+o\`u $,k=0,\ldots,n-1$
 \begin{equation}
 \begin{split}
 E^{Q_n}[P_{k+1}(H_n)|\mathcal{F}_k]&=E^{Q_n}[S_{k+1}^0E^{Q_n}[\frac{H_n}{S_n^0}|\mathcal{F}_{k+1}]|\mathcal{F}_k]\\
@@ -693,6 +767,8 @@ E^{Q_n}[P_{k+1}(H_n)|\mathcal{F}_k]&=E^{Q_n}[S_{k+1}^0E^{Q_n}[\frac{H_n}{S_n^0}|
 &=e^{R\frac{T}{n}}P_k[H_n]
 \end{split}
 \end{equation}
+\end{propos}
+
 
 \textbf{Remarque}:
 La valorisation et la couverture dans le cas multi-p\'eriode se r\'eduit \`a une s\'equence de valorisation/couverture dans le cas d'une seule p\'eriode.
@@ -701,8 +777,8 @@ En effet, $P_k(H_n)$ est le juste prix de l'actif conditionnel $P_{k+1}(H_n)$.
 \begin{center}
 \begin{tabular}{ll}
  $\frac{kT}{n}$ & $\frac{(k+1)T}{n}$\\
- Actif risqu\'e: $S_k^1$ & $->u_nS_k^1$\\
- & $->d_nS_k^n$
+ Actif risqu\'e: $S_k^1$ & $\rightarrow u_nS_k^1$\\
+ & $\rightarrow d_nS_k^n$
 \end{tabular}
 \end{center}
 
@@ -710,8 +786,8 @@ Actif conditionnel:
 \begin{center}
 \begin{tabular}{ll}
 $\frac{kT}{n}$ & $\frac{(k-1)T}{n}$ \\ 
-$P_k(H_n)$ & $->P_{k+1}(H_n)$\\
-&$->P_{k+1}(H_n)_{d_n}$
+$P_k(H_n)$ & $\rightarrow P_{k+1}(H_n)_{u_b}$\\
+&$\rightarrow P_{k+1}(H_n)_{d_n}$
 \end{tabular}
 \end{center}
 
@@ -724,37 +800,53 @@ On la tracte $(P_k(H_n),\theta_{k+1}^1)$.
 \subsubsection{Exercise}
 On consid\`re le mod\`ele suivant:
 \begin{equation}
-S_0^0=1->S_1^0=1+R->S_2^0=(1+R)^2
+S_0^0=1\rightarrow S_1^0=1+R\rightarrow S_2^0=(1+R)^2
 \end{equation}
 \begin{equation}
 S_0^1=2
-\begin{split}
-->4\left\{\begin{array}{l}
+\left\{
+\begin{array}{l}
+\rightarrow 4\left\{\begin{array}{l}
 8\\
 2
 \end{array}\right.\\
-->1
+\rightarrow 1
 \left\{\begin{array}{l}
 2\\
 \frac{1}{2}
 \end{array}\right.
-\end{split}
+\end{array}\right.
 \end{equation}
+
 1) Est-ce que le march\'e est viable/complet?
+
 2) Calculer le prix d'un call sur l'actif risqu\'e $S^1$ de maturit\'e $2$ et de strike $1$.
+
+Solution:
 
 1)
 \begin{equation}
-u_1=u_2=2, d_1=d_2=\frac{1}{2}
+u_1=\frac{4}{2}=u_2=\frac{8}{4}=2
 \end{equation}
 \begin{equation}
-d_i=\frac{1}{2}<1+R=1.25<<2=u_i
+	d_1=\frac{1}{2}=d_2=\frac{\frac{1}{2}}{1}=\frac{1}{2}
 \end{equation}
-$=>$ le march\'e est viable
+\begin{equation}
+d_i=\frac{1}{2}<1+R=1.25<2=u_i
+\end{equation}
+Ainsi, le march\'e est viable car la condition $d<1+R<u$ est satisfaite.
+
+\textbf{Note}:
+
+March\'e viable $\rightarrow$ AOA
+
+March\'e complet:
+
+Toute option peut \^etre couverte (r\'epliqu\'ee) parfaitement par un portefeuille auto-financ\'e. 
 
 2)
 \begin{equation}
-P_k(H_n)=\frac{1}{1+R}[q_kP_{k+1}(H_n)+(1-q_n)P_{k}(H_n)]e^{-R}\approx=frac{1}{1+R}
+P_k(H_n)=\frac{1}{1+R}[q_kP_{k+1}(H_n)+(1-q_n)P_{k}(H_n)]e^{-R}\approx=\frac{1}{1+R}
 \end{equation}
 
 $Q_k=\{q_k,1-q_k\}$ est la mesure de proba risque neutre.
@@ -779,20 +871,21 @@ P_1(H_2)=\frac{1}{1.25}[\frac{1}{2}\times 7+\frac{1}{2}\times 1]=\frac{16}{5}
 \end{equation}
 pour $S_1^1=1$:$q_2=\frac{1}{2}$
 \begin{equation}
-P_1(H_2)=\frac{4}{5}\times[\frac{1}{2}\times 1+\frac{1}{2}\times 0]==\frac{2}{5}
+P_1(H_2)=\frac{4}{5}\times[\frac{1}{2}\times 1+\frac{1}{2}\times 0]=\frac{2}{5}
 \end{equation}
 et en $t=0$: $q_1=\frac{1}{2}$
 \begin{equation}
 P_0(H_2)=\frac{4}{5}\times[\frac{1}{2}\times\frac{16}{5}+\frac{1}{2}\times\frac{2}{5}]=\frac{36}{25}
 \end{equation}
 
-\subsubsection{Th\'eor\`em}
-Le juste prix $P_0(H_n)$ $(H_n=(S_n^1-K)_+)$ converge quand $n->\infty$ au prix Black Scholes.
+\begin{thm}
+	Le juste prix $P_0(H_n)$ $(H_n=(S_n^1-K)_+)$ converge quand $n->\infty$ au prix Black Scholes.
+\end{thm}
 \begin{equation}
-P_0(S,T,K)=S\mathcal{N}(d_1(S,K,\sigma^2 T))-Ke^{\Omega T}\mathcal{N}(d_2(S,K,\sigma^2 T))
+P_0(S,T,K)=S\mathcal{N}(d_1(S,K,\sigma^2 T))-Ke^{R T}\mathcal{N}(d_2(S,K,\sigma^2 T))
 \end{equation}
 \begin{equation}
-d_1(S,K,v)-\frac{ln(\frac{S}{Ke^{\Omega t}})}{Nv}++\frac{1}{v}Sv
+d_1(S,K,v)=\frac{ln(\frac{S}{Ke^{R t}})}{Nv}+\frac{1}{v}Sv
 \end{equation}
 \begin{equation}
 d_2(S,K,v)=d_1-\frac{1}{2}Sv
@@ -800,56 +893,60 @@ d_2(S,K,v)=d_1-\frac{1}{2}Sv
 \begin{equation}
 \mathcal{N}(x)=\int_{-\infty}^x\frac{e^{-\frac{y^2}{2}}}{\sqrt{2\pi}}
 \end{equation}
-est la fonction de r\'epartition de la loi normale standarde.
+est la fonction de r\'epartition de la loi normale standard.
 
 \section{Valorisation dans un cadre continue: Le mod\`ele de Black-Scholes}
 \subsection{Introduction}
-Notre objectif est de donner dans un mod\`ele probabiliste continue un prix \`a une option et g\'en\'eralement \`a tout contrat de flox terminale en $T$ de la forme$g(S_T)$ avec $S_t$ est un titre n\'egociable.
+Notre objectif est de donner dans un mod\`ele probabiliste continue un prix \`a une option et g\'en\'eralement \`a tout contrat de flux terminale en $T$ de la forme $g(S_T)$ avec $S_t$ un titre n\'egociable.
 
 Nous traitons dans ce chap\^itre un mod\`ele de base en finance, qui est le mod\`ele de Black Scholes.
 
 \subsection{Mod\`ele de Black Scholes}
-L'al\'ea du march\'e financier est mod\'elis\'e via un espace de probabilit\'e filtr\'e $(\Omega,\mathcal{F}_1(\mathcal{F}_t),\mathbb{P}),0<=t<=T$
+L'al\'ea du march\'e financier est mod\'elis\'e via un espace de probabilit\'e filtr\'e $(\Omega,\mathcal{F}_1(\mathcal{F}_t),\mathbb{P}),0\leq t\leq T$
 
 $\Omega$: L'ensemble des scenarii possibles
-$\mathcal{F}$: est une tribu quir\'epr\'esente l'information globale disponible sur le march\'e.
+$\mathcal{F}$: est une tribu qui r\'epr\'esente l'information globale disponible sur le march\'e.
 
-Les al\'eas sont g\'en\'er\'es par un mouvement brownien standard $(W_t)_{0<=t<=T}$ qui engendre le filtration $\mathbb{F}=(\mathcal{F})_{0<=t<=T}$
+Les al\'eas sont g\'en\'er\'es par un mouvement brownien standard $(W_t)_{0<=t<=T}$ qui engendre le filtration $\mathbb{F}=(\mathcal{F})_{0\leq t\leq T}$
 
 $\mathbb{P}$ est la probabilit\'e historique.
 
-Rappel:
+\textbf{Rappel}:
 
-Un mouvement brownien etandard est un processus stochastique $(W_t)_{t>0}$
+Un mouvement brownien standard est un processus stochastique $(W_t)_{t>0}$
 \begin{equation}
-\left\{\begin{array}{rcl}
-W_0=0 \text{(standard) et} W_t \text{est continu}\\
-\text{accroissements ind\'ependants}:\forall t_1<=\ldots <= t_n, (W_{t_n}-W_{t_{n-1}}),\ldots,(W_{t_2}-W_{t_1}) \text{sont ind\'ependants.}\\
-W_t-W_s est de loi \mathcal{N}(0,t-s),\forall t>s\\
+\left\{\begin{array}{l}
+W_0=0 \text{(standard) et } W_t \text{ est continu}\\
+\text{accroissements ind\'ependants}:\\
+\forall t_1\leq\ldots \leq t_n, (W_{t_n}-W_{t_{n-1}}),\ldots,(W_{t_2}-W_{t_1}) \text{ sont ind\'ependants.}\\
+W_t-W_s \text{ est de loi } \mathcal{N}(0,t-s),\forall t>s\\
 \end{array}\right.
 \end{equation}
 
-\subsubsection{Definition}
-Le mod\`ele de Black \& Scholes est d\'efini sous forme de rendement instantan\'e par
+\begin{defn}
+	Le mod\`ele de Black \& Scholes est d\'efini sous forme de rendement instantan\'e par
 \begin{equation}
 \frac{d S_t}{S_t}=b dt+\sigma d W_t, d S_t=b S_t dt+\sigma S_t d W_t
 \end{equation}
 \begin{equation}
 S_t=S_0+\int_0^t S_u du +\int_0^t \sigma S_u dW_u
 \end{equation}
+\end{defn}
+
 
 \begin{equation}
-\int_0^t X_u dW_u=lim_{\Delta t->0}\sum_{i=1}^{n}X_{t_i}(W_{t+1}-W_t)
+\int_0^t X_u dW_u=\lim_{\Delta t\rightarrow 0}\sum_{i=1}^{n}X_{t_i}(W_{t+1}-W_t)
 \end{equation}
 
-avec $S_0=x$ et $W_t$ est un M>B>S sous $\mathbb{P}$
+avec $S_0=x$ et $W_t$ est un M.B.S(Mouvement Brownien Stocastique) sous $\mathbb{P}$
 Ainsi
 \begin{equation}
 S_t=S_0e^{(b-\frac{1}{2}\sigma^2)t+\sigma W_t}
 \end{equation}
-On suppose que l'on a un actif sans risque $S^0$ sont la valeur $S_t^0=e^{Rt}$
-Remarque:
-D\'efinissons le rendement de l'actif $S$ en $t=1$ et $t_i$
+On suppose que l'on a un actif sans risque $S^0$ dont la valeur $S_t^0=e^{Rt}$
+\begin{remq}
+	D\'efinissons le rendement de l'actif $S$ en $t=1$ et $t_i$
+\end{remq}
 \begin{equation}
 t_i(\Delta t_i=t_i-t_{i-1})
 \end{equation}
@@ -873,22 +970,21 @@ E[R_{t-1}]&=E[e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-
 Var(R_{t_i})&=E[(R_{t_i}-E[R_{t_i}])^2]\\
 &=E[(e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-e^{b\Delta t_i})^2]\\
 &=e^{2b\Delta t_i}E[(e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1)^2]\\
-&=e^{2b\Delta t_i}(e^{-\sigma^2\Delta t_i}E[e^{2\sigma (W_{t_i}-W_{t_{i-1}})}]-2e^{-\frac{1}{2}sigma^2\Delta t_i}E[e^{\sigma (W_{t_i}-W_{t_{i-1}})}]+1)\\
+&=e^{2b\Delta t_i}(e^{-\sigma^2\Delta t_i}E[e^{2\sigma (W_{t_i}-W_{t_{i-1}})}]-2e^{-\frac{1}{2}\sigma^2\Delta t_i}E[e^{\sigma (W_{t_i}-W_{t_{i-1}})}]+1)\\
 &=e^{2b\Delta t_i}(e^{-\sigma^2\Delta t_i e^{\frac{1}{2}(2\sigma)^2\Delta t_i}}-1)\\
 &=e^{2b\Delta t_i}(e^{\sigma^2\Delta t_i}-1)\\
 &\approx\sigma^2\Delta t_i+o(\Delta t_i^2)
 \end{split}
 \end{equation}
-
-$=>$
+Ainsi,
 \begin{equation}
 \sigma\approx\sqrt{\frac{Var(R_{t_i})}{\Delta t_i}}
 \end{equation}
 $\sigma$ est donc l'\'ecart type normalis\'e du rendement, appll\'ee volatilit\'e.
-$b$ est l'esp\'erance du standatd (normalis\'e) sur une courte p\'eriode $\Delta t_i$.
+$b$ est l'esp\'erance du standard (normalis\'e) sur une courte p\'eriode $\Delta t_i$.
 
 \begin{equation}
-dS_t=b_tS_tdt+\sigma S_t dW_t => S_t=S_0 e^{(b-\frac{1}{2}\sigma^2 t)+\sigma W_t}
+dS_t=b_tS_tdt+\sigma S_t dW_t \Rightarrow S_t=S_0 e^{(b-\frac{1}{2}\sigma^2 t)+\sigma W_t}
 \end{equation}
 \begin{equation}
 \begin{split}
@@ -899,8 +995,9 @@ ln(S_t)&=ln(S_0)+\int_0^u (\frac{\partial ln}{\partial S}(S_t) dS_t)+\int_0^u \f
 &=ln(S_0)+(b-\frac{1}{2}\sigma^2)u+\sigma W_u
 \end{split}
 \end{equation}
+Ainsi,
 \begin{equation}
-=>S_u=S_0e^{(b-\frac{1}{2}\sigma^2)u+\sigma W_u}
+S_u=S_0e^{(b-\frac{1}{2}\sigma^2)u+\sigma W_u}
 \end{equation}
 Supposons que le prix d'une option en $t$ est $u(t,S_t)=P_t$
 \begin{equation}
@@ -918,7 +1015,7 @@ Ainsi la volatilit\'e de l'option en $t$ est:
 
 \subsection{Dynamique d'un portefeuille auto-finan\c{c}ant}
 On consid\`ere un portefeuille financier contenant une centaine $S_t$ de l'actif risqu\'e $S$ et le reste dansl'actif sans risque $S^0$.
-On suppose que ce portefeuille est audo-finan\c{c}ant.(Il n'y a pas d'argent ou de retrait d'argent),, Soit $V_t$
+On suppose que ce portefeuille est audo-finan\c{c}ant.(Il n'y a pas d'argent ou de retrait d'argent). Soit $V_t$
  sa valeur en $t$.
  
 Si l'ajustement de fait \`a des dates discr\`ere $t_1,\ldots,t_n$,  alors
@@ -971,7 +1068,7 @@ d<X>_t=d<X,X>_t=b_t^2dt
 \begin{equation}
 \begin{split}
 v(t, S_t)&=v(0,S_0)+\int_0^t\frac{\partial v}{\partial S}(u,S_u)du+\int_0^t\frac{\partial v}{\partial S}(u, S_u)
- dS_u + \frac{1}{2}\int_0^t\frac{\partial^2 v}{\partial S^2}(u,S_u)d<S>_u\\
+ dS_u + \frac{1}{2}\int_0^t\frac{\partial^2 v}{\partial S^2}(u,S_u)dS_u\\
  &=v(0,S_0)+\int_0^t\frac{\partial v}{\partial u}(u,S_u)du+\frac{1}{2}\int_0^t\sigma^2S_u^2\frac{\partial^2 v}{\partial S}(u,S_u)du+\int_0^t\frac{\partial v}{\partial S}(u, S_u)dS_u\\
  &=v(0,S_0)+\int (\frac{\partial v}{\partial u}(u,S_u)+\frac{1}{2}\sigma^2S_u^2\frac{\partial^2 v}{\partial S^2}(u,S_u))du+\int \frac{\partial v}{\partial S}(u, S_u)dS_u
 \end{split}
@@ -1014,9 +1111,9 @@ Dans le mod\`ele de Black Scholes, le prix en $t$ d'une option europ\'eenne de p
 \begin{equation}
 v(T,S) = g(S)
 \end{equation}
-Cette option peut-\^etrte couverte par un portefeuille auto-finan\c{c}ant de valeur initiale $v(0,S_0)=V_0$ et qui contient \`a tout $t$ $\frac{\partial v}{\\partial S}(t,S_t)$ d'unit\'e d'actif risqu\'e.
+Cette option peut-\^etrte couverte par un portefeuille auto-finan\c{c}ant de valeur initiale $v(0,S_0)=V_0$ et qui contient \`a tout $t$ $\frac{\partial v}{\partial S}(t,S_t)$ d'unit\'e d'actif risqu\'e.
 
-\textbf{Remarque}: Pour r\'eplique une option europ\'eenne dans le mod\'ele B\&S, on peut utiliser la proc\'edure suivante:
+\textbf{Remarque}: Pour r\'epliquer une option europ\'eenne dans le mod\'ele B\&S, on peut utiliser la proc\'edure suivante:
 \begin{enumerate}
 \item Calculer la fonction $v(t,S)$ r\'esolvant l'EDP
 
@@ -1025,8 +1122,8 @@ Cette option peut-\^etrte couverte par un portefeuille auto-finan\c{c}ant de val
 
 Pour que cette d\'emarche fonctionne, il faut que l'EDP admet une unique solution. D'o\'u le th\'eor\'eme suivant :
 
-\subsubsection{Theor\`eme 2}
-Soit $g$ une fonction \`a croissance polynomiale.
+\begin{thm}
+	Soit $g$ une fonction \`a croissance polynomiale.
 \begin{equation}
 \exists p, \forall x, |g(x)|<=c(1+|x|^p)
 \end{equation}
@@ -1034,10 +1131,12 @@ Alors l'EDP de B\&S admet une solution dans la classe des fonctions de croissanc
 \begin{equation}
 v(t,S)=E[e^{-r(T-t)}g(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma (W_T -W_t)})]
 \end{equation}
+\end{thm}
+
 
 \subsection{Formule de Black-Scholes}
-\subsubsection{Th\'eor\`eme 3}
-Le prix d'une option europeene payoff
+\begin{thm}
+	Le prix d'une option europeene payoff
 \begin{equation}
 g(S)=(S-K)_+
 \end{equation}
@@ -1062,6 +1161,8 @@ Le ratio de couverture (delta) est donn\'ee par
 \begin{equation}
 \Delta_{BS}(t,S)=\mathcal{N}(d_1)
 \end{equation}
+
+\end{thm}
 \textbf{preuve}:
 
 \begin{equation}
@@ -1133,7 +1234,7 @@ Le ratio de couverture (delta du put) est donn\'e par:
 \frac{\partial P_{BS}}{\partial S}(t,S)=\mathcal{N}(d_1)-1 
 \end{equation}
 
-Relation Call-Put:
+Parit\'e Call-Put:
 \begin{equation}
 \begin{split}
 &Call(t,S,K,T)-Put(t,S,K,T)\\
@@ -1143,7 +1244,7 @@ Relation Call-Put:
 \end{equation}
 
 \begin{equation}
-\\frac{\partial C_{BS}}{\partial S}(r,S)-\frac{\partial P_{BS}}{\partial S}(r,S) = 1-0=1
+\frac{\partial C_{BS}}{\partial S}(r,S)-\frac{\partial P_{BS}}{\partial S}(r,S) = 1-0=1
 \end{equation}
 \begin{equation}
 \frac{\partial P_{BS}}{\partial S} = \frac{\partial C_{BS}}{\partial S}-1=\mathcal{N}(d_1)-1
@@ -1167,7 +1268,7 @@ et
 \begin{equation}
 \frac{\partial P_{BS}}{\partial S}=\mathcal{N}(d_1)-1
 \end{equation}
-$=>$ $C_{BS}$ est croissant et $P_{BS}$ est d\'ecroissant par rapport \`a $S$.
+Ainsi, $C_{BS}$ est croissant et $P_{BS}$ est d\'ecroissant par rapport \`a $S$.
 
 \subsection{Les grecques}
 
@@ -1211,7 +1312,7 @@ Le th\'eta est la sensibilit\'e par rapport au temps.
 \begin{equation}
 \Theta^p=\frac{\partial P_{BS}}{\partial t}=-\frac{Sn(d_1)\sigma}{2\sqrt{T-t}}+rKe^{-r(T-t)}\mathcal{N}(-d_2)
 \end{equation}
-$=>$Le prix du call est d\'ecroissant par rapport au temps
+Ainsi, Le prix du call est d\'ecroissant par rapport au temps
 
 \item Rho
 
@@ -1222,7 +1323,7 @@ Le Rho est la sensibilit\'e par rapport au taux d'int\'er\^et $r$
 \begin{equation}
 \rho_{BS}^p=\frac{\partial P_{BS}}{\partial r}=-K(T-t)e^{-r(T-t)}\mathcal{N}(-d_2)<0
 \end{equation}
-$=>$ call est croissant et le put est d\'ecroissant par rapport au taux d'int\'er\^et
+Ainsi, call est croissant et le put est d\'ecroissant par rapport au taux d'int\'er\^et.
 
 \end{enumerate}
 
