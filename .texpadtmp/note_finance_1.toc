@@ -2,29 +2,29 @@
 \contentsline {subsection}{\numberline {1.1}Introduction}{3}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Hypoth\`ese}{3}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}Propri\'et\'e}{3}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}Options am\'ericaines}{3}{subsection.1.4}
-\contentsline {section}{\numberline {2}Th\'eorie de la valorisation dans le cas discr\`et \`a une p\'eriode}{4}{section.2}
-\contentsline {subsection}{\numberline {2.1}Introduction}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {1.4}Options am\'ericaines}{4}{subsection.1.4}
+\contentsline {section}{\numberline {2}Th\'eorie de la valorisation dans le cas discr\`et \`a une p\'eriode}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}Introduction}{5}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Mod\`ele \`a une p\'eriode}{5}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}R\'esultats de non-arbitrage}{5}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}D\'efinition}{5}{subsubsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3}R\'esultats de non-arbitrage}{6}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}D\'efinition}{6}{subsubsection.2.3.1}
 \contentsline {subsubsection}{\numberline {2.3.2}D\'efinition 2}{6}{subsubsection.2.3.2}
 \contentsline {subsubsection}{\numberline {2.3.3}Th\'eor\`eme}{6}{subsubsection.2.3.3}
-\contentsline {section}{\numberline {3}March\'e complet et valorisation d'actif conditionnel}{8}{section.3}
+\contentsline {section}{\numberline {3}March\'e complet et valorisation d'actif conditionnel}{9}{section.3}
 \contentsline {section}{\numberline {4}Le mod\`ele binominale \`a une p\'eriode}{12}{section.4}
-\contentsline {section}{\numberline {5}Th\'eor\`em de Valorisation dans le cas discr\`ete multi-p\'eriode}{13}{section.5}
-\contentsline {subsection}{\numberline {5.1}Mod\`ele}{13}{subsection.5.1}
+\contentsline {section}{\numberline {5}Th\'eor\`em de Valorisation dans le cas discr\`ete multi-p\'eriode}{14}{section.5}
+\contentsline {subsection}{\numberline {5.1}Mod\`ele}{14}{subsection.5.1}
 \contentsline {subsection}{\numberline {5.2}R\'esultats du march\'e viable et complet}{15}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Mod\`ele binomiale multi-p\'eriode(Mod\`ele de Lex-Ross-Robinstein)}{16}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.3}Mod\`ele binomiale multi-p\'eriode(Mod\`ele de Lex-Ross-Robinstein)}{17}{subsection.5.3}
 \contentsline {subsubsection}{\numberline {5.3.1}Proposition}{17}{subsubsection.5.3.1}
-\contentsline {subsection}{\numberline {5.4}Valorisation dans le mod\`ele de Cor-Ross-Robinstein}{17}{subsection.5.4}
-\contentsline {subsubsection}{\numberline {5.4.1}Exercise}{18}{subsubsection.5.4.1}
-\contentsline {section}{\numberline {6}Valorisation dans un cadre continue: Le mod\`ele de Black-Scholes}{20}{section.6}
-\contentsline {subsection}{\numberline {6.1}Introduction}{20}{subsection.6.1}
+\contentsline {subsection}{\numberline {5.4}Valorisation dans le mod\`ele de Cor-Ross-Robinstein}{18}{subsection.5.4}
+\contentsline {subsubsection}{\numberline {5.4.1}Exercise}{19}{subsubsection.5.4.1}
+\contentsline {section}{\numberline {6}Valorisation dans un cadre continue: Le mod\`ele de Black-Scholes}{21}{section.6}
+\contentsline {subsection}{\numberline {6.1}Introduction}{21}{subsection.6.1}
 \contentsline {subsection}{\numberline {6.2}Mod\`ele de Black Scholes}{21}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}Dynamique d'un portefeuille auto-finan\c {c}ant}{23}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.3}Dynamique d'un portefeuille auto-finan\c {c}ant}{24}{subsection.6.3}
 \contentsline {subsection}{\numberline {6.4}Construction du portefeuille de replication}{24}{subsection.6.4}
-\contentsline {subsubsection}{\numberline {6.4.1}Theor\`eme}{25}{subsubsection.6.4.1}
-\contentsline {subsection}{\numberline {6.5}Formule de Black-Scholes}{26}{subsection.6.5}
+\contentsline {subsubsection}{\numberline {6.4.1}Theor\`eme}{26}{subsubsection.6.4.1}
+\contentsline {subsection}{\numberline {6.5}Formule de Black-Scholes}{27}{subsection.6.5}
 \contentsline {subsubsection}{\numberline {6.5.1}Corrollaire}{28}{subsubsection.6.5.1}
 \contentsline {subsection}{\numberline {6.6}Les grecques}{29}{subsection.6.6}

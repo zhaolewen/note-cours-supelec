@@ -43,6 +43,18 @@ o\`u
 	\item $K$ prix strike
 	\item $B(t,T)=e^{-r(T-t)}$ valeur of a zero-coupon bond that matures to $1$ at  $T$
 \end{itemize}
+{\color{blue} \href{https://en.wikipedia.org/wiki/Put%E2%80%93call_parity}{Put-Call Parity on Wikipedia}}
+
+\textbf{Explication}:
+
+Par principe de AOA, $2$ portefeuilles de la m\^eme payoff au strike ont la m\^eme valeur \`a tout instant.
+
+Donc on constrire 2 portefeuilles:
+\begin{enumerate}
+	\item Acheter une option Call sur l'actif $S$ et vendre une option Put avec strike $K$.
+	\item Acheter un actif $S$ et vendre K bonds $B(t,T)=e^{-r(T-t)}$
+\end{enumerate}
+Ces deux portefeuilles donne la m\^eme valeur au strike. 
 	
 \subsection{Options am\'ericaines}
 Option am\'ericaine similaire aux options europeens mais l'exercise du droit pourra se faire \`a toute date $t$ avant maturit\'e $T$.
