@@ -27,7 +27,24 @@
 
 \section{Cadre de valorisation des produite devive}
 \subsection{Introduction}
+Les produits d\'eriv\'es comme des options expose leur vendeur \`a un grand risque de perte, si ce risque n'est pas couvert, la perte peut \^etre consid\'erable. Ainsi, le vendeur de ces produits doit r\'epondre \`a deux questions majeurs:
+\begin{enumerate}
+	\item Quel prix doit je facturer (probl\`eme de valorisation ou pricing)
+	\item Comment investir cette prime pour couvrir tout au long du temps le risque et pouvoir honorer l'engagement \`a maturit\'e(probl\`eme de couverture ou hedging).
+\end{enumerate}
+
+Les deux probl\`emes sont intim\'ement li\'es.
+ 
 \subsection{Hypoth\`ese}
+\begin{enumerate}
+	\item Absence d'opportunit\'e d'arbitrage
+	
+	C'est une hypoth\`ese fondamentale sur laquelle se basent de nombreux riasonnements. Cette stipule qu'on ne peut pas gagner de l'argent \`a coup s\^ur sans prendre de risque.
+	
+	\item March\'e complet
+	
+	Il s'agit de march\'e o\`u on arrive \`a mettre en place une strat\'egie pour atteindre un flux futur \`a une \'eche\'eance(Dans le cas du call, le flux futur est $(S_T-K)_+$)
+\end{enumerate}
 \subsection{Propri\'et\'e}
 \begin{thm}
 	Parit\'e Call-Put
@@ -903,13 +920,13 @@ d_1(S,K,v)=\frac{ln(\frac{S}{Ke^{R t}})}{Nv}+\frac{1}{v}Sv
 d_2(S,K,v)=d_1-\frac{1}{2}Sv
 \end{equation}
 \begin{equation}
-\mathcal{N}(x)=\int_{-\infty}^x\frac{e^{-\frac{y^2}{2}}}{\sqrt{2\pi}}
+\mathcal{N}(x)=\int_{-\infty}^x\frac{e^{-\frac{y^2}{2}}}{\sqrt{2\pi}}dy
 \end{equation}
 est la fonction de r\'epartition de la loi normale standard.
 
 \section{Valorisation dans un cadre continue: Le mod\`ele de Black-Scholes}
 \subsection{Introduction}
-Notre objectif est de donner dans un mod\`ele probabiliste continue un prix \`a une option et g\'en\'eralement \`a tout contrat de flux terminale en $T$ de la forme $g(S_T)$ avec $S_t$ un titre n\'egociable.
+Notre objectif est de donner dans un mod\`ele probabiliste continu un prix \`a une option et g\'en\'eralement \`a tout contrat de flux terminale en $T$ de la forme $g(S_T)$ avec $S_t$ un titre n\'egociable.
 
 Nous traitons dans ce chap\^itre un mod\`ele de base en finance, qui est le mod\`ele de Black Scholes.
 
@@ -919,7 +936,7 @@ L'al\'ea du march\'e financier est mod\'elis\'e via un espace de probabilit\'e f
 $\Omega$: L'ensemble des scenarii possibles
 $\mathcal{F}$: est une tribu qui r\'epr\'esente l'information globale disponible sur le march\'e.
 
-Les al\'eas sont g\'en\'er\'es par un mouvement brownien standard $(W_t)_{0<=t<=T}$ qui engendre le filtration $\mathbb{F}=(\mathcal{F})_{0\leq t\leq T}$
+Les al\'eas sont g\'en\'er\'es par un mouvement brownien standard $(W_t)_{0\leq t\leq T}$ qui engendre le filtration $\mathbb{F}=(\mathcal{F})_{0\leq t\leq T}$
 
 $\mathbb{P}$ est la probabilit\'e historique.
 
@@ -938,7 +955,10 @@ W_t-W_s \text{ est de loi } \mathcal{N}(0,t-s),\forall t>s\\
 \begin{defn}
 	Le mod\`ele de Black \& Scholes est d\'efini sous forme de rendement instantan\'e par
 \begin{equation}
-\frac{d S_t}{S_t}=b dt+\sigma d W_t, d S_t=b S_t dt+\sigma S_t d W_t
+\frac{d S_t}{S_t}=b dt+\sigma d W_t
+\end{equation}
+\begin{equation}
+	d S_t=b S_t dt+\sigma S_t d W_t
 \end{equation}
 \begin{equation}
 S_t=S_0+\int_0^t S_u du +\int_0^t \sigma S_u dW_u
@@ -968,6 +988,7 @@ R_{t_i}&=\frac{S_{t_i}-S_{t_{i-1}}}{S_{t_{i-1}}}=\frac{S_{t_{i-1}}e^{(b-\frac{1}
 &=e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1
 \end{split}
 \end{equation}
+Esp\'erance du rendement:
 \begin{equation}
 \begin{split}
 E[R_{t-1}]&=E[e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1]\\
@@ -976,14 +997,14 @@ E[R_{t-1}]&=E[e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-
 &=e^{b\Delta t_i}-1\approx b\Delta t_i+o(\Delta t_i^2)
 \end{split}
 \end{equation}
-
+Variance du rendement:
 \begin{equation}
 \begin{split}
 Var(R_{t_i})&=E[(R_{t_i}-E[R_{t_i}])^2]\\
 &=E[(e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-e^{b\Delta t_i})^2]\\
-&=e^{2b\Delta t_i}E[(e^{(b-\frac{1}{2}\sigma^2)\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1)^2]\\
+&=e^{2b\Delta t_i}E[(e^{-\frac{1}{2}\sigma^2\Delta t_i+\sigma(W_{t_i}-W_{t_{i-1}})}-1)^2]\\
 &=e^{2b\Delta t_i}(e^{-\sigma^2\Delta t_i}E[e^{2\sigma (W_{t_i}-W_{t_{i-1}})}]-2e^{-\frac{1}{2}\sigma^2\Delta t_i}E[e^{\sigma (W_{t_i}-W_{t_{i-1}})}]+1)\\
-&=e^{2b\Delta t_i}(e^{-\sigma^2\Delta t_i e^{\frac{1}{2}(2\sigma)^2\Delta t_i}}-1)\\
+&=e^{2b\Delta t_i}(e^{-\sigma^2\Delta t_i} e^{\frac{1}{2}(2\sigma)^2\Delta t_i}-2e^{-\frac{1}{2}\sigma^2\Delta t_i}e^{\frac{1}{2}\sigma^2\Delta t_i}+1)\\
 &=e^{2b\Delta t_i}(e^{\sigma^2\Delta t_i}-1)\\
 &\approx\sigma^2\Delta t_i+o(\Delta t_i^2)
 \end{split}
@@ -996,11 +1017,11 @@ $\sigma$ est donc l'\'ecart type normalis\'e du rendement, appll\'ee volatilit\'
 $b$ est l'esp\'erance du standard (normalis\'e) sur une courte p\'eriode $\Delta t_i$.
 
 \begin{equation}
-dS_t=b_tS_tdt+\sigma S_t dW_t \Rightarrow S_t=S_0 e^{(b-\frac{1}{2}\sigma^2 t)+\sigma W_t}
+dS_t=bS_tdt+\sigma S_t dW_t \Rightarrow S_t=S_0 e^{(b-\frac{1}{2}\sigma^2 t)+\sigma W_t}
 \end{equation}
 \begin{equation}
 \begin{split}
-ln(S_t)&=ln(S_0)+\int_0^u (\frac{\partial ln}{\partial S}(S_t) dS_t)+\int_0^u \frac{1}{2}(\frac{\partial^2 ln}{\partial S^2}(S_t)d<S>_t)\\
+ln(S_t)&=ln(S_0)+\int_0^u (\frac{\partial ln}{\partial S}(S_t) dS_t)+\int_0^u \frac{1}{2}(\frac{\partial^2 ln}{\partial S^2}(S_t)dS_t)\\
 &=ln(S_0)+\int_0^u\frac{1}{S_t} dS_t -\int_0^u \frac{1}{S_t^2}(\sigma S_t)^2 dt\\
 &=ln(S_0)-\frac{1}{2}\int_0^u\sigma^2 dt + \int_0^u \frac{1}{S_t} (b_t S_t+dt)+\int_0^u \frac{1}{S_t}\sigma S_t dW_t\\
 &=ln(S_0)-\frac{1}{2}\sigma^2 u+b u+\int_0^u\sigma d W_t\\
@@ -1015,7 +1036,7 @@ Supposons que le prix d'une option en $t$ est $u(t,S_t)=P_t$
 \begin{equation}
 \begin{split}
 dP_t&=du(t,S_t)\\
-&=\frac{\partial u}{\partial t}(t, S_t)dt+\frac{\partial u}{\partial S}(t,S_t)dS_t+\frac{1}{2}\frac{\partial^2 u}{\partial S^2}(t,S_t)d<S>_t\\
+&=\frac{\partial u}{\partial t}(t, S_t)dt+\frac{\partial u}{\partial S}(t,S_t)dS_t+\frac{1}{2}\frac{\partial^2 u}{\partial S^2}(t,S_t)dS_t\\
 &=(\frac{\partial u}{\partial t}(t,S_t)+\frac{1}{2}\sigma^2S_t^2\frac{\partial^2}{\partial S^2}(t, S_t))dt+\frac{\partial u}{\partial S}(t, S_t)(bS_tdt + \sigma S_tdW_t)\\
 &=(\frac{\partial u}{\partial t}+\frac{1}{2}\sigma^2 S_t^2\frac{\partial^2 u}{\partial S^2}+bS_t\frac{\partial u}{\partial S})dt+\sigma S_t\frac{\partial u}{\partial S}dW_t
 \end{split}
@@ -1026,20 +1047,20 @@ Ainsi la volatilit\'e de l'option en $t$ est:
 \end{equation}
 
 \subsection{Dynamique d'un portefeuille auto-finan\c{c}ant}
-On consid\`ere un portefeuille financier contenant une centaine $S_t$ de l'actif risqu\'e $S$ et le reste dansl'actif sans risque $S^0$.
-On suppose que ce portefeuille est audo-finan\c{c}ant.(Il n'y a pas d'argent ou de retrait d'argent). Soit $V_t$
+On consid\`ere un portefeuille financier contenant une centaine $S_t$ de l'actif risqu\'e $S$ et le reste dans l'actif sans risque $S^0$.
+On suppose que ce portefeuille est auto-finan\c{c}ant.(Il n'y a pas de virement d'argent ou de retrait d'argent). Soit $V_t$
  sa valeur en $t$.
  
-Si l'ajustement de fait \`a des dates discr\`ere $t_1,\ldots,t_n$,  alors
+Si l'ajustement est fait \`a des dates discr\`ere $t_1,\ldots,t_n$,  alors
 \begin{equation}
 \begin{split}
 V_{t_{i+1}}-V_{t_i}&=\delta_{t_i}(S_{t_i+1}-S_{t_i})+\frac{V_{t_i}-\delta_{t_i}S_{t_i}}{S^2_{t_i}}(S^0_{t_{i+1}}-S^0_{t_{i}})\\
 &=\delta_{t_i}(S_{t_{i+1}}-S_{t_i})+(V_{t_i}-\delta_{t_i}S_{t_i})(e^{R(t_{i+1}-t_i)}-1)
 \end{split}
 \end{equation}
-
+{\color{red} Pourquoi ?}
 \begin{equation}
-\tilde{V}_{t_{i+1}}-\tilde{V}_{t_i}=\delta_{t_i}(\tilde{S}_{t_{i+1}-\tilde{S}_{t_i}})
+\tilde{V}_{t_{i+1}}-\tilde{V}_{t_i}=\delta_{t_i}(\tilde{S}_{t_{i+1}}-\tilde{S}_{t_i})
 \end{equation}
 En faisant tendre le pas d'ajustement $\Delta t_i=t_{i+1}-t_i$ vers $0$, on obtient
 \begin{equation}
@@ -1058,10 +1079,11 @@ Soit $v(t,S):[0,T]\times]0,\infty[ $ une fonction dans $C^{1,2}$
 Nous cherchons les conditions que doit v\'erifier $v$ pour qu'elle soit le prix de l'option.
 D'abord, nous cherchons un portefeuille auto-finan\c{c}ant $V$ qui r\'eplique $v$, c'est-\`a-dire
 \begin{equation}
-V_t=v(t,S_t)  en tout t
+V_t=v(t,S_t)
 \end{equation}
+en tout t.
 \begin{equation}
-f(t,X_t)=f(0,X_0)+\int_0^tf'(u,X_u)dX_u+\int_0^t f'(u,X_u)dX_u+\int_0^tf''(u,X_u)d<X>_u
+f(t,X_t)=f(0,X_0)+\int_0^tf'(u,X_u)dX_u+\int_0^tf''(u,X_u)dX_u
 \end{equation}
 Rappel
 \begin{equation}
@@ -1114,25 +1136,27 @@ Pour A.O.A. On a
 
 valeur de l'option = valeur du portefeuille de couverture
 
-\subsubsection{Theor\`eme}
-Dans le mod\`ele de Black Scholes, le prix en $t$ d'une option europ\'eenne de payoff $g(S_T)$ en $T$ est $v(t,S_t)$ o\`u la fonction $v$ est la solution de l'EDP
-
-\begin{equation}
+\begin{thm}
+	Dans le mod\`ele de Black Scholes, le prix en $t$ d'une option europ\'eenne de payoff $g(S_T)$ en $T$ est $v(t,S_t)$ o\`u la fonction $v$ est la solution de l'EDP:
+	\begin{equation}
 \frac{\partial v}{\partial t}+\frac{1}{2} \sigma^2 S^2 \frac{\partial^2 v}{\partial S^2}=r(v-S\frac{\partial v}{\partial S})
 \end{equation}
 \begin{equation}
 v(T,S) = g(S)
 \end{equation}
 Cette option peut-\^etrte couverte par un portefeuille auto-finan\c{c}ant de valeur initiale $v(0,S_0)=V_0$ et qui contient \`a tout $t$ $\frac{\partial v}{\partial S}(t,S_t)$ d'unit\'e d'actif risqu\'e.
+\end{thm}
 
-\textbf{Remarque}: Pour r\'epliquer une option europ\'eenne dans le mod\'ele B\&S, on peut utiliser la proc\'edure suivante:
+\begin{remq}
+	Pour r\'epliquer une option europ\'eenne dans le mod\'ele B\&S, on peut utiliser la proc\'edure suivante:
+\end{remq}
 \begin{enumerate}
 \item Calculer la fonction $v(t,S)$ r\'esolvant l'EDP
 
 \item Calculer la d\'eriv\'ee $\frac{\partial v}{\partial S}$ pour obtenir le ratio de couverture.
 \end{enumerate}
 
-Pour que cette d\'emarche fonctionne, il faut que l'EDP admet une unique solution. D'o\'u le th\'eor\'eme suivant :
+Pour que cette d\'emarche fonctionne, il faut que l'EDP admet une solution unique. D'o\'u le th\'eor\`eme suivant :
 
 \begin{thm}
 	Soit $g$ une fonction \`a croissance polynomiale.
@@ -1148,25 +1172,23 @@ v(t,S)=E[e^{-r(T-t)}g(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma (W_T -W_t)})]
 
 \subsection{Formule de Black-Scholes}
 \begin{thm}
-	Le prix d'une option europeene payoff
+	Le prix d'une option europeene (payoff)
 \begin{equation}
 g(S)=(S-K)_+
 \end{equation}
 dans le mod\`ele de B\&S est donn\'ee par
 \begin{equation}
-\begin{split}
-v(t,S)&=C_{BS}(t,S)\\
-&=S\mathcal{N}(d_1)-K e^{-r(T-t)}\mathcal{N}(d_2)
-\end{split}
+v(t,S)=C_{BS}(t,S)=S\mathcal{N}(d_1)-K e^{-r(T-t)}\mathcal{N}(d_2)
+\end{equation}
+o\`u
+\begin{equation}
+\mathcal{N}(x)=\int_{-\infty}^x \frac{e^{-\frac{y^2}{2}}}{\sqrt{2\pi}}dy
 \end{equation}
 \begin{equation}
-\mathcal{N}(x)=\int_{-\infty}^x \frac{e^{-\frac{y^2}{2}}}{V\bar{\epsilon}\pi}dy
+d_1=\frac{\ln(\frac{S}{Ke^{-r(T-t)}})+\frac{1}{2}\sigma^2(T-t)}{\sigma \sqrt{T-t}}
 \end{equation}
 \begin{equation}
-d_1=\frac{ln(\frac{S}{Ke^{-r(T-t)}})+\frac{1}{2}\sigma^2(T-t)}{\sigma \sqrt{T-t}}
-\end{equation}
-\begin{equation}
-d_2=\frac{ln(\frac{S}{Ke^{-r(T-t)}})-\frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}}=d_1-\sigma\sqrt{T-t}
+d_2=\frac{\ln(\frac{S}{Ke^{-r(T-t)}})-\frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}}=d_1-\sigma\sqrt{T-t}
 \end{equation}
 
 Le ratio de couverture (delta) est donn\'ee par
@@ -1180,7 +1202,7 @@ Le ratio de couverture (delta) est donn\'ee par
 \begin{equation}
 \begin{split}
 C_{BS}(t,S)&=E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K)_+]\\
-&=E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K) \mathds{1}_{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K}]\\
+&=E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K) \mathds{1}_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]\\
 &=P_1-P_2
 \end{split}
 \end{equation}
@@ -1189,8 +1211,8 @@ C_{BS}(t,S)&=E[e^{-r(T-t)}(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}-K)_
 \begin{split}
 P_2&=Ke^{-r(T-t)}E[\mathds{1}_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]\\
 &=Ke^{-r(T-t)}P((r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)>ln(\frac{K}{S}))\\
-&=Ke^{-r(T-t)}P(\frac{W_T-W_t}{\sqrt{T-t}})>\frac{ln(\frac{K}{S})-(r-\frac{1}{2}\sigma^2)(T-t)}{\sigma\sqrt{T-t}}\\
-&=Ke^{-r(T-t)}P(\frac{W_T-W_t}{\sqrt{T-t}})>\frac{ln(\frac{Ke^{-r(T-t)}}{S})+\frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}}\\
+&=Ke^{-r(T-t)}P(\frac{W_T-W_t}{\sqrt{T-t}}>\frac{ln(\frac{K}{S})-(r-\frac{1}{2}\sigma^2)(T-t)}{\sigma\sqrt{T-t}})\\
+&=Ke^{-r(T-t)}P(\frac{W_T-W_t}{\sqrt{T-t}}>\frac{ln(\frac{Ke^{-r(T-t)}}{S})+\frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}})\\
 &=Ke^{-r(T-t)}P(\frac{W_T-W_t}{\sqrt{T-t}}<d_2)\\
 &=Ke^{-r(T-t)}\mathcal{N}(d_2)
 \end{split}
@@ -1202,15 +1224,15 @@ P_1&=E[e^{-r(T-t)}Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}\mathds{1}_{\
 &=E[Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\mathds{1}_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}]
 \end{split}
 \end{equation}
-
+Comme
 \begin{equation}
 W_T-W_t\sim\mathcal{N}(0,T-t)
 \end{equation}
-
+on a
 \begin{equation}
 W_T-W_t=\sqrt{T-t}Z
 \end{equation}
-avec $Z\sim \mathcal{N}(0,1)$
+avec $Z\sim \mathcal{N}(0,1)$.
 \begin{equation}
 \begin{split}
 P_1&=\int_{\mathbb{R}}Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\mathds{1}_{\{Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma(W_T-W_t)}>K\}}\times \frac{e^{\frac{-z^2}{2}}}{\sqrt{2\pi}}dz\\
@@ -1218,15 +1240,19 @@ P_1&=\int_{\mathbb{R}}Se^{-\frac{1}{2}\sigma^2(T-t)+\sigma(W_T-W_t)}\mathds{1}_{
 &=\int_{\{\frac{1}{2}\sigma^2(T-t)+\sigma\sqrt{T-t}>ln(\frac{K}{S})\}} S\frac{e^{-\frac{(z-\sigma\sqrt{T-t})^2}{2}}}{\sqrt{2\pi}}dz
 \end{split}
 \end{equation}
-
+En appliquant
+\begin{equation}
+	y=-\sigma\sqrt{T-t}
+\end{equation}
+on a
 \begin{equation}
 \begin{split}
-y&=-\sigma\sqrt{T-t}\\
-&=S\int_{\{\sigma\sqrt{T-t}(y+\sigma\sqrt{T-t})+(r-\frac{1}{2}\sigma^2)(T-t)>ln(\frac{K}{S})\}}\frac{e^{-y^2}}{\sqrt{2\pi}}dy\\
-&=S\int_{\{y>\frac{ln(\frac{Ke^{-r(T-t)}}{S})-\frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}}\}}\\
+P_1&=S\int_{\{\sigma\sqrt{T-t}(y+\sigma\sqrt{T-t})+(r-\frac{1}{2}\sigma^2)(T-t)>ln(\frac{K}{S})\}}\frac{e^{-y^2}}{\sqrt{2\pi}}dy\\
+&=S\int_{\{y>\frac{ln(\frac{Ke^{-r(T-t)}}{S})-\frac{1}{2}\sigma^2(T-t)}{\sigma\sqrt{T-t}}\}}\frac{e^{-y^2}}{\sqrt{2\pi}}dy\\
 &=S\mathcal{N}(d_1)
 \end{split}
 \end{equation}
+{\color{red} Comment?}
 
 \begin{equation}
 \begin{split}
@@ -1272,14 +1298,15 @@ Donc
 \begin{equation}
 P_{BS}(t,S)=Ke^{-r(T-t)}\mathcal{N}(-d_2)-S\mathcal{N}(-d_1)
 \end{equation}
-\textbf{Remarque}:
-\begin{equation}
-\frac{\partial C_{BS}}{\partial S}=\mathcal{N}(d_1)
+\begin{remq}
+	\begin{equation}
+\frac{\partial C_{BS}}{\partial S}=\mathcal{N}(d_1)>0
 \end{equation}
 et
 \begin{equation}
-\frac{\partial P_{BS}}{\partial S}=\mathcal{N}(d_1)-1
+\frac{\partial P_{BS}}{\partial S}=\mathcal{N}(d_1)-1<0
 \end{equation}
+\end{remq}
 Ainsi, $C_{BS}$ est croissant et $P_{BS}$ est d\'ecroissant par rapport \`a $S$.
 
 \subsection{Les grecques}
@@ -1288,7 +1315,7 @@ Pour comprendre le comportement des options en fonction des diff\'erents propri\
 \begin{enumerate}
 \item Delta
 
-Le delta est la sensibilit\'e du prix par rapport \`a la valeur actuelle de l'actif sous-jacent.
+Le delta est la sensibilit\'e du prix par rapport \`a la valeur actuelle de l'actif sous-jacent(underlying asset).
 \begin{equation}
 \Delta^c = \frac{\partial C_{BS}}{\partial S}=\mathcal{N}(d_1)
 \end{equation}
@@ -1297,15 +1324,16 @@ Le delta est la sensibilit\'e du prix par rapport \`a la valeur actuelle de l'ac
 \end{equation}
 
 \item Gamma
+
 Le gamma est d\'efini comme la d\'eriv\'ee du prix au b, en la d\'eriv\'ee du delta.
 \begin{equation}
-\Gamma^c=\Gamma_p=\frac{\partial^2 C_{B,S}}{\partial S^2}=\frac{\partial^2 P_{BS}}{\partial S^2}=\frac{n(d_1)}{S\sigma\sqrt{T-t}}
+\Gamma^c=\Gamma^p=\frac{\partial^2 C_{B,S}}{\partial S^2}=\frac{\partial^2 P_{BS}}{\partial S^2}=\frac{n(d_1)}{S\sigma\sqrt{T-t}}
 \end{equation}
 \begin{equation}
 n(x)=\frac{e^{-\frac{x^2}{2}}}{\sqrt{2\pi}}
 \end{equation}
 
-Puisque $\Gamma$ est positif, le prix du call et du put est convexe en $S$.. Le Gamma est grand quand l'option est \`a la monnaie au proche de l'\'ech\'eance
+Puisque $\Gamma$ est positif, le prix du call et du put est convexe en $S$. Le Gamma est grand quand l'option est \`a la monnaie au proche de l'\'ech\'eance
 
 \item le Vega
 
