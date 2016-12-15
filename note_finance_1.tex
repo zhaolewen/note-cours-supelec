@@ -665,7 +665,7 @@ qui donne le prix \`a definir pour l'acheter si le vendeur veut eliminer tout ri
 \subsection{Mod\`ele}
 On consid\`ere qu'il y a $n$ p\'eriodes et $n+1$ dates ${t_0=0,t_1,\ldots,t_n=T}$. L'al\'ea est repr\'esent\'e par un espace de probabilit\'e $(\Omega,\mathcal{F},P)$. Pour sp\'ecifier l'information disponible en $t$, on introduit la filtration $\mathbb{F}=\{\mathcal{F}_0,\ldots,\mathcal{F}_n\}$. 
 
-On suppose $\mathcal{F}_0=\{\emptyset,\Omega\},\mathcal{F}_n=\mathcal{F}=P(\Omega)$. Les actifs risqu\'es sont mod\'elis\'es par $d$ processus stocastiques $(S^i_j)_{j=0,\ldots,n}^{i=1,\ldots,d}$ comme $\mathbb{F}$-adapt\'e. L'actif sans risque est d\'efini $(S_j^0)_{j=0,\ldots,n}$
+On suppose $\mathcal{F}_0=\{\emptyset,\Omega\},\mathcal{F}_n=\mathcal{F}=P(\Omega)$. Les actifs risqu\'es sont mod\'elis\'es par $d$ processus stochastiques $(S^i_j)_{j=0,\ldots,n}^{i=1,\ldots,d}$ comme $\mathbb{F}$-adapt\'e. L'actif sans risque est d\'efini $(S_j^0)_{j=0,\ldots,n}$
 \begin{equation}
 S_0^0=1,S_j^0=(1+R_j)S_{j-1}^0
 \end{equation} 
@@ -694,7 +694,7 @@ o\`u le changement de la strat\'egie d'investissement ne change pas la valeur to
 \end{defn}
 
 \begin{defn}
-	Le processus de gain d'une strat\'egie est un processus stocastique qui d\'ecrit le changement de valeur du portefeuille associ\'e suite aux variation des prix d'actif.
+	Le processus de gain d'une strat\'egie est un processus stochastique qui d\'ecrit le changement de valeur du portefeuille associ\'e suite aux variation des prix d'actif.
 
 \end{defn}
 
@@ -1055,7 +1055,7 @@ S_t=S_0+\int_0^t S_u du +\int_0^t \sigma S_u dW_u
 \int_0^t X_u dW_u=\lim_{\Delta t\rightarrow 0}\sum_{i=1}^{n}X_{t_i}(W_{t+1}-W_t)
 \end{equation}
 
-avec $S_0=x$ et $W_t$ est un M.B.S(Mouvement Brownien Stocastique) sous $\mathbb{P}$
+avec $S_0=x$ et $W_t$ est un M.B.S(Mouvement Brownien Stochastique) sous $\mathbb{P}$
 Ainsi
 \begin{equation}
 S_t=S_0e^{(b-\frac{1}{2}\sigma^2)t+\sigma W_t}
@@ -1451,5 +1451,228 @@ Le Rho est la sensibilit\'e par rapport au taux d'int\'er\^et $r$
 Ainsi, call est croissant et le put est d\'ecroissant par rapport au taux d'int\'er\^et.
 
 \end{enumerate}
+
+\subsection{Erreur de couverture}
+
+Dans le mod\`ele de B\&S, pour que l'option soit compl\`etement r\'epliqu\'ee, le portefeuille de couverture soit \^etre r\'eajust\'e en continue. En pratique, il est r\'eajust\'e \`a des dates discr\`etes, ce qui entra\^ine une erreur de couverture(erreur de discretisation).
+
+Pour quantifier cette erreur, on \'ecrit la diff\'erence entre la valeur actualis\'ee d'une option et le portefeuille de couverture $V$ correspondant(r\'eajust\'e de mani\`ere discr\`ete \`a des dates $0=t_0<t_1<t_2<\ldots<t_n=T$)
+
+\begin{equation}
+\tilde{v}(t,\tilde{S})=e^{-RT}v(t,e^{RT}\tilde{S})
+\end{equation}
+\begin{equation}
+\begin{split}
+\tilde{v}(T,\tilde{S}_T)&=\tilde{v}(0,\tilde{S}_0)++\sum_{i=1}^n(\tilde{v}(t_i,\tilde{S}_{t_i})-\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}}))\\
+&=\tilde{v}(0,\tilde{S}_0)+\sum_{i=1}^n \frac{\partial}{\partial t}[\tilde{v}(t_i, \tilde{S}_{t_i})]\Delta t_i,\frac{\partial}{\partial S}\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}})\Delta \tilde{S}_{t_i}+
+\frac{1}{2}\frac{\partial^2}{\partial\tilde{S}^2}\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}}(\Delta\tilde{S}_{t_i})^2)
+\end{equation}
+Cherchons l'EDP v\'erifi\'ee par $\tilde{v}$:
+\begin{equation}
+\begin{split}
+\frac{\partial\tilde{v}}{\partial t}&=-Re^{-RT}v(t,e^{RT}\tilde{S})+E^{-RT}\frac{\partial}{\partial t}v(t,e^{e^{RT}\tilde{S}})\\
+&=-re^{-RT}v(t,e^{RT}\tilde{S})+e^{-RT}[\frac{\partial v(t,e^{RT}\tilde{S})}{\partial t}+Re^{RT}\tilde{S}\frac{\partial v(t,e^{RT}\tilde{S})}{\partial \tilde{S}}]
+\end{split}
+\end{equation}
+On a
+\begin{equation}
+\frac{\partial v}{\partial t}=r(v-S\frac{\partial v}{\partial S})=\frac{1}{2}\sigma^2 S^2\frac{\partial^2v}{\partial S^2}
+\end{equation}
+Donc
+\begin{equation}
+\begin{split}
+\frac{\partial\tilde{v}}{\partial t}=-Re^{RT}v(t,e^{RT}\tilde{S})+e^{-RT}[R(v(t,e^{RT}\tilde{S}-e^{RT}\tilde{S}\frac{\partial}{\partial S}v(t,e^{RT}\tilde{S})-\frac{1}{2}\sigma^2e^{2RT}(\tilde{S})^2\frac{\partial^2 v}{\partial \tilde{S}^2+Re^{-RT}\tilde{S}\frac{\partial v(t,e^{RT}\tilde{S})}{\partial S}))]\\
+&=-\frac{1}{2}\sigma^2(\tilde{S})^2\frac{\partial^2\tilde{v}}{\partial\tilde{S}^2}
+\end{split}
+\end{equation}
+Ainsi
+\begin{equation}
+\frac{\partial\tilde{v}}{\partial t}+\frac{1}{2}\sigma^2\tilde{S}^2\frac{\partial^2\tilde{v}}{\partial\tilde{S}^2}=0
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\tilde{v}(T,\tilde{S}_T)\approx v(0,S_0)+\sum_{i=1}^n\{-\frac{1}{2}\sigma^2\tilde{S}_{t_i}^2\frac{\partial \tilde{v}}{\partial \tilde{S}}\Delta t_{i-1}+\frac{\partial\tilde{v}}{\partial\tilde{S}}\sigma\tilde{S}_{t_{i-1}}\Delta W_{t_i}+\frac{1}{2}\frac{\partial^2\tilde{v}}{\partial S^2}\sigma^2\tilde{S}_{t_{i-1}}(\Delta W_{t_i})^2\}\\
+&=v(0,\tilde{S}_0)+\sum_{i=1}^n\sigma\tilde{S}_{t_{i-1}}\frac{\partial\tilde{v}}{\partial\tilde{S}}\Delta W_{t_i}+\sum_{i=1}^n\frac{1}{2}\sigma^2\tilde{S}_{t_{i-1}}\{(\Delta W_{t_i})^2-\Delta t_i\}
+\end{split}
+\end{equation}
+\begin{equation}
+\tilde{V}_t=\tilde{v}(0,\tilde{S}_0)+\sum_{i=1}^n(\tilde{V}_{t_i}-\tilde{V}_{t_{i-1}})
+\end{equation}
+On a 
+\begin{equation}
+d\tilde{V}_t=\frac{\partial v}{\partial S}d\tilde{S}_t
+\end{equation}
+\begin{equation}
+\tilde{V}_T\approx \tilde{v}(0,\tilde{S}_0)+\sum_{i=1}^n\frac{\partial v}{\partial S}(t_{i-1},S_{t_{i-1}})\Delta\tilde{S}_{t_i}
+\end{equation}
+\begin{equation}
+\frac{\partial}{\partial S}\tilde{v}(t,\tilde{S}_t)=\frac{\partial v}{\partial S}(t,S_t)
+\end{equation}
+\begin{equation}
+\frac{\partial}{\partial S}[e^{-RT}v(t,R^{Rt}\tilde{S}_t)]=\frac{\partial}{\partial S}v(t,S_t)
+\end{equation}
+\begin{equation}
+\tilde{V}_T-\tilde{v}(T,S_T)=-\frac{1}{2}\sum_{i=1}^n\sigma^2\tilde{S}_{t_{i-1}}^n\{\Delta W_{t_i}^2-\Delta t_i\}
+\end{equation}
+Aisni,
+\begin{equation}
+V_T-v(T,S_T)&=e^{RT}(\tilde{V}_T-\tilde{v}(T,\tilde{S}_T))\\
+&=-\frac{e^{RT}}{2}\sum_{i=1}^n\sigma^2 \tilde{S}_{t_{i-1}}\{\Delta W_{t_i}^2-\Delta t_i\}
+\end{equation}
+\begin{equation}
+E[(\Delta W_{t_i})^2-\Delta t_i]=0
+\end{equation}
+\begin{equation}
+Var[(\Delta W_{t_i})^2-\Delta t_i]=2(\Delta t_i)^2
+\end{equation}
+\begin{equation}
+V_T-v(T,S_T)=-\frac{e^{RT}\Delta t_i}{\sqrt{2}}\sigma^2\sum_{i=1}^n (e^{-Rt_{i-1}}S_{t_{i-1}})^2\frac{\partial^2 v}{\partial S^2}(\frac{\Delta W_{t_i}^2-\Delta t_i}{\sqrt{2}\Delta t_i})
+\end{equation}
+\begin{equation}
+\begin{split}
+Var[(\Delta W_{t_i})^2-\Delta t_i]&=Var[(\Delta W_{t_i})^2]\\
+&=E[(\Delta W_{t_i})^4]-E[(\Delta W_{t_i})^2]^2\\
+&=3(\Delta t_i)^2-(\Delta t_i)^2\\
+&=2(\Delta t_i)^2
+\end{split}
+\end{equation}
+
+\subsection{Robustesse de la formule de Black Scholes}
+La formule de Black Scholes est souvent utilis\'ee dans le march\'e m\^eme pour les actifs dont les volatilit\'e n'est pas constante. Cette pratique est justif\'ee par la pratique appel\'ee robustesse de la formule de Black-Scholes.
+
+On suppose 
+\begin{equation}
+dS_t=S_t (bdt+\sigma_t dW_t)
+\end{equation}
+sous $\mathbb{P}$, $(\sigma_t)_t$ est un processus stochastique. On va supposer que le vendeur couvre l'ioption en se servant de la formule de B\&S, c'est-\`a-dire, mettre en place un portefeuille de couverture qui coute
+\begin{equation}
+\Delta=\frac{\partial C_{BS}(t,S_t)}{\partial S}
+\end{equation}
+de l'actif risqu\'e. La formule de $C_{BS}$ est calcul\'e avec une valeur constante $\Sigma$.
+
+\begin{equation}
+d\tilde{V}_T=\Delta_td\tilde{S}_t
+\end{equation}
+\begin{equation}
+\tilde{V}_T=\tilde{V}_0-\int_0^T\Delta_td\tilde{S}_t
+\end{equation}
+\begin{equation}
+(S_T-K)_+=C_{BS}(T,S_T)
+\end{equation}
+\begin{equation}
+e^{-RT}(S_T-K)_+=\tilde{C}_{BS}(T,\tilde{S}_T)(\tilde{C}_{BS}(t,S)-e^^{-RT}C_{BS}(t,e^{RT}S))
+\end{equation}
+\begin{equation}
+\tilde{C}_{BS}(T,\tilde{S}_T)=\tilde{C}_{BS}(0,\tilde{S}_0)+\int_0^T\frac{\partial \tilde{C}_{BS}(t,S_t)}{\partial t}dt+\int_0^T\frac{\partial\tilde{C}_{BS}}{\partial S}(t,\tilde{S}_t)d\tilde{S}_t+\frac{1}{2}\int_0^T\frac{\partial^2 \tilde{C}_{BS}}{\partial S^2}(t,\tilde{S}_t)\sigma_t^2S_t^2dt
+\end{equation}
+\begin{equation}
+\tilde{V}_T-\tilde{H}_T=-\int_0^T\frac{\partial \tilde{C}_{BS}}{\partial t}(t,\tilde{S}_t)dt-\frac{1}{2}\int_0^T\sigma_t^2\tilde{S}_t^2\frac{\partial^2\tilde{C}_{BS}}{\partial S^2}(t,\tilde{S})dt
+\end{equation}
+\begin{equation}
+\frac{\partial\tilde{C}_{BS}}{\partial t}+\frac{1}{2}\Sigma_t^2\tilde{S}_t^2\frac{\partial^2\tilde{C}_{BS}}{\partial S}=0
+\end{equation}
+Ainsi,
+\begin{equation}
+\tilde{V}_T-\tilde{H}_T=\int_0^T\frac{1}{2}(\Sigma^2-\sigma_t^2)\tilde{S}_t^2\frac{\partial^2\tilde{C}_{BS}}{\partial S^2}(t,\tilde{S}_t)dt
+\end{equation}
+Donc,
+\begin{equation}
+V_T-H_T=e^{RT}\int_0^T\frac{1}{2}(\Sigma^2-\sigma_t^2)e^{-2RT}S_t^2\frac{\partial^2\tilde{C}_{BS}}{\partial S^2}(t,\tilde{S}_t)dt
+\end{equation}
+\begin{equation}
+\frac{\partial^2\tilde{C}_{BS}(t,\tilde{S}_t)}{\partial S^2}=e^{RT}\frac{\partial^2C_{BS}(t,S_t)}{\partial S^2}
+\end{equation}
+Ainsi,
+\begin{equation}
+V_T-H_T=\int_0^T\frac{1}{2}e^{R(T-t)}S_t^2\frac{\partial^2C_{BS}(t,S_t)}{\partial S^2}(\Sigma^2-\sigma^2_t)dt
+\end{equation}
+Si $\Sigma\geq\sigma_t$, alors $V_T\geq H_T$
+
+\subsection{R\'einterpr\'etation avec le point de vue probabilit\'e risque neutre}
+
+\begin{equation}
+dS_t=S_t(bdt+\sigma dW_t)
+\end{equation}
+sous $\mathbb{R}$
+\begin{equation}
+\begin{split}
+d((e^{-RT}S_T)&=-Re^{-RT}S_tdt+e^{-RT}dS_t\\
+&=-Re^{-RT}S_tdt+e^{-RT}S_t(bdt+\sigma dW_t)\\
+&=e^{-RT}S_t(b-R)dt+\sigma e^{-RT}S_t+d W_t
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+d(\tilde{S}_t)&=\tilde{S}_t(\sigma dW_t+(b-R)dt)\\
+&=\tilde{S}_t\sigma (dW_t+\frac{b-R}{\sigma}dt)
+\end{split}
+\end{equation}
+\begin{equation}
+\tilde{S}_T=\tilde{S}_t+\int_t^T\sigma\tilde{S}_u(dW_u+\frac{b-R}{\sigma}du)
+\end{equation}
+\begin{equation}
+E^Q[e^{-RT}S_T|S_t]=e^{-RT}S_t
+\end{equation}
+\begin{equation}
+\frac{dQ}{dP}=e^{-\frac{1}{2}(\frac{b-R}{\sigma})^2T-(\frac{b--R}{\sigma})W_T}
+\end{equation}
+implique que 
+\begin{equation}
+\tilde{W}_t=W_t+\frac{b-R}{\sigma}t
+\end{equation}
+ est un mouvement brownien standard sous $Q$.
+ 
+ Sous $Q$,
+\begin{equation}
+\tilde{S}_T=\tilde{S}_t+\int_t^T\sigma\tilde{S}_ud\tilde{W}_u
+\end{equation}
+\begin{equation}
+C_{BS}(0,S_0)=E^Q[e^{-RT}(S_T-K)_+]
+\end{equation}
+\begin{equation}
+d\tilde{S}_t=\tilde{S}_t+dW_t
+\end{equation}
+\begin{equation}
+\begin{split}
+d(S_t)&=d(e^{RT}\tilde{S}_t)\\
+&=Re^{RT}\tilde{S}_tdt+e^{RT}d\tilde{S}_t\\
+&=RS_tdt+e^{RT}\sigma\tilde{S}_td\tilde{W}_u\\
+&=S_t(Rdt+\sigmad\tilde{W}_u)
+\end{split}
+\end{equation}
+Donc,
+\begin{equation}
+S_t=S_0e^{(R-\frac{1}{2}\sigma^2)T+\sigma\tilde{W}_T}
+\end{equation}
+
+\subsection{Volatilit\'e implicite}
+Vega:
+\begin{equation}
+\nu=\frac{\partial C_{BS}}{\partial \sigma}(\sigma)=Sn(d_1)\sqrt{T}>0
+\end{equation}
+\begin{equation}
+C_{BS}(0)=(S-Ke^{-RT})_+
+\end{equation}
+\begin{equation}
+\lim_{\sigma\to\infty}C_{BS}(\sigma)=S
+\end{equation}
+
+Smile de volatilit\'e :)
+
+Avec un prix de l'option sur le march\'e, on r\'esoudre $C_{BS}(\sigma,K)=P$ en changant $K$, et on obtiendra une courbe $\sigma_{implicit}\~K$, ce qui est une courbe de smile.
+
+\section{Examen}
+5 exercises
+
+1. Question de cours
+
+les graphs d\'esinn\'ees
+
+Les autres exercises seront bas\'ees sur les exercises que l'on a faites.
+
+Valorisation dans le cadre discr\`ete
+
+5e exercise concerne le chap\^itre de Black-Scholes
 
 \end{document}
