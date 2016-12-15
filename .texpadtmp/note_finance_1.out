@@ -2,28 +2,34 @@
 \BOOKMARK [2][-]{subsection.1.1}{Introduction}{section.1}% 2
 \BOOKMARK [2][-]{subsection.1.2}{Hypoth\350se}{section.1}% 3
 \BOOKMARK [2][-]{subsection.1.3}{Propri\351t\351}{section.1}% 4
-\BOOKMARK [2][-]{subsection.1.4}{Options am\351ricaines}{section.1}% 5
-\BOOKMARK [1][-]{section.2}{Th\351orie de la valorisation dans le cas discr\350t \340 une p\351riode}{}% 6
-\BOOKMARK [2][-]{subsection.2.1}{Introduction}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.2}{Mod\350le \340 une p\351riode}{section.2}% 8
-\BOOKMARK [2][-]{subsection.2.3}{R\351sultats de non-arbitrage}{section.2}% 9
-\BOOKMARK [3][-]{subsubsection.2.3.1}{D\351finition}{subsection.2.3}% 10
-\BOOKMARK [3][-]{subsubsection.2.3.2}{D\351finition 2}{subsection.2.3}% 11
-\BOOKMARK [3][-]{subsubsection.2.3.3}{Th\351or\350me}{subsection.2.3}% 12
-\BOOKMARK [1][-]{section.3}{March\351 complet et valorisation d'actif conditionnel}{}% 13
-\BOOKMARK [1][-]{section.4}{Le mod\350le binominale \340 une p\351riode}{}% 14
-\BOOKMARK [1][-]{section.5}{Th\351or\350m de Valorisation dans le cas discr\350te multi-p\351riode}{}% 15
-\BOOKMARK [2][-]{subsection.5.1}{Mod\350le}{section.5}% 16
-\BOOKMARK [2][-]{subsection.5.2}{R\351sultats du march\351 viable et complet}{section.5}% 17
-\BOOKMARK [2][-]{subsection.5.3}{Mod\350le binomiale multi-p\351riode\(Mod\350le de Lex-Ross-Robinstein\)}{section.5}% 18
-\BOOKMARK [3][-]{subsubsection.5.3.1}{Proposition}{subsection.5.3}% 19
-\BOOKMARK [2][-]{subsection.5.4}{Valorisation dans le mod\350le de Cor-Ross-Robinstein}{section.5}% 20
-\BOOKMARK [3][-]{subsubsection.5.4.1}{Exercise}{subsection.5.4}% 21
-\BOOKMARK [1][-]{section.6}{Valorisation dans un cadre continue: Le mod\350le de Black-Scholes}{}% 22
-\BOOKMARK [2][-]{subsection.6.1}{Introduction}{section.6}% 23
-\BOOKMARK [2][-]{subsection.6.2}{Mod\350le de Black Scholes}{section.6}% 24
-\BOOKMARK [2][-]{subsection.6.3}{Dynamique d'un portefeuille auto-finan\347ant}{section.6}% 25
-\BOOKMARK [2][-]{subsection.6.4}{Construction du portefeuille de replication}{section.6}% 26
-\BOOKMARK [2][-]{subsection.6.5}{Formule de Black-Scholes}{section.6}% 27
-\BOOKMARK [3][-]{subsubsection.6.5.1}{Corrollaire}{subsection.6.5}% 28
-\BOOKMARK [2][-]{subsection.6.6}{Les grecques}{section.6}% 29
+\BOOKMARK [3][-]{subsubsection.1.3.1}{Propri\351t\351 1}{subsection.1.3}% 5
+\BOOKMARK [3][-]{subsubsection.1.3.2}{Propri\351t\351 2}{subsection.1.3}% 6
+\BOOKMARK [2][-]{subsection.1.4}{Exercise}{section.1}% 7
+\BOOKMARK [2][-]{subsection.1.5}{Propri\351t\351 sur les prix des options}{section.1}% 8
+\BOOKMARK [3][-]{subsubsection.1.5.1}{Notations}{subsection.1.5}% 9
+\BOOKMARK [3][-]{subsubsection.1.5.2}{Relation de parit\351 Call-Put}{subsection.1.5}% 10
+\BOOKMARK [2][-]{subsection.1.6}{Options am\351ricaines}{section.1}% 11
+\BOOKMARK [1][-]{section.2}{Th\351orie de la valorisation dans le cas discr\350t \340 une p\351riode}{}% 12
+\BOOKMARK [2][-]{subsection.2.1}{Introduction}{section.2}% 13
+\BOOKMARK [2][-]{subsection.2.2}{Mod\350le \340 une p\351riode}{section.2}% 14
+\BOOKMARK [2][-]{subsection.2.3}{R\351sultats de non-arbitrage}{section.2}% 15
+\BOOKMARK [3][-]{subsubsection.2.3.1}{D\351finition}{subsection.2.3}% 16
+\BOOKMARK [3][-]{subsubsection.2.3.2}{D\351finition 2}{subsection.2.3}% 17
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Th\351or\350me}{subsection.2.3}% 18
+\BOOKMARK [1][-]{section.3}{March\351 complet et valorisation d'actif conditionnel}{}% 19
+\BOOKMARK [1][-]{section.4}{Le mod\350le binominale \340 une p\351riode}{}% 20
+\BOOKMARK [1][-]{section.5}{Th\351or\350m de Valorisation dans le cas discr\350te multi-p\351riode}{}% 21
+\BOOKMARK [2][-]{subsection.5.1}{Mod\350le}{section.5}% 22
+\BOOKMARK [2][-]{subsection.5.2}{R\351sultats du march\351 viable et complet}{section.5}% 23
+\BOOKMARK [2][-]{subsection.5.3}{Mod\350le binomiale multi-p\351riode\(Mod\350le de Lex-Ross-Robinstein\)}{section.5}% 24
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Proposition}{subsection.5.3}% 25
+\BOOKMARK [2][-]{subsection.5.4}{Valorisation dans le mod\350le de Cor-Ross-Robinstein}{section.5}% 26
+\BOOKMARK [3][-]{subsubsection.5.4.1}{Exercise}{subsection.5.4}% 27
+\BOOKMARK [1][-]{section.6}{Valorisation dans un cadre continue: Le mod\350le de Black-Scholes}{}% 28
+\BOOKMARK [2][-]{subsection.6.1}{Introduction}{section.6}% 29
+\BOOKMARK [2][-]{subsection.6.2}{Mod\350le de Black Scholes}{section.6}% 30
+\BOOKMARK [2][-]{subsection.6.3}{Dynamique d'un portefeuille auto-finan\347ant}{section.6}% 31
+\BOOKMARK [2][-]{subsection.6.4}{Construction du portefeuille de replication}{section.6}% 32
+\BOOKMARK [2][-]{subsection.6.5}{Formule de Black-Scholes}{section.6}% 33
+\BOOKMARK [3][-]{subsubsection.6.5.1}{Corrollaire}{subsection.6.5}% 34
+\BOOKMARK [2][-]{subsection.6.6}{Les grecques}{section.6}% 35
