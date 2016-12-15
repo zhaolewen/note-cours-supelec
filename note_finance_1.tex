@@ -1367,4 +1367,90 @@ Ainsi, call est croissant et le put est d\'ecroissant par rapport au taux d'int\
 
 \end{enumerate}
 
+\subsection{Erreur de couverture}
+
+Dans le mod\`ele de B\&S, pour que l'option soit compl\`etement r\'epliqu\'ee, le portefeuille de couverture soit \^etre r\'eajust\'e en continue. En pratique, il est r\'eajust\'e \`a des dates discr\`etes, ce qui entra\^ine une erreur de couverture(erreur de discretisation).
+
+Pour quantifier cette erreur, on \'ecrit la diff\'erence entre la valeur actualis\'ee d'une option et le portefeuille de couverture $V$ correspondant(r\'eajust\'e de mani\`ere discr\`ete \`a des dates $0=t_0<t_1<t_2<\ldots<t_n=T$)
+
+\begin{equation}
+\tilde{v}(t,\tilde{S})=e^{-RT}v(t,e^{RT}\tilde{S})
+\end{equation}
+\begin{equation}
+\begin{split}
+\tilde{v}(T,\tilde{S}_T)&=\tilde{v}(0,\tilde{S}_0)++\sum_{i=1}^n(\tilde{v}(t_i,\tilde{S}_{t_i})-\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}}))\\
+&=\tilde{v}(0,\tilde{S}_0)+\sum_{i=1}^n \frac{\partial}{\partial t}[\tilde{v}(t_i, \tilde{S}_{t_i})]\Delta t_i,\frac{\partial}{\partial S}\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}})\Delta \tilde{S}_{t_i}+
+\frac{1}{2}\frac{\partial^2}{\partial\tilde{S}^2}\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}}(\Delta\tilde{S}_{t_i})^2)
+\end{equation}
+Cherchons l'EDP v\'erifi\'ee par $\tilde{v}$:
+\begin{equation}
+\begin{split}
+\frac{\partial\tilde{v}}{\partial t}&=-Re^{-RT}v(t,e^{RT}\tilde{S})+E^{-RT}\frac{\partial}{\partial t}v(t,e^{e^{RT}\tilde{S}})\\
+&=-re^{-RT}v(t,e^{RT}\tilde{S})+e^{-RT}[\frac{\partial v(t,e^{RT}\tilde{S})}{\partial t}+Re^{RT}\tilde{S}\frac{\partial v(t,e^{RT}\tilde{S})}{\partial \tilde{S}}]
+\end{split}
+\end{equation}
+On a
+\begin{equation}
+\frac{\partial v}{\partial t}=r(v-S\frac{\partial v}{\partial S})=\frac{1}{2}\sigma^2 S^2\frac{\partial^2v}{\partial S^2}
+\end{equation}
+Donc
+\begin{equation}
+\begin{split}
+\frac{\partial\tilde{v}}{\partial t}=-Re^{RT}v(t,e^{RT}\tilde{S})+e^{-RT}[R(v(t,e^{RT}\tilde{S}-e^{RT}\tilde{S}\frac{\partial}{\partial S}v(t,e^{RT}\tilde{S})-\frac{1}{2}\sigma^2e^{2RT}(\tilde{S})^2\frac{\partial^2 v}{\partial \tilde{S}^2+Re^{-RT}\tilde{S}\frac{\partial v(t,e^{RT}\tilde{S})}{\partial S}))]\\
+&=-\frac{1}{2}\sigma^2(\tilde{S})^2\frac{\partial^2\tilde{v}}{\partial\tilde{S}^2}
+\end{split}
+\end{equation}
+Ainsi
+\begin{equation}
+\frac{\partial\tilde{v}}{\partial t}+\frac{1}{2}\sigma^2\tilde{S}^2\frac{\partial^2\tilde{v}}{\partial\tilde{S}^2}=0
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\tilde{v}(T,\tilde{S}_T)\approx v(0,S_0)+\sum_{i=1}^n\{-\frac{1}{2}\sigma^2\tilde{S}_{t_i}^2\frac{\partial \tilde{v}}{\partial \tilde{S}}\Delta t_{i-1}+\frac{\partial\tilde{v}}{\partial\tilde{S}}\sigma\tilde{S}_{t_{i-1}}\Delta W_{t_i}+\frac{1}{2}\frac{\partial^2\tilde{v}}{\partial S^2}\sigma^2\tilde{S}_{t_{i-1}}(\Delta W_{t_i})^2\}\\
+&=v(0,\tilde{S}_0)+\sum_{i=1}^n\sigma\tilde{S}_{t_{i-1}}\frac{\partial\tilde{v}}{\partial\tilde{S}}\Delta W_{t_i}+\sum_{i=1}^n\frac{1}{2}\sigma^2\tilde{S}_{t_{i-1}}\{(\Delta W_{t_i})^2-\Delta t_i\}
+\end{split}
+\end{equation}
+\begin{equation}
+\tilde{V}_t=\tilde{v}(0,\tilde{S}_0)+\sum_{i=1}^n(\tilde{V}_{t_i}-\tilde{V}_{t_{i-1}})
+\end{equation}
+On a 
+\begin{equation}
+d\tilde{V}_t=\frac{\partial v}{\partial S}d\tilde{S}_t
+\end{equation}
+\begin{equation}
+\tilde{V}_T\approx \tilde{v}(0,\tilde{S}_0)+\sum_{i=1}^n\frac{\partial v}{\partial S}(t_{i-1},S_{t_{i-1}})\Delta\tilde{S}_{t_i}
+\end{equation}
+\begin{equation}
+\frac{\partial}{\partial S}\tilde{v}(t,\tilde{S}_t)=\frac{\partial v}{\partial S}(t,S_t)
+\end{equation}
+\begin{equation}
+\frac{\partial}{\partial S}[e^{-RT}v(t,R^{Rt}\tilde{S}_t)]=\frac{\partial}{\partial S}v(t,S_t)
+\end{equation}
+\begin{equation}
+\tilde{V}_T-\tilde{v}(T,S_T)=-\frac{1}{2}\sum_{i=1}^n\sigma^2\tilde{S}_{t_{i-1}}^n\{\Delta W_{t_i}^2-\Delta t_i\}
+\end{equation}
+Aisni,
+\begin{equation}
+V_T-v(T,S_T)&=e^{RT}(\tilde{V}_T-\tilde{v}(T,\tilde{S}_T))\\
+&=-\frac{e^{RT}}{2}\sum_{i=1}^n\sigma^2 \tilde{S}_{t_{i-1}}\{\Delta W_{t_i}^2-\Delta t_i\}
+\end{equation}
+\begin{equation}
+E[(\Delta W_{t_i})^2-\Delta t_i]=0
+\end{equation}
+\begin{equation}
+Var[(\Delta W_{t_i})^2-\Delta t_i]=2(\Delta t_i)^2
+\end{equation}
+\begin{equation}
+V_T-v(T,S_T)=-\frac{e^{RT}\Delta t_i}{\sqrt{2}}\sigma^2\sum_{i=1}^n (e^{-Rt_{i-1}}S_{t_{i-1}})^2\frac{\partial^2 v}{\partial S^2}(\frac{\Delta W_{t_i}^2-\Delta t_i}{\sqrt{2}\Delta t_i})
+\end{equation}
+\begin{equation}
+\begin{split}
+Var[(\Delta W_{t_i})^2-\Delta t_i]&=Var[(\Delta W_{t_i})^2]\\
+&=E[(\Delta W_{t_i})^4]-E[(\Delta W_{t_i})^2]^2\\
+&=3(\Delta t_i)^2-(\Delta t_i)^2\\
+&=2(\Delta t_i)^2
+\end{split}
+\end{equation}
+
 \end{document}
