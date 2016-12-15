@@ -1466,6 +1466,7 @@ Pour quantifier cette erreur, on \'ecrit la diff\'erence entre la valeur actuali
 \tilde{v}(T,\tilde{S}_T)&=\tilde{v}(0,\tilde{S}_0)++\sum_{i=1}^n(\tilde{v}(t_i,\tilde{S}_{t_i})-\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}}))\\
 &=\tilde{v}(0,\tilde{S}_0)+\sum_{i=1}^n \frac{\partial}{\partial t}[\tilde{v}(t_i, \tilde{S}_{t_i})]\Delta t_i,\frac{\partial}{\partial S}\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}})\Delta \tilde{S}_{t_i}+
 \frac{1}{2}\frac{\partial^2}{\partial\tilde{S}^2}\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}}(\Delta\tilde{S}_{t_i})^2)
+\end{split}
 \end{equation}
 Cherchons l'EDP v\'erifi\'ee par $\tilde{v}$:
 \begin{equation}
@@ -1481,7 +1482,7 @@ On a
 Donc
 \begin{equation}
 \begin{split}
-\frac{\partial\tilde{v}}{\partial t}=-Re^{RT}v(t,e^{RT}\tilde{S})+e^{-RT}[R(v(t,e^{RT}\tilde{S}-e^{RT}\tilde{S}\frac{\partial}{\partial S}v(t,e^{RT}\tilde{S})-\frac{1}{2}\sigma^2e^{2RT}(\tilde{S})^2\frac{\partial^2 v}{\partial \tilde{S}^2+Re^{-RT}\tilde{S}\frac{\partial v(t,e^{RT}\tilde{S})}{\partial S}))]\\
+\frac{\partial\tilde{v}}{\partial t}&=-Re^{RT}v(t,e^{RT}\tilde{S})+e^{-RT}[R(v(t,e^{RT}\tilde{S}-e^{RT}\tilde{S}\frac{\partial}{\partial S}v(t,e^{RT}\tilde{S})-\frac{1}{2}\sigma^2e^{2RT}(\tilde{S})^2\frac{\partial^2 v}{\partial \tilde{S}}^2+Re^{-RT}\tilde{S}\frac{\partial v(t,e^{RT}\tilde{S})}{\partial S}))]\\
 &=-\frac{1}{2}\sigma^2(\tilde{S})^2\frac{\partial^2\tilde{v}}{\partial\tilde{S}^2}
 \end{split}
 \end{equation}
@@ -1517,8 +1518,10 @@ d\tilde{V}_t=\frac{\partial v}{\partial S}d\tilde{S}_t
 \end{equation}
 Aisni,
 \begin{equation}
-V_T-v(T,S_T)&=e^{RT}(\tilde{V}_T-\tilde{v}(T,\tilde{S}_T))\\
+\begin{split}
+	V_T-v(T,S_T)&=e^{RT}(\tilde{V}_T-\tilde{v}(T,\tilde{S}_T))\\
 &=-\frac{e^{RT}}{2}\sum_{i=1}^n\sigma^2 \tilde{S}_{t_{i-1}}\{\Delta W_{t_i}^2-\Delta t_i\}
+\end{split}
 \end{equation}
 \begin{equation}
 E[(\Delta W_{t_i})^2-\Delta t_i]=0
@@ -1561,7 +1564,7 @@ d\tilde{V}_T=\Delta_td\tilde{S}_t
 (S_T-K)_+=C_{BS}(T,S_T)
 \end{equation}
 \begin{equation}
-e^{-RT}(S_T-K)_+=\tilde{C}_{BS}(T,\tilde{S}_T)(\tilde{C}_{BS}(t,S)-e^^{-RT}C_{BS}(t,e^{RT}S))
+e^{-RT}(S_T-K)_+=\tilde{C}_{BS}(T,\tilde{S}_T)(\tilde{C}_{BS}(t,S)-e^{-RT}C_{BS}(t,e^{RT}S))
 \end{equation}
 \begin{equation}
 \tilde{C}_{BS}(T,\tilde{S}_T)=\tilde{C}_{BS}(0,\tilde{S}_0)+\int_0^T\frac{\partial \tilde{C}_{BS}(t,S_t)}{\partial t}dt+\int_0^T\frac{\partial\tilde{C}_{BS}}{\partial S}(t,\tilde{S}_t)d\tilde{S}_t+\frac{1}{2}\int_0^T\frac{\partial^2 \tilde{C}_{BS}}{\partial S^2}(t,\tilde{S}_t)\sigma_t^2S_t^2dt
@@ -1638,7 +1641,7 @@ d\tilde{S}_t=\tilde{S}_t+dW_t
 d(S_t)&=d(e^{RT}\tilde{S}_t)\\
 &=Re^{RT}\tilde{S}_tdt+e^{RT}d\tilde{S}_t\\
 &=RS_tdt+e^{RT}\sigma\tilde{S}_td\tilde{W}_u\\
-&=S_t(Rdt+\sigmad\tilde{W}_u)
+&=S_t(Rdt+\sigma\tilde{W}_u)
 \end{split}
 \end{equation}
 Donc,
@@ -1660,7 +1663,7 @@ C_{BS}(0)=(S-Ke^{-RT})_+
 
 Smile de volatilit\'e :)
 
-Avec un prix de l'option sur le march\'e, on r\'esoudre $C_{BS}(\sigma,K)=P$ en changant $K$, et on obtiendra une courbe $\sigma_{implicit}\~K$, ce qui est une courbe de smile.
+Avec un prix de l'option sur le march\'e, on r\'esoudre $C_{BS}(\sigma,K)=P$ en changant $K$, et on obtiendra une courbe $\sigma_{implicit}\sim K$, ce qui est une courbe de smile.
 
 \section{Examen}
 5 exercises
