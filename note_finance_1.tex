@@ -44,8 +44,84 @@ Les deux probl\`emes sont intim\'ement li\'es.
 	\item March\'e complet
 	
 	Il s'agit de march\'e o\`u on arrive \`a mettre en place une strat\'egie pour atteindre un flux futur \`a une \'eche\'eance(Dans le cas du call, le flux futur est $(S_T-K)_+$)
+	
+	\item March\'e parfait
+	
+	Il n'y a pas de frais de transaction.
+	
+	\item On peut emprunter et pr\^eter \`a un taux sans risque.
+	
+	Un euro pr\^et\'e en $t=0$ rapport $e^{RT}$ en $T$
+	
+	\item Possibilit\'e de vente \`a d\'ecouverte
+	
+	On suppose qu'on peut vendre un actif qu'on ne d\'etient au moment de la vente.
 \end{enumerate}
 \subsection{Propri\'et\'e}
+\subsubsection{Propri\'et\'e 1}
+
+Le rendement d'un produit sans risque est forc\'ement $R$
+
+\textbf{Prueve}:
+
+Supposons le contraire: Notons la valeur de ce produit est $V_0$ en $t=0$, et supposons que le taux de rangement $r'>r$. En $t=0$, on fait la strat\'egie suivante:
+\begin{enumerate}
+	\item On prend $V_0$ au taux sans risque.
+	\item Acheter le produit $V$ au prix $V_0$
+	\item En $T$, on rembouse $V_0e^{RT}$, et on re\c{c}oit $V_0e^{r'T}$
+\end{enumerate}
+Avec un investissement initial nul, je gagne \`a coup s\^ur $V_0(e^{r'T}-e^{rT})$. Donc, il y a opportunit\'e d'arbitrage.
+
+Si $r'<r$, on fait la strat\'egie inverse.
+
+\subsubsection{Propri\'et\'e 2}
+Si deux portefeuille ont la m\^eme valeur \`a une maturit\'e $T$, alors ils sont \'egale \`a tout instant avant maturit\'e.
+
+\textbf{Preuve}:
+
+Notons $V^1$ et $V^2$ deux portefeuilles. Supposons que 
+\begin{equation}
+	\exists t<T, \text{ t.q. } V_t^1<V_t^2
+\end{equation}
+alors on fait la strat\'egie suivante:
+\begin{enumerate}
+	\item En $t$: Acheter $V^1$ au prix $V_t^1$, vendre $V^2$ au prix $V_t^2$
+	\item En $T$: recevoir $V_T^1$, verser $V_T^2$
+	\item En $T$, j'ai un flux global nul mais en $t$ je r\'ecup\`ere un gain de $V_t^2-V_t^1>0$, donc opportunit\'e d'arbitrage.
+\end{enumerate}
+
+\subsection{Exercise}
+
+Calculer le prix du forward de matirut\'e $T$ sur une action $S$
+\begin{equation}
+	V_0\rightarrow V_0e^{RT}
+\end{equation}
+
+\textbf{Solution}
+
+Si $F>S_0e^{RT}$
+\begin{enumerate}
+	\item At $t=0$
+	\begin{itemize}
+		\item Vendre Forward
+		\item Emprunter $S_0$ \`a taux $R$
+		\item On ach\`ete l'action \`a $S_0$
+	\end{itemize}
+	\item At $t=T$
+	\begin{itemize}
+		\item Vendre action \`a prix $F$
+		\item Rembourser l'emprunt \`a $S_0e^{RT}$
+		\item Gagner $F-S_0e^{RT}$
+	\end{itemize}
+\end{enumerate}
+
+\subsection{Propri\'et\'e sur les prix des options}
+
+\subsubsection{Notations}
+On note $Call_t(T,K)$ le prix du call \`a l'instant $t$, de strike $K$, et de maturit\'e $T$.
+
+\subsubsection{Relation de parit\'e Call-Put}
+
 \begin{thm}
 	Parit\'e Call-Put
 	\begin{equation}
@@ -120,18 +196,20 @@ Donc, on a
 Put_t(T, K)< K-S_t
 \end{equation} 
 
+{\color{red} Pas compris...}
+
 \section{Th\'eorie de la valorisation dans le cas discr\`et \`a une p\'eriode}
 
 \subsection{Introduction}
-Nous avons vu que les contrats \`a termes peuvent \^{e}tre valoris\'es par le principe de non arbitrage alors que ce principe ne donne que des bornes sur le prix des options. La valorisation de ces produits assez complexes n\'ecessite l'introduction des mod\`eles probabilistes pour d\'ecrire les sc\'enarios possibles du march\'e.
+Nous avons vu que les contrats \`a termes peuvent \^{e}tre valoris\'es par le principe de non-arbitrage alors que ce principe ne donne que des bornes sur le prix des options. La valorisation de ces produits assez complexes n\'ecessite l'introduction des mod\`eles probabilistes pour d\'ecrire les sc\'enarios possibles du march\'e.
 
-Dans ce march\'e, si l'on trouve une strat\'egie qui r\'eplique le payoff de l'option, alors la portefeuille construite par cette strat\'egie r\'eplique l'option.
+Dans ce march\'e, si l'on trouve une strat\'egie qui r\'eplique le payoff de l'option, alors le portefeuille construit par cette strat\'egie r\'eplique l'option.
 
 Par l'absence d'opportunite d'arbitrage, la valeur de ce portefeuille est la m\^{e}me que celle de l'option. Cependant, ce prix est d\'ependant du mod\`ele qui doit \^etre proche de la r\'ealit\'e.
 
 \subsection{Mod\`ele \`a une p\'eriode}
 
-On consir\`ere qu'il y a $d+1$ actifs financiers et $2$ dates,: $t=0, t=1$. L'al\'ea du mod\`ele est represent\'e par $K$ \'etats dans $\Omega=\{\omega_1,\ldots,\omega_K\}$.
+On consir\`ere qu'il y a $d+1$ actifs financiers et $2$ dates: $t=0, t=1$. L'al\'ea du mod\`ele est represent\'e par $K$ \'etats dans $\Omega=\{\omega_1,\ldots,\omega_K\}$.
 
 En $t=1$, avec des probabilit\'es $ \{p_1,\ldots,p_K\},(p_i>0) $.
 
@@ -371,6 +449,9 @@ Soit
 \begin{equation}
 	Q_i|Q_2=\frac{Q(w_k)+\epsilon z_k}{1+\epsilon \sum z_k}
 \end{equation}. 
+
+{\color{red} Pas compris}
+
 Il suffit de prendre $\epsilon$ suffisamment petit, $0<Q_2(w_k)<1$.
 \begin{equation}
 	\begin{split}
@@ -617,9 +698,13 @@ o\`u le changement de la strat\'egie d'investissement ne change pas la valeur to
 
 \end{defn}
 
-On va le noter $G$
+On va le noter $G$, avec
 \begin{equation}
-G_0=0,G_t=\sum_{j=1}^t\sum_{i=0}^d \theta_j^i\Delta S_j^i,\Delta S_j^i=S_j^i-S_{j-1}^i
+	G_0=0
+\end{equation}
+et
+\begin{equation}
+	G_t=\sum_{j=1}^t\sum_{i=0}^d \theta_j^i\Delta S_j^i,\Delta S_j^i=S_j^i-S_{j-1}^i
 \end{equation}
 pour une strat\'egie auto-financ\'ee,
 \begin{equation}
@@ -1381,6 +1466,7 @@ Pour quantifier cette erreur, on \'ecrit la diff\'erence entre la valeur actuali
 \tilde{v}(T,\tilde{S}_T)&=\tilde{v}(0,\tilde{S}_0)++\sum_{i=1}^n(\tilde{v}(t_i,\tilde{S}_{t_i})-\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}}))\\
 &=\tilde{v}(0,\tilde{S}_0)+\sum_{i=1}^n \frac{\partial}{\partial t}[\tilde{v}(t_i, \tilde{S}_{t_i})]\Delta t_i,\frac{\partial}{\partial S}\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}})\Delta \tilde{S}_{t_i}+
 \frac{1}{2}\frac{\partial^2}{\partial\tilde{S}^2}\tilde{v}(t_{i-1},\tilde{S}_{t_{i-1}}(\Delta\tilde{S}_{t_i})^2)
+\end{split}
 \end{equation}
 Cherchons l'EDP v\'erifi\'ee par $\tilde{v}$:
 \begin{equation}
@@ -1396,7 +1482,7 @@ On a
 Donc
 \begin{equation}
 \begin{split}
-\frac{\partial\tilde{v}}{\partial t}=-Re^{RT}v(t,e^{RT}\tilde{S})+e^{-RT}[R(v(t,e^{RT}\tilde{S}-e^{RT}\tilde{S}\frac{\partial}{\partial S}v(t,e^{RT}\tilde{S})-\frac{1}{2}\sigma^2e^{2RT}(\tilde{S})^2\frac{\partial^2 v}{\partial \tilde{S}^2+Re^{-RT}\tilde{S}\frac{\partial v(t,e^{RT}\tilde{S})}{\partial S}))]\\
+\frac{\partial\tilde{v}}{\partial t}&=-Re^{RT}v(t,e^{RT}\tilde{S})+e^{-RT}[R(v(t,e^{RT}\tilde{S}-e^{RT}\tilde{S}\frac{\partial}{\partial S}v(t,e^{RT}\tilde{S})-\frac{1}{2}\sigma^2e^{2RT}(\tilde{S})^2\frac{\partial^2 v}{\partial \tilde{S}}^2+Re^{-RT}\tilde{S}\frac{\partial v(t,e^{RT}\tilde{S})}{\partial S}))]\\
 &=-\frac{1}{2}\sigma^2(\tilde{S})^2\frac{\partial^2\tilde{v}}{\partial\tilde{S}^2}
 \end{split}
 \end{equation}
@@ -1432,8 +1518,10 @@ d\tilde{V}_t=\frac{\partial v}{\partial S}d\tilde{S}_t
 \end{equation}
 Aisni,
 \begin{equation}
-V_T-v(T,S_T)&=e^{RT}(\tilde{V}_T-\tilde{v}(T,\tilde{S}_T))\\
+\begin{split}
+	V_T-v(T,S_T)&=e^{RT}(\tilde{V}_T-\tilde{v}(T,\tilde{S}_T))\\
 &=-\frac{e^{RT}}{2}\sum_{i=1}^n\sigma^2 \tilde{S}_{t_{i-1}}\{\Delta W_{t_i}^2-\Delta t_i\}
+\end{split}
 \end{equation}
 \begin{equation}
 E[(\Delta W_{t_i})^2-\Delta t_i]=0
@@ -1476,7 +1564,7 @@ d\tilde{V}_T=\Delta_td\tilde{S}_t
 (S_T-K)_+=C_{BS}(T,S_T)
 \end{equation}
 \begin{equation}
-e^{-RT}(S_T-K)_+=\tilde{C}_{BS}(T,\tilde{S}_T)(\tilde{C}_{BS}(t,S)-e^^{-RT}C_{BS}(t,e^{RT}S))
+e^{-RT}(S_T-K)_+=\tilde{C}_{BS}(T,\tilde{S}_T)(\tilde{C}_{BS}(t,S)-e^{-RT}C_{BS}(t,e^{RT}S))
 \end{equation}
 \begin{equation}
 \tilde{C}_{BS}(T,\tilde{S}_T)=\tilde{C}_{BS}(0,\tilde{S}_0)+\int_0^T\frac{\partial \tilde{C}_{BS}(t,S_t)}{\partial t}dt+\int_0^T\frac{\partial\tilde{C}_{BS}}{\partial S}(t,\tilde{S}_t)d\tilde{S}_t+\frac{1}{2}\int_0^T\frac{\partial^2 \tilde{C}_{BS}}{\partial S^2}(t,\tilde{S}_t)\sigma_t^2S_t^2dt
@@ -1553,7 +1641,7 @@ d\tilde{S}_t=\tilde{S}_t+dW_t
 d(S_t)&=d(e^{RT}\tilde{S}_t)\\
 &=Re^{RT}\tilde{S}_tdt+e^{RT}d\tilde{S}_t\\
 &=RS_tdt+e^{RT}\sigma\tilde{S}_td\tilde{W}_u\\
-&=S_t(Rdt+\sigmad\tilde{W}_u)
+&=S_t(Rdt+\sigma\tilde{W}_u)
 \end{split}
 \end{equation}
 Donc,
@@ -1575,7 +1663,7 @@ C_{BS}(0)=(S-Ke^{-RT})_+
 
 Smile de volatilit\'e :)
 
-Avec un prix de l'option sur le march\'e, on r\'esoudre $C_{BS}(\sigma,K)=P$ en changant $K$, et on obtiendra une courbe $\sigma_{implicit}\~K$, ce qui est une courbe de smile.
+Avec un prix de l'option sur le march\'e, on r\'esoudre $C_{BS}(\sigma,K)=P$ en changant $K$, et on obtiendra une courbe $\sigma_{implicit}\sim K$, ce qui est une courbe de smile.
 
 \section{Examen}
 5 exercises
