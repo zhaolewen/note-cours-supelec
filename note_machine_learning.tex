@@ -14,7 +14,7 @@ Y=\beta_0+\beta_1 X_1 +\cdots+\beta_p X_p+\epsilon
 \end{equation}
 o\`u les coefficients de r\'egression $\beta_j$ sont des param\`etres fixe mais inconnus, et $\epsilon$ un terme al\'eatoire suivant une $\mathcal{N}(0,\sigma^2)$
 
-\subsection{Donn\'ees et mod\`ele statistique}
+\subsubsection{Donn\'ees et mod\`ele statistique}
 
 On dispose de $n$ observations des variables $X_1,\ldots,X_p$
 Soit 
@@ -27,5 +27,132 @@ y_m & x_{1m} & \ldots & x_{pm}
 \end{split}
 \end{equation}
 (Tableau d'observations)
+
+La mod\`ele statistique est d\'efinie comme 
+
+Pour chaque individu $t$, on consid\`ere que la valeur $y_i$ prise par $Y$ est une r\'ealisation d'une variable al\'eatoire $Y_i$ d\'efinie par 
+\begin{equation}
+Y_i=\beta_0+\beta_1 X_{1i}+\ldots+\beta_p X_{pi}+\epsilon_i
+\end{equation}
+o\`u $\sigma_i$ est un terme al\'eatoire suivant une $\mathcal{N}(0,\sigma^2)$. Il faut supposer de plus que les $\epsilon_1,\ldots,\epsilon_m$ sont ind\'ependantes les un les autres.
+
+Sur l'exemple des automobiles, on consid\`ere que le prix $Y_i$ de la voiture $i$ suit une loi normale de moyenne
+\begin{equation}
+\mu_i=\beta_0+\beta_1 PUISSANCE_i,\ldots,\beta_p LARGEUR_i+\epsilon.
+\end{equation} 
+
+\subsubsection{Estimations des param\`etres du mod\`ele}
+\`A l'aide des $n$ observations des variables $Y,X_1,\ldots,X_p$, nous allons chercher \`a estimer les param\`etres $\beta_0,\ldots,\beta_p$ du mod\`le.
+
+On cherche $\hat{\beta}=(\hat{\beta}_0,\ldots,\hat{\beta}_p)$ tel que 
+\begin{equation}
+\hat{\beta}=argmin ||y-X\beta||_2^2=argmin (y-X\beta)^T(y-X\beta)
+\end{equation}
+
+G\'eom\'etriquement, cas o\`u $p=1$
+\begin{equation}
+\hat{y}=\hat{\beta}_0+\hat{\beta}_1 X_1
+\end{equation}
+On cherche $\hat{\beta}_0$ et $\hat{\beta}_1$ tel que $\sum \epsilon_i^2$ soit minimal.
+
+\begin{equation}
+\frac{\partial L}{\partial \beta}=-X^Ty-X^Ty+2X^TX\hat{\beta}=0
+\end{equation}
+Ainsi
+\begin{equation}
+\hat{\beta}=(X^TX)^{-1}X^Ty
+\end{equation}
+
+remarque 1: Notons que $\hat{\beta}$ est de la forme $Hy$
+
+remarque 2:
+\begin{equation}
+\hat{\beta}=(X^TX)^{-1}X^Ty=(X^TX)(X^TX)^{-2}X^Ty=X^T\hat{\alpha}
+\end{equation}
+Cela signifie que $\hat{\beta}$ s'exprime comme la combinaison lin\'eaire des individus
+\begin{equation}
+\hat{\beta}=\sum_{i=1}^n \hat{\alpha}_ix_i
+\end{equation}
+
+Remarque 3
+Posons 
+\begin{equation}
+X=V\Sigma U^T
+\end{equation}
+(D\'ecomposition en valeurs singuliers)
+\begin{equation}
+V^TV=I
+\end{equation}
+et $\Sigma$ est diagonale et $U^TU=I$
+Posons 
+\begin{equation}
+\Lambda=\Sigma^T\Sigma
+\end{equation}
+matrice diagonale des valeurs de $X^TX$. Ainsi
+\begin{equation}
+\begin{split}
+\hat{\beta}^{OLS}&=(X^TX)^{-1}X^Ty=(U\Sigma V^TV\Sigma U^T)^-1U\Sigma V^T y\\
+&=U\Sigma^{-1}\Sigma^{-1}U^TU\Sigma V^Ty\\
+&=U\Lambda^{-1}\Sigma V^Ty\\
+&=\sum_{j=1}^{P}\frac{v_j^Ty}{\sqrt{\lambda_j}}\mu_j
+\end{split}
+\end{equation}
+
+Interpr\'etation g\'eom\'etrique de la r\'egression multiple...
+
+Pour un nouvel individu $x$
+\begin{equation}
+\hat{y}(x)=x^t\hat{\beta}
+\end{equation}
+
+Remarque 4
+
+En termes de pr\'ediction, on peut aussi obtenir des expressions duales
+\begin{equation}
+\hat{y}=x^T\hat{\beta}=\sum_{j=1}^n\alpha_jx^T_jx
+\end{equation}
+Cette expression duale a la particularit\'e de ne d\'ependre que des produits scalaires entre observations.  
+
+\subsubsection{Qualit\'e des estimations}
+On souhaite \'evaluer la pr\'ecision des estimations
+\begin{equation}
+\begin{split}
+\mathbb{E}[\hat{\beta}]&=\mathbb{E}[(X^TX)^{-1}X^TY]=(X^TX)^{-1}X^T\mathbb{E}[Y]\\
+&=(X^TX)^{-1}X^T\mathbb{E}[X\beta+\epsilon]\\
+&=(X^TX)^{-1}(X^TX)\beta\\
+&=\beta
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+Var(\hat{\beta})&=var((X^TX)^{-1}X^TY)\\
+&=(X^TX)^{-1}X^{T} var(Y) X(X^TX)^{-1}\\
+&=\sigma^2 (X^TX)^{-1}
+\end{split}
+\end{equation}
+o\`u
+\begin{equation}
+var(Y)=\sigma^2I
+\end{equation}
+
+Le MSE(Mean Square Error) d'un estimateur $\hat{\beta}$ d'un vecteur $\beta$ est d\'efini
+\begin{equation}
+\begin{split}
+MSE(\hat{\beta})&=\mathbb{E}[tr(\hat{\beta}-\beta)(\hat{\beta}-\beta)^T]\\
+&=\mathbb{E}[(\hat{\beta}-\beta)^T(\hat{\beta}-\beta)]\\
+&=\mathbb{E}[||\hat{\beta}-\beta||_2^2]\\
+&=[\mathbb{E}[\hat{\beta}-\beta]^T][\mathbb{E}[\hat{\beta}]-\beta]+\mathbb{E}[(\hat{\beta}-\methbb{E}[\hat{\beta}])(\hat{\beta}-\mathbb{E}[\hat{\beta}])]\\
+&=biais^2(\hat{\beta})+ tr(var(\hat{\beta}))\\
+&=\sigma^2tr(X^TX)^{-1}\\
+&=\sigma^2\sum_{j=1}^{P}\frac{1}{\lambda_j}
+\end{split}
+\end{equation}
+
+Si les donn\'ees sont mal-conditionn\'ees, alors
+$\Rightarrow$ petit valeurs de $X^TX$
+$\Rightarrow$ instabilit\'e des coefficients de regression
+$\Rightarrow$ Explosion du MSE
+$\Rightarrow$ \'ecart entre $\beta$ et $\hat{\beta}$
+
 
 \end{document}
