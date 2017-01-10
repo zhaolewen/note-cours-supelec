@@ -155,4 +155,90 @@ $\Rightarrow$ Explosion du MSE
 $\Rightarrow$ \'ecart entre $\beta$ et $\hat{\beta}$
 
 
+Illustration de la multi-lin\'earit\'e
+
+Consid\'erons le mod\`ele suivant
+\begin{equation}
+Y=\beta_1X_1+\beta_2X_2+\Sigma
+\end{equation}
+On suppose que les donn\'ees sont standardis\'ees
+\begin{equation}
+cor(X_1,X_2)=r_{12}, cor(X_j,Y)=r_{jy}
+\end{equation}
+
+L'estimation des moindres carr\'ees 
+\begin{equation}
+\hat{\beta}=(\hat{\beta}_1,\hat{\beta}_2)
+\end{equation}
+est donn\'e par
+\begin{equation}
+(X^TX)\hat{\beta}=X^TY
+\end{equation}
+Comme les donn\'ees sont standardis\'ees
+\begin{equation}
+\left(\begin{array}{cc}
+1 & r_{12} \\
+r_{21} & 1
+\end{array}\right)
+\left(\begin{array}{cc}
+\hat{\beta}_1\\
+\hat{\beta}_2
+\end{array}\right)\sim
+\left(\begin{array}{c}
+r_{1y}\\
+r_{2y}
+\end{array}\right)
+\end{equation}
+L'inverse de $X^TX$ est donn\'ee par 
+\begin{equation}
+C=(X^TX)^{-1}=\frac{1}{1-r_{12}^2}\left(\begin{array}{cc}
+1 & -r_{12}\\
+-r_{12} & 1
+\end{array}\right)
+\end{equation}
+
+On rppelle que
+\begin{equation}
+var(\hat{\beta})=\sigma^2(X^TX)^{-1}
+\end{equation}
+donc
+\begin{equation}
+var(\hat{\beta}_j)=\sigma^2C_jj
+\end{equation}
+
+Alors, une forte corr\'elation entre $X_1$ et $X_2$ est indiqu\'ee par $|r_{12}|\to 1$. Ceci implique que $var(\hat{\beta}_j)\to +\infty$.
+Ainsi, MSE qui explose.
+
+De mani\'ere g\'en\'erale, on peut montrer que dans le cas de $p$ variables explicatives, des elements diagonaux de $C=(X^TX)^{-1}$ sont \'egaux \`a 
+\begin{equation}
+C_jj=\frac{1}{1-R_j^2}
+\end{equation}
+o\`u $R_j^2$ est le coefficient de determination entre $X_j$ et les $p$ autres variables. S'il existe une forte multi-colin\'earit\'e entre $X_j$ et les  $(p-1)$ autres variables. $R_j^2\to 1$
+
+Exemple II
+
+(Voir photos)
+
+\subsection{Facteur de shrinkage}
+On rappelle que 
+\begin{equation}
+\hat{\beta}^{OLS}=(X^TX)^{-1}X^Ty=\sum_{j=1}^{P}\frac{v_j^Ty}{\sqrt{\lambda_j}}\mu_j\sum_{j=1}^{P}\z_j
+\end{equation}
+
+Dans sa forme g\'en\'erale, on f\'efinit un estimateur g\'en\'erale de $\beta$ par
+\begin{equation}
+\hat{\beta}^{shi}=\sum_{j=1}^{P}f(\lambda_j)z_j
+\end{equation}
+
+$f(\lambda_j)$ est un facteur de shrinkage qui va jouer sur le MSE. Ici, on se concentre sur les facteurs de shrinkage ind\'ependant de $y$. Malheureusement, on a 
+\begin{equation}
+\hat{\beta}^{shi}=U\Sigma^{-1}DV^Ty=H^{shi}y
+\end{equation}
+avec
+\begin{equation}
+D=diag(f(\lambda_1),\ldots,f(\lambda_p))
+\end{equation}
+\'Etudions l'influence de 
+
+
 \end{document}

@@ -1,0 +1,41 @@
+\documentclass{article}
+\title{Apprentissage en grande domension}
+\begin{document}
+\maketitle
+\pagebreak
+
+\begin{equation}
+\min_{\beta\in\mathbb{R}} f(\beta)
+\end{equation}
+Conditions:
+$f$ convexe
+
+
+Definition 1:
+\begin{equation}
+\forall \theta\in [0,1]
+\end{equation}
+
+
+Def 3 $M$ 
+
+Def 4 Lipschizsienne
+\begin{equation}
+\forall x,y ||f(x)-f(y)||_2<=L||x-y||_2
+\end{equation}
+
+Def 5 contractant
+\begin{equation}
+L Lipschitz avec 0<=L<1
+\end{equation}
+
+Them 1 Thm point fixe:
+$f$ est $\alpha -$contractant,
+\begin{equation}
+\exists x^* tel que f^*=f(x^*)
+\end{equation}
+La suite definie par $x_{n+1}=f(x_n)$ converge vers $x^*$ et v\'erifie 
+\begin{equation}
+||x_n-x^*||_2<=\frac{\alpha^n}{1-\alpha}||x_0-x_1||_2
+\end{equation}
+\end{document}
