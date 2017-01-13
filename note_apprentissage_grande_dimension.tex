@@ -8,7 +8,10 @@
 \min_{\beta\in\mathbb{R}} f(\beta)
 \end{equation}
 Conditions:
-$f$ convexe
+$f$ convexe:
+\begin{equation}
+f(y)>=f(x)+\nabla f(x)^T(y-x)
+\end{equation}
 
 
 Definition 1:
@@ -37,5 +40,115 @@ $f$ est $\alpha -$contractant,
 La suite definie par $x_{n+1}=f(x_n)$ converge vers $x^*$ et v\'erifie 
 \begin{equation}
 ||x_n-x^*||_2<=\frac{\alpha^n}{1-\alpha}||x_0-x_1||_2
+\end{equation}
+
+Gradient Algo
+
+Prop 5 Gradient monotone
+$f$ diff est convexe, si et seulement si
+\begin{equation}
+\begin{split}
+&(\nabla f(x)-\nabla f(y))^T(x-y)>=0 \\
+&=\nabla f(x) f-\text{consistante}
+\end{split}
+\end{equation}
+
+PREUVE
+1.$\Rightarrow$:
+\begin{equation}
+f(y)>=f(x)+\nabla f(x)^T(y-x)
+\end{equation}
+\begin{equation}
+f(x)>=f(y)+\nabla f(y)^T(x-y)
+\end{equation}
+\begin{equation}
+-f(x)-f(y)<-f(x)-f(y)+\nabla f(x)^T(x-y)-\nabla f(y)^T (x-y)
+\end{equation}
+\begin{equation}
+(\nabla f(x)-\nabla f(y))^T (x-y)>=0
+\end{equation}
+
+2. $\Leftarrow$:
+On introduit une fonction $\Phi$:
+\begin{equation}
+\Phi(t)=f(x+t(y-x))
+\end{equation}
+\begin{equation}
+\Phi'(t)=\nabla f(x+t(y-x))^T(y-x)
+\end{equation}
+
+Comme $\nabla f$ est monotone
+\begin{equation}
+\Phi'(t)>=\Phi'(0), t>=0
+\end{equation}
+\begin{equation}
+f(y)-\Phi(1)=\Phi(0)+\int_0^1\Phi'(t)dt
+\end{equation}
+\begin{equation}
+f(y)>=\Phi(0)+\Phi'(0)=f(x)+\nabla f(x)^T(y-x)
+\end{equation}
+
+Theor\`eme Bo\^ite quadratique sup\'erieure
+\begin{equation}
+f\sim L^1,\nabla f est L-lipschitz
+\end{equation}
+Alors
+\begin{equation}
+g(x)=\frac{L}{2}x^Tx-f(x) est convexe
+\end{equation}
+\begin{equation}
+f(y)<=\nabla <=\nabla f(x)^T(y-x)+\frac{L}{2}||x-y||_2^2
+\end{equation}
+
+1. $\nabla f$ Lipschitz
+\begin{equation}
+||\nabla f(y)-\nabla f(x)||_2 <= L||y-x||_2
+\end{equation}
+
+2. 
+\begin{equation}
+\begin{split}
+(\nabla f(y)-\nabla f(x))^T(y-x)&<=||\nabla f(y)-\nabla f(x)||_2||y-x||_2\\
+&<=L||y-x||_2^2
+\end{split}
+\end{equation}
+\begin{equation}
+\nabla g(x)=Lx-\nabla f
+\end{equation}
+\begin{equation}
+\begin{split}
+&(\nabla g(x)-\nabla g(y))^T(x-y)\\
+=&(Lx-\nabla f(x)-Ly+\nabla f(y))^T(x-y)\\
+=&-(\nabla f(y)-\nabla f(x))^T(y-x)+L||x-y||_2^2\\
+>=&0
+\end{split}
+\end{equation}
+
+\begin{equation}
+y=x-t\nabla f(x)
+\end{equation}
+\begin{equation}
+f(x-t\nabla f(x))<=f(x)+t(1-\frac{Lt}{2})||\nabla f(x)||_2^2
+\end{equation}
+choix de $t$ tel que $0<=t<\frac{1}{2}$
+\begin{equation}
+x^+=x-t\nabla f(x)
+\end{equation}
+\begin{equation}
+\begin{split}
+f(x^+)<=&f(x)+f(1-\frac{Lt}{2})||\nabla f(x)||_2^2\\
+<=& f(x)-\frac{t}{2}||\nabla f(x)||_2^2\\
+<=f^*+\nabla f(x)^T (x-x^*)-\frac{t}{2}||\nabla f(x)||^2\\
+=& f^*+\frac{1}{2t}(||x-x^*||_2^2-||x-x^*-t\nabla f(x)||_2^2)\\
+=& f^* +\frac{1}{2t}(||x-x^*||^2_2-||x^+-x^*||_2^2)
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\sum_{k=1}^N (f(x_k)-k^*)<=&\frac{1}{2t}\sum_{k=1}^N(||x_{k-1}-x^*||_2^2-||x_k-x^*||_2^2)\\
+=&\frac{1}{2t}(||x_0-x^*||_2^2-||x_N-x^*||_2^2)\\
+<=\frac{1}{2t}||x_0-x^*||_2^2
+\end{split}
 \end{equation}
 \end{document}
