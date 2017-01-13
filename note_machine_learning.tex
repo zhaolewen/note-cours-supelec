@@ -239,6 +239,119 @@ avec
 D=diag(f(\lambda_1),\ldots,f(\lambda_p))
 \end{equation}
 \'Etudions l'influence de 
+(Photos)
 
+\begin{equation}
+\begin{split}
+\hat{\beta}=&argmin_{\beta\in\mathbb{R}^p}\{||y-X\beta||+\lambda||\beta||_2^2\}\\
+=&(X^TX+\lambdaI_p)^{-1}X^Ty\\
+=&\sum_{j=1}^p\frac{\lambda_j}{\lambda_j+\lambda}\frac{v^T_jy}{\sqrt{\lambda_j}}\\
+=&\sum_{j=1}^p f(\lambda_j)z_j
+\end{split}
+\end{equation}
+
+\begin{equation}
+\hat{y}_\lambda=X\hat{\beta}_\lambda^{RR}=V\SigmaU^TU(\Lambda+\lambda I)^{-1}\Sigma\Lambda y=V\Sigma(\Lambda+\lambda I)^{-1}\Sigma V^T y
+\end{equation}
+
+\subsubsection{Choix de mod\`ele (\lambda) + ridge path validation crois\'ee}
+\begin{itemize}
+        \item Ensemble d'apprentissage permet de construire le mod\`ele
+        \item Ensemble de test permet d'\'evaluer la qualit\'e du mod\`ele 
+\end{itemize}
+
+N\'ecessite de d\'eterminer $\lambda$ sur la base d'un crit\'ere objectif
+
+Un mod\`ele devrait predire efficacement des individus qui n'ont pas servi \`a sa construction
+
+Pour \'evaluer la qualit\'e du mod\`ele, on utilise des strat\'egies de validation crois\'ee.
+
+K-fold cross validation
+\begin{enumerate}
+\item Partition du jeu de donn\'ees en $K$ parties de taille \'egale $T_1,\ldots,T_K$
+\item Pour chaque $k=1,\ldots,K$ construire $\hat{\beta}_\lambda^{-k}$ sans $T_k$
+\item $\hat{y}_\lambda^{-k}=T_k\hat{\beta}_\lambda^{-k}$
+\item Calcul d'erreurs en test
+\begin{equation}
+CV_{erreur}(\lambda,k)=\frac{1}{n_k}\sum(y_k-\hat{y}_\lambda^{-k})^2
+\end{equation}
+Ainsi, Taux d'erreur global($\lambda$)
+\begin{equation}
+=\frac{1}{K}\sum_{k=1}^KCV_{erreur}(\lambda,k)
+\end{equation}
+Ainsi,
+\begin{equation}
+\lambda^*=argmin(Taux d'erreur global(\lambda))
+\end{equation}
+\end{enumerate}
+
+On appelle que 
+\begin{equation}
+\hat{\beta}^{RR}=argmin\{||y-x||^2_2+\lambda||\beta||_2^2\}=(X^TX+\lambda I)^{-1}X^Ty
+\end{equation}
+
+Proposition
+$\forall \lambda>0$ on a 
+\begin{equation}
+(X^TX+\lambda I_p)^{-1}X^T=X^T(XX^T+\lambda I_\lambda)^{-1}
+\end{equation}
+
+Preuve
+\begin{equation}
+(X^TX+\lambda I_p)^{-1}X^T(XX^T+\lambda I_n)=X^T
+\end{equation}
+\begin{equation}
+(X^TX+\lambdaI_p)^{-1}(X^TX+\lambdaI_p)X^T=X^T
+\end{equation}
+Il vient de cette proposition une formulation duale pour $\hat{\beta}^{RR}$
+\begin{equation}
+\begin{split}
+\hat{\beta}^{RR}=&X^T(XX^T+\lambda I_n)^{-1}y\\
+=&X^T\hat{\alpha}^{RR}
+\end{split}
+\end{equation}
+
+Remarque: $\hat{\beta}^{RR}$ s'exprime comme une combinaison lin\'eaire des observations.
+
+En termes de pr\'ediction
+\begin{equation}
+\hat{y}_{\lambda}=X\hat{\beta}_\lambda^{RR}=XX^T\hat{\alpha}^{RR}
+\end{equation}
+\begin{equation}
+h(x)=\sum_{i=1}^n \alpha_i x_i^Tx
+\end{equation}
+
+Conclusion
+
+On remarque que $\hat{\alpha}$ et $\hat{y}$ ne s'expriment qu'au
+(Photo)
+
+\section{M\'ethode \`a noyaux}
+Introduction Supposons que l'on recherche \`a r\'esoudre un probl\`eme de r\'egression non-lin\'eaire.
+
+Il est tout \`a fait possible d'utiliser une fonction de redescription $\Phi:\mathbb{R}^p\to\mathcal{F}$(espace de description).
+La solution du probl\`eme de r\'egression lin\'eaire dans l'espace de redescription est de la forme 
+\begin{equation}
+\begin{split}
+h(x)=&<\beta,\Phi(x)>\\
+=&\sum_{j=1}^n\beta_j\Phi_j(x)+\beta_0
+\end{split}
+\end{equation}
+avec $Phi(x)=\{\Phi_1(x),\Phi_2(x),\ldots\}$
+
+En r\'esolvant comme pr\'ec\'edemment dans l'espace de redescription, devient la repr\'esentation duale.
+\begin{equation}
+h(x)=\sum_{i=1}^n\Phi(x_i)^T\Phi(x)
+\end{equation}
+
+En rapprochant $h(x)=\beta^T\Phi(x)$ et $h(x)=\sum_{i=1}^n\alpha_i\Phi(n_i)^T\Phi(x)$
+devient 
+\begin{equation}
+\beta^T=\sum_{i=1}^n\alpha_i\Phi(x_i)^T
+\end{equation}
+
+Commentaire 1: Comment trouver une fonction de redescription ad\'equate?
+
+Commentaire 2: Co\^{u}t calculatoire des produits scalaires dans un espace $\mathcal{F}$ dont la dimension peut \^etre tr\`es grande.
 
 \end{document}
