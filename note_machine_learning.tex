@@ -354,4 +354,157 @@ Commentaire 1: Comment trouver une fonction de redescription ad\'equate?
 
 Commentaire 2: Co\^{u}t calculatoire des produits scalaires dans un espace $\mathcal{F}$ dont la dimension peut \^etre tr\`es grande.
 
+Plut\^ot que de repr\'esenter les observations par un tableau individus $x$ variables, on peut les repr\'esenter par une matrice de similarit\'e de dimension $n\times n$
+\begin{equation}
+[K]_y=k(x_i,x_j)
+\end{equation}
+\begin{equation}
+[X]\sim [K]
+\end{equation}
+\begin{equation}
+(x_i)_{n\times p}\sim (k(x_i,x_n))_{n\times n}
+\end{equation}
+
+Remarque: Mesure de similarit\'e quelle que soit la nature et la complexit\'e des objets.(images, graphs, s\'equences ADN,...)
+Remarque 2: La matrice $K$ est toujours de dimension $n\times n$ \forall la taille de l'objet.
+
+Dans ce cours nous nous restrienons \`aune classe particuli\`res de fonction $k$.
+
+D\'efinition Fonction semi definie positive
+
+Une fonction $k$ semi definie positive sur l'ensemble $X$ est une fonction $k:X,X\to \mathcal{R}$ symm\'etrique 
+\begin{equation}
+\forall (x,x')\in X, k(x,x')=k(x',x)
+\end{equation}
+et quisatisfait pour 
+(Photo)
+
+et $(a_1,\ldots,\a_n)\in\mathcal{R}^n$
+\begin{equation}
+\sum_{i,j=1}^na_ia_jk(x_i,k_j)>=0
+\end{equation}
+En d'autres termes $K=(k(x_i,x_j))$ est semi definie positive.
+
+Exemple 1: Le plus simple des noyaux semi definie positif
+
+Soit $X\in\mathbb{R}^P$ et la fonction $k:\mathcal{X}^2\to\mathbb{R}$ definie par
+\begin{equation}
+\forall (x,x')\in (\mathbb{R}^p)^2, k(x,x')=<x,x'>_{\mathbb{R}^p}
+\end{equation}
+Sym\'etrie
+\begin{equation}
+<x,x'>_{\mathbb{R}^p}=<x',x>_{\mathbb{R}^p}
+\end{equation}
+
+Th\'eor\`eme de Moose-Aroszajin, 1950
+
+(Photo)
+
+Definition: Soit $\mathcal{H}$
+
+(Photo)
+
+2. La fonction $k$ est une fonction noyau reproduisante 
+\begin{equation}
+\forall f\in \mathcal{H} on a <f,k(n,.)>=f(x)
+\end{equation}
+
+Le produit scalaire est alors d\'efini comme suit:
+
+Soit $f$ et $g\in\mathcal{H}$ d\'efinies par
+\begin{equation}
+f(x)=\sum_{i=1}^n\alpha_ik(x_i,x)
+\end{equation}
+et
+\begin{equation}
+g(x)=\sum_{i=1}^n\beta_jk(x_j,x)
+\end{equation}
+alors
+\begin{equation}
+\begin{split}
+<f,g>=&\sum_{j=1}^n\sum_{i=1}^n\alpha_i\beta_jk(x_i,x_j)\\
+=&\sum_{i=1}^n\alpha_ig(x_i)\\
+=&\sum_{j=1}^n\beta_jf(x_j)
+\end{split}
+\end{equation}
+
+Representation theorem (Kimeldoif & Wabhia 1970)
+
+Soit $\mathcal{H}$ un RKHS associ\'e \`a un noyau $k$.
+Soit $\Omega [0,+\infty\[\to\mathbb{R} $ une fonction strictement croissante
+Soit $\mathcal{X}$ un emsemble et $l(\mathcal{X}\times\mathbb{R})\to\mathbb{R}$ une fonction de co\^ut.
+
+Alors toute solution du probl\`ele d'optimisation suivant 
+\begin{equation}
+\min_fJ_f=l((x_1,y_1,f(x_1)),\ldots,(x_n,y_n,f(x_n)))+\lambda\Omega(||f||_\mathcal{H})
+\end{equation}
+admet une repr\'esentation de la forme $f^*=\sum_{i=1}^n\alpha_ik(x_i,.)$
+
+Remarque 1
+\begin{equation}
+l((x_1,y_1,f(x_1)),\ldots,(x_n,y_n,f(x_n)))+\lambda\Omega(||f||_\mathcal{H})
+\end{equation}
+conduit \`a la regression rigide.
+
+Remarque 2:
+Quelque soit la dimension de l'espace $\mathcal{H}$, la solution \'evolue dans $span\{k(x_i,.),1<=i<=n\}$
+de dimension $n$ connue, bien que $H$ puisse \^etre de dimension imporeante.
+$\Rightarrow$ Developpement d'algo thno efficace.
+
+\textbf{Preuve du th\'eoreme du representant}
+Supposons $f\in\mathcal{H}$ project\'ee sur $span{k(x_i,.),1<=i<=n}$
+Soit $f_s$(la composante dans l'espace engendr\'e) et $f_\perp$ la composante orthogonale
+\begin{equation}
+f=f_s+f_\perp
+\end{equation}
+Ainsi
+\begin{equation}
+||f||_\mathcal{H}^2=||f_s||^2_\mathcal{H}+||f_\perp||__\mathcal{H}^2>=||f||_\mathcal{H}^2
+\end{equation}
+Puisque $\Omega$ est strictement croissante, on a 
+\begin{equation}
+\Omega(||f||_\methcal{H}^2)>\Omega(||f_s||_\mathcal{H}^2)
+\end{equation}
+Cela signifie que $\Omega$ est minimis\'ee pour des fonctions $f\in span\{k(x_i,.),1<=i<=n\}$
+
+Par ailleurs, des propri\'et\'es reproduisantes de $k$ on obtient
+\begin{equation}
+f(x_i)=<f,k(x_i,.)>=<f_s,k(x_i,.)>_\mathcal{H}+<f_\perp,k(x_i,.)>_\mathcal{H}=<f_s,k(x_i,.)>=f_s(x_i)
+\end{equation}
+Par cons\'equent,
+\begin{equation}
+l((x_1,y_1,f(x_1)),\ldots,(x_n,y_n,f(x_n)))=((x_1,y_1,f_s(x_1)),\ldots,(x_n,y_n,f_s(x_n)))
+\end{equation}
+Donc $l$ ne d\'epend que des composantes de $f\in span\{k(x_i,.),1<=i<=n\}$ et $\Omega$ est minimis\'ee que si $f\in$ cet espace
+
+Conclusion:
+$J(f)$ est minimis\'ee que si $f\in span\{k(x_i,.),1<=i<=n\}$ et ;a solution est fonc de la forme
+\begin{equation}
+f^*=\sum_{i=1}^n\alpha_ik(x_i,.)
+\end{equation}
+
+Kernel Rigide Regression
+
+Un point d'une fonctionnelle
+
+Soit $\mathcal{H}$ un RKHS de noyau $k$. On consid\`ere le probl\`eme suivant
+\begin{equation}
+f^*=argmin_{f\mathcal{H}}\{\frac{1}{2}\sum_{i=1}^n (y_i-f(x_i))^2+\frac{\lambda}{2}||f||_\mathcal{H}^2\}
+\end{equation}
+$=$ termed'attache aux donn\'ees $+$ terme de r\'egularisation.
+
+Par le th\'eor\`eme de repr\'esentant, on sait que 
+\begin{equation}
+f^*\sum_{j=1}^n\alpha_j k(x_j,.)
+\end{equation}
+
+(Photo)
+
+Exercise: Montrer que
+
+(Photo)
+
+Kernel Ridige Regression
+
+
 \end{document}
