@@ -152,4 +152,355 @@ f(x^+)<=&f(x)+f(1-\frac{Lt}{2})||\nabla f(x)||_2^2\\
 \end{split}
 \end{equation}
 
+
+Prop: Quand $f$ est differenciable
+\begin{equation}
+f(y)>=f(x)+\nabla f(x)^T(y-x)
+\end{equation}
+
+Definition: sous gradient
+$g$ est un sous gradient de $f$ en $x$, ssi
+\begin{equation}
+\forall y, f(y)>=f(x)+g^T(y-x)
+\end{equation}
+
+Definition: sous differentielle
+$f$ convexe, on definit la sous differentielle de $f$ en $x$ comme
+\begin{equation}
+\partial f(x)=\{g|\forall y, f(y)>=f(x)+g^T(y-x)\}
+\end{equation}
+
+Theoreme 3:
+\begin{equation}
+x^*=argmin f \Leftrightarrow 0 \in \partial f(x^*)
+\end{equation}
+Si $0 \in \partial f(x^*)$, alors
+\begin{equation}
+\forall y, f(y)>=f(x^*)+0^T(y-x^*) \Leftrightarrow x^=argmin f
+\end{equation}
+
+Prop 7: lin\'earit\'e non n\'egative
+$f_1$ et $f_2$ convexes, $\alpha_1,\alpha_2>=0$
+\begin{equation}
+f>=\partial(\alpha_1 f_1+\alpha_2 f_2)(x)=\alpha_1 \partial f_1(x)+\alpha_2 \partial f_x(x)
+\end{equation}
+$+$ addition d'ensemble
+\begin{equation}
+E+F=\{e+f avec e\in E,f\in F\}
+\end{equation}
+
+Prop 8: combinaison affine:
+Si $h(x)=f(Ax+b)$, alors
+\begin{equation}
+\partial h(x)=A^T\partial f(Ax+b)
+\end{equation}
+
+$f$ est une fonction $G$-Lipschitzienne
+
+ALGO: M\'ethode du "sous-gradient"
+\begin{equation}
+x_k\leftarrow x_{k-1}-t_k g_{k-1}
+\end{equation}
+ou
+\begin{equation}
+g_{k-1}\in\partial f(x_k-1)
+\end{equation}
+
+Trois possibilit\'e pour $t_k$
+\begin{enumerate}
+\item $t_k=t$
+\item "Longueur constante" $t_k||g_{k-1}||_2 est constante$
+\item 
+\begin{equation}
+t_k\to_{k\to +\infty} 0
+\end{equation}
+\begin{equation}
+\sum_{k=1}^{+\infty}=+\infty
+\end{equation}
+\begin{equation}
+\sum_{k=1}^{+\infty} t_k^2=\text{limite finie}
+\end{equation}
+\end{enumerate}
+
+Theoreme: f convexe et non differentielle
+$f$ est G-Lipschitzienne $\Leftrightarrow$ ||g||_2<=G,\forall g\in\partial f(x)
+
+Preuve:
+$\Leftarrow$
+
+On suppose $\forall x, \forall g\in\partial f(x)$
+\begin{equation}
+||g||_2<=G
+\end{equation}
+Soit $x(g_x)$ et $y(g_y)$
+\begin{equation}
+g_x^T(x-y)>=f(x)-f(y)>=g_y^T(x-y)
+\end{equation}
+\begin{equation}
+G||x-y||_2>=f(x)-f(y)>=-G||x-y||_2
+\end{equation}
+\begin{equation}
+\forall x,y, ||f(x)-f(y)||<=G||x-y||_2
+\end{equation}
+
+$\Rightarrow$
+$\exists g$ tel que $||g||_2>G$
+\begin{equation}
+y=x+\frac{g}{||g||_2}
+\end{equation}
+\begin{equation}
+f(y)>=f(x)+g^T(y-x)=f(x)+||g||_2>f(x)+G
+\end{equation}
+Pas possible car $f$ est $G$-Lipschitzienne
+
+Attention: 
+La m\'ethode du sous-gradient n'est pas une m\'ethode de descente.
+
+\begin{equation}
+x^+=tg
+\end{equation}
+$g$ sous-gradient de $f$ en $x$.
+\begin{equation}
+\begin{split}
+||x^+-x^*||^2_2=||x-tg-x^*||_2^2\\
+=&||x-x^*||_2^2+t^2||g||_2^2-2tg^T(x-x^*)\\
+<=&||x-x^*||_2^2+t^2||g||_2^2-2t(f(x)-f^*)
+\end{split}
+\end{equation}
+
+Pour une iteration $k$:
+\begin{equation}
+2t_k (f(x_{k-1})-f^*)<||x_{k-1}-x^*||_2^2-||x_k-x^*||_2^2+t_k^2||g_{k-1}||_2^2
+\end{equation}
+en sommant les in\'egalit\'es
+\begin{equation}
+\begin{split}
+2(\sum_{k=1}^N t_k)(f_{best}^(N)-f^*)<=& ||x_0-x^*||_2^2-||x_N-x^*||_2^2+\sum_{k=1}^N t_k^2||g_{k-1}||_2^2\\
+<=& ||x_0-x^*||_2^2+\sum_{k=1}^N t_k^2||g_{k-1}||_2^2
+\end{split}
+\end{equation}
+
+1. $t_k=t$
+\begin{equation}
+f_{best}^{(N)}-f^*<=\frac{||x_0-x^*||_2^2}{2Nt}+\frac{G^2t}{2}
+\end{equation}
+
+2. $t_k ||g_{k-1}||_2=s$
+\begin{equation}
+f_{best}^{(N)}-f^*<=\frac{G||x_0-x^*||_2^2}{2Ns}+\frac{Gs}{2}
+\end{equation}
+
+3. $t_k\to 0,\sum t_k\to +\infty, \sum t_k^2$ converge
+\begin{equation}
+f_{best}^{(N)}-f^*<=\frac{||x_0-x^*||_2^2+\sigma^2\sum t_k^2}{2\sum t_k}
+\end{equation}
+
+Conclusion: La m\'ethode du sous gradient n'est pas facile \`a param\'etrer pour obtenir sa convergence.
+
+Exercise: 
+\begin{equation}
+f(\beta)=||X\beta-y||_2^2+\lambda||\beta||_1
+\end{equation}
+\begin{equation}
+\partial f(\beta)=X^T(X\beta-y)+\lambda\pertial_{||\dot||_1}(\beta)
+\end{equation}
+\begin{equation}
+[\partial_{||\dot||_1}(\beta)]=\left\{\begin{array}{rcl}
+signe(\beta_i) &\text{si} \beta_i\neq 0\\
+[-1,1] & \text{si} \beta_i=0
+\end{array}\right.
+\end{equation}
+
+Definition Operateur proximal
+\begin{equation}
+prox_f(x)=argmin_u \{f(u)+\frac{1}{2}||u-x||_2^2\}
+\end{equation}
+$f$ convexe "semi-continue inf\'erieurement"(sci). alors, $prox_f(x)$ existe et est unique.
+
+Theoreme Caract\'erisation par le sous-gradient
+\begin{equation}
+u=prox_f(x) \Leftrightarrow x-u \in \partial f(u)
+\end{equation}
+
+Preuve:
+\begin{equation}
+\begin{split}
+u=prox_f(x) &\Leftrightarrow u=argmin \{f(u)+\frac{1}{2}||u-x||_2^2\}\\
+&\Leftrightarrow 0\in \partial g(u)\\
+&\Leftrightarrow 0\in \partial g_1(u)+\partial g_2(u)\\
+&\Leftrightarrow 0\in \partial f(u) + (u-x) \Leftrightarrow x-u \in\partial f(u)
+\end{split}
+\end{equation}
+\begin{equation}
+g(y)=g_1(y)+g_2(y)=f(y)+\frac{1}{2}||y-x||_2^2
+\end{equation}
+
+Algorithme du gradient proximal
+\begin{equation}
+0\in\partial f(x^*) \Leftrightarrow x^*=argmin_x f(x)
+\end{equation}
+\begin{equation}
+\partial (f_1+f_2)=\partial f_1+\partial f_2
+\end{equation}
+Si $f$ est diff\'erentielle en $x$, alors
+\begin{equation}
+\partial f(x) =\nabla f(x)
+\end{equation}
+
+Norme euclidienne
+\begin{equation}
+f(x)=||x||_2
+\end{equation}
+\begin{equation}
+prox_{tf}(x)=\left\{\begin{array}{rcl}
+(1-\frac{t}{||x||_2})x&, ||x||_2>=t\\
+0&, sinon
+\end{equation}
+
+Multiplication par un scalaire >0
+\begin{equation}
+f(x)=\lambda g(x/\lambda)
+\end{equation}
+\begin{equation}
+prox_f(x)=\lambda prox_{\frac{1}{\lambda}g}(\frac{x}{\lambda})
+\end{equation}
+
+Somme s\'eparable (Group LASSO)
+\begin{equation}
+f([x,y]=g(x)+h(y)
+\end{equation}
+\begin{equation}
+prox_f([x,y])=[prox_g(x), prox_h(y)]
+\end{equation}
+
+Norme $l_1$
+\begin{equation}
+f(x)=||x||_1
+\end{equation}
+\begin{equation}
+[prox_f(x)]_i\left\{\begin{array}{rcl}
+x_i-1 & \text{si} x_i>=1\\
+0 & \text{si} |x_i|<1\\
+x_i+1 & \text{si} x_i<=-1
+\end{equation}
+
+Num\'eriquement
+\begin{equation}
+prox l_1(x)=sign(x)\times pmax(abs(x)-1,x)
+\end{equation}
+
+\begin{equation}
+min_\beta f(\beta)=min_\beta \{g(\beta)+h(\beta)\}
+\end{equation}
+
+Algorithme du gradient proximal
+$g$ convexe et differentiable, $\nabla g$ est $L$-Lipschitzienne
+
+$h$ convexe et non-differentiable (sci pour avoir $prox_{l_2}(x)$)
+
+Exercise
+\begin{equation}
+f(\beta)=||X\beta-y||_2^2+\lambda ||\beta||_1
+\end{equation}
+
+Algorithme:
+\begin{equation}
+x_k\leftarrow prox_{t_kh}(x_{k-1-t_k \nabla g(x_{k-1})})
+\end{equation}
+\begin{equation}
+f^*=f(x^*) \text{ fini}
+\end{equation}
+\begin{equation}
+t_k=\frac{1}{L},(0<=t_k<\frac{1}{L})
+\end{equation}
+
+Gradient Map
+\begin{equation}
+G_t(x)=\frac{1}{t}(x-prox_{tl_2}(x-t\nabla g(x)))
+\end{equation}
+
+Pourquoi?
+\begin{equation}
+x^+=x-tG_t(x)
+\end{equation}
+
+Attention:
+\begin{itemize}
+\item $G_t(x)$ n'est pas un gradient pour $g$, n'est pas un sous-gradient pour $h$ ou pour $f$
+\item $G_t(x^*)=0$ ssi $x^*=argmin f$
+\end{itemize}
+
+Borne Quadratique Sup\'erieure (BQS)
+\begin{equation}
+g(y)<=g(x)+\nabla g(x)^T (y-x)+\frac{L}{2}||y-x||_2^2
+\end{equation}
+Pour
+\begin{equation}
+y(=x^+)=x-tG_t(x)
+\end{equation}
+\begin{equation}
+\begin{split}
+g(x-tG_t(x))<=&g(x)-t\nabla g(x)^T G_t(x)+\frac{L}{2} t^2||G_t(x)||_2^2\\
+<=g(x)-t\nabla g(x)^TG_t(x)+\frac{t}{2}||G_t(x)||_2^2
+\end{split}
+\end{equation}
+
+Th\'eor\`eme: L'in\'egalit\'e pr\'ec\'edente nous permet de montrer
+\begin{equation}
+f(x-tG_t(x))<=f(z)+G_t(x)^T (x-z)-\frac{t}{2}||G_t(x)||_2^2
+\end{equation}
+
+\begin{equation}
+\begin{split}
+f(x-tG_t(x))<=&g(x)-t\nabla g(x)^TG_t(x)+\frac{t}{2}||G_t(x)||_2^2+h(x-tG_t(x))\\
+<=& g(z)+\nabla g(z)^T(x-z)-t\nabla g(x)^T G_t(x)+\frac{t}{2}||G_t(x)||_2^2+h(z)+v^T(x-z-tG_t(x))\\
+=& f(z)+G_t(x)^T(x-z)-\frac{t}{2}||G_t(x)||_2^2
+\end{split}
+\end{equation}
+
+Pour
+\begin{equation}
+z=x
+\end{equation}
+on a
+\begin{equation}
+f(x^+)<=f(x)-\frac{t}{2}||G_t(x)||_2^2
+\end{equation}
+\begin{equation}
+f(x^+)\to f(x_k)
+\end{equation}
+Donc, on a une m\'ethode de descente !
+
+Pour $z=x^*$
+\begin{equation}
+\begin{split}
+f(x^*)-f^*<=&G_t(x)^T(x-x^*)-\frac{t}{2}||G_t(x)||_2^2\\
+=& \frac{1}{2t}(||x-x^*||_2^2-||x-x^*-tG_t(x)||_2^2)\\
+=& \frac{1}{2t}(||x-x^*||_2^2-||x^+-x^*||_2^2)
+\end{split}
+\end{equation}
+
+\begin{equation}
+f(x_N)-f^*<=\frac{1}{2Nt}||x_0-x^*||_2^2
+\end{equation}
+
+\begin{equation}
+[prox_{t||\dot||}_1](x)=\left\{\begin{array}{rcl}
+x_i-t & \text{si} x_i>=t\\
+0 & \text{si} |x_i|<t\\
+x_i+t & \text{si} x_i <=t
+\end{array}\right.
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
