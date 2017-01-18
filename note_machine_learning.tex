@@ -506,5 +506,216 @@ Exercise: Montrer que
 
 Kernel Ridige Regression
 
+(Photo)
+
+Franchement, le choix de la fonction $Phi$ se ramene au choix d'une fonction $k$ sdp.
+
+Exemple demonstratif:
+
+similarity:
+focntion noyau
+\begin{equation}
+k(x_i,x_j)=(1+x_i^Tx_j)^2
+\end{equation}
+On va construire explicitement l'espace induit par la fonction $k$.
+\begin{equation}
+\begin{split}
+k(x_i,x_j)=&1+x_{i1}^2x_{j1}^2+2x_{i1}x_{j1}x_{i2}x_{j2}+x_{i2}^2x_{j2}^2+2x_{i1}x_{j1}x_{i2}x_{j2}\\
+=&[1 x_{i1}^2 \sqrt{2}x_{i1}x_{i2} x_{i2}^2 \sqrt{2}x_{i1} \sqrt{2}x_{i2}]^T[1 x_{j1}^2 \sqrt{2}x_{j1}x_{j2} x_{j2}^2 \sqrt{2}x_{j1} \sqrt{2}x_{j2}]\\
+=&\Phi(x_i)^T\Phi(x_j)
+\end{split}
+\end{equation}
+
+Astude du noyau
+\begin{equation}
+\hat{\alpha}^{RR}=(XX^^T+\lambda I_n)^{-1}y
+\end{equation}
+\begin{equation}
+\hat{\alpha}^{RR}=(K+\lambda I_n)^{-1}y
+\end{equation}
+
+Autres exemples de noyaux,
+Noyau polynomial
+\begin{equation}
+k(x,y)=(c+x_i^Tx_j)^p
+\end{equation}
+Noyau gaussien
+\begin{equation}
+exp(-\frac{||x_i-x_j||^2}{2\sigma^2})
+\end{equation}
+
+\section{Analyse discriminante}
+Introduction
+Soit $Y$ une variable \`a expliquer QUALITATIVE \`a $K$ cat\'egorie $y\in{1,\ldots,K}$
+
+Soient $X_1,\ldots,X_p$ les $p$ variables explicatives.
+
+Objectif 1: L'analyse discriminante
+descriptive: Proposer un syst\`eme de repr\'esentation qui permet de discerner le plus possible les differents groupes d'individus.
+$Rightarrow$ L'analyse factorielle discriminante
+
+Objective 2: Construire une fonction de classement qui permet de pr\'edire le groupe d'appartenance d'un individu \`a partir des valeurs prises par les variables explicatives.
+$Rightarrow$ Analyse Discriminante Bayesienne
+
+Soit $n_j$ le nombre d'observation appartenant au groupe $j$. Soit $n$ le nombre d'observations total.
+\begin{equation}
+g=(g_1,\ldots,g_p)
+\end{equation}
+les centres de gravit\'e du nuage global.
+noyaux des $X_j$ calcul\'e \`a partir de toute les observations.
+\begin{equation}
+m_k=(m_{k1},\ldots,m_{kp})
+\end{equation}
+centre de gravit\'e du nuage des individus de la class $k$.
+\begin{equation}
+V=\frac{1}{n}\sum_{i=1}^{n}(x_i-y)(x_i-y)^T
+\end{equation}
+matrice de covariance des donn\'ees compl\`etes.
+\begin{equation}
+B=\frac{1}{n}\sum_{k=1}^Kn_k(g_k-g)(g_k-g)^T
+\end{equation}
+
+\begin{equation}
+W-\frac{1}{n}\sum_{k=1}^{K}n_kV_k
+\end{equation}
+avec
+\begin{equation}
+V_k=\frac{1}{n_k}\sum_{i \in \mathcal{C}_k}(x_i-m_k)(x_i-m_k)^T
+\end{equation}
+qui est la matrice de covariance intraclasse.
+
+On peut montrer(exercise) que(voir TP)
+\begin{equation}
+V=B+W
+\end{equation} 
+
+Construisons la variance globale du nuage de points.
+\begin{equation}
+\begin{split}
+\sigma^2=&\frac{1}{n}\sum_{i=1}^n(x_i-y)(x_i-y)^T\\
+=&\frac{1}{n}\sum_{k=1}^K\sum_{i\in\mathcal{L}_k}(x_i-g)^*(x_i-g)\\
+=&\frac{1}{n}\sum_{k=1}^KSS(k)
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+SS(k)=&\sum_{i\in\mathcal{L}_k}(x_i-g)^T(x_i-g)\\
+=&\sum_{i\in\mathcal{L}_k}(x_i-m_k+m_k-g)^T(x_i-m_k+m_k-g)\\
+=&\sum_{i\in\mathcal{L}_k}(||x_i-m_k||^2+||m_k-g||^2+2(x_i-m_k)(m_k-g))\\
+=&\sum_{i\in\mathcal{L}_k}(||x_i-m_k||^2+||m_k-g||^2)
+\end{split}
+\end{equation}
+
+Donc, la variance totale s'\''ecrit
+\begin{equation}
+\begin{split}
+\sigma^2=&\frac{1}{n}[\sum_{k=1}^K\sum_{i\in\mathcal{L}_k}||x_i-m_k||^2+\sum_{k=1}^Kn_k||m_k-m||^2]\\
+=&\frac{1}{n}\sum_{k=1}^Kn_k\frac{1}{n_k}\sum_{i\in\mathcal{L}_k}||x_i-m_k||^2+\sum_{k=1}^K||m_k-g||^2\\
+=&\frac{1}{n}\sum_{k=1}^Kn_k[\frac{1}{n_k}\sum_{i\in\mathcal{L}_k}||x_i-m_k||^2+||m_k-g||^2]
+\end{split}
+\end{equation}
+Si l'on definit une operation de projection $\Pi=vv^T$avec $v^Tv=1$
+\begin{equation}
+\sigma_{within}^2
+\end{equation}
+(Photo)
+
+Pour la variance between projet\'ee sur $V$
+\begin{equation}
+\begin{split}
+\sigma^2_{between}(v)=&\frac{1}{n}\sum_{k=1}^Kn_k(\Pi m_k-\Pi y)^T(\Pi m_k-\Pi y)\\
+=&v^T[\sum_{k=1}^Kn_k \frac{1}{n}(m_k-y)(m_k-y)^T]v
+\end{split}
+\end{equation}
+Comme $V=B+W$
+\begin{equation}
+\sigma^2_{total}(v)+v^TVv
+\end{equation}
+L'analyse discriminante factorielle est  d\'efinie par le probl\`eme d'optimisation suivant
+\begin{equation}
+\max(\frac{v^TBv}{v^TWv})
+\end{equation}
+On remarque si $v^*$  est solution alors $\alphav^*$ est \'egalement solution
+\begin{equation}
+\max(v^TBv),\text{ sc } v^TWv=1
+\end{equation}
+
+Remarque:  On aurait pu  \'egalement consid\'erer le probl\'eme d'optimisation suivant
+\begin{equation}
+\max  (\frac{v^TBv}{v^TVv})\Leftrightarrow \max v^TBv \text{ sc } v^TVv=1
+\end{equation}
+
+Considerons le lagrangien associ\'ee \`a ce probl\`eme d'optimisation
+\begin{equation}
+L=v^TBv-\lambda (v^TVv-1)
+\end{equation}
+En annulant la d\'eriv\'ee de $L$ par rapport \`a $v$, devient
+\begin{equation}
+\frac{\partial L}{\partial v}=2Bv-\lambda Vv=0
+\end{equation}
+Ainsi,
+\begin{equation}
+V^{-1}Bv=\lambda v
+\end{equation}
+La solution est obtenue en consid\'erant $v$ le premier vecteur propre.
+
+Commentaire: Le nombre de vecteurs propres associ\'e \`a des valeurs propres non nulles est \'egal \`a $K-1$ (du fait du rang de $B$)
+
+\subsection{Analyse Discriminante Bayesienne}
+
+On cherche \`a construire une r\`egle de pr\'ediction sur l'affectation  d'un individu \`a l'un des groupes.
+On s'int\'eresse \`a estimer
+\begin{equation}
+p_k(x)=P(y=k|X_1=x_1, \ldots,X_n=x_n)
+\end{equation}
+
+On effectuera l'observation un groupe le plus probable.
+On utilise la formule de Bayesienne pour calculer $p_k(x)$  avec l'hypoth\`ese que le $X=(X_1,\ldots,X_p)\sim\mathcal{N}(\mu_k,\Sigma_k)$ sur chaque population et en fonction des probabilis\''es a priori $q_k=\mathbb{P}(y=k)$ d'appartenance aux differentes sous-population. La formule de Bayes permet d'obtenir la probabilit\'e a posterori $p_k(x)$ en fonction de la densit\'e $f_k(x)$
+ et des probabilit\'e $q_k$..
+\begin{equation}
+p_k(x)=\mathbb{P}(Y=k|X=x)=\frac{f_h(x)q_h}{\sum_{k=1}^K f_h(x)q_k}
+\end{equation}
+\subsubsection{Cas de matrice de covariances homog\`ene}
+Ici, on suppose que $X=(X_1,\ldots,X_p)\sim\mathcal{N}(\mu_h,\Sigma)$ sur la sous population $\mathcal{P}_k$
+
+(Photo)
+
+En remplacant la moyenne $\mu_h$ par leur estimation,
+\begin{equation}
+\hat{\mu}_h=m_h
+\end{equation}
+\begin{equation}
+\hat{q}_k=\frac{n_k}{n}
+\end{equation}
+Et la matrice de covariance par son estimation
+\begin{equation}
+S=\frac{1}{n-k}\sum_{k=1}^Kn_kV_k
+\end{equation}
+On obtient des fonctions discriminantes lin\'eaire $d_h(x)$ suivante
+\begin{equation}
+d_h(x)=\frac{1}{2}m_k^TS^{-1}m_k-h^TS^{-1}x+\ln(\hat{q}_h)
+\end{equation}
+on en d\'eduit une estimation des probabilit\'es a posteriori
+\begin{equation}
+\hat{p}_h(x)=\frac{exp(d_h(x))}{\sum_{k=1}^K exp(d_k(x))}
+\end{equation}
+Un nouvel individu sur lequel a \'et\'e observ\'e les valeurs $x=(x_1,\ldots,x_p)$ est affect\'e au groupe $h$ pour lequel $d_h(x)$ est maximum.
+
+\subsubsection{Cas o\`u les covariances sont h\'et\'erog\`ene}
+On suppose maintenant que $X=(X_1,\ldots,X_p)$ est une loi multinomial $\mathcal{N}(\mu_h,\Sigma_h)$ sur chaque sous population $\mathcal{P}_h$.
+Avec un raisonnement analogue et enconsid\'erant
+\begin{equation}
+\hat{\mu}
+\end{equation}
+
+On obtient des fonctions discriminantes quadratiques definie par 
+\begin{equation}
+d_h(x)=-\frac{1}{2}(x-m_k)^TS_h^{-1}(x-m_h)
+\end{equation}
+
+(Photo)
+
+Pour chacun entre la version lin\'eaire ou quadratique, on proc\`ede par cross validation.
+
 
 \end{document}
