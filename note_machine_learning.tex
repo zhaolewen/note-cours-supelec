@@ -873,6 +873,145 @@ par
 y_i(x_i^T\beta++\beta_0)>1-\epsilon_i
 \end{equation}
 
+On d\'efinit donc le probl\`eme d'optimisation suivant
+\begin{equation}
+\min \frac{1}{2}||\beta||^2+\\gamma\sum_{i=1}^n\beta_i
+\end{equation}
+sc
+\begin{equation}
+\left{\begin{array}{rc}
+y_i(x_i^T\beta+\beta_0)>=1-\epsilon_i & i=1,\ldots,n\
+\epsilon_i>=0 & i=1,\ldots,n
+\end{array}\right.
+\end{equation}
+
+Remarque 1: Le param\`etre $\gamma$ est un param\`etre de r\'egularisationpermettant d'\'etablir un compromis entre dargeur de marge "raisonnable" et taux d'erreur.
+
+Remarque 2:
+\begin{equation}
+y_i(x_i^T\beta++\beta_0)>=1-\epsilon_i\Leftrightarrow \epsilon_i>=1-y_i(x_i^T\beta+\beta_0)
+\end{equation}
+Dans ce cas, le Largrangian s'ecrit
+\begin{equation}
+\begin{split}
+L(\beta,\beta_0,\epsilon,\alpha,\mu)=&\frac{1}{2}||\beta||^2+\gamma\sum_{i=1}^n\epsilon_i-\sum_{i=1}^n\alpha_i(y(x_i^T\bet+\beta_0)-(1-\epsilon_i))-\sum_{i=1}^n\mu_i\epsilon_i
+\end{split}
+\end{equation}
+
+En annulant la d\'eriv\'ee du Largrangian par rapport aux $\beta,\beta_0$ et $\epsilon_i$
+\begin{equation}
+\frac{\partial L}{\partial \beta}=\beta-\sum_{i=1}^n\alpha_iy_ix_i=0
+\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial \beta_0}=-\sum_{i=1}^n x_iy_i=0
+\end{equation}
+\begin{equation}
+\frac{\pratial L}{\partial \epsilon_i}=\gamma-\alpha_i-\mu_i=0,i=0,\ldots,n
+\end{equation}
+
+En d\'eveloppant cette formule et en injectant les constantes, on obtient 
+\begin{equation}
+L(\alpha)=\sum_{i=1}^n\alpha_i-\frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n\alpha_i\alpha_jy_iy_ix^T_ix_j
+\end{equation}
+m\^eme expression que dans le cas lin\'eairement s\'eparabl.
+
+Le probl\`eme d'optimisation g\'en\'eral des SVM consiste \`a maximiser ()  sous les contraintes:
+\begin{equation}
+\left{\begin{array}{lc}
+\alpha_i>=0 & i=1,\ldots,n\\
+\mu_i>=0 & i=1,\ldots,n\\
+\mu_i=\gamma-\alpha_i & i=1,\ldots,n\\
+\sum_{i=1}^n\alpha_iy_i=0
+\end{array}
+\Leftrightarrow\left{\begin{array}{l}
+0<=\alpha_i<=\gamma\\
+\sum_{i=1}^n\alpha_iy_i=0
+\end{array}\right.
+\end{equation}
+
+En r\''esum\'e, SVM est d\'efini par le probl\`eme d'optimisation suivant
+\begin{equation}
+whatever
+\end{equation}
+
+Soit $\alpha^*$
+ la solution de (),  les conditions KKT se ram\`ene ici KTT1
+ \begin{equation}
+ \alpha_i^*[y_i(x_i^T\beta^*+\beta^*_0)-(1-\epsilon_i)]=0
+\end{equation}
+KKT 2:
+\begin{equation}
+\mu_i^*\epsilon_i^*=0
+\end{equation}
+
+Les SV sorrespondent aux $x_i$ associ\'es \`a des $\alpha_i^*>0$.. Ils  v\''erifient
+\begin{equation}
+y_i(x_i^T\beta^*+\beta^*_0)=1-\epsilon_i^*
+\end{equation}
+Les SV sont soit les $x_i$
+ mal class\'es $(1-\epsilon_i)<0$, soit les $x_i$ \`a l'int\'erieur de la marge.
+ 
+ Si de plus $\mu_i^*>0$ ($0<\alpha_i<Y$), alors,, $\epsilon_i=0$ et dans ce cas, les SV $x_i$ sont sur la marge.
+ 
+ Posons $S=\{i|\alpha_i^*>0\}$ l'ensemble des indices associ\'ees  aux SV.
+ 
+ Une fois resolu le probl\`eme dual
+\begin{equation}
+\beta^*=\sum_{i=1}^n\alpha_i^*y_ix_i=\sum_{i\in S}\alpha_i^*y_ix_i
+\end{equation}
+
+Par ailleurs, pour obtenir $\beta_0^*$, il suffit de consid\'erer un SV sur la marge ($0<\alpha<\gamma$) puis d'utiliser KKT 1
+\begin{equation}
+\beta_o^*=\frac{1}{y_i}-x_i^T\beta^*=y_i-x_i^T\beta^*
+\end{equation}
+La fonction de d\'ecision est la  m\^eme que pr\'ec\'edamment
+\begin{equation}
+f^*(x)=\sum_{i\in S}\alpha^*y_ix_i^Tx++\beta_0^*
+\end{equation}
+$\\Rightarrow$
+\begin{equation}
+d^*(u)=sign(f^*(x))
+\end{equation}
+\subsection{SVM comme une probl\'ematique de fonction de co\^ut p\'enalis\'e}
+\begin{equation}
+\min_\beta\frac{1}{2}||\beta||^2++\gamma\sum_{i=1}^n
+\end{equation}
+sc
+\begin{equation}
+y_i(x_i^T\beta+\beta_0)>=1-\epsilon_i, i=1,\ldots,n
+\end{equation}
+et
+\begin{equation}
+\epsilon_i>=0,  i=1,\ldots,n
+\end{equation}
+$\Leftrightarrow$
+\begin{equation}
+\min_\beta \frac{1}{2}||\beta||^2+\gamma\sum_{i=1}^n\epsilon_i
+\end{equation}
+sc
+\begin{equation}
+\epsilon_i>=1-y_i(x_i^T\beta+\beta_0)
+\end{equation}
+\begin{equation}
+\epsilon_i>=0
+\end{equation}
+$\Leftrightarrow$
+\begin{equation}
+\min_\beta\frac{1}{2}+\gamma\sum_{i=1}^nmax(0,1-y_i(x_i^T\beta+\beta_0))
+\end{equation}
+$\Leftrightarrow$
+\begin{equation}
+\min_\beta\sum_{i=1}^n\max(0,1-y_i(x_i^T\beta+\beta_0))+\lambda||\beta||^2
+\end{equation}
+Premier terme Hinge Loss
+
+Si l'on souhaite \'etendre les SVM lin\'eaire \`a non-lin\'eaire, il suffit d'appliquer le kernel trick.
+
+Les probl\`eme d'optimisation associ\'e au SVM non-lin\'eaire est le suivant
+\begin{equation}
+\max_\alpha{\sum_{i=1}}
+\end{equation}
+
 
 
 
