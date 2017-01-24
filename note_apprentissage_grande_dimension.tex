@@ -492,6 +492,116 @@ x_i+t & \text{si} x_i <=t
 \end{array}\right.
 \end{equation}
 
+Fast Proximal gradient algorithm
+
+Convexe \& differentielle
+\begin{equation}
+f(y)>=f(x)+\nabla f(x)^T(y-x)
+\end{equation}
+
+Sous-gradient | sous differentielle
+\begin{equation}
+\partial f(x)=\{g|g^T(x-y)<=f(y)-f(x)\}
+\end{equation}
+
+Prox.
+\begin{equation}
+prox_f (x) = argmin_\mu \{f(\mu)+\frac{1}{2}||x-\mu||^2_2\}
+\end{equation}
+\begin{equation}
+x-u\in\partial f(u) \Leftrightarrow u=prox_f (x)
+\end{equation}
+
+\begin{equation}
+\min f(\beta)=g(\beta)+h(\beta)
+\end{equation}
+$\nabla g$ L-Lipschitzienne
+$prox_{th}$ convexe
+
+FISTA:
+(n'est pas une m\'ethode de descente)
+\begin{equation}
+y = x_{k-1}+\frac{k-2}{k+1}(x_{k-1}-x_{k-2})
+\end{equation}
+\begin{equation}
+x_k=prox_{t_k h}(y-t_k\nabla g(y))
+\end{equation}
+\begin{equation}
+t_k=\frac{1}{L} \text{constant}
+\end{equation}
+
+Reformulation
+\begin{equation}
+\theta_k=\frac{2}{k+1}
+\end{equation
+$v_k$ tel que $v_0=x_0$ et $\forall k>=1$
+\begin{equation}
+\left{
+\begin{array}{l}
+y=(1-\theta_k)x_{k-1}+\theta_k v_{k-1}\\
+x_k=prox_{th} (y-t_k\nabla g(y))\\
+v_k=x_{k-1}+\frac{1}{\theta_k}(x_k-x_{k-1})
+\end{array}\right.
+\end{equation}
+
+In\'egalit\'e
+\begin{equation}
+\forall k>=2,\frac{1-\theta_k}{\theta_k}<=\frac{1}{\theta^2_{k-1}}
+\end{equation}
+BQS(g)
+\begin{equation}
+g(u)<=g(z)+\nabla g^T(z)(u-z)+\frac{L}{2}||u-z||^2_2
+\end{equation}
+$BQS(h)$
+\begin{equation}
+u=prox_{th}(w)
+\end{equation}
+alors
+\begin{equation}
+\forall z, h(u)<=h(z)+\frac{1}{t}(v-u)^T(u-z)
+\end{equation}
+
+1.
+\begin{equation}
+g(x^+)<=g(y)+\nabla g^T(y)(x^+-y)+\frac{1}{2t}||x^+-y||^2_2
+\end{equation}
+2.
+\begin{equation}
+\begin{split}
+h(x^+)<=h(z)+\frac{1}{t}(y-t\nabla g(y)x^+)^T(x^+-z)\\
+=h(z)+\nabla g(y)^T(z-x^+)+\frac{1}{t}(x^+-y)^T(z-x^+)
+\end{equation}
+1+2:
+\begin{equation}
+\begin{split}
+f(x^+)=g(x^+)+h(x^+)\\
+<=g(y)+h(z)+\nabla g(y)^T (x^+-y+z-x^+)+\frac{1}{2t}||x^+-y||_2^2+\frac{1}{t}(x^+-y)^T(z-x^+)\\
+<=f(z)+\frac{1}{2t}||x^+-y||_2^2+\frac{1}{t}(x^+-y)^T(z-x^+)
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+f(x^+)-f^*-(1-\theta)(f(x)-f^*)\\
+<=\frac{\theta^2}{2t}(||v-x^*||_2^2)-||v^+-x^*||_2^2\\
+\Leftrightarrow \frac{t}{\theta^2}(f(x)-f^*+\frac{1}{2}||v_1-x^*||_2^2<=\frac{1-\theta_1^2}{\theta_1^2}(f(z)-f^*)+\frac{1}{2}||v-x^*||_2^2
+\end{split}
+\end{equation}
+Comme 
+\begin{equation}
+\frac{1-\theta_1}{\theta_1^2}<=\frac{1}{\theta_{i-1}^2}
+\end{equation}
+Conclusion
+\begin{equation}
+\frac{t}{\theta_k^2}(f(x_k)-f^*)-\frac{1}{2}||v_1-x^*||_2^2<=\frac{(1-\theta_1)^t}{\theta_1^2}(f(x_0)-f^*)+\frac{1}{2}||v_0-x^+||_2^2
+\end{equation}
+Ainsi
+\begin{equation}
+\frac{t}{\theta_k^2}f(x_k)-f^*<=\frac{(1-\theta_1)^t}{\theta_1^2}(f(x_0-f^*))+\frac{1}{2}||v_k-x^*||_2^2-\frac{1}{2}||v_0-x^*||_2^2
+\end{equation}
+\begin{equation}
+f(x_k)-f^*<=\frac{2L}{(k+1)^2}||x_0-x^*||_2^2
+\end{equation}
 
 
 
