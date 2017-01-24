@@ -1,9 +1,12 @@
 \documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
 \title{Machine Learning}
-\maketitle
-\pagebreak
 
 \begin{document}
+\maketitle
+\pagebreak
 \section{La regression dans tous ses \'etats}
 \subsection{Introduction \`a la r\'egression multiple}
 La r\'egression muyltiple permet d'\'etudier la liaison entre une variable (\`a expliquer) $Y$ et un ensemble de $p$ variables explicatives $X_1,\ldots,X_p$.
@@ -19,12 +22,12 @@ o\`u les coefficients de r\'egression $\beta_j$ sont des param\`etres fixe mais 
 On dispose de $n$ observations des variables $X_1,\ldots,X_p$
 Soit 
 \begin{equation}
-X=
-\begin{split}
+X=\left[
+\begin{array}{cccc}
 y_1 & x_{11} & \ldots & x_{p1} \\
 \ldots & \ldots & \ldots & \ldots \\
 y_m & x_{1m} & \ldots & x_{pm}
-\end{split}
+\end{array}\right]
 \end{equation}
 (Tableau d'observations)
 
@@ -141,7 +144,7 @@ Le MSE(Mean Square Error) d'un estimateur $\hat{\beta}$ d'un vecteur $\beta$ est
 MSE(\hat{\beta})&=\mathbb{E}[tr(\hat{\beta}-\beta)(\hat{\beta}-\beta)^T]\\
 &=\mathbb{E}[(\hat{\beta}-\beta)^T(\hat{\beta}-\beta)]\\
 &=\mathbb{E}[||\hat{\beta}-\beta||_2^2]\\
-&=[\mathbb{E}[\hat{\beta}-\beta]^T][\mathbb{E}[\hat{\beta}]-\beta]+\mathbb{E}[(\hat{\beta}-\methbb{E}[\hat{\beta}])(\hat{\beta}-\mathbb{E}[\hat{\beta}])]\\
+&=[\mathbb{E}[\hat{\beta}-\beta]^T][\mathbb{E}[\hat{\beta}]-\beta]+\mathbb{E}[(\hat{\beta}-\mathbb{E}[\hat{\beta}])(\hat{\beta}-\mathbb{E}[\hat{\beta}])]\\
 &=biais^2(\hat{\beta})+ tr(var(\hat{\beta}))\\
 &=\sigma^2tr(X^TX)^{-1}\\
 &=\sigma^2\sum_{j=1}^{P}\frac{1}{\lambda_j}
@@ -197,13 +200,13 @@ C=(X^TX)^{-1}=\frac{1}{1-r_{12}^2}\left(\begin{array}{cc}
 \end{array}\right)
 \end{equation}
 
-On rppelle que
+On rappelle que
 \begin{equation}
 var(\hat{\beta})=\sigma^2(X^TX)^{-1}
 \end{equation}
 donc
 \begin{equation}
-var(\hat{\beta}_j)=\sigma^2C_jj
+var(\hat{\beta}_j)=\sigma^2C_j
 \end{equation}
 
 Alors, une forte corr\'elation entre $X_1$ et $X_2$ est indiqu\'ee par $|r_{12}|\to 1$. Ceci implique que $var(\hat{\beta}_j)\to +\infty$.
@@ -211,7 +214,7 @@ Ainsi, MSE qui explose.
 
 De mani\'ere g\'en\'erale, on peut montrer que dans le cas de $p$ variables explicatives, des elements diagonaux de $C=(X^TX)^{-1}$ sont \'egaux \`a 
 \begin{equation}
-C_jj=\frac{1}{1-R_j^2}
+C_j=\frac{1}{1-R_j^2}
 \end{equation}
 o\`u $R_j^2$ est le coefficient de determination entre $X_j$ et les $p$ autres variables. S'il existe une forte multi-colin\'earit\'e entre $X_j$ et les  $(p-1)$ autres variables. $R_j^2\to 1$
 
@@ -222,7 +225,7 @@ Exemple II
 \subsection{Facteur de shrinkage}
 On rappelle que 
 \begin{equation}
-\hat{\beta}^{OLS}=(X^TX)^{-1}X^Ty=\sum_{j=1}^{P}\frac{v_j^Ty}{\sqrt{\lambda_j}}\mu_j\sum_{j=1}^{P}\z_j
+\hat{\beta}^{OLS}=(X^TX)^{-1}X^Ty=\sum_{j=1}^{P}\frac{v_j^Ty}{\sqrt{\lambda_j}}\mu_j\sum_{j=1}^{P}z_j
 \end{equation}
 
 Dans sa forme g\'en\'erale, on f\'efinit un estimateur g\'en\'erale de $\beta$ par
@@ -244,17 +247,17 @@ D=diag(f(\lambda_1),\ldots,f(\lambda_p))
 \begin{equation}
 \begin{split}
 \hat{\beta}=&argmin_{\beta\in\mathbb{R}^p}\{||y-X\beta||+\lambda||\beta||_2^2\}\\
-=&(X^TX+\lambdaI_p)^{-1}X^Ty\\
+=&(X^TX+\lambda I_p)^{-1}X^Ty\\
 =&\sum_{j=1}^p\frac{\lambda_j}{\lambda_j+\lambda}\frac{v^T_jy}{\sqrt{\lambda_j}}\\
 =&\sum_{j=1}^p f(\lambda_j)z_j
 \end{split}
 \end{equation}
 
 \begin{equation}
-\hat{y}_\lambda=X\hat{\beta}_\lambda^{RR}=V\SigmaU^TU(\Lambda+\lambda I)^{-1}\Sigma\Lambda y=V\Sigma(\Lambda+\lambda I)^{-1}\Sigma V^T y
+\hat{y}_\lambda=X\hat{\beta}_\lambda^{RR}=V\Sigma U^TU(\Lambda+\lambda I)^{-1}\Sigma\Lambda y=V\Sigma(\Lambda+\lambda I)^{-1}\Sigma V^T y
 \end{equation}
 
-\subsubsection{Choix de mod\`ele (\lambda) + ridge path validation crois\'ee}
+\subsubsection{Choix de mod\`ele ($\lambda$) + ridge path validation crois\'ee}
 \begin{itemize}
         \item Ensemble d'apprentissage permet de construire le mod\`ele
         \item Ensemble de test permet d'\'evaluer la qualit\'e du mod\`ele 
@@ -301,7 +304,7 @@ Preuve
 (X^TX+\lambda I_p)^{-1}X^T(XX^T+\lambda I_n)=X^T
 \end{equation}
 \begin{equation}
-(X^TX+\lambdaI_p)^{-1}(X^TX+\lambdaI_p)X^T=X^T
+(X^TX+\lambda I_p)^{-1}(X^TX+\lambda I_p)X^T=X^T
 \end{equation}
 Il vient de cette proposition une formulation duale pour $\hat{\beta}^{RR}$
 \begin{equation}
@@ -366,7 +369,7 @@ Plut\^ot que de repr\'esenter les observations par un tableau individus $x$ vari
 \end{equation}
 
 Remarque: Mesure de similarit\'e quelle que soit la nature et la complexit\'e des objets.(images, graphs, s\'equences ADN,...)
-Remarque 2: La matrice $K$ est toujours de dimension $n\times n$ \forall la taille de l'objet.
+Remarque 2: La matrice $K$ est toujours de dimension $n\times n \forall$ la taille de l'objet.
 
 Dans ce cours nous nous restrienons \`aune classe particuli\`res de fonction $k$.
 
@@ -379,7 +382,7 @@ Une fonction $k$ semi definie positive sur l'ensemble $X$ est une fonction $k:X,
 et quisatisfait pour 
 (Photo)
 
-et $(a_1,\ldots,\a_n)\in\mathcal{R}^n$
+et $(a_1,\ldots,a_n)\in\mathcal{R}^n$
 \begin{equation}
 \sum_{i,j=1}^na_ia_jk(x_i,k_j)>=0
 \end{equation}
@@ -428,10 +431,10 @@ alors
 \end{split}
 \end{equation}
 
-Representation theorem (Kimeldoif & Wabhia 1970)
+Representation theorem (Kimeldoif \& Wabhia 1970)
 
 Soit $\mathcal{H}$ un RKHS associ\'e \`a un noyau $k$.
-Soit $\Omega [0,+\infty\[\to\mathbb{R} $ une fonction strictement croissante
+Soit $\Omega [0,+\infty [\to\mathbb{R} $ une fonction strictement croissante
 Soit $\mathcal{X}$ un emsemble et $l(\mathcal{X}\times\mathbb{R})\to\mathbb{R}$ une fonction de co\^ut.
 
 Alors toute solution du probl\`ele d'optimisation suivant 
@@ -459,11 +462,11 @@ f=f_s+f_\perp
 \end{equation}
 Ainsi
 \begin{equation}
-||f||_\mathcal{H}^2=||f_s||^2_\mathcal{H}+||f_\perp||__\mathcal{H}^2>=||f||_\mathcal{H}^2
+||f||_\mathcal{H}^2=||f_s||^2_\mathcal{H}+||f_\perp||_\mathcal{H}^2>=||f||_\mathcal{H}^2
 \end{equation}
 Puisque $\Omega$ est strictement croissante, on a 
 \begin{equation}
-\Omega(||f||_\methcal{H}^2)>\Omega(||f_s||_\mathcal{H}^2)
+\Omega(||f||_\mathcal{H}^2)>\Omega(||f_s||_\mathcal{H}^2)
 \end{equation}
 Cela signifie que $\Omega$ est minimis\'ee pour des fonctions $f\in span\{k(x_i,.),1<=i<=n\}$
 
@@ -528,7 +531,7 @@ k(x_i,x_j)=&1+x_{i1}^2x_{j1}^2+2x_{i1}x_{j1}x_{i2}x_{j2}+x_{i2}^2x_{j2}^2+2x_{i1
 
 Astude du noyau
 \begin{equation}
-\hat{\alpha}^{RR}=(XX^^T+\lambda I_n)^{-1}y
+\hat{\alpha}^{RR}=(XX^T+\lambda I_n)^{-1}y
 \end{equation}
 \begin{equation}
 \hat{\alpha}^{RR}=(K+\lambda I_n)^{-1}y
@@ -616,9 +619,22 @@ Donc, la variance totale s'\''ecrit
 \end{equation}
 Si l'on definit une operation de projection $\Pi=vv^T$avec $v^Tv=1$
 \begin{equation}
-\sigma_{within}^2
+\begin{split}
+	\sigma_{within}^2=&\frac{1}{n}\sum_{k=1}^K\sum_{i\in\mathcal{L}_k}(\Pi_{x_i}-\Pi_{m_k})^T(\Pi_{x_i}-\Pi_{m_k})\\
+	=&\frac{1}{n}\sum_{k=1}^K\sum_{i\in\mathcal{L}_k}(vv^Tx_i-vv^Tm_k)^T(vv^Tx_i-vv^Tm_k)\\
+	=&\frac{1}{n}\sum_{k=1}^K(x_i-m_k)^Tvv^Tvv^T(x_i-m_k)
+\end{split}
 \end{equation}
-(Photo)
+
+\begin{equation}
+	\begin{split}
+		\sigma_w^2=&\frac{1}{n}\sum_{k=1}^K\sum_[i\in\mathcal{L}_k](x_i-m_k)^Tvv^T(x_i-m_k)\\
+		=&\frac{1}{n}\sum_{k=1}^K\sum_{i\in\mathcal{L}_k}v^T(x_i-m_k)(x_i-m_k)^Tv\\
+		=&v^T[\frac{1}{n}\sum_{k=1}^K\sum_{i\in\mathcal{L}_k}(x_i-m_k)(x_i-m_k)^T]v\\
+		=&v^T[\frac{1}{n}\sum_{k=1}^Kn_k\sum_{i\in\mathcal{L}_k}(x_i-m_k)(x_i-m_k)^T]v\\
+		=&v^Tv
+	\end{split}
+\end{equation}
 
 Pour la variance between projet\'ee sur $V$
 \begin{equation}
@@ -635,7 +651,7 @@ L'analyse discriminante factorielle est  d\'efinie par le probl\`eme d'optimisat
 \begin{equation}
 \max(\frac{v^TBv}{v^TWv})
 \end{equation}
-On remarque si $v^*$  est solution alors $\alphav^*$ est \'egalement solution
+On remarque si $v^*$  est solution alors $\alpha v^*$ est \'egalement solution
 \begin{equation}
 \max(v^TBv),\text{ sc } v^TWv=1
 \end{equation}
@@ -666,7 +682,7 @@ Commentaire: Le nombre de vecteurs propres associ\'e \`a des valeurs propres non
 On cherche \`a construire une r\`egle de pr\'ediction sur l'affectation  d'un individu \`a l'un des groupes.
 On s'int\'eresse \`a estimer
 \begin{equation}
-p_k(x)=P(y=k|X_1=x_1, \ldots,X_n=x_n)
+p_k(x)=P(y=k|X_1=x_1, \ldots,X_p=x_p)
 \end{equation}
 
 On effectuera l'observation un groupe le plus probable.

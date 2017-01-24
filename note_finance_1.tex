@@ -27,7 +27,7 @@
 
 \section{Cadre de valorisation des produite devive}
 \subsection{Introduction}
-Les produits d\'eriv\'es comme des options expose leur vendeur \`a un grand risque de perte, si ce risque n'est pas couvert, la perte peut \^etre consid\'erable. Ainsi, le vendeur de ces produits doit r\'epondre \`a deux questions majeurs:
+Les produits d\'eriv\'es comme des options exposent leur vendeur \`a un grand risque de perte, si ce risque n'est pas couvert, la perte peut \^etre consid\'erable. Ainsi, le vendeur de ces produits doit r\'epondre \`a deux questions majeurs:
 \begin{enumerate}
 	\item Quel prix doit je facturer (probl\`eme de valorisation ou pricing)
 	\item Comment investir cette prime pour couvrir tout au long du temps le risque et pouvoir honorer l'engagement \`a maturit\'e(probl\`eme de couverture ou hedging).
@@ -64,18 +64,18 @@ Le rendement d'un produit sans risque est forc\'ement $R$
 
 \textbf{Prueve}:
 
-Supposons le contraire: Notons la valeur de ce produit est $V_0$ en $t=0$, et supposons que le taux de rangement $r'>r$. En $t=0$, on fait la strat\'egie suivante:
+Supposons le contraire: Notons la valeur de ce produit est $V_0$ en $t=0$, et supposons que le taux de rendement $R'>R$. En $t=0$, on fait la strat\'egie suivante:
 \begin{enumerate}
 	\item On prend $V_0$ au taux sans risque.
 	\item Acheter le produit $V$ au prix $V_0$
-	\item En $T$, on rembouse $V_0e^{RT}$, et on re\c{c}oit $V_0e^{r'T}$
+	\item En $T$, on rembouse $V_0e^{RT}$, et on re\c{c}oit $V_0e^{R'T}$
 \end{enumerate}
-Avec un investissement initial nul, je gagne \`a coup s\^ur $V_0(e^{r'T}-e^{rT})$. Donc, il y a opportunit\'e d'arbitrage.
+Avec un investissement initial nul, je gagne \`a coup s\^ur $V_0(e^{R'T}-e^{RT})$. Donc, il y a opportunit\'e d'arbitrage.
 
-Si $r'<r$, on fait la strat\'egie inverse.
+Si $R'<R$, on fait la strat\'egie inverse.
 
 \subsubsection{Propri\'et\'e 2}
-Si deux portefeuille ont la m\^eme valeur \`a une maturit\'e $T$, alors ils sont \'egale \`a tout instant avant maturit\'e.
+Si deux portefeuille ont la m\^eme valeur \`a une maturit\'e $T$, alors ils sont \'egales \`a tout instant avant maturit\'e.
 
 \textbf{Preuve}:
 
@@ -94,7 +94,7 @@ alors on fait la strat\'egie suivante:
 
 Calculer le prix du forward de matirut\'e $T$ sur une action $S$
 \begin{equation}
-	V_0\rightarrow V_0e^{RT}
+	S_0\rightarrow S_0e^{RT}
 \end{equation}
 
 \textbf{Solution}
@@ -118,7 +118,27 @@ Si $F>S_0e^{RT}$
 \subsection{Propri\'et\'e sur les prix des options}
 
 \subsubsection{Notations}
-On note $Call_t(T,K)$ le prix du call \`a l'instant $t$, de strike $K$, et de maturit\'e $T$.
+On note $Call_t(T,K)$ le prix du call \`a l'instant $t$, de strike $K$, et de maturit\'e $T$. On note aussi $Put_t(T,K)$ le prix du put \`a l'instant $t$ de strike $K$ et de maturit\'e $T$.
+
+Le flux du put \`a maturit\'e est $(K-S_T)_+$, et le flux du call est $(S_T-K)_+$.
+
+On dit que le call est
+\begin{equation}
+	\left\{\begin{array}{rcl}
+		\text{\`a la monnaie} & \text{si} & S_t=K\\
+		\text{dans monnaie} & \text{si} & S_t>K\\
+		\text{en dehors de la monnaie} & \text{si} & S_t<K
+	\end{array}\right.
+\end{equation}
+
+Pour un put:
+\begin{equation}
+	\left\{\begin{array}{rcl}
+		\text{\`a la monnaie} & \text{si} & S_t=K\\
+		\text{dans monnaie} & \text{si} & S_t<K\\
+		\text{en dehors de la monnaie} & \text{si} & S_t>K
+	\end{array}\right.
+\end{equation}
 
 \subsubsection{Relation de parit\'e Call-Put}
 
@@ -147,7 +167,10 @@ Donc on constrire 2 portefeuilles:
 	\item Acheter une option Call sur l'actif $S$ et vendre une option Put avec strike $K$.
 	\item Acheter un actif $S$ et vendre K bonds $B(t,T)=e^{-r(T-t)}$
 \end{enumerate}
-Ces deux portefeuilles donne la m\^eme valeur au strike. 
+Ces deux portefeuilles donne la m\^eme valeur au strike, car au $T$
+\begin{equation}
+	C(T)-P(T) = (S_T-K)_+-(K-S_T)_+=S_T-K
+\end{equation}
 	
 \subsection{Options am\'ericaines}
 Option am\'ericaine similaire aux options europeens mais l'exercise du droit pourra se faire \`a toute date $t$ avant maturit\'e $T$.
@@ -201,7 +224,7 @@ Put_t(T, K)< K-S_t
 \section{Th\'eorie de la valorisation dans le cas discr\`et \`a une p\'eriode}
 
 \subsection{Introduction}
-Nous avons vu que les contrats \`a termes peuvent \^{e}tre valoris\'es par le principe de non-arbitrage alors que ce principe ne donne que des bornes sur le prix des options. La valorisation de ces produits assez complexes n\'ecessite l'introduction des mod\`eles probabilistes pour d\'ecrire les sc\'enarios possibles du march\'e.
+Nous avons vu que les contrats \`a terme peuvent \^{e}tre valoris\'es par le principe de non-arbitrage alors que ce principe ne donne que des bornes sur le prix des options. La valorisation de ces produits assez complexes n\'ecessite l'introduction des mod\`eles probabilistes pour d\'ecrire les sc\'enarios possibles du march\'e.
 
 Dans ce march\'e, si l'on trouve une strat\'egie qui r\'eplique le payoff de l'option, alors le portefeuille construit par cette strat\'egie r\'eplique l'option.
 
@@ -209,7 +232,7 @@ Par l'absence d'opportunite d'arbitrage, la valeur de ce portefeuille est la m\^
 
 \subsection{Mod\`ele \`a une p\'eriode}
 
-On consir\`ere qu'il y a $d+1$ actifs financiers et $2$ dates: $t=0, t=1$. L'al\'ea du mod\`ele est represent\'e par $K$ \'etats dans $\Omega=\{\omega_1,\ldots,\omega_K\}$.
+On consid\`ere qu'il y a $d+1$ actifs financiers et $2$ dates: $t=0, t=1$. L'al\'ea du mod\`ele est represent\'e par $K$ \'etats dans $\Omega=\{\omega_1,\ldots,\omega_K\}$.
 
 En $t=1$, avec des probabilit\'es $ \{p_1,\ldots,p_K\},(p_i>0) $.
 
@@ -243,7 +266,7 @@ alors
 Une opportunite d'arbitrage est une strategie $\theta$ tel que 
 \begin{enumerate}
 	\item  $V_0^\theta =0$
-	\item $P(V_1^\theta >=0) = 1$ et $P(V_1^\theta>0)>0$ 
+	\item $P(V_1^\theta\geq 0) = 1$ et $P(V_1^\theta>0)>0$ 
 \end{enumerate}
 o\`u
 \begin{enumerate}
@@ -327,7 +350,7 @@ $\Rightarrow$ Il y a arbitrage. Contradition, donc $0\in C \Rightarrow \exists $
 \begin{equation}
 \Omega=\{\omega_1, \omega_2,\omega_3, \omega_4\}, \mathbb{P}=\{0.3, 0.3,0.2,0.2\}
 \end{equation}
-$R=0.25$, $S^0$: Actif sans risque vaux $1$ en $t=0$.
+$R=0.25$, $S^0$: Actif sans risque vaut $1$ en $t=0$.
 $S^1$: une action qui vaut $1$ en $t=0$.
 $S^2$: un call sur $S^1$ de strike $K=1$ qui vaut $0.3$ en $t=0$.
 \begin{center}
@@ -978,10 +1001,10 @@ H_2=(S_2^1-1)_+
 \end{equation}
 pour $S_1^1=4$:
 \begin{equation}
-q_2=\frac{1.25-0.5}{2-0.5}=\frac{0.75}{1.5}\frac{1}{2}
+q_{2d}=\frac{1+R-d}{u-d}=\frac{1.25-0.5}{2-0.5}=\frac{0.75}{1.5}=\frac{1}{2}
 \end{equation}
 \begin{equation}
-P_1(H_2)=\frac{1}{1.25}[\frac{1}{2}\times 7+\frac{1}{2}\times 1]=\frac{16}{5}
+P_1(H_2)=\frac{E[H_2]}{1+R}=\frac{1}{1.25}[\frac{1}{2}\times 7+\frac{1}{2}\times 1]=\frac{16}{5}
 \end{equation}
 pour $S_1^1=1$:$q_2=\frac{1}{2}$
 \begin{equation}
@@ -993,13 +1016,13 @@ P_0(H_2)=\frac{4}{5}\times[\frac{1}{2}\times\frac{16}{5}+\frac{1}{2}\times\frac{
 \end{equation}
 
 \begin{thm}
-	Le juste prix $P_0(H_n)$ $(H_n=(S_n^1-K)_+)$ converge quand $n->\infty$ au prix Black Scholes.
+	Le juste prix $P_0(H_n)$ $(H_n=(S_n^1-K)_+)$ converge quand $n\to\infty$ au prix Black Scholes.
 \end{thm}
 \begin{equation}
 P_0(S,T,K)=S\mathcal{N}(d_1(S,K,\sigma^2 T))-Ke^{R T}\mathcal{N}(d_2(S,K,\sigma^2 T))
 \end{equation}
 \begin{equation}
-d_1(S,K,v)=\frac{ln(\frac{S}{Ke^{R t}})}{Nv}+\frac{1}{v}Sv
+d_1(S,K,v)=\frac{\ln(\frac{S}{Ke^{R t}})}{Nv}+\frac{1}{v}Sv
 \end{equation}
 \begin{equation}
 d_2(S,K,v)=d_1-\frac{1}{2}Sv
@@ -1106,11 +1129,11 @@ dS_t=bS_tdt+\sigma S_t dW_t \Rightarrow S_t=S_0 e^{(b-\frac{1}{2}\sigma^2 t)+\si
 \end{equation}
 \begin{equation}
 \begin{split}
-ln(S_t)&=ln(S_0)+\int_0^u (\frac{\partial ln}{\partial S}(S_t) dS_t)+\int_0^u \frac{1}{2}(\frac{\partial^2 ln}{\partial S^2}(S_t)dS_t)\\
-&=ln(S_0)+\int_0^u\frac{1}{S_t} dS_t -\int_0^u \frac{1}{S_t^2}(\sigma S_t)^2 dt\\
-&=ln(S_0)-\frac{1}{2}\int_0^u\sigma^2 dt + \int_0^u \frac{1}{S_t} (b_t S_t+dt)+\int_0^u \frac{1}{S_t}\sigma S_t dW_t\\
-&=ln(S_0)-\frac{1}{2}\sigma^2 u+b u+\int_0^u\sigma d W_t\\
-&=ln(S_0)+(b-\frac{1}{2}\sigma^2)u+\sigma W_u
+\ln(S_t)&=\ln(S_0)+\int_0^u (\frac{\partial ln}{\partial S}(S_t) dS_t)+\int_0^u \frac{1}{2}(\frac{\partial^2 ln}{\partial S^2}(S_t)dS_t)\\
+&=\ln(S_0)+\int_0^u\frac{1}{S_t} dS_t -\int_0^u \frac{1}{S_t^2}(\sigma S_t)^2 dt\\
+&=\ln(S_0)-\frac{1}{2}\int_0^u\sigma^2 dt + \int_0^u \frac{1}{S_t} (b_t S_t+dt)+\int_0^u \frac{1}{S_t}\sigma S_t dW_t\\
+&=\ln(S_0)-\frac{1}{2}\sigma^2 u+b u+\int_0^u\sigma d W_t\\
+&=\ln(S_0)+(b-\frac{1}{2}\sigma^2)u+\sigma W_u
 \end{split}
 \end{equation}
 Ainsi,
@@ -1246,7 +1269,7 @@ Pour que cette d\'emarche fonctionne, il faut que l'EDP admet une solution uniqu
 \begin{thm}
 	Soit $g$ une fonction \`a croissance polynomiale.
 \begin{equation}
-\exists p, \forall x, |g(x)|<=c(1+|x|^p)
+\exists p, \forall x, |g(x)|\leq c(1+|x|^p)
 \end{equation}
 Alors l'EDP de B\&S admet une solution dans la classe des fonctions de croissance polynomiale, appartenant \`a $C^0([0,T]\times ]0,\infty[) and C^{1,2}([0,T)\times]0,\infty[)$ donn\'ee par:
 \begin{equation}
@@ -1261,7 +1284,7 @@ v(t,S)=E[e^{-r(T-t)}g(Se^{(r-\frac{1}{2}\sigma^2)(T-t)+\sigma (W_T -W_t)})]
 \begin{equation}
 g(S)=(S-K)_+
 \end{equation}
-dans le mod\`ele de B\&S est donn\'ee par
+dans le mod\`ele de B\&S est donn\'e par
 \begin{equation}
 v(t,S)=C_{BS}(t,S)=S\mathcal{N}(d_1)-K e^{-r(T-t)}\mathcal{N}(d_2)
 \end{equation}
@@ -1410,7 +1433,7 @@ Le delta est la sensibilit\'e du prix par rapport \`a la valeur actuelle de l'ac
 
 \item Gamma
 
-Le gamma est d\'efini comme la d\'eriv\'ee du prix au b, en la d\'eriv\'ee du delta.
+Le gamma est d\'efini comme la d\'eriv\'ee du prix au b, de la d\'eriv\'ee du delta.
 \begin{equation}
 \Gamma^c=\Gamma^p=\frac{\partial^2 C_{B,S}}{\partial S^2}=\frac{\partial^2 P_{BS}}{\partial S^2}=\frac{n(d_1)}{S\sigma\sqrt{T-t}}
 \end{equation}
