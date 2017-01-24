@@ -733,5 +733,302 @@ d_h(x)=-\frac{1}{2}(x-m_k)^TS_h^{-1}(x-m_h)
 
 Pour chacun entre la version lin\'eaire ou quadratique, on proc\`ede par cross validation.
 
+\section{Les Support Vector Machines(SVM)}
+\textbf{Introduction}
+Dans ce cours, on se concentre sur des problematiques de classification binaire. L'approche propos\'ee initialement par (Boser et al.  1995) repose sur la notion intuitive d'hyperplan s\'eparable de marge maximale. Ce nouveau concept est motiv\'e par la question suivante: 
+
+Comment construire \`a partir d'une base d''apprentissage finie une fonction de d\'ecision capable de pr\'edire efficacement la classe d'appartenance d'un individu qui n'a pas servi \`a construire le mod\`ele.
+
+\subsection{SVM Lin\'eaire et classe lin\'eaire s\'eparable}
+
+Soient $n$ observations d\'2crites par $p$ variables s\'eparable en $2$ classes.
+\`A chaque observation $x_i$ est donc associ\'e un label $y\in\{-1,1\}$.
+
+Soit un hyperplan d\'efini par
+\begin{equation}
+\mathcal{H}=\{x|f(x)=x^T\beta+\beta_0=0\}
+\end{equation}
+
+Si les donn\'ees sont lin\'eairement s\'eparable, alors. Il existe une infinit\'e d'hyperplan tel que 
+\begin{equation}
+y_if(x_i)>0
+\end{equation}
+
+L'hyperplan  s\''eparateur optimal  est d\'efini par les vecteurs $\beta$ et $\beta_0$ comme suit:
+
+Trouver $\beta$ et $\beta_0$ qui rendent maximal la distance minimale des individus \``a l'hyperplan.
+
+La distance d'un individu de $\mathcal{C}_1$ \`a l'hyperplan $H$
+\begin{equation}
+d(x,\mathcal{H})=x^T\beta-(-\beta_0)=x^T\beta+\beta_0
+\end{equation}
+
+La distance d'un individu de $\mathcal{C}_{-1}$  \`a l'hyperplan $\mathcal{H}$
+\begin{equation}
+d(x,\mathcal{H})=-\beta_0-x^T\beta
+\end{equation}
+Ainsi, $x^T\beta+\beta_0$ repr\'esente  la distance "sign\'ee" de $x$ \`a l'hyperplan $\mathcal{H}$. Cette distance est positive si $x\in\mathcal{C}_1$ et n\'egative si  $x\in\mathcal{C}_{-1}$. De plus, $y_if(x_i)>=0,\forall i$. Si les donn\'ees sont lin\'eairement s\'eparables.
+
+Conclusion
+
+L'hyperplan s\'eparateur  optimal maximise les distances sign\'ees entre les points et l'hyperplan $\mathcal{H}$.
+On cherche donc \`a maximiser l'\'epaisseur (de la marge par rapport \`a $\beta$ et $\beta_0$).
+\begin{equation}
+||\beta||=1
+\end{equation}
+
+Si $x_i$ \`a droite de 
+(Photo)
+
+Ainsi, maximiser $C$ servient \`a minimiser $||\beta||_2$(lien avec la ridge)
+Par cons\'equent, dans le cas de $2$ classes lin\'eairement s\'eparables. La recherche de l'hyperplan s\'eparateur optimal servient \`a r\'esoudre le probl\`eme d'optimisation quadratique suivant: 
+\begin{equation}
+\min_{\beta,\beta_0}\frac{1}{2}||\beta||^ \text{ sc } y_i(x_i^T\beta+\beta_0)>=1, \forall i=1,\ldots,n
+\end{equation}
+Les contraintes d\;e finissent une marge de par et d'autre de l'HSO les valeurs $x_i$ tel que 
+\begin{equation}
+y_i(x_i^T\beta+\beta_0)==1
+\end{equation}
+Sont situ\'e sur la marge et sont appel\'es "support vectors".
+
+Il faut maintenant r\'esoudre ce probl\`eme d'optimisation. 
+
+D\'efinissons le Largrangien associ\'e 
+\begin{equation}
+L(\beta,\beta_0,\alpha)=\frac{1}{2}||\beta||^2\sum_{i=1}^n \alpha[y_i(x_i^T\beta+\beta_0)-1]
+\end{equation}
+
+o\`u les $x_i>=0$ sont les multiplicateurs de Lagrange.
+
+On duit minimiser par rapport \`a  $\beta$ et $\beta_0$ et maximiser par rapport \`a $\alpha$. En annulant la d\'eriv\'ee du Lagrangien par rapport \`a $\beta$ et $\beta_0$, on obtient
+\begin{equation}
+\frac{\partial L}{\partial \beta}-\beta-\sum_{i=1}^^n\alpha_i y_ix_i
+\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial \beta}=-\sum_{i=1}^n\alpha_i y
+\end{equation}
+
+En d\'evceloppant cette formule et injecter () et (), on atteint la formulation duale du  Lagrangien 
+\begin{equation}
+L(\alpha)=\sum_{i=1}^n\alpha_i-\sum_{i=1}^n\sum_{j=1}^n\alpha_i\alpha_jy_iy_jx_i^Tx_j
+\end{equation}
+qui ne d\'epend pas de $\beta$ et $\beta_0$. On cherche ensuite \`a maximiser $L(\alpha)$ par rapport \`a $\alpha$ sous les contrainte
+\begin{equation}
+\left{\begin{array}{ll}
+\alpha_i>=0 &  i=1,\ldots,n\\\
+\sum_{i=1}^n\alpha_iy_i=0
+\end{array}
+\end{equation}
+
+C'est un probl\`eme d'optimisation quadratique sous contraintes lin\'eaire.
+Ainsi $quadprog/ipop$.
+
+Soit $\alpha^*$ la solution. La condition $KKT$ devient ici
+\begin{equation}
+\alpha_i^*[y_i(x_i^T\beta_0^*+\beta_0^*)-1]=0
+\end{equation}
+Si $\alpha_2^*>=0$,
+\begin{equation}
+\Rightarrow y_i(x_i^T\beta^*+\beta_0^*)=1
+\end{equation}
+$\Rightarrow$ la contrainte est satur\'ee
+$\Rightarrow$ $x_i$  est sur la marge et est un vecteur de support.
+
+Posons
+\begin{equation}
+S=\{i|\alpha_i^*>0\}
+\end{equation}
+L'ensemble des $i$ associ\'e aux vecteurs de support. Inversement, si $x_i$ n'est pas un vecteur de support alors,
+\begin{equation}
+y_i(x_i^T\beta++\beta_0)>1
+\end{equation}
+et donc $\alpha_i^*=0$.
+
+Une fois r\'esolu le probl\`eme dual, on en d\'eduit la solution $(\beta^*,\beta^*_0)$ du probl\`eme initial.
+
+En effet, on a
+\begin{equation}
+\beta^*=\sum_{i=1}^n\alpha_i^* y_i x_i=\sum_{i\in S}\alpha_i^* y_i x_i
+\end{equation}
+
+Par ailleurs, pour tout  $i\in S$,
+\begin{equation}
+y_i(x_i^T\beta^*+\beta^0)=1\Rightarrow \beta_0^*=\frac{1}{y_i}-x_i^^T\beta^*=y_i-x_i^T\beta^*
+\end{equation}
+
+Remarque importante
+
+La solution du probl\`eme initial s'exprime donc uniquement en fonction des support vectors(SV).
+
+Conclusion
+L'HSO a donc pour \`equation
+\begin{equation}
+f(x)=&x^T\beta^*+\beta^*_0\\
+=&\sum_{i=1}^n\alpha_i^* y_i x_i^Tx+\beta_0^*\\
+=&\sum_{i\in S}\alpha_i^*y_ix_i^T x+\beta_0^*
+\end{equation}
+
+La fonction de d\'ecision correspondante est 
+\begin{equation}
+d(x)=sign(f^*(x))
+\end{equation}
+
+Remarque fondamentale
+
+La fonction de d\'ecision et le probl\`eme d'optimisation ne s'exprime qu'qu travers de produits scalaires entre observations
+
+\subsection{SVM Lin\'eaire cas non-lin\'eairement s\'eparable}
+
+Dans le cas non lin\'eairement s\'eparable, l'HSO doit \'etablir un compromis entre largeur de marge "raisonnable" et taux d'erreur. 
+La solution consiste \`a autoriser certains individus \`a avoir une marge plus petite que $1$ voire n\'egative. Les contraintes doivent \^etre retranch\'es de facon douce en introduisant des variables ressorts $\\epsilon_i,i=1,\ldots,n$. On va remplacer 
+\begin{equation}
+y_i(x_i^T\beta+\beta_0)>1
+\end{equation}
+par
+\begin{equation}
+y_i(x_i^T\beta++\beta_0)>1-\epsilon_i
+\end{equation}
+
+On d\'efinit donc le probl\`eme d'optimisation suivant
+\begin{equation}
+\min \frac{1}{2}||\beta||^2+\\gamma\sum_{i=1}^n\beta_i
+\end{equation}
+sc
+\begin{equation}
+\left{\begin{array}{rc}
+y_i(x_i^T\beta+\beta_0)>=1-\epsilon_i & i=1,\ldots,n\
+\epsilon_i>=0 & i=1,\ldots,n
+\end{array}\right.
+\end{equation}
+
+Remarque 1: Le param\`etre $\gamma$ est un param\`etre de r\'egularisationpermettant d'\'etablir un compromis entre dargeur de marge "raisonnable" et taux d'erreur.
+
+Remarque 2:
+\begin{equation}
+y_i(x_i^T\beta++\beta_0)>=1-\epsilon_i\Leftrightarrow \epsilon_i>=1-y_i(x_i^T\beta+\beta_0)
+\end{equation}
+Dans ce cas, le Largrangian s'ecrit
+\begin{equation}
+\begin{split}
+L(\beta,\beta_0,\epsilon,\alpha,\mu)=&\frac{1}{2}||\beta||^2+\gamma\sum_{i=1}^n\epsilon_i-\sum_{i=1}^n\alpha_i(y(x_i^T\bet+\beta_0)-(1-\epsilon_i))-\sum_{i=1}^n\mu_i\epsilon_i
+\end{split}
+\end{equation}
+
+En annulant la d\'eriv\'ee du Largrangian par rapport aux $\beta,\beta_0$ et $\epsilon_i$
+\begin{equation}
+\frac{\partial L}{\partial \beta}=\beta-\sum_{i=1}^n\alpha_iy_ix_i=0
+\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial \beta_0}=-\sum_{i=1}^n x_iy_i=0
+\end{equation}
+\begin{equation}
+\frac{\pratial L}{\partial \epsilon_i}=\gamma-\alpha_i-\mu_i=0,i=0,\ldots,n
+\end{equation}
+
+En d\'eveloppant cette formule et en injectant les constantes, on obtient 
+\begin{equation}
+L(\alpha)=\sum_{i=1}^n\alpha_i-\frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n\alpha_i\alpha_jy_iy_ix^T_ix_j
+\end{equation}
+m\^eme expression que dans le cas lin\'eairement s\'eparabl.
+
+Le probl\`eme d'optimisation g\'en\'eral des SVM consiste \`a maximiser ()  sous les contraintes:
+\begin{equation}
+\left{\begin{array}{lc}
+\alpha_i>=0 & i=1,\ldots,n\\
+\mu_i>=0 & i=1,\ldots,n\\
+\mu_i=\gamma-\alpha_i & i=1,\ldots,n\\
+\sum_{i=1}^n\alpha_iy_i=0
+\end{array}
+\Leftrightarrow\left{\begin{array}{l}
+0<=\alpha_i<=\gamma\\
+\sum_{i=1}^n\alpha_iy_i=0
+\end{array}\right.
+\end{equation}
+
+En r\''esum\'e, SVM est d\'efini par le probl\`eme d'optimisation suivant
+\begin{equation}
+whatever
+\end{equation}
+
+Soit $\alpha^*$
+ la solution de (),  les conditions KKT se ram\`ene ici KTT1
+ \begin{equation}
+ \alpha_i^*[y_i(x_i^T\beta^*+\beta^*_0)-(1-\epsilon_i)]=0
+\end{equation}
+KKT 2:
+\begin{equation}
+\mu_i^*\epsilon_i^*=0
+\end{equation}
+
+Les SV sorrespondent aux $x_i$ associ\'es \`a des $\alpha_i^*>0$.. Ils  v\''erifient
+\begin{equation}
+y_i(x_i^T\beta^*+\beta^*_0)=1-\epsilon_i^*
+\end{equation}
+Les SV sont soit les $x_i$
+ mal class\'es $(1-\epsilon_i)<0$, soit les $x_i$ \`a l'int\'erieur de la marge.
+ 
+ Si de plus $\mu_i^*>0$ ($0<\alpha_i<Y$), alors,, $\epsilon_i=0$ et dans ce cas, les SV $x_i$ sont sur la marge.
+ 
+ Posons $S=\{i|\alpha_i^*>0\}$ l'ensemble des indices associ\'ees  aux SV.
+ 
+ Une fois resolu le probl\`eme dual
+\begin{equation}
+\beta^*=\sum_{i=1}^n\alpha_i^*y_ix_i=\sum_{i\in S}\alpha_i^*y_ix_i
+\end{equation}
+
+Par ailleurs, pour obtenir $\beta_0^*$, il suffit de consid\'erer un SV sur la marge ($0<\alpha<\gamma$) puis d'utiliser KKT 1
+\begin{equation}
+\beta_o^*=\frac{1}{y_i}-x_i^T\beta^*=y_i-x_i^T\beta^*
+\end{equation}
+La fonction de d\'ecision est la  m\^eme que pr\'ec\'edamment
+\begin{equation}
+f^*(x)=\sum_{i\in S}\alpha^*y_ix_i^Tx++\beta_0^*
+\end{equation}
+$\\Rightarrow$
+\begin{equation}
+d^*(u)=sign(f^*(x))
+\end{equation}
+\subsection{SVM comme une probl\'ematique de fonction de co\^ut p\'enalis\'e}
+\begin{equation}
+\min_\beta\frac{1}{2}||\beta||^2++\gamma\sum_{i=1}^n
+\end{equation}
+sc
+\begin{equation}
+y_i(x_i^T\beta+\beta_0)>=1-\epsilon_i, i=1,\ldots,n
+\end{equation}
+et
+\begin{equation}
+\epsilon_i>=0,  i=1,\ldots,n
+\end{equation}
+$\Leftrightarrow$
+\begin{equation}
+\min_\beta \frac{1}{2}||\beta||^2+\gamma\sum_{i=1}^n\epsilon_i
+\end{equation}
+sc
+\begin{equation}
+\epsilon_i>=1-y_i(x_i^T\beta+\beta_0)
+\end{equation}
+\begin{equation}
+\epsilon_i>=0
+\end{equation}
+$\Leftrightarrow$
+\begin{equation}
+\min_\beta\frac{1}{2}+\gamma\sum_{i=1}^nmax(0,1-y_i(x_i^T\beta+\beta_0))
+\end{equation}
+$\Leftrightarrow$
+\begin{equation}
+\min_\beta\sum_{i=1}^n\max(0,1-y_i(x_i^T\beta+\beta_0))+\lambda||\beta||^2
+\end{equation}
+Premier terme Hinge Loss
+
+Si l'on souhaite \'etendre les SVM lin\'eaire \`a non-lin\'eaire, il suffit d'appliquer le kernel trick.
+
+Les probl\`eme d'optimisation associ\'e au SVM non-lin\'eaire est le suivant
+\begin{equation}
+\max_\alpha{\sum_{i=1}}
+\end{equation}
+
+
+
 
 \end{document}
