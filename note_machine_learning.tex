@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{bbm}
 
 \title{Machine Learning}
 
@@ -1057,14 +1058,14 @@ Pour comprendre pourquoi la norme $l_1$ conduit \`a des mod\`eles parcimonieux(s
 Comme $X^TX=I, L=\cdots$
 D\'erivons $L$ par rapport \`a $\beta_j$
 \begin{equation}
-\frac{\partial  L}{\partial \beta_j}=-2X_j^Ty+2\hat{\beta}_j^{LASSO}+\lambda sign(\hat{\beta}_j^^{LASSO})
+\frac{\partial  L}{\partial \beta_j}=-2X_j^Ty+2\hat{\beta}_j^{LASSO}+\lambda sign(\hat{\beta}_j^{LASSO})
 \end{equation} 
 Remarquons
 \begin{equation}
 \hat{\beta}^{OLS}=(X^TX)^{-1}X^Ty=X^Ty
 \end{equation}
 \begin{equation}
-\frac{\partial L}{\\partial \beta_j}=-2\hat{\beta}_j^{OLS}+2\hat{\beta}_j^{LASSO}+\lambda sign(\hat{\beta}_j^{LASSO}})=0
+\frac{\partial L}{\partial \beta_j}=-2\hat{\beta}_j^{OLS}+2\hat{\beta}_j^{LASSO}+\lambda sign(\hat{\beta}_j^{LASSO})=0
 \end{equation}
 
 3 cas de figure se pr\'esentent
@@ -1072,23 +1073,25 @@ Remarquons
 \hat{\beta}_j^{LASSO}=0\Rightarrow\hat{\beta}_j^{LASSO}=0
 \end{equation}
 \begin{equation}
-\hat{\beta}_j^{LASSO}>0\Rightarrow\hat{\beta}_j^{LASSO}=\hat{\beta}_j^^{OLS}-\frac{\lambda}{2}
+\hat{\beta}_j^{LASSO}>0\Rightarrow\hat{\beta}_j^{LASSO}=\hat{\beta}_j^{OLS}-\frac{\lambda}{2}
 \end{equation}
 \begin{equation}
-\\hat{\beta}_j^{LASSO}<0\Rightarrow \hat{\beta}_j^{LASSO}=\hat{\beta}_j^{{OLS}+\frac{\lambda}{2}
+\hat{\beta}_j^{LASSO}<0\Rightarrow \hat{\beta}_j^{LASSO}=\hat{\beta}_j^{OLS}+\frac{\lambda}{2}
 \end{equation}
 \begin{equation}
-sign(\hat{\beta}__j^{LASSO})=sign(\hat{\beta}_j^{OLS})
+sign(\hat{\beta}_j^{LASSO})=sign(\hat{\beta}_j^{OLS})
 \end{equation}
 
 Puisque ces 3 cas sont exclusifs
 \begin{equation}
-\hat{\beta}_j^{LASSO}=(\hat{\beta}__j^{OLS}-\frac{\lambda}{2})_{\mathbbm{1}_{\\hat{\beta}_j^{OLS}-\frac{\lambda}{2}>0\}}}+(\hat{\beta}_j^{OLS}+\frac{\lambda}{2})_{\mathbbm{1}_{\{\hat{\beta}_j^{OLS}+\frac{\lambda}{2}<0\}}\\
+\begin{split}
+	\hat{\beta}_j^{LASSO}=&(\hat{\beta}_j^{OLS}-\frac{\lambda}{2})_{\mathbbm{1}_{\hat{\beta}_j^{OLS}-\frac{\lambda}{2}>0\}}}+(\hat{\beta}_j^{OLS}+\frac{\lambda}{2})_{\mathbbm{1}_{\{\hat{\beta}_j^{OLS}+\frac{\lambda}{2}<0\}}}\\
 =&(\hat{\beta}_j^{OLS}-sign(\hat{\beta}_j^{OLS}))_{\mathbbm{1}_{\{|\hat{\beta}_j^{OLS}|>\frac{\lambda}{2}\}}}\\
 =&sign(\hat{\beta}_j^{OLS})(|\hat{\beta}_j^{OLS}|-\frac{\lambda}{2})_{\mathbbm{1}_{\{|\hat{\beta}_j^{OLS}|-\frac{\lambda}{2}>0\}}}
+\end{split}
 \end{equation}
 \begin{equation}
-\hat{\beta}_j^{LASSO}=sign(\hat{\beta_j^{OLS}})\times max(0,|\hat{\beta}_j^{OLS}|-\frac{\lambda}{2})
+\hat{\beta}_j^{LASSO}=sign(\hat{\beta}_j^{OLS})\times max(0,|\hat{\beta}_j^{OLS}|-\frac{\lambda}{2})
 \end{equation}
 
 Cet op\'eration porte le nom de seuillage doux.
@@ -1137,21 +1140,23 @@ Plusieurs outils algorithmique pour r\'esoudre le probl\`eme du LASSO Citons les
 2. LARS
 3. Gradient Descent
 \begin{equation}
-\hat{\beta}}^{LASSO}=argmin \{||y-X\beta||_2^2+\lambda||\beta||_1\}=f(\beta_1,\ldots,\beta_p)
+\hat{\beta}^{LASSO}=argmin \{||y-X\beta||_2^2+\lambda||\beta||_1\}=f(\beta_1,\ldots,\beta_p)
 \end{equation}
 Un algorithme de type Gradient Descent a pour principe de base une optimisation altern\'ee.
-$\Rightarrow$ Optimiser par rapport \`a $\beta_j$ en fixant toous les autres.
+$\Rightarrow$ Optimiser par rapport \`a $\beta_j$ en fixant tous les autres.
 \begin{equation}
+\begin{split}
 \hat{\beta}_k=argmin_{\beta_k}||y-\sum_{j=1,j\neq k}^P\beta_j X_j-\beta_kX_k||_2^2+\lambda||\beta||_2\\
 =&argmin_{\beta_k}||\hat{y}-\beta_kX_k||_2^2+\lambda|\beta_k|
+\end{split}
 \end{equation}
 
 En supposant les donn\'ees normalis\'es (chacune des colonne de norme \'egale \`a 1)
 \begin{equation}
-L=\~y^Ty-2\beta_k^TX^T_ky+\beta_k^T\beta_k+\lambda|\beta_k|
+L=\tilde{y}^Ty-2\beta_k^TX^T_ky+\beta_k^T\beta_k+\lambda|\beta_k|
 \end{equation}
 \begin{equation}
-\frac{\partial L}{\partial \beta_k}=-2X_k^T\~y+2\hat{\beta}_k^{LASSO}+\lambda sign(\hat{\beta}_k^{LASSO})=0
+\frac{\partial L}{\partial \beta_k}=-2X_k^T\tilde{y}+2\hat{\beta}_k^{LASSO}+\lambda sign(\hat{\beta}_k^{LASSO})=0
 \end{equation}
 Avec la m\^eme raisonnement que p\'rc\'edamment,
 \begin{equation}
@@ -1163,8 +1168,8 @@ Regression sur Composant Principal
 
 M\'ethode \`a noyau
 \begin{equation}
-
-\end{equation}\min \sum_{i=1}^nl(y_i,f(x_i))+\lambda ||f||_H\to^{KW} \sum_{i=1}^n \alpha k(x_i)
+\min \sum_{i=1}^nl(y_i,f(x_i))+\lambda ||f||_H\to^{KW} \sum_{i=1}^n \alpha k(x_i)
+\end{equation}
 
 Analyse Discriminante
 Regression Elastic net
