@@ -1,4 +1,8 @@
 \documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{bbm}
+
 \title{Apprentissage en grande domension}
 \begin{document}
 \maketitle
@@ -223,7 +227,7 @@ t_k\to_{k\to +\infty} 0
 \end{enumerate}
 
 Theoreme: f convexe et non differentielle
-$f$ est G-Lipschitzienne $\Leftrightarrow$ ||g||_2<=G,\forall g\in\partial f(x)
+$f$ est G-Lipschitzienne $\Leftrightarrow$ $||g||_2<=G,\forall g\in\partial f(x)$
 
 Preuve:
 $\Leftarrow$
@@ -302,11 +306,12 @@ Exercise:
 f(\beta)=||X\beta-y||_2^2+\lambda||\beta||_1
 \end{equation}
 \begin{equation}
-\partial f(\beta)=X^T(X\beta-y)+\lambda\pertial_{||\dot||_1}(\beta)
+\partial f(\beta)=X^T(X\beta-y)+\lambda\partial_{||\dot||_1}(\beta)
 \end{equation}
 \begin{equation}
-[\partial_{||\dot||_1}(\beta)]=\left\{\begin{array}{rcl}
-signe(\beta_i) &\text{si} \beta_i\neq 0\\
+[\partial_{||\dot||_1}(\beta)]=
+\left\{\begin{array}{lll}
+sign(\beta_i) &\text{si} \beta_i\neq 0\\ \relax
 [-1,1] & \text{si} \beta_i=0
 \end{array}\right.
 \end{equation}
@@ -355,6 +360,7 @@ f(x)=||x||_2
 prox_{tf}(x)=\left\{\begin{array}{rcl}
 (1-\frac{t}{||x||_2})x&, ||x||_2>=t\\
 0&, sinon
+\end{array}\right.
 \end{equation}
 
 Multiplication par un scalaire >0
@@ -382,6 +388,7 @@ f(x)=||x||_1
 x_i-1 & \text{si} x_i>=1\\
 0 & \text{si} |x_i|<1\\
 x_i+1 & \text{si} x_i<=-1
+\end{array}\right.
 \end{equation}
 
 Num\'eriquement
@@ -485,7 +492,7 @@ f(x_N)-f^*<=\frac{1}{2Nt}||x_0-x^*||_2^2
 \end{equation}
 
 \begin{equation}
-[prox_{t||\dot||}_1](x)=\left\{\begin{array}{rcl}
+[prox_{t||\dot||_1}](x)=\left\{\begin{array}{rcl}
 x_i-t & \text{si} x_i>=t\\
 0 & \text{si} |x_i|<t\\
 x_i+t & \text{si} x_i <=t
@@ -533,10 +540,10 @@ t_k=\frac{1}{L} \text{constant}
 Reformulation
 \begin{equation}
 \theta_k=\frac{2}{k+1}
-\end{equation
+\end{equation}
 $v_k$ tel que $v_0=x_0$ et $\forall k>=1$
 \begin{equation}
-\left{
+\left\{
 \begin{array}{l}
 y=(1-\theta_k)x_{k-1}+\theta_k v_{k-1}\\
 x_k=prox_{th} (y-t_k\nabla g(y))\\
@@ -570,6 +577,7 @@ g(x^+)<=g(y)+\nabla g^T(y)(x^+-y)+\frac{1}{2t}||x^+-y||^2_2
 \begin{split}
 h(x^+)<=h(z)+\frac{1}{t}(y-t\nabla g(y)x^+)^T(x^+-z)\\
 =h(z)+\nabla g(y)^T(z-x^+)+\frac{1}{t}(x^+-y)^T(z-x^+)
+\end{split}
 \end{equation}
 1+2:
 \begin{equation}
