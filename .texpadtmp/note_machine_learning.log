@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.8)  18 JAN 2017 23:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.8)  25 JAN 2017 00:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -134,20 +134,35 @@ Overfull \hbox (1.81497pt too wide) in paragraph at lines 721--723
 \OT1/cmr/m/n/10 On sup-pose main-tenant que $\OML/cmm/m/it/10 X \OT1/cmr/m/n/10 = (\OML/cmm/m/it/10 X[]; [] ; X[]\OT1/cmr/m/n/10 )$ est une loi multi-no-mial $\OMS/cmsy/m/n/10 N\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^V[]; \OT1/cmr/m/n/10 ^^F[])$
  []
 
-[14] [15] (/Users/zlw/Documents/Supelec/Lessons/5/note_git/note-cours-supelec/.texpadtmp/note_machine_learning.aux) ) 
+[14] [15]
+Overfull \hbox (13.75539pt too wide) in paragraph at lines 783--785
+[]\OT1/cmr/m/n/10 Ainsi, max-imiser $\OML/cmm/m/it/10 C$ \OT1/cmr/m/n/10 servient ^^Ra min-imiser $\OMS/cmsy/m/n/10 jj\OML/cmm/m/it/10 ^^L\OMS/cmsy/m/n/10 jj[]$\OT1/cmr/m/n/10 (lien avec la ridge) Par cons^^Sequent,
+ []
+
+
+Overfull \hbox (1.46358pt too wide) in paragraph at lines 823--825
+[]\OT1/cmr/m/n/10 C'est un probl^^Reme d'optimisation quadra-tique sous con-traintes lin^^Seaire. Ainsi
+ []
+
+[16]
+Overfull \hbox (1.47968pt too wide) in paragraph at lines 847--848
+[]\OT1/cmr/m/n/10 Une fois r^^Sesolu le probl^^Reme dual, on en d^^Seduit la so-lu-tion $(\OML/cmm/m/it/10 ^^L[]; ^^L[]\OT1/cmr/m/n/10 )$ du probl^^Reme
+ []
+
+[17] [18] [19] [20] (/Users/zlw/Documents/Supelec/Lessons/5/note_git/note-cours-supelec/.texpadtmp/note_machine_learning.aux) ) 
 Here is how much of TeX's memory you used:
- 951 strings out of 493117
- 11597 string characters out of 6135433
+ 953 strings out of 493117
+ 11613 string characters out of 6135433
  73341 words of memory out of 5000000
- 4450 multiletter control sequences out of 15000+600000
+ 4452 multiletter control sequences out of 15000+600000
  11503 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  27i,16n,24p,422b,197s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on /Users/zlw/Documents/Supelec/Lessons/5/note_git/note-cours-supelec/.texpadtmp/note_machine_learning.pdf (15 pages, 189518 bytes).
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on /Users/zlw/Documents/Supelec/Lessons/5/note_git/note-cours-supelec/.texpadtmp/note_machine_learning.pdf (20 pages, 213675 bytes).
 PDF statistics:
- 109 PDF objects out of 1000 (max. 8388607)
- 77 compressed objects within 1 object stream
+ 129 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

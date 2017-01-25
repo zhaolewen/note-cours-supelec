@@ -814,10 +814,10 @@ L(\alpha)=\sum_{i=1}^n\alpha_i-\sum_{i=1}^n\sum_{j=1}^n\alpha_i\alpha_jy_iy_jx_i
 \end{equation}
 qui ne d\'epend pas de $\beta$ et $\beta_0$. On cherche ensuite \`a maximiser $L(\alpha)$ par rapport \`a $\alpha$ sous les contrainte
 \begin{equation}
-\left{\begin{array}{ll}
+\left\{\begin{array}{ll}
 \alpha_i>=0 &  i=1,\ldots,n\\\
 \sum_{i=1}^n\alpha_iy_i=0
-\end{array}
+\end{array}\right.
 \end{equation}
 
 C'est un probl\`eme d'optimisation quadratique sous contraintes lin\'eaire.
@@ -853,7 +853,7 @@ En effet, on a
 
 Par ailleurs, pour tout  $i\in S$,
 \begin{equation}
-y_i(x_i^T\beta^*+\beta^0)=1\Rightarrow \beta_0^*=\frac{1}{y_i}-x_i^^T\beta^*=y_i-x_i^T\beta^*
+y_i(x_i^T\beta^*+\beta^0)=1\Rightarrow \beta_0^*=\frac{1}{y_i}-x_i^T\beta^*=y_i-x_i^T\beta^*
 \end{equation}
 
 Remarque importante
@@ -863,9 +863,11 @@ La solution du probl\`eme initial s'exprime donc uniquement en fonction des supp
 Conclusion
 L'HSO a donc pour \`equation
 \begin{equation}
-f(x)=&x^T\beta^*+\beta^*_0\\
+\begin{split}
+	f(x)=&x^T\beta^*+\beta^*_0\\
 =&\sum_{i=1}^n\alpha_i^* y_i x_i^Tx+\beta_0^*\\
 =&\sum_{i\in S}\alpha_i^*y_ix_i^T x+\beta_0^*
+\end{split}
 \end{equation}
 
 La fonction de d\'ecision correspondante est 
@@ -895,7 +897,7 @@ On d\'efinit donc le probl\`eme d'optimisation suivant
 \end{equation}
 sc
 \begin{equation}
-\left{\begin{array}{rc}
+\left\{\begin{array}{rcl}
 y_i(x_i^T\beta+\beta_0)>=1-\epsilon_i & i=1,\ldots,n\
 \epsilon_i>=0 & i=1,\ldots,n
 \end{array}\right.
@@ -910,7 +912,7 @@ y_i(x_i^T\beta++\beta_0)>=1-\epsilon_i\Leftrightarrow \epsilon_i>=1-y_i(x_i^T\be
 Dans ce cas, le Largrangian s'ecrit
 \begin{equation}
 \begin{split}
-L(\beta,\beta_0,\epsilon,\alpha,\mu)=&\frac{1}{2}||\beta||^2+\gamma\sum_{i=1}^n\epsilon_i-\sum_{i=1}^n\alpha_i(y(x_i^T\bet+\beta_0)-(1-\epsilon_i))-\sum_{i=1}^n\mu_i\epsilon_i
+L(\beta,\beta_0,\epsilon,\alpha,\mu)=&\frac{1}{2}||\beta||^2+\gamma\sum_{i=1}^n\epsilon_i-\sum_{i=1}^n\alpha_i(y(x_i^T\beta+\beta_0)-(1-\epsilon_i))-\sum_{i=1}^n\mu_i\epsilon_i
 \end{split}
 \end{equation}
 
@@ -922,7 +924,7 @@ En annulant la d\'eriv\'ee du Largrangian par rapport aux $\beta,\beta_0$ et $\e
 \frac{\partial L}{\partial \beta_0}=-\sum_{i=1}^n x_iy_i=0
 \end{equation}
 \begin{equation}
-\frac{\pratial L}{\partial \epsilon_i}=\gamma-\alpha_i-\mu_i=0,i=0,\ldots,n
+\frac{\partial L}{\partial \epsilon_i}=\gamma-\alpha_i-\mu_i=0,i=0,\ldots,n
 \end{equation}
 
 En d\'eveloppant cette formule et en injectant les constantes, on obtient 
@@ -933,13 +935,13 @@ m\^eme expression que dans le cas lin\'eairement s\'eparabl.
 
 Le probl\`eme d'optimisation g\'en\'eral des SVM consiste \`a maximiser ()  sous les contraintes:
 \begin{equation}
-\left{\begin{array}{lc}
+\left\{\begin{array}{lcr}
 \alpha_i>=0 & i=1,\ldots,n\\
 \mu_i>=0 & i=1,\ldots,n\\
 \mu_i=\gamma-\alpha_i & i=1,\ldots,n\\
 \sum_{i=1}^n\alpha_iy_i=0
-\end{array}
-\Leftrightarrow\left{\begin{array}{l}
+\end{array}\right.
+\Leftrightarrow\left\{\begin{array}{l}
 0<=\alpha_i<=\gamma\\
 \sum_{i=1}^n\alpha_iy_i=0
 \end{array}\right.
