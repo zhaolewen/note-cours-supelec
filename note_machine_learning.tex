@@ -1030,7 +1030,144 @@ Les probl\`eme d'optimisation associ\'e au SVM non-lin\'eaire est le suivant
 \max_\alpha{\sum_{i=1}}
 \end{equation}
 
+\section{R\'egression parcimonieuse}
+\textbf{Introduction}
 
+Les mod\`eles "parcimonieux" poursuivent deux objectifs
+1. Le mod\`ele doit \^etre pr\'edictif
+2. La "forme" du mod\`ele doit sugg\'egrer quelles variables sont importantes pour pr\'edire efficacement  la r\'epnse.
+
+Ici, nous pr\''esentons des m\'ethodes attractives \`a la r\'egression ridge, fond\'ee sur des p\'enalit\'es de type $L1$.
+
+Soient $X_1,\ldots,X_p$ un ensemble de variables explicatives  et $y$ vecteur de r\'eponse.
+\begin{equation}
+\hat{y}=\hat{\beta}_1X_1+\cdots+\hat{\beta}_pX_p
+\end{equation}
+Dans toute la suite, on va supposer que $X$ est standardis\'ee et $y$ centr\'ee.
+
+\subsection{LASSO Least Absolute Shrinkage and Selection Operation}
+La r\'egression LASSO a \'et\'e propos\'e en 1996 par Tib... L'estimation LASSO est d\'efinie par le probl\`eme d'optimisation
+\begin{equation}
+\hat{\beta}^{LASSO}=argmin_\beta\{||y-X\beta||_2^2+\lambda ||\beta||_1\}
+\end{equation} 
+Pour comprendre pourquoi la norme $l_1$ conduit \`a des mod\`eles parcimonieux(sparse), pla\c{c}ons nous  dans un cadre simplifi\'e o\`u $X^TX=I$
+\begin{equation}
+\hat{\beta}^{LASSO}=argmin_\beta\{y^Ty-2\beta^TX^Ty+\beta^TX^TX\beta++\lambda\sum_{j=1}^P|\beta_j|\}=argmin\{L(\beta)\}
+\end{equation}
+Comme $X^TX=I, L=\cdots$
+D\'erivons $L$ par rapport \`a $\beta_j$
+\begin{equation}
+\frac{\partial  L}{\partial \beta_j}=-2X_j^Ty+2\hat{\beta}_j^{LASSO}+\lambda sign(\hat{\beta}_j^^{LASSO})
+\end{equation} 
+Remarquons
+\begin{equation}
+\hat{\beta}^{OLS}=(X^TX)^{-1}X^Ty=X^Ty
+\end{equation}
+\begin{equation}
+\frac{\partial L}{\\partial \beta_j}=-2\hat{\beta}_j^{OLS}+2\hat{\beta}_j^{LASSO}+\lambda sign(\hat{\beta}_j^{LASSO}})=0
+\end{equation}
+
+3 cas de figure se pr\'esentent
+\begin{equation}
+\hat{\beta}_j^{LASSO}=0\Rightarrow\hat{\beta}_j^{LASSO}=0
+\end{equation}
+\begin{equation}
+\hat{\beta}_j^{LASSO}>0\Rightarrow\hat{\beta}_j^{LASSO}=\hat{\beta}_j^^{OLS}-\frac{\lambda}{2}
+\end{equation}
+\begin{equation}
+\\hat{\beta}_j^{LASSO}<0\Rightarrow \hat{\beta}_j^{LASSO}=\hat{\beta}_j^{{OLS}+\frac{\lambda}{2}
+\end{equation}
+\begin{equation}
+sign(\hat{\beta}__j^{LASSO})=sign(\hat{\beta}_j^{OLS})
+\end{equation}
+
+Puisque ces 3 cas sont exclusifs
+\begin{equation}
+\hat{\beta}_j^{LASSO}=(\hat{\beta}__j^{OLS}-\frac{\lambda}{2})_{\mathbbm{1}_{\\hat{\beta}_j^{OLS}-\frac{\lambda}{2}>0\}}}+(\hat{\beta}_j^{OLS}+\frac{\lambda}{2})_{\mathbbm{1}_{\{\hat{\beta}_j^{OLS}+\frac{\lambda}{2}<0\}}\\
+=&(\hat{\beta}_j^{OLS}-sign(\hat{\beta}_j^{OLS}))_{\mathbbm{1}_{\{|\hat{\beta}_j^{OLS}|>\frac{\lambda}{2}\}}}\\
+=&sign(\hat{\beta}_j^{OLS})(|\hat{\beta}_j^{OLS}|-\frac{\lambda}{2})_{\mathbbm{1}_{\{|\hat{\beta}_j^{OLS}|-\frac{\lambda}{2}>0\}}}
+\end{equation}
+\begin{equation}
+\hat{\beta}_j^{LASSO}=sign(\hat{\beta_j^{OLS}})\times max(0,|\hat{\beta}_j^{OLS}|-\frac{\lambda}{2})
+\end{equation}
+
+Cet op\'eration porte le nom de seuillage doux.
+
+Remarque, Si un groupe de variables est tr\`es corr\'el\'ees, le LASSO aura tendance \`a selectionner une variable dans le groupe.
+Pour contributeur ce point Zou \& Hastie en 2005 ont propos\'e Elastic Net f\'efinie par le probl\`eme d'optimisation suivant:
+\begin{equation}
+\hat{\beta}^{EN}=argmin_\beta\{||y-X\beta||_2^2+\lambda_1||\beta||_2+\lambda_2||\beta||_2^2\}
+\end{equation}
+\begin{equation}
+L=y^Ty-2\beta^TX^Ty+\beta^TX^TX\beta+\lambda_2\beta^T\beta+\lambda_1\sum_{j=1}^P|\beta_j|
+\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial \beta_j}=-2\hat{\beta}_j^{OLS}+2\hat{\beta}_j^{EN}(1+\lambda_2)+\lambda_1 sign(\hat{\beta}_j^{EN})=0
+\end{equation}
+
+3 cas de figure se pr\'esentent
+\begin{equation}
+\hat{\beta}_j^{EN} = 0 \Rightarrow \hat{\beta}_j^{EN}=0
+\end{equation}
+\begin{equation}
+\hat{\beta}_j^{EN}>0\Rightarrow=\frac{1}{1+\lambda_2}(\hat{\beta}_j^{OLS}-\frac{\lambda_1}{2})
+\end{equation}
+\begin{equation}
+\hat{\beta}_j^{EN}<0\Rightarrow \hat{\beta}_j^{EN}=\frac{1}{1+\lambda_2}(\hat{\beta}_j^{OLS}+\frac{\lambda_1}{2})
+\end{equation}
+Ainsi
+\begin{equation}
+\hat{\beta}_j^{EN}=\frac{max(0,|\hat{\beta}_j^{OLS}|-\frac{\lambda_1}{2})}{1+\lambda_2} sign(\hat{\beta}_j^{OLS})
+\end{equation}
+Commentaires
+\begin{equation}
+\hat{\beta}^{RR}=argmin_\beta\{||y-X\beta||_2^2+\lambda||\beta||_2^2\}
+\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial \beta}=-2X^Ty+2\hat{\beta}^{RR}(1+\lambda)=0\\
+=-2\hat{\beta}^{OLS}+2\hat{\beta}^{RR}(1+\lambda)=0
+\end{equation}
+Ainsi
+\begin{equation}
+\hat{\beta}^{RR}=\frac{1}{\lambda+1}\hat{\beta}^{OLS}
+\end{equation}
+
+Plusieurs outils algorithmique pour r\'esoudre le probl\`eme du LASSO Citons les 4 plus couramment utilis\'es.
+1. FISTA
+2. LARS
+3. Gradient Descent
+\begin{equation}
+\hat{\beta}}^{LASSO}=argmin \{||y-X\beta||_2^2+\lambda||\beta||_1\}=f(\beta_1,\ldots,\beta_p)
+\end{equation}
+Un algorithme de type Gradient Descent a pour principe de base une optimisation altern\'ee.
+$\Rightarrow$ Optimiser par rapport \`a $\beta_j$ en fixant toous les autres.
+\begin{equation}
+\hat{\beta}_k=argmin_{\beta_k}||y-\sum_{j=1,j\neq k}^P\beta_j X_j-\beta_kX_k||_2^2+\lambda||\beta||_2\\
+=&argmin_{\beta_k}||\hat{y}-\beta_kX_k||_2^2+\lambda|\beta_k|
+\end{equation}
+
+En supposant les donn\'ees normalis\'es (chacune des colonne de norme \'egale \`a 1)
+\begin{equation}
+L=\~y^Ty-2\beta_k^TX^T_ky+\beta_k^T\beta_k+\lambda|\beta_k|
+\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial \beta_k}=-2X_k^T\~y+2\hat{\beta}_k^{LASSO}+\lambda sign(\hat{\beta}_k^{LASSO})=0
+\end{equation}
+Avec la m\^eme raisonnement que p\'rc\'edamment,
+\begin{equation}
+\hat{\beta}_k^{s+1}=sign (X_k^T\tilde{y})max(0,|X^T_k\tilde{y}|-\frac{\lambda}{2})
+\end{equation}
+En r\'esum\'e, regularisation \& Shrinkage factor
+Regression ridge
+Regression sur Composant Principal
+
+M\'ethode \`a noyau
+\begin{equation}
+
+\end{equation}\min \sum_{i=1}^nl(y_i,f(x_i))+\lambda ||f||_H\to^{KW} \sum_{i=1}^n \alpha k(x_i)
+
+Analyse Discriminante
+Regression Elastic net
 
 
 \end{document}
