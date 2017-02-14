@@ -612,8 +612,72 @@ f(x_k)-f^*<=\frac{2L}{(k+1)^2}||x_0-x^*||_2^2
 \end{equation}
 
 
+Travaux pratiques: Analyse en Composantes Principales parcimonieuse
 
+1. Equation normale
+\begin{equation}
+\begin{split}
+f(v)=&\frac{1}{2}||A-\delta v v^T||_F^2\\
+=&\frac{1}{2}tr((A-\delta vv^T)(A-\delta v v^T))\\
+=&tr(A^TA-\delta A^Tvv^T-\delta vv^TA+\delta^2vv^Tvv^T)\\
+=&\frac{1}{2}tr(A^TA)-\frac{1}{2}tr(\delta A^Tvv^T)-\frac{1}{2}tr(\delta vv^TA)+\frac{1}{2}tr(\delta^2vv^Tvv^T)\\
+=&\frac{1}{2}tr(A^TA)-\delta v^TAv+\frac{1}{2}\delta^2 (v^Tv)
+\end{split}
+\end{equation}
 
+\begin{equation}
+\delta=v^TAv/(v^Tv)^2
+\end{equation}
+\begin{equation}
+Av=\frac{\alpha+\delta^2}{\delta}v
+\end{equation}
+Tel que $v^Tv=1, Av=\delta v$
+$\delta$ est valeur propre de $A$ associ\'ee \`a $v$
+\begin{equation}
+f(v)=(v^Tv)^2
+\end{equation}
+\begin{equation}
+\nabla f(v)=4(v^Tv)v
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\nabla L(v)=&-2\delta Av+2\delta^2(v^Tv)v+2\alpha v\\
+=&0 \Leftrightarrow \delta Av=(\delta^2(v^Tv)+\alpha)v
+\end{split}
+\end{equation}
+
+\begin{equation}
+f(v,\delta)=\frac{1}{2}||A-\delta vv^T||_F^2
+\end{equation}
+\begin{equation}
+A=V\Delta V^T
+\end{equation}
+Avec 
+\begin{equation}
+\Delta=diag(\delta_1,\ldots,\delta_n)
+\end{equation}
+
+$\delta, v$ qui sont solution de $\min f$
+\begin{equation}
+A-\delta vv^T=Vdiag(0,\delta_2,\ldots,\delta_n)V^T=B
+\end{equation}
+\begin{equation}
+tr(B^TB)=\sum_{k=2}^m\delta_k^2
+\end{equation}
+\begin{equation}
+\delta_1=\delta_{\max}
+\end{equation}
+
+ACP
+\begin{equation}
+v^{k+1}=normalize(Av^{(k)})
+\end{equation}
+
+ACP $l_1$
+\begin{equation}
+V^{(k+1)}=normalize(prox_{\lambda||\dot||}(Av^{(k)}))
+\end{equation}
 
 
 
