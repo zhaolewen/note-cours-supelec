@@ -680,9 +680,257 @@ V^{(k+1)}=normalize(prox_{\lambda||\dot||}(Av^{(k)}))
 \end{equation}
 
 
+\section{Les mod\`ele graphique gaussien}
+Soit $X\sim\mathcal{N}(\mu,\Sigma)$, on suppose $\Sigma$ inversible, de dentit\'e
+\begin{equation}
+f_\alpha(x)=(2\Pi)^{-P/2}|\Sigma|^{-P/2}exp(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))
+\end{equation}
+Posons
+\begin{equation}
+K=\Sigma^{-1}
+\end{equation}
+La matrice de corr\'elation. On a
+\begin{equation}
+f_\alpha(x) \alpha |K|^{P/2}exp(-\frac{1}{2}(x-\mu)^T\Sigma(x-\mu))
+\end{equation}
+D\'efinition
 
+Un mod\`ele graphique $G(V,E)$ o\`u $V={1,\ldots,P}$ l'ensemble de noeudes et $E=$ l'ensemble des liens connectant certaine paire de noeud. Le paire $(i,j)\in E$ $\Leftrightarrow$ $X_i,X_j$ sont "conditionnellement d\'ependants " sachant toutes les autres variables $X_{V\\ \{i,j\}}$
+Autrement dit, $(i,j) \text{ not }\in E$ $\Leftrightarrow$ sont conditionnellement ind\'ependantes sachant $X_{V\\ \{i,j\}}$
 
+Proposition
+\begin{equation}
+(i,j) \in E \Leftrightarrow K_{ij}\neq 0
+\end{equation}
+Preuve: Supposons $\mu=0$, ainsi
+\begin{equation}
+f_x(x)\alpha exp(-\frac{1}{2}x^TKx)
+\end{equation}
+La densit\'e conditionnelle de $(X_i,X_j)$ sachant toutes autres variables est d\'efinie par
+\begin{equation}
+f(x_i,x_j|x_1,\dots,x_p)\alpha exp(-\frac{1}{2}x_b^TK_{bb}x_b)
+\end{equation}
+Avec
+\begin{equation}
+K_{bb}=\begin{bmatrix}
+K_{11} & K_{12}\\
+K_{21} & K_{22}
+\end{bmatrix}
+\end{equation}
 
+De dimension $2\times2$.
+Ainsi
+\begin{equation}
+f(x_b|x_*)\alpha exp(-\frac{1}{2}x_1^TK_{11}x_1-\frac{1}{2}x_2^TK_{22}x_2-x_1^TK_{12}x_2)a=f(x_1)f(x_2)exp(-x_1^TK_{12}x_2)
+\end{equation}
+
+(Whatever)
+
+Afin d'interpreter les \'elements de la matrice de ?, on \'etude maintenant la corr\'elation partielle.
+
+Soit $p_{ij}$ la corr\'elation entre $X_i$ et $X_j$ apr\`es avoir \'elinmin\'e l'effet de toute les elements $\{X_k|k\inV\\ \{i,j\}\}$
+
+\section{Analyse de donn\'ees structur\'ees}
+
+\begin{equation}
+X_1\to y_1=X_1w_1,\ldots,X_J\to y_J=X_Jw_J
+\end{equation}
+\begin{equation}
+\max_{w_1,\ldots,w_J}\sum_{j=1}^J\sum_{k=1}^J cos(X_jw_j, X_kw_k)
+\end{equation}
+
+Rappel: Analyse en Composantes principales
+
+Objectif: Trouver une combinaison lin\'eaire des colonnes de $X$ qui soit "repr\'esentative"
+
+Crit\`ere: $w_1=argmax_w var(Xw)$ s.t. $||w||=1$
+
+Solution: $w_1$ est premier vecteur propre de $\frac{1}{n}X^TX$ 
+\begin{equation}
+\frac{1}{n}X^TXw=\lambda w
+\end{equation}
+
+* Regression PLS-1
+
+Objectif: Trouver une combinaison lin\'eaire des colonnes de $X$: $t=Xw$ bien explicative de son propre bloc et cor\'el\'e \`a $y$.
+
+Crit\`ere:
+\begin{equation}
+w_1=argmax_w cov(Xw,y) \text{ s.t. } ||w||=1
+\end{equation}
+Solution:
+\begin{equation}
+w_1=\frac{X^Ty}{||X^Ty||}
+\end{equation}
+
+M\'ethode d'analyse de donn\'ees \`a 2 blocs
+L'objectif des m\'ethodes d'analyse de donn\'ees structur\'ees en 2 blocs est de comprendre la relation. Il s'agit d'identifierdes sous-ensemble de variables dans chaque bloc qui "cr\'eent" le lien.
+
+Une premi\`ere m\'ethode intitul\'ee R\'egression PLS 2 est d\'efinie par le crit\`ere suivant
+
+$y_1=X_1w_1$: $y_1$ composante, $w_1$ vecteur de poids
+$(w_1, w_2)=argmax_{w_1\in\mathbb{R}^{P_1},w_2\in\mathbb{R}^{P_2}} cov(X_1w_1,X_2w_2) \text{ s.t. } ||w_1||=||w_2||=2$
+
+Pour r\'esoudre ce probl\`eme d'optimisation, on passe par la fonction Lagrangien donn\'ee par
+\begin{equation}
+L=\frac{1}{n}w_1^TX_1^TX_2w_2-\lambda_1(w_1^Tw_1-1)-\lambda_2(w_2^Tw_2-1)
+\end{equation}
+On va d\'eriver $L$ par rapport \`a $w_1$ et $w_2$
+\begin{equation}
+\frac{\partial L}{\partial w_1}=\frac{1}{n}X_1^TX_2w_2-2\lambda_1w_1
+\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial w_2}=\frac{1}{n}w_1^TX_1^TX_2-2\lambda_2w_2
+\end{equation}
+\begin{equation}
+\left{\begin{array}{ll}
+\frac{1}{n}X_1^TX_2w_2=2\lambda_1w_1\\
+\frac{1}{n}X_2^TX_1w_1=2\lambda_2w_2
+\end{array}\right.
+\end{equation}
+
+En multipliant de par et d'autre du signe \'egal par $w_1^T$ et $w_2^T$, on obtient
+\begin{equation}
+\left{\begin{array}{ll}
+\frac{1}{n}w_1^TX_1^TX_2w_2=2\lambda_1\\
+\frac{1}{n}w_2^TX_2^TX_2w_1=2\lambda_2
+\end{array}\right.
+\end{equation}
+Ainsi
+\begin{equation}
+\lambda_1=\lambda_2
+\end{equation}
+En injectant une \'equation dans l'autre, on obtient que 
+\begin{equation}
+\frac{1}{4n^2}X_1^TX_2X_2^Tw_1=\lambda w_1
+\end{equation}
+\begin{equation}
+\frac{1}{4n^2}X_2^TX_1X_1^TX_2w_2=\lambda w_2
+\end{equation}
+
+Conclusion:
+$w_1$ est 1er vecteur propre de $X_1^TX_2X_2^TX_1$, $w_2$ est 1er vecteur propre de $X_2^TX_1X_1^TX_2$
+
+Remarque: La r\'egression PLS 2 s'appuie sur un crit\`ere de covariance
+\begin{equation}
+cov^2(X_1a_1, X_2a_2)=var(X_1a_1)*cov^2(X_1a_1,X_2,a_2)*var(X_2a_2)
+\end{equation}
+On cherche une composante $y_1=X_1a_1$ bien explicative de son propre bloc $\to ACP(x_1)$
+
+On cherche une composante $y_2=X_2a_2$ bien explicative de $X_2$. Ainsi $ACP(X_2)$
+
+Plut\^ot que de maximiser la covariance entre composantes on peut voulouir maximiser la corr\'elation (Hoteling, 1936) propose le crit\`ere suivant
+\begin{equation}
+\begin{split}
+(a_1, a_2)=argmax_{a_1,a_2} cor(X_1a_1,X_2a_2)=argmax\frac{cov(X_1a_1,X_2a_2)}{\sqrt{var(X_1a_1)}\sqrt{var(X_2a_2)}}\\
+=argmax_{a_1,a_2} \frac{\frac{1}{n}a_1^TX_1^TX_2^Ta_2}{\sqrt{\frac{1}{n}a_1^TX_1^TX_1a_1}\sqrt{\frac{1}{n}a_2^TX_2^TX_2a_2}}
+\end{split}
+\end{equation}
+
+On remarque que la solution est invariante par changement d'\'echelle et donc on peut consid\'erer le probl\`eme d'optimisation \'equivalent suivant
+\begin{equation}
+(a_1,a_2)=argmax_{a_1\in\mathbb{R}^{P_1},a_2\in\mathbb{R}^{P_2}} cov(X_1a_1,X_2a_2)
+\end{equation}   
+s.t.
+\begin{equation}
+\left{\begin{array}{ll}
+var(X_1a_1)=1\\
+var(X_2a_2)=1
+\end{array}\right.
+\end{equation}
+
+Pour r\'esoudre ce probl\`eme d'optimisation, on passe comme pr\'ec\'edemment par le Lagrangien
+\begin{equation}
+L=\frac{1}{n}a_1^TX_1^TX_2a_2-\lambda_1(\frac{1}{n}a_1^Ta_1^TX_1^TX_1a_1-1)
+\end{equation}
+
+En annulant les d\'eriv\'ees Lagrangien par rapport \`a $a_1$ et $a_2$
+\begin{equation}
+\left{\begin{array}{ll}
+\frac{1}{n}X_1^TX_2a_2=2\lambda_1\frac{1}{n}X_1^TX_1a_1\\
+\frac{1}{n}X_2^TX_1a_1=2\lambda_2\frac{1}{n}X_2^TX_2a_2
+\end{array}\right.
+\end{equation}
+
+En multipliant par $a_1^T$ et $a_2^T$, il vient que $\lambda_1=\lambda_2$
+
+En injectant l'un dans l'autre
+\begin{equation}
+\frac{1}{4n^2}(X_1^TX_1)^{-1}X_1^TX_2(X_2^TX_2)^{-1}X_2^TX_1a_1=\lambda^2a_1=\frac{1}{4n^2}Q_{12}a_1
+\end{equation}
+
+En conclusion:
+$a_1$ est $1er$ vecteur propre de $Q_{12}$, $a_2$ est 1er vecteur propre de $Q_{21}$.
+
+R\'esum\'e g\'en\'erale: Jusqu'alors, on a vu 2 m\'ethodes 2 blocs bas\'es sur les unit\'es suivants
+Crit\`ere 1:
+\begin{equation}
+cov(X_1a_1, X_2a_2) \text{ s.c. }||a_1||=||a_2||=1
+\end{equation}
+
+Finalement, l'analyse canonique (CCA) et PLS2 sont bas\'ees sur la m\^eme fonction objective mais avec des contraints diff\'erents.
+
+Dans la suite nous allons pr\'esenter un cadre unifiant les $2$ m\'ethodes, Pour ce faire, introduisons des param\`etres $\tau_j\in[0,1],j=1,2$ et consid\'erons le probl\`eme d'optimisation suivant:
+\begin{equation}
+(a_1,a_2)=argmax_{a_1\in\mathbb{R}^{P_1},a_2\in\mathbb{R}^{P2}} cov(X_1a_1,X_2a_2)
+\end{equation}
+s.c.
+\begin{equation}
+\left{\begin{array}{ll}
+(1-\tau_1)var(X_1w_1)+\tau_1||a_1||_2^2=1\\
+(1-\tau_2)var(X_2w_2)+\tau_2||a_2||_2^2=1
+\end{array}\right.
+\end{equation}
+Ce probl\`eme d'optimisation d\'efinit l'analyse canonique r\'egularis\'ee.
+
+Si $\tau_1=\tau_2=0$, alors on retrouve l'analyse canonique.
+Si $\tau_1=\tau_2=1$, alors pm retrrouve PLS2.
+Si $\tau_1, \tau_2=0$, alors le crit\`ere sous-jacent devient
+\begin{equation}
+\max_{a_1} var(X_1a_1)cov^2(X_1a_1, X_2a_2)
+\end{equation}
+s.c.
+\begin{equation}
+||a_1||=1, var(X_2a_2)=1
+\end{equation}
+L'analyse des redondance (Wollenberg, 1977) s'appuient sur ce dernier crit\`ere.
+
+\begin{table}
+\begin{tabular}{ccc}
+ & $\tau_1=0$ & $\tau_1=1$ \\
+ $\tau_2=0$ & Analyse canonique & Analyse de redondance de $X_1$ sur $X_2$ \\
+ $\tau_2=1$ & Analyse des redondances de $X_2$ sur $X_1$ & PLS2
+\end{tabular}
+\end{table}
+
+Regardons maintenant ce qu'il se oasse quand $\tau_1\in(0,1)$ et $\tau_2\in(0,1)$.
+
+On peut montrer que $a_1$ et $a_2$ sont vecteurs propres des matrices suivantes
+
+Reprenons le probl\`eme d'optimisation de CCA regularis\'ee
+\begin{equation}
+\max cov(X_1a_1, X_2a_2)
+\end{equation}
+s.c.
+\begin{equation}
+(1-\tau_j)var(X_ja_j)+\tau_j||a_j||^2_2=1, j=1,2\\
+=(1-\tau_j)\frac{1}{n}a_j^TX_j^TX_ja_j+\tau_ja_j^Ta_j=1
+=a_j^T[(1-\tau_j)\frac{1}{n}X_j^TX_j+\tau_j i_{P_j}]a_j=1
+\end{equation}
+
+La solution de ce probl\`eme d'oiptimisation est (en utilisant les m\^eme recettes que pr\'ec\'edamment)
+\begin{equation}
+((1-\tau_1)\frac{1}{n}X_1^TX_1+\tau_1I_{P_1})^{-1}X_1^TX_2((1-\tau_2)\frac{1}{n}X_2^TX_2+\tau_2I_{P_2})^{-1}X_2^TX_1
+\end{equation}
+\begin{equation}
+\hat{\Sigma}_{11}X_1^TX_2\hat{\Sigma}_{22}X_2^TX_1
+\end{equation}
+On voit appara\^itre des estimations r\'egularis\'ees des $\Sigma_{11}$ et $\Sigma_{22}$.
+
+Par symm\'etrique, on a que $a_2$ est 1er vecteur propre de 
+\begin{equation}
+\hat{\Sigma}_{11}X_1^TX_2\hat{\Sigma}_{22}X_2^TX_1
+\end{equation}
 
 
 \end{document}
