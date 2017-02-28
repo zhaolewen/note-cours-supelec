@@ -918,7 +918,8 @@ s.c.
 =a_j^T[(1-\tau_j)\frac{1}{n}X_j^TX_j+\tau_j i_{P_j}]a_j=1
 \end{equation}
 
-La solution de ce probl\`eme d'oiptimisation est (en utilisant les m\^eme recettes que pr\'ec\'edamment)
+La solution de ce probl\`eme d'oiptimisation est obtenu en recherchant les vecteurs propres de
+(en utilisant les m\^eme recettes que pr\'ec\'edamment)
 \begin{equation}
 ((1-\tau_1)\frac{1}{n}X_1^TX_1+\tau_1I_{P_1})^{-1}X_1^TX_2((1-\tau_2)\frac{1}{n}X_2^TX_2+\tau_2I_{P_2})^{-1}X_2^TX_1
 \end{equation}
@@ -930,6 +931,142 @@ On voit appara\^itre des estimations r\'egularis\'ees des $\Sigma_{11}$ et $\Sig
 Par symm\'etrique, on a que $a_2$ est 1er vecteur propre de 
 \begin{equation}
 \hat{\Sigma}_{11}X_1^TX_2\hat{\Sigma}_{22}X_2^TX_1
+\end{equation}
+
+Ainsi,
+\begin{equation}
+X_2^T[(1-\tau_2)\frac{1}{n}X_2X_2^T+\tau_2I_n]^{-1} X_1X_1^T[(1-\tau_1)\frac{1}{n}X_1X_1^T+\tau_1In]^{-1}X_2a_2=\lambda a_2
+\end{equation}
+
+Remarque
+
+On obtient deux formulations \'equivalentes pour obtenir $a_1$ et $a_2$. Une formulation primale qu'on utilisera quand $n>p_j$ et une formulation duale \`a utiliser si $n<p_j$.
+
+En plus, en -pr\'e-multipliant \`a gauche par $X_2$, on obtient le probl\`eme au valeur propre/vecteur propre suivant
+\begin{equation}
+X_2^T[(1-\tau_2)\frac{1}{n}X_2X_2^T+\tau_2I_n]^{-1} X_1X_1^T[(1-\tau_1)\frac{1}{n}X_1X_1^T+\tau_1In]^{-1}X_2a_2=\lambda X_2a_2
+\end{equation}
+Et posons
+\begin{equation}
+K_j=X_jX_j^T
+\end{equation}
+on obtient alors,
+\begin{equation}
+K_2[(1-\tau_2)\frac{1}{n}K2+\tau_2 I_n]^{-1}K_1 [(1-\tau_1)\frac{1}{n}K_1+\tau_1I_n]^{-1}y_2=\lambda y_2
+\end{equation}
+
+On constate que pour calculer les composantes $y_1$ et $y_2$, il suffit de reconna\^itre uniquement les matrices de produits scalaires entre observations pour chaque bloc $X_1$ et $X_2$.
+
+On \'etend de fait les m\'ethodes cit\'es pr\'ec\'edemment au contexte des noyaux.
+
+PLS $\to$ kernel PLS $\leftarrow$ Rosipal, 2001
+CCA $\to$ kernel CCA
+RA $\to$ kernel Redundancy Analysis
+
+
+Exemple illustratif
+Si $y$ est uni-vari\'ee, lakernel PLS se r\'eduit \`a 
+
+Dans ce cours, l'analyse de tableaux multiples est pr\'esent\'e au travers de l'analyse canonique g\'en\'eralis\'eer\'egularis\'ee.(RGCCA) propos\'ee en 2011(Tenenhaus & Tenenhaus, 2011).
+
+RGCCA est d\'efini par le probl\`eme d'optimisation suivant:
+\begin{equation}
+max_{a_1, \ldots,a_S} \sum_{j=1}^J \sum_{k=1}^J c_{jk} g(cov(X_ja_j,X_ka_k))
+\end{equation}
+s.c.
+\begin{equation}
+(1-\tau_j) var(X_ja_j)+\tau_j||a_j||_2^2=1,j=1,\ldots,J
+\end{equation}
+o\`u
+\begin{equation}
+c_{jk}=\left\{\begin{array}{lll}
+0 si X_j not \leftrightarrow \\
+1 si X_j \leftrightarrow 
+\end{array}\right.
+\end{equation}
+$g$: fonction convexe
+
+On va maintenant \'etudier en d\'etail ce probl\`eme d'optimisation qu'on peut re-exprimer comme:
+\begin{equation}
+\max_{a_1,\ldots,\a_J} f(a_1,\ldots,a_J) = \sum_{j,k=1}^Ja_{jk}g(\frac{1}{n}a^T_jX^T_jX_ka_k)
+\end{equation}
+s.c.
+\begin{equation}
+(1-\tau_j)\frac{1}{n}a_j^TX_j^TX_ja_j+\tau_ja^T_ja_j=1,j=1,\ldots,J\\
+=a_j^T[(1-\tau_j)\frac{1}{n}X^T_jX_j+\tau_jI_{p_j}]a_j=1\\
+=a^T_jM_ja_j=1
+\end{equation}
+
+Posons $b_j=M^{1/2}_ja_j$ et $P_j=X_jM_j^{1/2}$
+
+On obtient alors
+\begin{equation}
+\max_{b_1,\ldots,b_J}f(b_1,\ldots,b_J)=\sum_{j,k=1}^Jc_{jk}g(\frac{1}{n}b_j^TP_j^TP_kb_k)
+\end{equation}
+s.c.
+\begin{equation}
+b_j^Tb_j=1
+\end{equation}
+
+Pour r\'esoudre ce probl\`eme, on va utiliser deux ingr\'edients
+1. Block relatation
+2. Majorization par minorization (MM)
+
+Analyse de donn\'ees multibloc
+
+Ecrivons le Lagrangien assou\'e au probl\`eme d'optimisation de RGCCA
+\begin{equation}
+L=\sum_{j,k=1}^J c_{jk}g(\frac{1}{n}b_j^TP_j^TP_kb_k)-\sum_{j=1}^J\lambda_j(b^T_jb_j-1)
+\end{equation}
+Annulons la d\'eriv\'ee de $L$ par rapport \`a $b_j$
+\begin{equation}
+\frac{\partial L}{\partial b_j}\sum_{k=1}^J c_{jk} g'(\frac{1}{n}b_j^TP_j^TP_kb_k)\frac{1}{n}P_j^TP_kb_k-2\lambda_jb_j=0
+\end{equation}
+\begin{equation}
+b_j=\frac{1}{2\lambda_j}\sum_{k=1}^Jc_{jk}g'(\frac{1}{n}b_j^TP_j^TP_ka_k)P^T_jP_kb_k
+\end{equation}
+Posons
+\begin{equation}
+\epsilon_j=\sum_{k=1}^Jc_{jk}g'(\frac{1}{n}b_j^TP_j^TP_kb_k)P_kb_k
+\end{equation}
+Ainsi,
+\begin{equation}
+b_j=\frac{P_j^T\epsilon_j}{||P_j^T\epsilon_j||}
+\end{equation}
+
+Or
+\begin{equation}
+b_j=M_j^{1/2}a_j
+\end{equation}
+et
+\begin{equation}
+P_j=X_jM_j^{-1/2}
+\end{equation}
+Ainsi,
+\begin{equation}
+a_j=\frac{M_j^{-1\2}M_j^{-1/2}X_j^T\epsilon_j}{\epsilon_j^TX_j^TM_j^1X_j\epsilon_j}=\frac{M_j^{-1}X_j^T\epsilon_j}{\epsilon_j\ldots}
+\end{equation}
+Quelques commentaires
+\begin{equation}
+a_j\alpha [(1-\tau_j)\frac{1}{n}X^T_jX_j+\tau_jI_{P_j}]^{-1}X_j^T\epsilon_j
+\end{equation}
+Si $\tau_j=0$, ainsi $a_j\sim (X_j^TX_j)^{-1}X_j^T\epsilon_j$
+$\Leftrightarrow$ $a_j$ est obtenu par r\'egression multiple de $\epsilon_j$ sur $X_j$
+
+Si $\tau_j=1$, alors la contrainte devient  $||a_j||=1$
+
+\begin{equation}
+a_j=\frac{X_j^T\epsilon_j}{||X_j^T\epsilon_j||}
+\end{equation}
+
+............
+
+Reprenons la forme g\'en\'erale pour $a_j$
+\begin{equation}
+a_j=[\epsilon_j^TX_j^TM_j^1X_j\epsilon_j]^{-1/2}M_j^{-1}X_j^T\epsilon_j
+\end{equation}
+\begin{equation}
+a_j=[\epsilon_j^TX_j^T[(1-\tau_j)\frac{1}{n}X_j^TX_j+\tau_2 I_{P_j}]^{-1}X_j^T\epsilon_j]^{-1/2}[(1-\tau_j)\frac{1}{n}X_j^TX_j+\tau_j I_{P_j}]^{-1}
 \end{equation}
 
 
