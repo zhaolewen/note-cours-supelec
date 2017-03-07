@@ -1070,4 +1070,32 @@ a_j=[\epsilon_j^TX_j^T[(1-\tau_j)\frac{1}{n}X_j^TX_j+\tau_2 I_{P_j}]^{-1}X_j^T\e
 \end{equation}
 
 
+Sparse Partial Least Squares
+\begin{equation}
+\max cov(Xa,y)
+\end{equation}
+s.c.
+\begin{equation}
+||a||_2=1
+\end{equation}
+\begin{equation}
+||a||_1<s
+\end{equation}
+
+P1. Montrer que la solution optimale de SPLS est donn\'ee par 
+\begin{equation}
+a^*=\frac{S(\frac{1}{n}X^Ty,\lambda_1)}{||S(\frac{1}{n}X^Ty,\lambda_1)||_2}
+\end{equation}
+o\`u $S$ est l'operation de seuillage doux.
+
+Q2: Impl\'ementation cet algorithme ou utiliser le package RGCCA(SGCCA).
+
+Q3: Tester votre algorithme sur le jeu de donn\'ees Alzhieimer
+
+Q4: Par une proc\'edure de d\'eflqtion, construire une deuxi\`eme composante PLS.
+
+Q5: Visualisation des individus sur le plan $(y_1,y_2)$
+
+Q6: Comparer les r\'esultats \`a ceux obtenus par les packages.
+
 \end{document}
