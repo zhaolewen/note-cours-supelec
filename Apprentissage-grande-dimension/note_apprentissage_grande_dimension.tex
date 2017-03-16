@@ -728,7 +728,7 @@ f(x_b|x_*)\alpha exp(-\frac{1}{2}x_1^TK_{11}x_1-\frac{1}{2}x_2^TK_{22}x_2-x_1^TK
 
 Afin d'interpreter les \'elements de la matrice de ?, on \'etude maintenant la corr\'elation partielle.
 
-Soit $p_{ij}$ la corr\'elation entre $X_i$ et $X_j$ apr\`es avoir \'elinmin\'e l'effet de toute les elements $\{X_k|k\inV\\ \{i,j\}\}$
+Soit $p_{ij}$ la corr\'elation entre $X_i$ et $X_j$ apr\`es avoir \'elinmin\'e l'effet de toute les elements $\{X_k|k\in V\\ \{i,j\}\}$
 
 \section{Analyse de donn\'ees structur\'ees}
 
@@ -783,7 +783,7 @@ On va d\'eriver $L$ par rapport \`a $w_1$ et $w_2$
 \frac{\partial L}{\partial w_2}=\frac{1}{n}w_1^TX_1^TX_2-2\lambda_2w_2
 \end{equation}
 \begin{equation}
-\left{\begin{array}{ll}
+\left\{\begin{array}{ll}
 \frac{1}{n}X_1^TX_2w_2=2\lambda_1w_1\\
 \frac{1}{n}X_2^TX_1w_1=2\lambda_2w_2
 \end{array}\right.
@@ -791,7 +791,7 @@ On va d\'eriver $L$ par rapport \`a $w_1$ et $w_2$
 
 En multipliant de par et d'autre du signe \'egal par $w_1^T$ et $w_2^T$, on obtient
 \begin{equation}
-\left{\begin{array}{ll}
+\left\{\begin{array}{ll}
 \frac{1}{n}w_1^TX_1^TX_2w_2=2\lambda_1\\
 \frac{1}{n}w_2^TX_2^TX_2w_1=2\lambda_2
 \end{array}\right.
@@ -833,7 +833,7 @@ On remarque que la solution est invariante par changement d'\'echelle et donc on
 \end{equation}   
 s.t.
 \begin{equation}
-\left{\begin{array}{ll}
+\left\{\begin{array}{ll}
 var(X_1a_1)=1\\
 var(X_2a_2)=1
 \end{array}\right.
@@ -846,7 +846,7 @@ L=\frac{1}{n}a_1^TX_1^TX_2a_2-\lambda_1(\frac{1}{n}a_1^Ta_1^TX_1^TX_1a_1-1)
 
 En annulant les d\'eriv\'ees Lagrangien par rapport \`a $a_1$ et $a_2$
 \begin{equation}
-\left{\begin{array}{ll}
+\left\{\begin{array}{ll}
 \frac{1}{n}X_1^TX_2a_2=2\lambda_1\frac{1}{n}X_1^TX_1a_1\\
 \frac{1}{n}X_2^TX_1a_1=2\lambda_2\frac{1}{n}X_2^TX_2a_2
 \end{array}\right.
@@ -876,7 +876,7 @@ Dans la suite nous allons pr\'esenter un cadre unifiant les $2$ m\'ethodes, Pour
 \end{equation}
 s.c.
 \begin{equation}
-\left{\begin{array}{ll}
+\left\{\begin{array}{ll}
 (1-\tau_1)var(X_1w_1)+\tau_1||a_1||_2^2=1\\
 (1-\tau_2)var(X_2w_2)+\tau_2||a_2||_2^2=1
 \end{array}\right.
@@ -967,7 +967,7 @@ RA $\to$ kernel Redundancy Analysis
 Exemple illustratif
 Si $y$ est uni-vari\'ee, lakernel PLS se r\'eduit \`a 
 
-Dans ce cours, l'analyse de tableaux multiples est pr\'esent\'e au travers de l'analyse canonique g\'en\'eralis\'eer\'egularis\'ee.(RGCCA) propos\'ee en 2011(Tenenhaus & Tenenhaus, 2011).
+Dans ce cours, l'analyse de tableaux multiples est pr\'esent\'e au travers de l'analyse canonique g\'en\'eralis\'eer\'egularis\'ee.(RGCCA) propos\'ee en 2011(Tenenhaus \& Tenenhaus, 2011).
 
 RGCCA est d\'efini par le probl\`eme d'optimisation suivant:
 \begin{equation}
@@ -988,7 +988,7 @@ $g$: fonction convexe
 
 On va maintenant \'etudier en d\'etail ce probl\`eme d'optimisation qu'on peut re-exprimer comme:
 \begin{equation}
-\max_{a_1,\ldots,\a_J} f(a_1,\ldots,a_J) = \sum_{j,k=1}^Ja_{jk}g(\frac{1}{n}a^T_jX^T_jX_ka_k)
+\max_{a_1,\ldots,a_J} f(a_1,\ldots,a_J) = \sum_{j,k=1}^Ja_{jk}g(\frac{1}{n}a^T_jX^T_jX_ka_k)
 \end{equation}
 s.c.
 \begin{equation}
@@ -1044,7 +1044,7 @@ P_j=X_jM_j^{-1/2}
 \end{equation}
 Ainsi,
 \begin{equation}
-a_j=\frac{M_j^{-1\2}M_j^{-1/2}X_j^T\epsilon_j}{\epsilon_j^TX_j^TM_j^1X_j\epsilon_j}=\frac{M_j^{-1}X_j^T\epsilon_j}{\epsilon_j\ldots}
+a_j=\frac{M_j^{-1/2}M_j^{-1/2}X_j^T\epsilon_j}{\epsilon_j^TX_j^TM_j^1X_j\epsilon_j}=\frac{M_j^{-1}X_j^T\epsilon_j}{\epsilon_j\ldots}
 \end{equation}
 Quelques commentaires
 \begin{equation}
@@ -1092,7 +1092,7 @@ Q2: Impl\'ementation cet algorithme ou utiliser le package RGCCA(SGCCA).
 
 Q3: Tester votre algorithme sur le jeu de donn\'ees Alzhieimer
 
-Q4: Par une proc\'edure de d\'eflqtion, construire une deuxi\`eme composante PLS.
+Q4: Par une proc\'edure de d\'eflation, construire une deuxi\`eme composante PLS.
 
 Q5: Visualisation des individus sur le plan $(y_1,y_2)$
 
